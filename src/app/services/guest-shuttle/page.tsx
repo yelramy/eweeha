@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { generateMetadata as generateSeoMetadata } from '@/lib/seoManager'
-import { ServiceSchema } from '@/components/StructuredDataEnhanced'
+import { ServiceSchema, FAQSchema } from '@/components/StructuredDataEnhanced'
 import { FAQAccordion } from '@/components/Accordion'
 
 export const metadata: Metadata = generateSeoMetadata({
@@ -50,6 +50,7 @@ export default function GuestShuttlePage() {
           priceRange: "$200-$800"
         }}
       />
+      <FAQSchema faqs={faqs} />
 
       <div className="min-h-screen bg-white dark:bg-gray-900">
         {/* Simple Header */}

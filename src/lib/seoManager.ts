@@ -516,11 +516,12 @@ export async function generateStructuredData({
   if (type === 'Organization') {
     return {
       ...baseData,
-      '@type': 'AutoRental',
+      '@type': ['AutoRental', 'LocalBusiness'],
       '@id': `${siteConfig.url}/#organization`,
       name: dynamicConfig.name,
-      alternateName: ['Eweeha', 'Eweeha Lebanon'],
-      description: 'Wedding car rental in Lebanon with chauffeur — bridal cars, classics, convertibles, and full wedding convoys',
+      alternateName: ['Eweeha', 'Eweeha Lebanon', 'Wedding Cars Lebanon'],
+      slogan: 'Eweeha! Smalla 3layke — wedding cars for the big Lebanese moment',
+      description: 'Wedding car rental in Lebanon with chauffeur — decorated bridal cars, classics, convertibles, and full wedding convoys, serving every ceremony and venue across all Lebanon.',
       url: siteConfig.url,
       logo: {
         '@type': 'ImageObject',
@@ -528,7 +529,7 @@ export async function generateStructuredData({
         width: 512,
         height: 512
       },
-      image: `${siteConfig.url}/logo.png`,
+      image: [`${siteConfig.url}/og-image.jpg`, `${siteConfig.url}/logo.png`],
       telephone: dynamicConfig.phone,
       email: dynamicConfig.email,
       address: {
@@ -538,13 +539,47 @@ export async function generateStructuredData({
         addressLocality: 'Beirut',
         addressRegion: 'Beirut'
       },
-      areaServed: {
-        '@type': 'Country',
-        name: 'Lebanon'
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 33.8938,
+        longitude: 35.5018
       },
+      areaServed: [
+        { '@type': 'Country', name: 'Lebanon' },
+        { '@type': 'City', name: 'Beirut' },
+        { '@type': 'City', name: 'Jounieh' },
+        { '@type': 'City', name: 'Byblos' },
+        { '@type': 'City', name: 'Batroun' },
+        { '@type': 'City', name: 'Broummana' },
+        { '@type': 'City', name: 'Aley' },
+        { '@type': 'City', name: 'Bhamdoun' },
+        { '@type': 'City', name: 'Faraya' },
+        { '@type': 'City', name: 'Deir el Qamar' },
+        { '@type': 'City', name: 'Zahle' },
+        { '@type': 'City', name: 'Baalbek' },
+        { '@type': 'City', name: 'Tripoli' },
+        { '@type': 'City', name: 'Saida' },
+        { '@type': 'City', name: 'Tyre' }
+      ],
       serviceType: ['Wedding Car Rental', 'Wedding Convoy', 'Bridal Car with Chauffeur', 'Classic Car Wedding Photoshoot', 'Wedding Guest Shuttle'],
-      priceRange: '$150-$700',
-      acceptedPaymentMethod: ['Credit Card', 'Bank Transfer', 'OMT'],
+      knowsAbout: [
+        'wedding car rental',
+        'wedding convoy',
+        'bridal car with chauffeur',
+        'classic car rental for weddings',
+        'convertible wedding cars',
+        'zaffe arrival coordination',
+        'wedding guest shuttle'
+      ],
+      makesOffer: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wedding convoy' }, url: `${siteConfig.url}/services/wedding-convoy` },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bridal car with chauffeur' }, url: `${siteConfig.url}/services/bridal-car` },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Classic & convertible photoshoot cars' }, url: `${siteConfig.url}/services/photoshoot-cars` },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wedding guest shuttle vans' }, url: `${siteConfig.url}/services/guest-shuttle` }
+      ],
+      priceRange: '$250-$1500',
+      paymentAccepted: ['Cash', 'Credit Card', 'Bank Transfer', 'OMT', 'Whish Money'],
+      currenciesAccepted: 'USD',
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: dynamicConfig.phone,
@@ -554,10 +589,31 @@ export async function generateStructuredData({
       sameAs: [
         `https://wa.me/${dynamicConfig.whatsapp}`,
       ],
-      openingHours: 'Mo-Su 00:00-24:00'
+      openingHoursSpecification: [{
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '00:00',
+        closes: '23:59'
+      }]
     }
   }
 
   return baseData
+}
+
+/**
+ * WebSite node for the root @graph — links the site to the organization entity.
+ */
+export function generateWebSiteStructuredData() {
+  return {
+    '@type': 'WebSite',
+    '@id': `${siteConfig.url}/#website`,
+    url: siteConfig.url,
+    name: 'Eweeha',
+    alternateName: 'Eweeha Wedding Cars Lebanon',
+    description: siteConfig.description,
+    inLanguage: 'en',
+    publisher: { '@id': `${siteConfig.url}/#organization` }
+  }
 }
 

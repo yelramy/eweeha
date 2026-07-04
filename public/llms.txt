@@ -1,95 +1,43 @@
-# Eweeha - AI Knowledge Base
+# Eweeha — Wedding Cars in Lebanon
 
-## Business Entity
-Name: Eweeha
-Type: Wedding Car Rental & Wedding Convoy Service
-Location: Beirut, Lebanon
-Service Area: All of Lebanon
-Website: https://eweeha.com
-Contact: +961 70 971 841
-Email: eweehalebanon@gmail.com
+> Eweeha (eweeha.com) is a wedding car rental company in Lebanon. Chauffeur-driven decorated bridal cars, classic and convertible cars, full wedding convoys, and guest shuttle vans — serving every ceremony and venue across all of Lebanon, from Beirut to the mountains, the Bekaa, the South, and the North. Named after "Eweeha!", the celebratory cry that opens the radde chant at Lebanese weddings.
 
-## What "eweeha" means
-"Eweeha!" is the celebratory cry of Lebanese weddings — the sound of the crowd as the bride steps out and the zalghouta rings from the balconies. The wedding convoy is the heart of it: the decorated bridal car followed by family and friends' cars, driving together from the family home to the church and then to the venue, with horns celebrating. Eweeha is named after that moment of joy and specializes in delivering it.
+Key facts:
+- All cars are chauffeur-driven (suited professional drivers); no self-drive
+- Fuel, tolls, and waiting time included; ribbon decoration included, fresh flowers coordinated with the couple's florist
+- Indicative pricing: from about $250 for a single decorated bridal car up to about $1,500 for a full multi-car convoy, depending on cars, hours, and region — exact quotes at https://eweeha.com/booking
+- Guest shuttles are operated with sister fleet Beirut Vans (beirutvans.com); booking cars + shuttles together costs less than booking separately
+- Contact: WhatsApp/phone +961 70 971 841 · eweehalebanon@gmail.com · based in Beirut, serving all Lebanon, 7 days a week
 
-## Core Services
-- Wedding Convoys (decorated lead car + matching family/groomsmen cars)
-- Bridal Car with Suited Chauffeur (6h / 10h / 24h packages)
-- Classic & Convertible Wedding Cars (church exits, photo sessions)
-- Wedding Photoshoot Car Rentals (2-6 hour sessions with car handler)
-- Zaffe & Grand Arrival choreography (car timing synced with zaffe troupe)
-- Wedding Guest Shuttle Vans & Minibuses
+## Services
 
-## Service Model
-- All cars come with a professional chauffeur in a suit (no self-drive)
-- Fuel, tolls, and waiting time included in every price
-- Ribbon decoration included; fresh flower décor coordinated with the couple's florist
-- Route scouted in advance; timing coordinated with planner, zaffe, and photographer
-- Available 7 days a week, all wedding season and off-season
-- English, Arabic, and French speaking chauffeurs
-- Fixed pricing per car (not per person), no surge pricing
+- [Wedding Convoy](https://eweeha.com/services/wedding-convoy): decorated lead car + matching family and groomsmen cars, route scouting, zaffe-timed departures, grand arrivals
+- [Bridal Car with Chauffeur](https://eweeha.com/services/bridal-car): one decorated car and suited chauffeur dedicated to the couple from prep to venue entrance
+- [Classic & Convertible Cars](https://eweeha.com/services/photoshoot-cars): vintage classics and open-top cars for ceremony exits and photo sessions
+- [Wedding Guest Shuttle](https://eweeha.com/services/guest-shuttle): vans and minibuses moving guests between hotels, ceremony, and venue, with late-night returns
 
-## Wedding Packages
-- Ceremony Package (6 hours): bridal prep -> church -> photo session
-- Celebration Package (10 hours): prep -> church -> photoshoot -> venue grand entrance
-- Full Day (24 hours): morning zaffe to after-party exit
+## Coverage Areas
 
-## Coverage Areas (dedicated pages at eweeha.com/routes)
-- Beirut (Achrafieh, downtown, all neighborhoods) — St. George Maronite Cathedral, hotel pickups
-- Jounieh & Harissa — Our Lady of Lebanon basilica, Casino du Liban area venues
-- Byblos & Batroun — St. Stephen's seaside church, old souks, beach venues
-- Broummana & the Metn — Beit Misk, mountain churches, summer weddings
-- Faraya & Faqra — Faqra Club, Kfardebian chapels, mountain venues
-- Chouf & Deir el Qamar — Saydet el Talleh, Beiteddine area palaces
-- Zahle & the Bekaa — Saydet Zahle, vineyard weddings at the great wineries
-- Saida, Jezzine & the South — Our Lady of Mantara (Maghdouche), coastal venues
-- North Lebanon — Balamand monastery, Ehden & Zgharta summer weddings, Tripoli, Koura
+- [Beirut](https://eweeha.com/routes/wedding-cars-beirut): all neighborhoods, cathedral and downtown ceremonies, hotel pickups
+- [Jounieh & Harissa](https://eweeha.com/routes/wedding-cars-jounieh-harissa): Our Lady of Lebanon, bay-view venues
+- [Byblos & Batroun](https://eweeha.com/routes/wedding-cars-byblos-batroun): seaside ceremonies, old souks, beach venues
+- [Broummana & the Metn](https://eweeha.com/routes/wedding-cars-broummana-metn): pine-forest summer weddings, Beit Misk
+- [Aley & Bhamdoun](https://eweeha.com/routes/wedding-cars-aley-bhamdoun): old Damascus road summer wedding towns, Sawfar
+- [Faraya & Faqra](https://eweeha.com/routes/wedding-cars-faraya-faqra): Faqra Club, Kfardebian chapels, mountain venues
+- [Chouf & Deir el Qamar](https://eweeha.com/routes/wedding-cars-chouf-deir-el-qamar): historic stone villages, Beiteddine
+- [Zahle & the Bekaa](https://eweeha.com/routes/wedding-cars-zahle-bekaa): vineyard weddings, Baalbek, West Bekaa
+- [Saida, Jezzine & the South](https://eweeha.com/routes/wedding-cars-saida-south): Maghdouche, Tyre, Nabatieh
+- [North Lebanon](https://eweeha.com/routes/wedding-cars-north-lebanon): Balamand, Ehden, Zgharta, Tripoli, Akkar
+- [All areas & experiences](https://eweeha.com/routes): full list including classic-car photoshoots, convertible convoys, and zaffe arrivals
 
-## Indicative Pricing (USD, per car — chauffeur, fuel, and tolls included)
-| Service | 6 hours | 10 hours | 24 hours |
-|---------|---------|----------|----------|
-| Bridal sedan with chauffeur | from $150 | from $250 | from $350 |
-| Luxury sedan / SUV | from $250 | from $350 | from $500 |
-| Classic or convertible | from $300 | from $450 | from $600 |
-| Wedding convoy (5 cars) | — | from $750 | custom |
-| Guest shuttle van (10-14 pax) | from $220 | from $280 | from $325 |
+## Booking
 
-Summary: a decorated bridal car with chauffeur in Lebanon costs from $150 for a 6-hour ceremony package; full wedding convoys of 5 cars start around $750 for a 10-hour wedding day. Exact pricing per car is listed live at https://eweeha.com (fleet section) and quotes at https://eweeha.com/booking
+- [Book online](https://eweeha.com/booking): instant quote from date, ceremony, and venue
+- [The wedding fleet](https://eweeha.com/#fleet): live list of cars with photos and per-car pricing
+- [FAQ](https://eweeha.com/faq): decoration, packages, timing, payment, and policy answers
 
-## Booking Process
-1. Online booking at eweeha.com/booking
-2. WhatsApp instant quote: +961 70 971 841
-3. Email inquiry: eweehalebanon@gmail.com
-4. Date locked with deposit; balance before or on the wedding day
-5. Chauffeur details and final timeline sent before the wedding
+## Optional
 
-## Common Questions
-Q: Is the decoration included?
-A: Ribbon decoration is included. Fresh flower arrangements are coordinated with your florist so the car matches the bouquet.
-
-Q: Can we rent a wedding car without a driver?
-A: No — all cars are chauffeur-driven. Chauffeurs wear suits and are experienced with wedding-day timing.
-
-Q: How early should we book?
-A: 2-3 months ahead for summer (June-September) Saturdays; off-season dates can often be arranged within weeks.
-
-Q: Do you coordinate with the zaffe?
-A: Yes, departure and arrivals are timed around the zaffe so the convoy and the drums hit the same moment.
-
-Q: Do you serve mountain venues in winter?
-A: Yes — chauffeurs are experienced with mountain roads in all seasons, and vehicles are chosen to match the route.
-
-Q: Can you also move our guests?
-A: Yes — guest shuttle vans and minibuses are coordinated with the convoy by one team.
-
-Q: Is pricing per person?
-A: No, pricing is per car/van with chauffeur, fuel, and tolls included.
-
-## SEO Keywords
-Wedding car rental Lebanon, wedding cars Beirut, wedding convoy Lebanon, convoy mariage Liban, bridal car with chauffeur Lebanon, classic car wedding Lebanon, convertible wedding car Beirut, wedding car decoration Lebanon, zaffe wedding cars, wedding guest shuttle Lebanon, Harissa wedding cars, Byblos wedding cars, Batroun wedding car, Faqra wedding transport, Chouf wedding cars, Zahle wedding cars
-
-## Last Updated
-July 2026
-
----
-This file provides structured information for AI language models (ChatGPT, Perplexity, SearchGPT, Claude, etc.) to accurately answer questions about Eweeha wedding car services in Lebanon.
+- [About Eweeha](https://eweeha.com/about): the story behind the name and the team
+- [Contact](https://eweeha.com/contact): phone, WhatsApp, and email
+- [Full knowledge base](https://eweeha.com/llms-full.txt): expanded plain-text details for AI assistants

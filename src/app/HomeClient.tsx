@@ -140,12 +140,12 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
               priority
               quality={75}
               sizes="100vw"
-              className="object-cover object-[72%_center] dark:opacity-45"
+              className="object-cover object-[72%_center] dark:opacity-85 sm:dark:opacity-60"
             />
-            {/* Mobile: uniform wash behind centered text; Desktop: left gradient so the car stays vivid */}
-            <div className="absolute inset-0 sm:hidden bg-cream-50/80 dark:bg-gray-900/85" />
-            <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-cream-50/95 via-cream-50/55 to-transparent dark:from-gray-900/95 dark:via-gray-900/60 dark:to-transparent" />
-            <div className="hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream-50/20 dark:to-gray-900/40" />
+            {/* Mobile: top-heavy wash — strong behind the title, fading so the car stays rich below; Desktop: left gradient so the car side stays vivid */}
+            <div className="absolute inset-0 sm:hidden bg-gradient-to-b from-cream-50/85 via-cream-50/45 to-cream-50/15 dark:from-gray-950/85 dark:via-gray-950/45 dark:to-gray-950/15" />
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-cream-50/95 via-cream-50/50 to-transparent dark:from-gray-950/95 dark:via-gray-950/55 dark:to-gray-950/10" />
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream-50/15 dark:to-gray-950/30" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-32 z-10">
@@ -170,7 +170,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
 
               <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-5" />
 
-              <p className="text-base md:text-lg text-warm-700 dark:text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8 font-light">
+              <p className="text-base md:text-lg text-charcoal-600 dark:text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8 font-light">
                 Decorated bridal cars, classic convertibles, and full wedding convoys —
                 ribbons, fresh flowers, and suited chauffeurs, on time wherever you
                 celebrate, from Beirut to the mountains.
@@ -188,13 +188,13 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                   href={`https://wa.me/${config.contact.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-3 text-center text-primary-700 dark:text-primary-300 text-sm font-medium tracking-wider border border-primary-300 dark:border-primary-500 rounded-full hover:bg-primary-50/80 dark:hover:bg-gray-800 bg-cream-50/60 dark:bg-gray-900/40 backdrop-blur-[2px] transition-all"
+                  className="w-full sm:w-auto px-8 py-3 text-center text-primary-700 dark:text-primary-200 text-sm font-medium tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
                 >
                   WhatsApp Us
                 </Link>
               </div>
 
-              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs md:text-sm text-warm-600 dark:text-gray-400">
+              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs md:text-sm font-medium text-charcoal-500 dark:text-gray-200">
                 <span>Suited chauffeurs</span>
                 <span aria-hidden="true" className="text-clay-300">✿</span>
                 <span>Ribbon &amp; flower décor</span>

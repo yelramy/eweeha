@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Great_Vibes, Outfit, Cormorant_Garamond } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
-import { generateMetadata, generateStructuredData } from '@/lib/seoManager';
+import { generateMetadata, generateStructuredData, generateWebSiteStructuredData, siteConfig } from '@/lib/seoManager';
 import { getOverallRating } from '@/lib/reviews';
 import AuthProvider from '@/components/AuthProvider';
 import { Analytics } from '@vercel/analytics/react';
@@ -37,6 +37,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   ...generateMetadata({
     title: "Wedding Car Rental in Lebanon | Eweeha",
     description: "Wedding cars in Lebanon with chauffeur: decorated bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Jounieh, Byblos, the Metn, Chouf & all Lebanon. Book online or on WhatsApp.",
@@ -87,78 +88,23 @@ export default async function RootLayout({
     getOverallRating(),
   ]);
 
-  // Add LocalBusiness schema for better local SEO
-  const localBusinessSchema: Record<string, unknown> = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    '@id': 'https://eweeha.com/#business',
-    name: 'Eweeha',
-    alternateName: ['Eweeha', 'Eweeha Lebanon', 'Wedding Cars Lebanon'],
-    image: 'https://eweeha.com/logo.png',
-    logo: {
-      '@type': 'ImageObject',
-      url: 'https://eweeha.com/logo.png',
-      width: 512,
-      height: 512
-    },
-    description: 'Wedding car rental in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Mount Lebanon, and all Lebanon.',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Beirut',
-      addressRegion: 'Beirut',
-      addressCountry: 'LB'
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 33.8938,
-      longitude: 35.5018
-    },
-    url: 'https://eweeha.com',
-    telephone: '+961-70-971-841',
-    priceRange: '$$',
-    openingHours: 'Mo-Su 00:00-24:00',
-    knowsAbout: [
-      'wedding car rental',
-      'wedding convoy',
-      'bridal car with chauffeur',
-      'classic car rental for weddings',
-      'convertible wedding cars',
-      'wedding guest shuttle'
-    ],
-    areaServed: [
-      { '@type': 'City', name: 'Beirut' },
-      { '@type': 'City', name: 'Jounieh' },
-      { '@type': 'City', name: 'Byblos' },
-      { '@type': 'City', name: 'Batroun' },
-      { '@type': 'City', name: 'Broummana' },
-      { '@type': 'City', name: 'Aley' },
-      { '@type': 'City', name: 'Bhamdoun' },
-      { '@type': 'City', name: 'Faraya' },
-      { '@type': 'City', name: 'Deir el Qamar' },
-      { '@type': 'City', name: 'Zahle' },
-      { '@type': 'City', name: 'Baalbek' },
-      { '@type': 'City', name: 'Tripoli' },
-      { '@type': 'City', name: 'Saida' },
-      { '@type': 'City', name: 'Tyre' }
-    ],
-    makesOffer: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wedding convoy' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bridal car with chauffeur' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Classic & convertible photoshoot cars' } },
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wedding guest shuttle vans' } }
-    ],
-    paymentAccepted: ['Cash', 'Credit Card', 'Bank Transfer', 'OMT', 'Whish Money'],
-    currenciesAccepted: 'USD'
-  }
-
+  // Single source of truth for the business entity: one @graph with the
+  // organization + website nodes, instead of multiple competing entities.
+  const orgNode = organizationData as Record<string, unknown>
+  delete orgNode['@context']
   if (ratingStats.totalReviews > 0) {
-    localBusinessSchema.aggregateRating = {
+    orgNode.aggregateRating = {
       '@type': 'AggregateRating',
       ratingValue: Math.round(ratingStats.averageRating * 10) / 10,
       reviewCount: ratingStats.totalReviews,
       bestRating: 5,
       worstRating: 1,
     }
+  }
+
+  const rootSchemaGraph = {
+    '@context': 'https://schema.org',
+    '@graph': [orgNode, generateWebSiteStructuredData()],
   }
 
   return (
@@ -168,13 +114,7 @@ export default async function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationData),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessSchema),
+            __html: JSON.stringify(rootSchemaGraph),
           }}
         />
 

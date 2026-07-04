@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation'
 import WhatsAppButton from '@/components/WhatsAppButton'
-import MobileContactBar from '@/components/MobileContactBar'
 
 export default function ContactButtons() {
   const pathname = usePathname()
@@ -12,13 +11,7 @@ export default function ContactButtons() {
     return null
   }
 
-  return (
-    <>
-      {/* WhatsApp Floating Button - the familiar green circle, on all screen sizes */}
-      <WhatsAppButton />
-
-      {/* Sticky Mobile Contact Bar */}
-      <MobileContactBar />
-    </>
-  )
+  // The green WhatsApp FAB is the single floating contact entry point
+  // (the old sticky Call/WhatsApp bottom bar was removed to unclutter mobile).
+  return <WhatsAppButton />
 }

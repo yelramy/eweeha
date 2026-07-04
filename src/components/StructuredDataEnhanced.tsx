@@ -159,7 +159,7 @@ export function ServiceSchema({
         }
       ]
     },
-    'priceRange': service.priceRange || '$50-$120'
+    'priceRange': service.priceRange || '$250-$1500'
   }
 
   return (
@@ -198,11 +198,14 @@ export function LocalBusinessSchema({
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'AutoRental',
+    // Same @id as the root organization node so search engines merge this
+    // into one entity instead of seeing a second competing business.
+    '@id': `${baseUrl}/#organization`,
     'name': name,
     'description': description,
     'url': baseUrl,
     'telephone': telephone,
-    'priceRange': priceRange || '$50-$120',
+    'priceRange': priceRange || '$250-$1500',
     'address': {
       '@type': 'PostalAddress',
       'streetAddress': address,

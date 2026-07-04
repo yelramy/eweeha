@@ -28,8 +28,6 @@ const staticRouteConfigs: StaticRouteConfig[] = [
   { path: '/privacy', priority: 0.4, changeFrequency: 'yearly' },
   // Routes index
   { path: '/routes', priority: 0.8, changeFrequency: 'weekly' },
-  // Blog index
-  { path: '/blog', priority: 0.8, changeFrequency: 'daily' },
 ]
 
 function resolveBaseUrl(url: string) {
@@ -87,11 +85,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }))
 
-  // Get blog posts and categories
+  // Get blog posts and categories.
+  // The blog index only enters the sitemap once real posts exist — an empty
+  // /blog page is thin content and the footer link is hidden until then too.
   const [blogPosts, blogCategories] = await Promise.all([
     getPublishedPosts(),
     getAllCategories()
   ])
+
+  const blogIndexRoute: MetadataRoute.Sitemap = blogPosts.length > 0
+    ? [{
+        url: new URL('/blog', baseUrl).toString(),
+        lastModified: fallbackLastModified,
+        changeFrequency: 'daily' as const,
+        priority: 0.8,
+      }]
+    : []
 
   const blogPostRoutes: MetadataRoute.Sitemap = blogPosts.map(post => ({
     url: new URL(`/blog/${post.slug}`, baseUrl).toString(),
@@ -107,7 +116,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  const allRoutes = [...staticRoutes, ...routePages, ...vehicleRoutes, ...blogPostRoutes, ...blogCategoryRoutes]
+  const allRoutes = [...staticRoutes, ...routePages, ...vehicleRoutes, ...blogIndexRoute, ...blogPostRoutes, ...blogCategoryRoutes]
   const deduped = new Map<string, MetadataRoute.Sitemap[number]>()
 
   allRoutes.forEach(route => {

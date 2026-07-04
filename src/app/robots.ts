@@ -19,10 +19,15 @@ const SENSITIVE_PATHS = [
   '/booking/request',
   '/profile/*',
   '/auth/*',
+  // Tokenized private pages — one-off links sent to customers
+  '/quote/*',
+  '/review/*',
 ]
 
-// AI assistants & answer engines (ChatGPT, Claude, Perplexity, Google AI).
-// Explicitly allowed so future edits to the catch-all rule never lock them out.
+// AI assistants & answer engines (ChatGPT, Claude, Perplexity, Google AI,
+// Common Crawl, Meta, Apple, Amazon, DuckDuckGo, Mistral, ByteDance).
+// Explicitly allowed so future edits to the catch-all rule never lock them out —
+// being quotable by AI assistants is a deliberate visibility channel for this site.
 const AI_CRAWLERS = [
   'GPTBot',
   'OAI-SearchBot',
@@ -34,8 +39,15 @@ const AI_CRAWLERS = [
   'PerplexityBot',
   'Perplexity-User',
   'Google-Extended',
+  'Applebot',
   'Applebot-Extended',
   'meta-externalagent',
+  'meta-externalfetcher',
+  'CCBot',
+  'Amazonbot',
+  'DuckAssistBot',
+  'MistralAI-User',
+  'Bytespider',
 ]
 
 export default function robots(): MetadataRoute.Robots {
@@ -78,7 +90,9 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/',
       },
     ],
-    sitemap: [sitemapUrl, imageSitemapUrl, new URL('/llms.txt', baseUrl).toString()],
+    // Note: llms.txt / llms-full.txt live at the site root for AI crawlers;
+    // they are not sitemaps, so they are deliberately not listed here.
+    sitemap: [sitemapUrl, imageSitemapUrl],
     host: baseUrl.origin,
   }
 }

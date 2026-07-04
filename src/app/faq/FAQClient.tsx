@@ -30,27 +30,10 @@ export default function FAQClient({ faqs }: FAQClientProps) {
     return matchesSearch && matchesCategory
   })
 
-  // FAQPage Schema for SEO
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  }
-
+  // FAQPage JSON-LD is emitted once by the server page (faq/page.tsx) —
+  // duplicating it here would ship two identical FAQPage entities.
   return (
     <>
-      {/* FAQPage Schema for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <div className="min-h-screen bg-gradient-to-b from-cream-50 to-white dark:from-gray-900 dark:to-gray-900">
         {/* Simple Header */}
         <div className="bg-white dark:bg-gray-800 border-b border-warm-200 dark:border-gray-700 sticky top-0 z-50">
