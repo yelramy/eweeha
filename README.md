@@ -84,9 +84,9 @@ STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
 
 # Email Notifications (Optional - defaults to dev mode logging)
 RESEND_API_KEY=re_your_resend_api_key
-EMAIL_FROM=info@eweeha.com
-EMAIL_REPLY_TO=info@eweeha.com
-EMAIL_ADMIN=info@eweeha.com
+EMAIL_FROM=eweehalebanon@gmail.com
+EMAIL_REPLY_TO=eweehalebanon@gmail.com
+EMAIL_ADMIN=eweehalebanon@gmail.com
 
 # AI Integration (Optional - AI SEO/content tools; choose ONE provider)
 OPENAI_API_KEY=sk-proj-your_openai_api_key

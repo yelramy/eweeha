@@ -15,7 +15,7 @@ export default function WhatsAppButton({
   const { appConfig } = useConfig()
   
   // Use provided phoneNumber, or fallback to config, or default
-  const whatsappNumber = phoneNumber || appConfig?.contact?.whatsapp || '96176103365'
+  const whatsappNumber = phoneNumber || appConfig?.contact?.whatsapp || '96170971841'
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
 
   const handleClick = () => {
@@ -28,7 +28,7 @@ export default function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       onClick={handleClick}
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group"
+      className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-50 group"
       aria-label="Contact us on WhatsApp"
     >
       <div className="relative">

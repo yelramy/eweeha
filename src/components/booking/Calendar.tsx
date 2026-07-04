@@ -172,7 +172,7 @@ export default function Calendar({
               type="button"
               onClick={() => !disabled && handleDateClick(day)}
               disabled={disabled}
-              style={selected ? { backgroundColor: '#0B6B3A', color: '#ffffff', borderColor: '#0B6B3A' } : {}}
+              style={selected ? { backgroundColor: '#742F38', color: '#ffffff', borderColor: '#742F38' } : {}}
               className={`
                 aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition-all
                 ${selected 

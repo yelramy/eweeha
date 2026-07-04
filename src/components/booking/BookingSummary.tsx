@@ -85,7 +85,7 @@ export default function BookingSummary({
         
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div className="flex items-center text-warm-600 dark:text-gray-400">
-            <CalendarDaysIcon className="h-4 w-4 mr-1.5 text-green-700 dark:text-green-300" />
+            <CalendarDaysIcon className="h-4 w-4 mr-1.5 text-primary-700 dark:text-primary-300" />
             <span>{pickup.date}</span>
           </div>
           <div className="flex items-center text-warm-600 dark:text-gray-400">
@@ -159,40 +159,40 @@ export default function BookingSummary({
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Pickup */}
-            <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+            <div className="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-4">
               <div className="flex items-center mb-2">
-                <MapPinIcon className="h-5 w-5 text-green-700 dark:text-green-300 mr-2" />
-                <span className="font-medium text-green-900 dark:text-green-300">Pickup</span>
+                <MapPinIcon className="h-5 w-5 text-primary-700 dark:text-primary-300 mr-2" />
+                <span className="font-medium text-primary-900 dark:text-primary-300">Pickup</span>
               </div>
               <div className="space-y-1">
                 <div className="flex items-center text-sm">
-                  <CalendarDaysIcon className="h-4 w-4 text-green-700 dark:text-green-300 mr-2" />
-                  <span className={hasDates ? "text-green-800 dark:text-green-300" : "text-green-700 dark:text-green-300 italic"}>{pickup.date}</span>
+                  <CalendarDaysIcon className="h-4 w-4 text-primary-700 dark:text-primary-300 mr-2" />
+                  <span className={hasDates ? "text-primary-800 dark:text-primary-300" : "text-primary-700 dark:text-primary-300 italic"}>{pickup.date}</span>
                 </div>
                 {pickup.time && (
                   <div className="flex items-center text-sm">
-                    <ClockIcon className="h-4 w-4 text-green-700 dark:text-green-300 mr-2" />
-                    <span className="text-green-800 dark:text-green-300">{pickup.time}</span>
+                    <ClockIcon className="h-4 w-4 text-primary-700 dark:text-primary-300 mr-2" />
+                    <span className="text-primary-800 dark:text-primary-300">{pickup.time}</span>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Return */}
-            <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4">
+            <div className="bg-gold-100 dark:bg-gold-900/20 rounded-lg p-4">
               <div className="flex items-center mb-2">
-                <MapPinIcon className="h-5 w-5 text-red-600 dark:text-red-400 mr-2" />
-                <span className="font-medium text-red-900 dark:text-red-300">Return</span>
+                <MapPinIcon className="h-5 w-5 text-gold-700 dark:text-gold-300 mr-2" />
+                <span className="font-medium text-gold-800 dark:text-gold-300">Return</span>
               </div>
               <div className="space-y-1">
                 <div className="flex items-center text-sm">
-                  <CalendarDaysIcon className="h-4 w-4 text-red-600 dark:text-red-400 mr-2" />
-                  <span className={hasDates ? "text-red-800 dark:text-red-300" : "text-red-600 dark:text-red-400 italic"}>{returnInfo.date}</span>
+                  <CalendarDaysIcon className="h-4 w-4 text-gold-700 dark:text-gold-300 mr-2" />
+                  <span className={hasDates ? "text-gold-800 dark:text-gold-300" : "text-gold-700 dark:text-gold-300 italic"}>{returnInfo.date}</span>
                 </div>
                 {returnInfo.time && (
                   <div className="flex items-center text-sm">
-                    <ClockIcon className="h-4 w-4 text-red-600 dark:text-red-400 mr-2" />
-                    <span className="text-red-800 dark:text-red-300">{returnInfo.time}</span>
+                    <ClockIcon className="h-4 w-4 text-gold-700 dark:text-gold-300 mr-2" />
+                    <span className="text-gold-800 dark:text-gold-300">{returnInfo.time}</span>
                   </div>
                 )}
               </div>
@@ -271,7 +271,7 @@ export default function BookingSummary({
               </div>
 
               {pricing.discounts.map((discount, index) => (
-                <div key={index} className="flex justify-between text-sm text-green-700 dark:text-green-300">
+                <div key={index} className="flex justify-between text-sm text-primary-700 dark:text-primary-300">
                   <span>{discount.description}</span>
                   <span>-${discount.amount}</span>
                 </div>

@@ -165,7 +165,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
     }
 
     // Show toast immediately (optimistic UI)
-    const whatsappNumber = appConfig?.contact?.whatsapp || '96176103365'
+    const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
     const scheduleSummary = formatScheduleSummary()
     const message = `Hi, I just submitted a wedding car rental request:\n\nSchedule: ${scheduleSummary}\nStarting from: ${startingLocation}\nPassengers: ${passengers}\n\nCan you send me a quote?`
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
@@ -249,7 +249,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
   }
 
   const handleWhatsAppDirect = () => {
-    const whatsappNumber = appConfig?.contact?.whatsapp || '96176103365'
+    const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
     const message = dayServices.length > 0 && startingLocation
       ? `Hi, I need a wedding car rental:\n\nSchedule: ${formatScheduleSummary()}\nStarting from: ${startingLocation}\nPassengers: ${passengers}\n\nCan you send me a quote?`
       : `Hi, I need a wedding car rental. Can you help me with pricing and availability?`
@@ -337,7 +337,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
                   value={day.date}
                   onChange={(e) => updateDayDate(day.id, e.target.value)}
                   min={today}
-                  className="flex-1 min-w-0 px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all dark:bg-gray-800 dark:text-white"
+                  className="flex-1 min-w-0 px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all dark:bg-gray-800 dark:text-white"
                   required
                 />
                 
@@ -348,7 +348,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
                     onClick={() => updateDayService(day.id, '6h')}
                     className={`px-2 py-1.5 text-xs rounded-md transition-all ${
                       day.serviceType === '6h'
-                        ? 'bg-[#0B6B3A] text-white dark:bg-green-600'
+                        ? 'bg-[#742F38] text-white dark:bg-primary-600'
                         : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
                     }`}
                   >
@@ -359,7 +359,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
                     onClick={() => updateDayService(day.id, '10h')}
                     className={`px-2 py-1.5 text-xs rounded-md transition-all ${
                       day.serviceType === '10h'
-                        ? 'bg-[#0B6B3A] text-white dark:bg-green-600'
+                        ? 'bg-[#742F38] text-white dark:bg-primary-600'
                         : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
                     }`}
                   >
@@ -370,7 +370,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
                     onClick={() => updateDayService(day.id, 'full-day')}
                     className={`px-2 py-1.5 text-xs rounded-md transition-all ${
                       day.serviceType === 'full-day'
-                        ? 'bg-[#0B6B3A] text-white dark:bg-green-600'
+                        ? 'bg-[#742F38] text-white dark:bg-primary-600'
                         : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
                     }`}
                   >
@@ -395,7 +395,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
           <button
             type="button"
             onClick={addDay}
-            className="mt-2 w-full py-2 px-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-600 dark:text-gray-300 hover:border-[#0B6B3A] hover:text-[#0B6B3A] dark:hover:border-green-500 dark:hover:text-green-400 transition-colors flex items-center justify-center gap-1"
+            className="mt-2 w-full py-2 px-3 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-600 dark:text-gray-300 hover:border-[#742F38] hover:text-[#742F38] dark:hover:border-primary-400 dark:hover:text-primary-300 transition-colors flex items-center justify-center gap-1"
           >
             <PlusIcon className="w-4 h-4" />
             Add a day
@@ -420,7 +420,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
             value={startingLocation}
             onChange={(e) => setStartingLocation(e.target.value)}
             placeholder="e.g. Hamra, Airport, Jounieh"
-            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
             required
           />
         </div>
@@ -442,7 +442,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
               placeholder="1"
               min="1"
               max="28"
-              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all dark:bg-gray-700 dark:text-white"
               required
             />
           </div>
@@ -458,7 +458,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Full name"
-              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all dark:bg-gray-700 dark:text-white"
             />
           </div>
           <div>
@@ -470,7 +470,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
               value={customerEmail}
               onChange={(e) => setCustomerEmail(e.target.value)}
               placeholder="For quote by email"
-              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all dark:bg-gray-700 dark:text-white"
             />
           </div>
         </div>
@@ -499,7 +499,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Planned stops (e.g. Byblos, Batroun)"
             rows={2}
-            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all resize-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+            className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all resize-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
           />
         </div>
 
@@ -524,7 +524,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
             <button
               type="button"
               onClick={handleWhatsAppDirect}
-              className="bg-transparent hover:bg-[#25D366]/10 dark:hover:bg-green-500/20 text-[#047857] dark:text-green-400 font-light py-2.5 px-4 rounded-md transition-all duration-200 flex items-center justify-center gap-1.5 text-xs tracking-wider border border-[#25D366] dark:border-green-500"
+              className="bg-transparent hover:bg-[#25D366]/10 dark:hover:bg-[#25D366]/20 text-[#128C7E] dark:text-[#25D366] font-light py-2.5 px-4 rounded-md transition-all duration-200 flex items-center justify-center gap-1.5 text-xs tracking-wider border border-[#25D366] dark:border-[#25D366]"
             >
               <ChatBubbleLeftRightIcon className="w-3 h-3" />
               <span>WhatsApp</span>

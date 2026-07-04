@@ -521,7 +521,7 @@ export default function InvoicesPage() {
                   <span>{formatMoney(totals.total, currency)}</span>
                 </div>
                 {totals.deposit > 0 && (
-                  <div className="flex justify-between text-[#0B6B3A] font-semibold">
+                  <div className="flex justify-between text-[#742F38] font-semibold">
                     <span>Balance due</span>
                     <span>{formatMoney(totals.balanceDue, currency)}</span>
                   </div>

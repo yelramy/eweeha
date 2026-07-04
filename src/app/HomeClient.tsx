@@ -8,6 +8,8 @@ import ImageWithFallback from '@/components/ImageWithFallback'
 import AIBookingAssistant from '@/components/AIBookingAssistant'
 import Button from '@/components/Button'
 import MobileMenu from '@/components/MobileMenu'
+import ConvoyPicker from '@/components/ConvoyPicker'
+import LebanonFlag from '@/components/LebanonFlag'
 import Footer from '@/components/Footer'
 import ServiceCard, { ServiceCardsGrid } from '@/components/ServiceCard'
 import { Vehicle } from '@/types/vehicle'
@@ -45,110 +47,9 @@ function RibbonDivider({ className = '' }: { className?: string }) {
   )
 }
 
-/** Hand-drawn classic wedding car with ribbon bow and trailing cans */
-function WeddingCarIllustration({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 520 300" className={className} fill="none" aria-hidden="true">
-      {/* ground line */}
-      <path d="M 20 252 H 500" stroke="#D4C8B7" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 10" />
-
-      {/* trailing cans on strings */}
-      <g stroke="#8A7A69" strokeWidth="1.6">
-        <path d="M 78 216 C 60 224 48 236 44 246" />
-        <path d="M 78 220 C 66 230 62 240 62 248" />
-        <path d="M 78 224 C 74 234 76 242 80 250" />
-      </g>
-      <g fill="#DEC690" stroke="#9C7838" strokeWidth="1.4">
-        <rect x="36" y="244" width="14" height="10" rx="2" transform="rotate(-14 43 249)" />
-        <rect x="55" y="247" width="14" height="10" rx="2" transform="rotate(8 62 252)" />
-        <rect x="74" y="249" width="14" height="10" rx="2" transform="rotate(-6 81 254)" />
-      </g>
-
-      {/* car body — classic silhouette */}
-      <path
-        d="M 84 226
-           C 84 208 92 196 110 192
-           L 148 184
-           C 168 160 196 146 232 146
-           L 306 146
-           C 342 146 372 158 392 182
-           L 436 190
-           C 456 194 464 206 464 222
-           C 464 234 456 240 444 240
-           L 116 240
-           C 96 240 84 236 84 226 Z"
-        fill="#742F38"
-      />
-      {/* body highlight */}
-      <path d="M 110 196 L 148 188 C 167 165 195 151 231 151 L 305 151 C 331 151 353 158 371 172" stroke="#A94D5F" strokeWidth="5" strokeLinecap="round" opacity="0.65" />
-
-      {/* windows */}
-      <path d="M 166 184 C 182 164 204 154 230 154 L 246 154 L 246 184 Z" fill="#FBF3F4" opacity="0.92" />
-      <path d="M 258 154 L 302 154 C 326 154 346 162 362 178 L 366 184 L 258 184 Z" fill="#FBF3F4" opacity="0.92" />
-
-      {/* chrome trim + bumpers */}
-      <path d="M 88 232 H 460" stroke="#DEC690" strokeWidth="3.5" strokeLinecap="round" />
-      <path d="M 80 226 C 76 226 72 228 70 232 M 468 224 C 472 224 476 227 478 231" stroke="#BA9348" strokeWidth="5" strokeLinecap="round" />
-
-      {/* headlight + taillight */}
-      <circle cx="452" cy="212" r="6" fill="#F6EEDD" stroke="#BA9348" strokeWidth="2" />
-      <rect x="88" y="206" width="8" height="10" rx="2" fill="#EBC3C9" stroke="#8E3B46" strokeWidth="1.5" />
-
-      {/* wheels */}
-      <g>
-        <circle cx="164" cy="240" r="30" fill="#2D2925" />
-        <circle cx="164" cy="240" r="14" fill="#FBF8F1" stroke="#BA9348" strokeWidth="3" />
-        <circle cx="380" cy="240" r="30" fill="#2D2925" />
-        <circle cx="380" cy="240" r="14" fill="#FBF8F1" stroke="#BA9348" strokeWidth="3" />
-      </g>
-
-      {/* ribbon across the hood to the bow */}
-      <path d="M 400 172 C 420 182 436 196 446 214" stroke="#EBC3C9" strokeWidth="6" strokeLinecap="round" opacity="0.9" />
-
-      {/* bow on the trunk */}
-      <g>
-        <path d="M 118 178 C 104 160 84 162 88 176 C 91 187 108 187 118 178 Z" fill="#EBC3C9" stroke="#8E3B46" strokeWidth="2.5" />
-        <path d="M 118 178 C 132 160 152 162 148 176 C 145 187 128 187 118 178 Z" fill="#EBC3C9" stroke="#8E3B46" strokeWidth="2.5" />
-        <circle cx="118" cy="178" r="5.5" fill="#8E3B46" />
-        <path d="M 112 184 C 106 194 104 200 100 206 M 124 184 C 130 194 132 200 136 206" stroke="#8E3B46" strokeWidth="2.5" strokeLinecap="round" />
-      </g>
-
-      {/* flowers on the hood corner */}
-      <g>
-        <circle cx="416" cy="176" r="7" fill="#DA9AA4" />
-        <circle cx="428" cy="168" r="5.5" fill="#EBC3C9" />
-        <circle cx="424" cy="182" r="4.5" fill="#F6E3E6" />
-        <circle cx="416" cy="176" r="2.4" fill="#742F38" />
-        <circle cx="428" cy="168" r="2" fill="#742F38" />
-      </g>
-
-      {/* confetti */}
-      <g fill="#DEC690">
-        <circle cx="120" cy="96" r="4" />
-        <circle cx="452" cy="120" r="3.5" />
-        <circle cx="256" cy="84" r="3" />
-      </g>
-      <g fill="#DA9AA4">
-        <circle cx="180" cy="72" r="3" />
-        <circle cx="392" cy="88" r="4" />
-        <circle cx="480" cy="168" r="3" />
-      </g>
-      <g fill="#ADBB95">
-        <circle cx="320" cy="66" r="3" />
-        <circle cx="88" cy="140" r="3.5" />
-      </g>
-
-      {/* "just married" plate hanging off the back */}
-      <g transform="rotate(-4 116 216)">
-        <rect x="86" y="204" width="62" height="22" rx="4" fill="#FFFEF9" stroke="#8E3B46" strokeWidth="2" />
-        <text x="117" y="220" textAnchor="middle" fontSize="13" fill="#742F38" style={{ fontFamily: 'var(--font-greatvibes), cursive' }}>just married</text>
-      </g>
-    </svg>
-  )
-}
-
 export default function HomeClient({ initialVehicles, config, reviews = [], ratingStats }: HomeClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isConvoyPickerOpen, setIsConvoyPickerOpen] = useState(false)
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
     e.preventDefault()
@@ -168,16 +69,15 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
             <div className="flex justify-between items-center py-2 sm:py-3">
               <Link href="/" className="flex items-center gap-2.5">
                 <Image
-                  src="/logo.svg"
+                  src="/logo.png"
                   alt="Eweeha — Wedding Cars Lebanon"
                   width={144}
                   height={144}
                   className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
                   priority
                 />
-                <span className="leading-none">
-                  <span className="script-accent block text-2xl sm:text-3xl text-primary-700 dark:text-primary-300">Eweeha</span>
-                  <span className="block text-[9px] sm:text-[10px] tracking-[0.28em] text-charcoal-500 dark:text-gray-300 uppercase mt-0.5">Wedding Cars Lebanon</span>
+                <span className="text-[10px] sm:text-[11px] tracking-[0.28em] text-charcoal-500 dark:text-gray-300 uppercase leading-snug">
+                  Wedding Cars<span className="block">Lebanon</span>
                 </span>
               </Link>
               <div className="hidden md:flex items-center gap-6">
@@ -229,67 +129,77 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
           <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
         </header>
 
-        {/* Hero Section — split editorial layout: invitation copy + illustrated wedding car */}
+        {/* Hero Section — soft photo backdrop + invitation copy */}
         <section className="relative overflow-hidden bg-cream-50 dark:bg-gray-900">
-          {/* soft wine & blush washes */}
+          {/* Background photo, kept airy with cream washes so it never overwhelms the text */}
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-32 -right-32 w-[30rem] h-[30rem] rounded-full bg-primary-100/60 dark:bg-primary-900/20 blur-3xl" />
-            <div className="absolute -bottom-40 -left-24 w-[26rem] h-[26rem] rounded-full bg-clay-100/70 dark:bg-clay-500/10 blur-3xl" />
+            <Image
+              src="/images/hero-bg.jpg"
+              alt=""
+              fill
+              priority
+              quality={75}
+              sizes="100vw"
+              className="object-cover object-[72%_center] dark:opacity-45"
+            />
+            {/* Mobile: uniform wash behind centered text; Desktop: left gradient so the car stays vivid */}
+            <div className="absolute inset-0 sm:hidden bg-cream-50/80 dark:bg-gray-900/85" />
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-cream-50/95 via-cream-50/55 to-transparent dark:from-gray-900/95 dark:via-gray-900/60 dark:to-transparent" />
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream-50/20 dark:to-gray-900/40" />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-6 items-center">
-              {/* Invitation copy */}
-              <div className="text-center lg:text-left animate-fade-in-up">
-                <p className="text-[11px] md:text-xs tracking-[0.35em] uppercase text-primary-700 dark:text-primary-300 mb-5">
-                  Chauffeured wedding cars · All of Lebanon
-                </p>
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-32 z-10">
+            <div className="max-w-2xl text-center lg:text-left animate-fade-in-up">
+              <p className="text-[11px] md:text-xs tracking-[0.35em] uppercase text-primary-700 dark:text-primary-300 mb-5">
+                Chauffeured wedding cars ·{' '}
+                <span className="whitespace-nowrap">
+                  All of Lebanon
+                  <LebanonFlag className="inline-block w-[19px] h-[13px] md:w-[21px] md:h-[14px] rounded-[2px] ml-2 align-[-2px] shadow-sm" />
+                </span>
+              </p>
 
-                <h1 className="text-4xl sm:text-5xl md:text-6xl text-charcoal-600 dark:text-white leading-[1.08] mb-4">
-                  The cars arrive.
-                  <span className="script-accent block text-primary-600 dark:text-primary-300 text-5xl sm:text-6xl md:text-7xl mt-3 leading-none">
-                    Eweeha!
-                  </span>
-                </h1>
+              <h1 className="mb-4">
+                <span className="sr-only">Eweeha — wedding cars in Lebanon: </span>
+                <span className="script-accent block text-primary-600 dark:text-primary-300 text-6xl sm:text-7xl md:text-8xl leading-none">
+                  Eweeha!
+                </span>
+                <span className="font-serif italic font-medium block text-gold-700 dark:text-gold-300 text-2xl sm:text-3xl md:text-4xl tracking-wide mt-3">
+                  Smalla 3layke
+                </span>
+              </h1>
 
-                <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-5" />
+              <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-5" />
 
-                <p className="text-base md:text-lg text-warm-700 dark:text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8 font-light">
-                  Decorated bridal cars, classic convertibles, and full cortège convoys —
-                  ribbons, fresh flowers, and suited chauffeurs, on time at every church
-                  and venue from Beirut to the mountains.
-                </p>
+              <p className="text-base md:text-lg text-warm-700 dark:text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8 font-light">
+                Decorated bridal cars, classic convertibles, and full wedding convoys —
+                ribbons, fresh flowers, and suited chauffeurs, on time wherever you
+                celebrate, from Beirut to the mountains.
+              </p>
 
-                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
-                  <a
-                    href="#booking"
-                    onClick={(e) => handleSmoothScroll(e, '#booking')}
-                    className="w-full sm:w-auto px-8 py-3 text-center text-white text-sm font-medium tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
-                  >
-                    Plan My Cortège
-                  </a>
-                  <Link
-                    href={`https://wa.me/${config.contact.whatsapp}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-8 py-3 text-center text-primary-700 dark:text-primary-300 text-sm font-medium tracking-wider border border-primary-300 dark:border-primary-500 rounded-full hover:bg-primary-50 dark:hover:bg-gray-800 transition-all"
-                  >
-                    WhatsApp Us
-                  </Link>
-                </div>
-
-                <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs md:text-sm text-warm-600 dark:text-gray-400">
-                  <span>Suited chauffeurs</span>
-                  <span aria-hidden="true" className="text-clay-300">✿</span>
-                  <span>Ribbon &amp; flower décor</span>
-                  <span aria-hidden="true" className="text-clay-300">✿</span>
-                  <span>On time at the church</span>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
+                <button
+                  type="button"
+                  onClick={() => setIsConvoyPickerOpen(true)}
+                  className="w-full sm:w-auto px-8 py-3 text-center text-white text-sm font-medium tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
+                >
+                  Pick My Cars
+                </button>
+                <Link
+                  href={`https://wa.me/${config.contact.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-8 py-3 text-center text-primary-700 dark:text-primary-300 text-sm font-medium tracking-wider border border-primary-300 dark:border-primary-500 rounded-full hover:bg-primary-50/80 dark:hover:bg-gray-800 bg-cream-50/60 dark:bg-gray-900/40 backdrop-blur-[2px] transition-all"
+                >
+                  WhatsApp Us
+                </Link>
               </div>
 
-              {/* Illustrated wedding car */}
-              <div className="animate-fade-in-up stagger-2">
-                <WeddingCarIllustration className="w-full max-w-xl mx-auto" />
+              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs md:text-sm text-warm-600 dark:text-gray-400">
+                <span>Suited chauffeurs</span>
+                <span aria-hidden="true" className="text-clay-300">✿</span>
+                <span>Ribbon &amp; flower décor</span>
+                <span aria-hidden="true" className="text-clay-300">✿</span>
+                <span>On time, every time</span>
               </div>
             </div>
           </div>
@@ -400,7 +310,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                 Your Big Day, Handled
               </h2>
               <p className="text-sm md:text-base text-gray-600 dark:text-gray-400">
-                Choose a car above, or tell us your church and venue — we&apos;ll build the cortège around your timeline.
+                Choose a car above, or tell us your ceremony and venue — we&apos;ll build the convoy around your timeline.
               </p>
             </div>
 
@@ -433,11 +343,11 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                   <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
                     <div>
                       <div className="font-semibold text-primary-600 dark:text-primary-300">Ceremony Package — 6 hours</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Bride&apos;s prep → church → photo session</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Bride&apos;s prep → ceremony → photo session</div>
                     </div>
                     <div>
                       <div className="font-semibold text-primary-600 dark:text-primary-300">Celebration Package — 10 hours</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Prep → church → photoshoot → grand venue entrance</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Prep → ceremony → photoshoot → grand venue entrance</div>
                     </div>
                     <div>
                       <div className="font-semibold text-primary-600 dark:text-primary-300">Full Day — 24 hours</div>
@@ -450,7 +360,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Getting married outside the city? We cover every region — mountain churches, coastal venues, and vineyard weddings alike.
+                Getting married outside the city? We cover every region — mountain ceremonies, coastal venues, and vineyard weddings alike.
               </p>
             </div>
           </div>
@@ -462,10 +372,10 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
             <div className="text-center animate-fade-in-up">
               <p className="script-accent text-3xl text-primary-600 dark:text-primary-300 mb-2">yalla…</p>
               <h2 className="text-3xl md:text-5xl text-gray-900 dark:text-white mb-3 md:mb-4">
-                Plan Your Cortège
+                Plan Your Convoy
               </h2>
               <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Tell us your date, church, and venue in your own words — we&apos;ll build your personalized quote instantly.
+                Tell us your date, ceremony, and venue in your own words — we&apos;ll build your personalized quote instantly.
               </p>
             </div>
 
@@ -496,9 +406,9 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                     <path d="M 20 33 h 0" />
                   </svg>
                 }
-                title="The Wedding Cortège"
-                excerpt="A full convoy for the big day — bridal car, family cars, and groomsmen vehicles moving together from door to church to venue, perfectly timed."
-                link="/services/wedding-cortege"
+                title="The Wedding Convoy"
+                excerpt="A full convoy for the big day — bridal car, family cars, and groomsmen vehicles moving together from door to ceremony to venue, perfectly timed."
+                link="/services/wedding-convoy"
               />
               <ServiceCard
                 icon={
@@ -523,7 +433,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                   </svg>
                 }
                 title="Classic & Convertible Cars"
-                excerpt="Timeless classics and open-top cars for the church exit and the photo session — the shots that end up framed in the salon."
+                excerpt="Timeless classics and open-top cars for the ceremony exit and the photo session — the shots that end up framed in the salon."
                 link="/services/photoshoot-cars"
               />
               <ServiceCard
@@ -537,7 +447,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                   </svg>
                 }
                 title="Guest Shuttle Vans"
-                excerpt="Comfortable vans and minibuses that move your guests between hotels, church, and venue — nobody gets lost on the mountain road."
+                excerpt="Comfortable vans and minibuses that move your guests between hotels, ceremony, and venue — nobody gets lost on the mountain road."
                 link="/services/guest-shuttle"
               />
             </ServiceCardsGrid>
@@ -578,7 +488,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
               {[
                 {
                   title: "Zero-Stress Timing",
-                  description: "We scout the route, plan for traffic and the zaffe, and get you to the church on time — every time",
+                  description: "We scout the route, plan for traffic and the zaffe, and get you to your ceremony on time — every time",
                 },
                 {
                   title: "The Right Car",
@@ -594,6 +504,73 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                   <p className="text-sm text-warm-600 dark:text-gray-400 leading-relaxed">{feature.description}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What does "Eweeha" mean? — a little cultural interlude */}
+        <section id="eweeha" className="relative overflow-hidden bg-primary-800 dark:bg-gray-950 py-12 md:py-16">
+          {/* Oversized script watermark */}
+          <span
+            aria-hidden="true"
+            className="script-accent absolute -top-6 -right-4 text-[10rem] md:text-[16rem] leading-none text-primary-700/40 dark:text-gray-800 select-none pointer-events-none"
+          >
+            Eweeha!
+          </span>
+
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-8">
+              <p className="script-accent text-2xl text-gold-300 mb-1">yalla, a quick Lebanese lesson</p>
+              <h2 className="text-2xl md:text-3xl text-white">
+                What Does &ldquo;Eweeha!&rdquo; Mean?
+              </h2>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-5 items-start">
+              {/* Dictionary-entry card */}
+              <div className="md:col-span-2 bg-cream-50 dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gold-400/40">
+                <p className="flex items-baseline gap-2 flex-wrap">
+                  <span className="script-accent text-4xl text-primary-700 dark:text-primary-300">Eweeha!</span>
+                  <span className="text-sm text-warm-500 dark:text-gray-400 italic">/ew-wee-ha/</span>
+                </p>
+                <p className="text-[11px] tracking-[0.2em] uppercase text-gold-700 dark:text-gold-300 mt-1 mb-4">
+                  exclamation · Lebanese
+                </p>
+                <ol className="space-y-3 text-sm text-charcoal-500 dark:text-gray-300 leading-relaxed list-decimal list-inside">
+                  <li>The opening cry of the radde — the chant that officially starts a Lebanese wedding.</li>
+                  <li>The call that rings down the street when the bridal car pulls up, ribbons flying and horns singing.</li>
+                  <li><span className="italic">(this company)</span> The moment we deliver — decorated, on time, every weekend.</li>
+                </ol>
+              </div>
+
+              {/* The story */}
+              <div className="md:col-span-3 text-primary-50 space-y-4 text-sm md:text-base leading-relaxed font-light">
+                <p>
+                  In Lebanon, a wedding doesn&apos;t begin with a schedule — it begins with a sound.
+                  The convoy turns into the street, the horns start their song, and whoever is
+                  leading the radde lets it fly:
+                  <span className="font-serif italic text-gold-200"> &ldquo;Eweeeeha! Smalla 3laykiii…&rdquo;</span> —
+                  verse after verse, each one louder than the last. And the whole street answers
+                  with the zalghouta: <span className="italic">lililililiiii!</span> Joy, pride,
+                  and just the right amount of showing off.
+                </p>
+                <p>
+                  That little blessing woven into the call — <span className="font-serif italic text-gold-200">&ldquo;Smalla 3layke,&rdquo;</span> God&apos;s
+                  name upon you — is there because anything this beautiful needs protecting from the
+                  evil eye. You&apos;ll hear it a hundred times on your big day. Count them, it&apos;s good luck.
+                </p>
+                <p>
+                  We loved that exact moment — the arrival, the noise, the goosebumps — so much that
+                  we named the whole company after it. Making that moment happen, on time and
+                  camera-ready, is literally our job.
+                </p>
+                <Link
+                  href="/about"
+                  className="inline-block mt-1 text-sm text-gold-300 hover:text-gold-200 underline underline-offset-4 decoration-gold-400/50"
+                >
+                  Read our story →
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -618,11 +595,11 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                 </span>
               </a>
 
-              <a href={`https://wa.me/${config.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="bg-cream-50 dark:bg-gray-700 border border-warm-200 dark:border-gray-600 rounded-lg p-6 hover-lift text-center cursor-pointer hover:border-[#25D366] dark:hover:border-green-300 transition-all group">
-                <ChatBubbleLeftRightIcon className="h-12 w-12 text-charcoal-500 dark:text-green-300 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <a href={`https://wa.me/${config.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className="bg-cream-50 dark:bg-gray-700 border border-warm-200 dark:border-gray-600 rounded-lg p-6 hover-lift text-center cursor-pointer hover:border-[#25D366] dark:hover:border-[#25D366] transition-all group">
+                <ChatBubbleLeftRightIcon className="h-12 w-12 text-charcoal-500 dark:text-[#25D366] mx-auto mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-lg font-semibold text-charcoal-500 dark:text-white mb-2">WhatsApp</h3>
                 <p className="text-sm text-warm-500 dark:text-gray-400 mb-3">Quick Response</p>
-                <span className="inline-block text-sm font-medium text-clay-400 dark:text-green-300 group-hover:text-[#25D366] dark:group-hover:text-green-300 py-2 px-3 rounded transition-colors">
+                <span className="inline-block text-sm font-medium text-clay-400 dark:text-[#25D366] group-hover:text-[#25D366] dark:group-hover:text-[#25D366] py-2 px-3 rounded transition-colors">
                   Start Chat
                 </span>
               </a>
@@ -643,8 +620,9 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                 <h3 className="text-lg md:text-xl font-bold text-charcoal-500 dark:text-white mb-3">Wedding Coverage</h3>
                 <p className="text-sm text-warm-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
                   Wedding cars across all Lebanon: Beirut, Jounieh &amp; Harissa, Byblos, Batroun, Broummana &amp; the Metn,
-                  Faraya &amp; Faqra, the Chouf, Zahle &amp; the Bekaa, the South and the North. Bridal cars, cortège convoys,
-                  photoshoot classics, and guest shuttles — one team for the whole day.
+                  Aley &amp; Bhamdoun, Faraya &amp; Faqra, the Chouf, Zahle &amp; the whole Bekaa, the South down to Tyre,
+                  and the North up to Akkar. Bridal cars, wedding convoys, photoshoot classics, and guest shuttles —
+                  one team for the whole day.
                 </p>
               </div>
             </div>
@@ -654,6 +632,12 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
         {/* Footer */}
         <Footer />
       </main>
+
+      <ConvoyPicker
+        isOpen={isConvoyPickerOpen}
+        onClose={() => setIsConvoyPickerOpen(false)}
+        vehicles={initialVehicles}
+      />
     </>
   )
 }

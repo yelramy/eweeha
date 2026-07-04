@@ -205,7 +205,8 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
                         </p>
                       )}
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                        Price varies by vehicle choice and group size
+                        Indicative range, from a single bridal car to a full multi-car convoy — final quote
+                        depends on the cars, hours, and route
                       </p>
                     </>
                   ) : (
@@ -214,7 +215,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
                         Contact for Quote
                       </p>
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                        Pricing depends on the car and the cortège size
+                        Pricing depends on the car and the convoy size
                       </p>
                     </>
                   )}

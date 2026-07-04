@@ -56,19 +56,6 @@ const config: Config = {
           400: '#C77E6D',
           500: '#B06553',
         },
-        // Muted olive — cedar & olive groves, church garden greens
-        cedar: {
-          50: '#F4F6F0',
-          100: '#E5EADC',
-          200: '#CDD6BC',
-          300: '#ADBB95',
-          400: '#8CA06E',
-          500: '#6F8452',
-          600: '#55683D', // primary olive
-          700: '#465635',
-          800: '#39462C',
-          900: '#2E3924',
-        },
         // Primary alias for convenience (used by UI components) — Eweeha wine
         // (deep burgundy rose: Lebanese wedding velvet, roses, aged wine)
         primary: {

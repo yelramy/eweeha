@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Eweeha - Wedding Cars Lebanon',
     short_name: 'Eweeha',
-    description: 'Wedding car rental in Lebanon with chauffeur: bridal cars, classics, convertibles, and full wedding cortège convoys. Book online.',
+    description: 'Wedding car rental in Lebanon with chauffeur: bridal cars, classics, convertibles, and full wedding convoys. Book online.',
     start_url: '/',
     display: 'standalone',
     background_color: '#FFFEF9',

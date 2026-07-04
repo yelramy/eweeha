@@ -1,14 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Button from '@/components/Button'
 import toast from 'react-hot-toast'
 
 export default function AdminLogin() {
-  const router = useRouter()
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -31,15 +30,17 @@ export default function AdminLogin() {
 
       if (result.success) {
         toast.success('Welcome to admin panel!')
-        router.push('/admin/dashboard')
+        // Full page navigation (not router.push) so the freshly set
+        // admin-token cookie is guaranteed to be sent with the request.
+        window.location.assign('/admin/bookings')
+        return
       } else {
         toast.error(result.error || 'Invalid credentials')
       }
     } catch {
       toast.error('Login failed. Please try again.')
-    } finally {
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   return (
@@ -48,11 +49,13 @@ export default function AdminLogin() {
         <div className="max-w-md w-full space-y-8">
           <div className="bg-white rounded-xl shadow-2xl p-8">
             <div className="text-center mb-8">
-              <div className="mx-auto h-16 w-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl text-white font-bold">BV</span>
+              <div className="mx-auto h-16 w-16 mb-4">
+                <Image src="/logo.png" alt="Eweeha" width={64} height={64} priority />
               </div>
-              <h2 className="text-3xl font-bold text-charcoal-500">Admin Panel</h2>
-              <p className="mt-2 text-warm-700">Sign in to manage Eweeha</p>
+              <h2 className="text-3xl font-bold text-charcoal-500">
+                <span className="script-accent text-primary-700">Eweeha</span> Admin
+              </h2>
+              <p className="mt-2 text-warm-700">Sign in to manage your wedding fleet</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -102,7 +105,7 @@ export default function AdminLogin() {
                 loading={loading}
                 className="w-full"
                 size="lg"
-                variant="warning"
+                variant="primary"
               >
                 Sign In
               </Button>

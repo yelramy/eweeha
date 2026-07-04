@@ -78,7 +78,7 @@ export default function ReviewSubmitClient({ token, customerName, vehicleName }:
       <div className="max-w-2xl mx-auto px-4">
         <Link href="/" className="inline-flex items-center gap-2 mb-6">
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="Eweeha"
             width={48}
             height={48}
@@ -139,7 +139,7 @@ export default function ReviewSubmitClient({ token, customerName, vehicleName }:
                 value={name}
                 onChange={e => setName(e.target.value)}
                 maxLength={120}
-                className="w-full rounded border border-warm-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-charcoal-500 dark:text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full rounded border border-warm-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-charcoal-500 dark:text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
 
@@ -154,7 +154,7 @@ export default function ReviewSubmitClient({ token, customerName, vehicleName }:
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. Great driver, very comfortable"
                 maxLength={120}
-                className="w-full rounded border border-warm-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-charcoal-500 dark:text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full rounded border border-warm-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-charcoal-500 dark:text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
                 required
               />
             </div>
@@ -170,7 +170,7 @@ export default function ReviewSubmitClient({ token, customerName, vehicleName }:
                 rows={5}
                 maxLength={2000}
                 placeholder="Tell us about the chauffeur, the car, the day..."
-                className="w-full rounded border border-warm-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-charcoal-500 dark:text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 resize-y"
+                className="w-full rounded border border-warm-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-charcoal-500 dark:text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 resize-y"
                 required
               />
               <div className="text-xs text-warm-500 dark:text-gray-400 text-right mt-1">

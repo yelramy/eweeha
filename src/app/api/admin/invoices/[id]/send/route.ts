@@ -51,7 +51,7 @@ export async function POST(
 
     const resend = new Resend(apiKey)
     const from = process.env.EMAIL_FROM || 'onboarding@resend.dev'
-    const replyTo = process.env.EMAIL_REPLY_TO || 'info@eweeha.com'
+    const replyTo = process.env.EMAIL_REPLY_TO || 'eweehalebanon@gmail.com'
 
     const result = await resend.emails.send({
       from: `${config.company.name} <${from}>`,

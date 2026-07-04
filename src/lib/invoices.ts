@@ -69,8 +69,8 @@ export function getInvoiceConfig(): InvoiceConfig {
       name: process.env.COMPANY_NAME || 'Eweeha',
       address: process.env.COMPANY_ADDRESS || 'Beirut, Lebanon',
       phone: process.env.COMPANY_PHONE || '',
-      email: process.env.COMPANY_EMAIL || 'info@eweeha.com',
-      logoUrl: baseUrl ? `${baseUrl.replace(/\/$/, '')}/logo.svg` : '/logo.svg',
+      email: process.env.COMPANY_EMAIL || 'eweehalebanon@gmail.com',
+      logoUrl: baseUrl ? `${baseUrl.replace(/\/$/, '')}/logo.png` : '/logo.png',
     },
   }
 }

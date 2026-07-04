@@ -158,14 +158,14 @@ export default function BookingLookupClient() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
-                  href="tel:+96176103365"
+                  href="tel:+96170971841"
                   className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                 >
                   📞 Call Us
                 </a>
                 <a
-                  href="https://wa.me/96176103365"
-                  className="inline-flex items-center justify-center px-4 py-2 border border-green-300 dark:border-green-600 rounded-lg text-sm font-medium text-green-700 dark:text-green-300 hover:bg-green-50 dark:hover:bg-green-900/20"
+                  href="https://wa.me/96170971841"
+                  className="inline-flex items-center justify-center px-4 py-2 border border-[#25D366] rounded-lg text-sm font-medium text-[#128C7E] dark:text-[#25D366] hover:bg-[#25D366]/10"
                 >
                   💬 WhatsApp
                 </a>

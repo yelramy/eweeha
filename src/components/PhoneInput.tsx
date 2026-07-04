@@ -65,8 +65,8 @@ export default function PhoneInput({
           className: `w-full px-3 py-2 rounded-md border transition-colors text-sm ${
             error || internalError
               ? 'border-red-300 bg-red-50 focus:border-red-500'
-              : 'border-gray-300 focus:border-[#0B6B3A]'
-          } focus:outline-none focus:ring-2 focus:ring-[#0B6B3A]/20`,
+              : 'border-gray-300 focus:border-[#742F38]'
+          } focus:outline-none focus:ring-2 focus:ring-[#742F38]/20`,
           required,
           maxLength
         }}
@@ -96,12 +96,12 @@ export default function PhoneInput({
         
         .PhoneInputInput:focus {
           outline: none;
-          border-color: #0B6B3A;
+          border-color: #742F38;
           box-shadow: 0 0 0 2px rgba(11, 107, 58, 0.1);
         }
         
         .PhoneInput--focus .PhoneInputInput {
-          border-color: #0B6B3A;
+          border-color: #742F38;
         }
         
         .PhoneInputCountry {

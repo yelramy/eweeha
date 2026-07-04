@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     
     // Get parameters from query string
     const title = searchParams.get('title') || 'Eweeha'
-    const subtitle = searchParams.get('subtitle') || 'Wedding Cars & Cortège in Lebanon'
+    const subtitle = searchParams.get('subtitle') || 'Wedding Cars & Convoys in Lebanon'
     const theme = searchParams.get('theme') || 'primary' // primary, dark, light
     
     // Theme colors

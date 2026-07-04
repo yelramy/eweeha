@@ -126,7 +126,7 @@ export default function QuoteClient() {
     }
   }
 
-  const whatsapp = appConfig?.contact?.whatsapp || '96176103365'
+  const whatsapp = appConfig?.contact?.whatsapp || '96170971841'
 
   if (loading) {
     return (

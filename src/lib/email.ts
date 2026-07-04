@@ -28,13 +28,13 @@ function getResendClient() {
 }
 
 // Email Configuration:
-// - EMAIL_FROM: Sender address for outgoing emails (should be info@eweeha.com in production)
+// - EMAIL_FROM: Sender address for outgoing emails (should be eweehalebanon@gmail.com in production)
 //   Must be verified in Resend. This is a no-reply address used only for sending.
-// - EMAIL_REPLY_TO: Where customer replies go (info@eweeha.com - the actual support inbox)
-// - EMAIL_ADMIN: Where admin notifications are sent (info@eweeha.com)
+// - EMAIL_REPLY_TO: Where customer replies go (eweehalebanon@gmail.com - the actual support inbox)
+// - EMAIL_ADMIN: Where admin notifications are sent (eweehalebanon@gmail.com)
 const EMAIL_FROM = process.env.EMAIL_FROM || 'onboarding@resend.dev'
-const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO || 'info@eweeha.com'
-const EMAIL_ADMIN = process.env.EMAIL_ADMIN || 'info@eweeha.com'
+const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO || 'eweehalebanon@gmail.com'
+const EMAIL_ADMIN = process.env.EMAIL_ADMIN || 'eweehalebanon@gmail.com'
 
 export async function sendBookingConfirmation(booking: Booking, accessToken?: string) {
   const resend = getResendClient()
@@ -365,7 +365,7 @@ export async function sendQuickQuoteRequest(data: QuickQuoteRequestData) {
     const subject = `Quick Quote Request: ${data.vehicle}`
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #0B6B3A;">Quick Quote Request</h2>
+        <h2 style="color: #742F38;">Quick Quote Request</h2>
         <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <p><strong>Vehicle:</strong> ${data.vehicle}</p>
           <p><strong>Start Date:</strong> ${data.startDate}</p>

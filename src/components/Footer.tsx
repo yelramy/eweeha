@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="mb-3 flex items-center gap-2.5">
               <Image
-                src="/logo.svg"
+                src="/logo.png"
                 alt="Eweeha — Wedding Cars Lebanon"
                 width={144}
                 height={144}
@@ -28,7 +28,7 @@ export default function Footer() {
             <h4 className="text-cream-50 font-semibold mb-3">Company</h4>
             <ul className="space-y-2 text-sm text-primary-100/80">
               <li><Link href="/about" className="hover:text-white">About Us</Link></li>
-              <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
+              {/* Blog link hidden until enough posts exist — /blog route still live */}
               <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
               <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
               <li><Link href="/terms" className="hover:text-white">Terms of Service</Link></li>
@@ -38,7 +38,7 @@ export default function Footer() {
           <div>
             <h4 className="text-cream-50 font-semibold mb-3">Services</h4>
             <ul className="space-y-2 text-sm text-primary-100/80">
-              <li><Link href="/services/wedding-cortege" className="hover:text-white">Wedding Cortège</Link></li>
+              <li><Link href="/services/wedding-convoy" className="hover:text-white">Wedding Convoy</Link></li>
               <li><Link href="/services/bridal-car" className="hover:text-white">Bridal Car &amp; Chauffeur</Link></li>
               <li><Link href="/services/photoshoot-cars" className="hover:text-white">Classic &amp; Convertible Cars</Link></li>
               <li><Link href="/services/guest-shuttle" className="hover:text-white">Guest Shuttle Vans</Link></li>
@@ -56,9 +56,9 @@ export default function Footer() {
           <div>
             <h4 className="text-cream-50 font-semibold mb-3">Support</h4>
             <ul className="space-y-2 text-sm text-primary-100/80">
-              <li><a href="tel:+96176103365" className="hover:text-white">+961-76-103-365</a></li>
-              <li><a href="mailto:info@eweeha.com" className="hover:text-white">info@eweeha.com</a></li>
-              <li><a href="https://wa.me/96176103365" target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a></li>
+              <li><a href="tel:+96170971841" className="hover:text-white">+961-70-971-841</a></li>
+              <li><a href="mailto:eweehalebanon@gmail.com" className="hover:text-white">eweehalebanon@gmail.com</a></li>
+              <li><a href="https://wa.me/96170971841" target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a></li>
             </ul>
           </div>
         </div>

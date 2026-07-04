@@ -117,9 +117,9 @@ function BankTransferPaymentContent() {
               <Link href="/" className="text-2xl font-bold text-charcoal-500">
                 Eweeha
               </Link>
-              <a href={`tel:${config?.contact?.phone || '+96176103365'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
+              <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
                 <PhoneIcon className="h-5 w-5 mr-2" />
-                {config?.contact?.phone || '+961-76-103-365'}
+                {config?.contact?.phone || '+961-70-971-841'}
               </a>
             </div>
           </div>
@@ -145,7 +145,7 @@ function BankTransferPaymentContent() {
 
             <Link
               href="/"
-              className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition-colors inline-block"
+              className="bg-primary-700 text-white px-6 py-3 rounded-md hover:bg-primary-800 transition-colors inline-block"
             >
               Back to Home
             </Link>
@@ -193,9 +193,9 @@ function BankTransferPaymentContent() {
             <Link href="/" className="text-2xl font-bold text-charcoal-500">
               Eweeha
             </Link>
-            <a href={`tel:${config?.contact?.phone || '+96176103365'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
+            <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
               <PhoneIcon className="h-5 w-5 mr-2" />
-              {config?.contact?.phone || '+961-76-103-365'}
+              {config?.contact?.phone || '+961-70-971-841'}
             </a>
           </div>
         </div>
@@ -290,7 +290,7 @@ function BankTransferPaymentContent() {
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-warm-600">Amount to Transfer:</span>
                       <div className="flex items-center">
-                        <span className="font-bold text-lg text-green-600">${formData.amount} USD</span>
+                        <span className="font-bold text-lg text-primary-700">${formData.amount} USD</span>
                         <button
                           onClick={() => handleCopy(formData.amount, 'Amount')}
                           className="ml-2 text-warm-600 hover:text-charcoal-500"
@@ -418,15 +418,15 @@ function BankTransferPaymentContent() {
           <h3 className="font-semibold text-charcoal-500 mb-2">Need Help with Bank Transfer?</h3>
           <div className="flex justify-center space-x-6">
             <a
-              href={`tel:${config?.contact?.phone || '+96176103365'}`}
+              href={`tel:${config?.contact?.phone || '+96170971841'}`}
               className="flex items-center text-warm-600 hover:text-charcoal-500"
             >
               <PhoneIcon className="h-4 w-4 mr-1" />
               Call Support
             </a>
             <a
-              href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}`}
-              className="flex items-center text-green-600 hover:text-green-800"
+              href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+              className="flex items-center text-[#128C7E] hover:text-[#075E54]"
             >
               💬 WhatsApp
             </a>

@@ -12,9 +12,9 @@ export const revalidate = 86400
 
 async function loadLogoDataUri(): Promise<string | null> {
   try {
-    const logoPath = path.join(process.cwd(), 'public', 'logo.svg')
+    const logoPath = path.join(process.cwd(), 'public', 'logo.png')
     const logo = await fs.readFile(logoPath)
-    return `data:image/svg+xml;base64,${logo.toString('base64')}`
+    return `data:image/png;base64,${logo.toString('base64')}`
   } catch {
     return null
   }
@@ -69,7 +69,7 @@ export async function GET() {
             color: '#6B6257',
           }}
         >
-          Wedding Cars &amp; Cortège in Lebanon — Chauffeur Included
+          Wedding Cars &amp; Convoys in Lebanon — Chauffeur Included
         </div>
         <div
           style={{
@@ -91,7 +91,7 @@ export async function GET() {
               background: '#C56E7D',
             }}
           />
-          <div style={{ display: 'flex' }}>+961 76 103 365</div>
+          <div style={{ display: 'flex' }}>+961 70 971 841</div>
         </div>
       </div>
     ),

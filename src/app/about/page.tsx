@@ -5,7 +5,7 @@ import { LocalBusinessSchema } from '@/components/StructuredDataEnhanced'
 
 export const metadata: Metadata = generateSeoMetadata({
   title: 'About Us - Wedding Car Rental in Lebanon',
-  description: "Eweeha is Lebanon's wedding car specialist — decorated bridal cars, classics, convertibles, and full cortège convoys with suited chauffeurs, everywhere in Lebanon.",
+  description: "Eweeha is Lebanon's wedding car specialist — decorated bridal cars, classics, convertibles, and full wedding convoys with suited chauffeurs, everywhere in Lebanon.",
   path: '/about',
 })
 
@@ -15,12 +15,12 @@ export default function AboutPage() {
       {/* Structured Data for Local Business */}
       <LocalBusinessSchema
         name="Eweeha"
-        description="Wedding car rental in Lebanon with suited chauffeurs — bridal cars, classics, convertibles, and full cortège convoys"
-        telephone="+96176103365"
+        description="Wedding car rental in Lebanon with suited chauffeurs — bridal cars, classics, convertibles, and full wedding convoys"
+        telephone="+96170971841"
         address="Beirut, Lebanon"
         rating={4.8}
         reviewCount={127}
-        priceRange="$150-$700"
+        priceRange="$250-$1500"
       />
 
       <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -54,19 +54,19 @@ export default function AboutPage() {
             <div className="space-y-6">
               <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
                 In Lebanon, the moment the bride steps out and the crowd erupts has a sound: <em>eweeha!</em> The decorated
-                car at the family door, the convoy of loved ones behind it, the horns down the road, the zaghrouta from the
+                car at the family door, the convoy of loved ones behind it, the horns down the road, the zalghouta from the
                 balconies — it&apos;s the moment the wedding truly begins. We named our company after it, because it&apos;s
                 exactly what we deliver.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
                 Eweeha was built by drivers and coordinators who have spent years on Lebanon&apos;s wedding roads — driving
-                couples, families, and guests to churches, monasteries, and venues in every region. We turned that
+                couples, families, and guests to ceremonies and venues in every region. We turned that
                 experience into a dedicated wedding operation: decorated bridal cars, classics and convertibles for the
-                photos, matching cortège convoys, and guest shuttles — all under one coordinator.
+                photos, matching wedding convoys, and guest shuttles — all under one coordinator.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
-                Today Eweeha serves weddings everywhere in Lebanon — Beirut churches, Harissa ceremonies, Batroun&apos;s
-                seaside chapel, mountain venues in Faqra and Broummana, vineyard weddings in the Bekaa, and the great summer
+                Today Eweeha serves weddings everywhere in Lebanon — Beirut ballrooms, Harissa ceremonies, Batroun&apos;s
+                seaside weddings, mountain venues in Faqra and Broummana, vineyard weddings in the Bekaa, and the great summer
                 weddings of the North and the South. One team, one timeline, zero stress on the biggest day of your life.
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function AboutPage() {
                   Suited Chauffeurs
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Experienced, licensed professionals in suits who know every church road in Lebanon — and how to hold a door for a wedding dress.
+                  Experienced, licensed professionals in suits who know every wedding road in Lebanon — and how to hold a door for a wedding dress.
                 </p>
               </div>
 
@@ -112,7 +112,7 @@ export default function AboutPage() {
                   One Coordinator
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Bridal car, cortège, photoshoot classic, and guest shuttles managed by one person on one timeline — yours.
+                  Bridal car, convoy, photoshoot classic, and guest shuttles managed by one person on one timeline — yours.
                 </p>
               </div>
 
@@ -121,7 +121,7 @@ export default function AboutPage() {
                   Backup Guarantee
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Insured vehicles, maintained fleet, and a standby plan behind every booking. Whatever happens, you get to the church on time.
+                  Insured vehicles, maintained fleet, and a standby plan behind every booking. Whatever happens, you get to your ceremony on time.
                 </p>
               </div>
 
@@ -130,7 +130,7 @@ export default function AboutPage() {
                   Every Road in Lebanon
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Thousands of rides behind us — coastal highways, mountain switchbacks, and village lanes. If there&apos;s a church at the end of it, we&apos;ve driven it.
+                  Thousands of rides behind us — coastal highways, mountain switchbacks, and village lanes. If there&apos;s a wedding at the end of it, we&apos;ve driven it.
                 </p>
               </div>
             </div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
               Service Coverage
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-              Eweeha serves weddings in every region of Lebanon — each area with its own dedicated page, churches, and venues:
+              Eweeha serves weddings in every region of Lebanon — each area with its own dedicated page, routes, and venues:
             </p>
             <div className="grid md:grid-cols-2 gap-4 text-gray-700 dark:text-gray-300">
               <ul className="space-y-2">
@@ -164,6 +164,10 @@ export default function AboutPage() {
                   <span className="mr-2 text-primary-600 dark:text-primary-400">✓</span>
                   <Link href="/routes/wedding-cars-broummana-metn" className="hover:underline">Broummana &amp; the Metn</Link>
                 </li>
+                <li className="flex items-center">
+                  <span className="mr-2 text-primary-600 dark:text-primary-400">✓</span>
+                  <Link href="/routes/wedding-cars-aley-bhamdoun" className="hover:underline">Aley, Bhamdoun &amp; Sawfar</Link>
+                </li>
               </ul>
               <ul className="space-y-2">
                 <li className="flex items-center">
@@ -176,11 +180,15 @@ export default function AboutPage() {
                 </li>
                 <li className="flex items-center">
                   <span className="mr-2 text-primary-600 dark:text-primary-400">✓</span>
-                  <Link href="/routes/wedding-cars-zahle-bekaa" className="hover:underline">Zahle &amp; the Bekaa</Link>
+                  <Link href="/routes/wedding-cars-zahle-bekaa" className="hover:underline">Zahle, Baalbek &amp; the Bekaa</Link>
                 </li>
                 <li className="flex items-center">
                   <span className="mr-2 text-primary-600 dark:text-primary-400">✓</span>
-                  <Link href="/routes/wedding-cars-north-lebanon" className="hover:underline">The North &amp; the South</Link>
+                  <Link href="/routes/wedding-cars-north-lebanon" className="hover:underline">The North, up to Akkar</Link>
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2 text-primary-600 dark:text-primary-400">✓</span>
+                  <Link href="/routes/wedding-cars-saida-south" className="hover:underline">The South, down to Tyre</Link>
                 </li>
               </ul>
             </div>

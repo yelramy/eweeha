@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Tailwind v4 does not auto-load tailwind.config.ts. Without this directive the
- * brand palette (cedar/warm/cream/charcoal/clay/primary) and the gray/slate/blue
+ * brand palette (warm/cream/charcoal/clay/primary/gold) and the gray/slate/blue
  * rebrands generate no CSS, so those utility classes silently do nothing. */
 @config "../../tailwind.config.ts";
 

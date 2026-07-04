@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       name: 'Eweeha',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://eweeha.com/logo.svg'
+        url: 'https://eweeha.com/logo.png'
       }
     },
     mainEntityOfPage: {

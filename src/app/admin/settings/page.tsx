@@ -128,19 +128,19 @@ export default function Settings() {
                 <tr className="bg-white">
                   <td className="px-3 py-2 border-r border-b border-gray-200 font-medium">Phone</td>
                   <td className="px-3 py-2 border-b border-gray-200">
-                    <input type="tel" value={settings.contactPhone} onChange={(e) => setSettings({...settings, contactPhone: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="+961-76-103-365" />
+                    <input type="tel" value={settings.contactPhone} onChange={(e) => setSettings({...settings, contactPhone: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="+961-70-971-841" />
                   </td>
                 </tr>
                 <tr className="bg-gray-50">
                   <td className="px-3 py-2 border-r border-b border-gray-200 font-medium">WhatsApp</td>
                   <td className="px-3 py-2 border-b border-gray-200">
-                    <input type="tel" value={settings.contactWhatsapp} onChange={(e) => setSettings({...settings, contactWhatsapp: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="96176103365" />
+                    <input type="tel" value={settings.contactWhatsapp} onChange={(e) => setSettings({...settings, contactWhatsapp: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="96170971841" />
                   </td>
                 </tr>
                 <tr className="bg-white">
                   <td className="px-3 py-2 border-r border-b border-gray-200 font-medium">Email</td>
                   <td className="px-3 py-2 border-b border-gray-200">
-                    <input type="email" value={settings.contactEmail} onChange={(e) => setSettings({...settings, contactEmail: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="info@eweeha.com" />
+                    <input type="email" value={settings.contactEmail} onChange={(e) => setSettings({...settings, contactEmail: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="eweehalebanon@gmail.com" />
                   </td>
                 </tr>
               </tbody>

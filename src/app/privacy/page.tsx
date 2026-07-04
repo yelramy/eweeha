@@ -139,9 +139,9 @@ export default function PrivacyPage() {
                   If you have questions about this privacy policy or want to exercise your rights, please reach out to us:
                 </p>
                 <div className="bg-cream-50 dark:bg-gray-700 rounded-lg p-4 dark:text-gray-300">
-                  <p><strong>Email:</strong> <a href="mailto:info@eweeha.com" className="text-primary-600 dark:text-primary-400 hover:underline">info@eweeha.com</a></p>
-                  <p><strong>Phone:</strong> <a href="tel:+96176103365" className="text-primary-600 dark:text-primary-400 hover:underline">+961-76-103-365</a></p>
-                  <p><strong>WhatsApp:</strong> <a href="https://wa.me/96176103365" className="text-primary-600 dark:text-primary-400 hover:underline">+961-76-103-365</a></p>
+                  <p><strong>Email:</strong> <a href="mailto:eweehalebanon@gmail.com" className="text-primary-600 dark:text-primary-400 hover:underline">eweehalebanon@gmail.com</a></p>
+                  <p><strong>Phone:</strong> <a href="tel:+96170971841" className="text-primary-600 dark:text-primary-400 hover:underline">+961-70-971-841</a></p>
+                  <p><strong>WhatsApp:</strong> <a href="https://wa.me/96170971841" className="text-primary-600 dark:text-primary-400 hover:underline">+961-70-971-841</a></p>
                   <p><strong>Address:</strong> Beirut, Lebanon</p>
                 </div>
                 <p className="mt-4 text-sm dark:text-gray-400">

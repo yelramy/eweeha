@@ -78,7 +78,7 @@ export default function SocialPreview({
           <div className="p-3 border-b border-warm-200">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold">
-                BV
+                E
               </div>
               <div>
                 <div className="font-semibold text-sm text-charcoal-500">Eweeha</div>
@@ -114,7 +114,7 @@ export default function SocialPreview({
           <div className="p-4">
             <div className="flex items-start space-x-3 mb-3">
               <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold flex-shrink-0">
-                BV
+                E
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center space-x-1">
@@ -157,7 +157,7 @@ export default function SocialPreview({
           <div className="p-4 border-b border-warm-200">
             <div className="flex items-center space-x-2">
               <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold">
-                BV
+                E
               </div>
               <div className="flex-1">
                 <div className="font-semibold text-sm text-charcoal-500">Eweeha</div>

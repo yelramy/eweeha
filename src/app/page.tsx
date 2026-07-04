@@ -8,13 +8,13 @@ export const revalidate = 300
 
 export const metadata: Metadata = {
   title: 'Wedding Cars in Lebanon with Chauffeur | Eweeha',
-  description: 'Wedding car rental in Lebanon: decorated bridal cars, classic & convertible cars, and full wedding cortège convoys with suited chauffeurs. Serving churches and venues in Beirut, Jounieh, Byblos, Broummana, Faraya, the Chouf & all Lebanon.',
+  description: 'Wedding car rental in Lebanon: decorated bridal cars, classic & convertible cars, and full wedding convoys with suited chauffeurs. Serving every ceremony and venue in Beirut, Jounieh, Byblos, Broummana, Faraya, the Chouf & all Lebanon.',
   alternates: {
     canonical: 'https://eweeha.com',
   },
   openGraph: {
     title: 'Wedding Cars in Lebanon with Chauffeur - Eweeha',
-    description: 'Decorated bridal cars, classic convertibles, and full wedding cortège convoys with professional chauffeurs, across all Lebanon.',
+    description: 'Decorated bridal cars, classic convertibles, and full wedding convoys with professional chauffeurs, across all Lebanon.',
     type: 'website',
     url: 'https://eweeha.com',
   },

@@ -1,8 +1,8 @@
 # PROJECT_MAP — Eweeha
 
-Production-grade anatomy map for the `eweeha` codebase — **eweeha.com**, wedding car & cortège rental in Lebanon (chauffeur-driven bridal cars, wedding convoys, classic/convertible photoshoot cars, guest shuttles).
+Production-grade anatomy map for the `eweeha` codebase — **eweeha.com**, wedding car & convoy rental in Lebanon (chauffeur-driven bridal cars, wedding convoys, classic/convertible photoshoot cars, guest shuttles).
 
-**Origin:** Forked from an in-house booking-platform codebase in Jul 2026; as of Jul 3 2026 the brand separation is complete — no cross-links, sister-site mentions, or legacy assets remain. Eweeha stands alone.
+**Origin:** Forked from an in-house booking-platform codebase in Jul 2026; as of Jul 3 2026 the brand separation is complete — no cross-links, sister-site mentions, legacy initials ("BV"), or legacy assets remain. Eweeha stands alone. A kill-switch service worker (`public/sw.js`) is deployed permanently to purge stale caches left by the previous codebase's PWA worker in returning visitors' browsers.
 
 ---
 
@@ -28,7 +28,7 @@ Production-grade anatomy map for the `eweeha` codebase — **eweeha.com**, weddi
 | XSS | `xss` + custom sanitizers | `src/utils/sanitize.ts` |
 | Rich text (admin) | TipTap | Blog editor |
 | UI primitives | Headless UI, Heroicons | Components, icons |
-| Fonts | Google Fonts (next/font) | Dancing Script, Poppins, Playfair Display |
+| Fonts | Google Fonts (next/font) | Outfit (sans), Great Vibes (script accent), Cormorant Garamond (serif) |
 | Deployment | Vercel | Region `cdg1` (`vercel.json`) |
 
 ### Architectural Pattern
@@ -90,9 +90,11 @@ eweeha/
 ├── .gitignore
 │
 ├── public/
-│   ├── favicon.ico, favicon-32x32.png, icon-192.png, icon-512.png
+│   ├── favicon.ico, favicon-32x32.png, icon-192.png, icon-512.png   # Bold "E!" mark (see scripts/make-favicons.ps1)
 │   ├── apple-touch-icon.png
-│   ├── logo.svg                       # Brand logo (interlocked gold rings + olive sprig)
+│   ├── logo.png                       # Brand logo (circular badge: wine car, ribbon, EWEEHA!)
+│   ├── sw.js                          # Kill-switch service worker (purges legacy PWA caches)
+│   ├── images/hero-bg.jpg             # Homepage hero photo (vivid classic car, coastal street)
 │   ├── images/fleet/standard.svg      # Fleet placeholder (wedding car illustration)
 │   ├── images/areas/ornament.svg      # Generic ornament for area pages
 │   └── llms.txt                       # LLM crawler guidance (wedding services knowledge base)
@@ -100,6 +102,8 @@ eweeha/
 ├── scripts/
 │   ├── migrate.ts                     # CLI: runs runAllMigrations() against Turso
 │   ├── init-db.ts                     # CLI: full bootstrap (initializeDatabase + all migrations) for a fresh DB
+│   ├── seed-test-cars.mjs             # Dev helper: seed/clear TEST vehicles in dev.db (`node ... seed|clear`)
+│   ├── make-favicons.ps1              # Regenerates all favicon PNGs + multi-size ICO from the E! design
 │   └── create_rental_requests_table.sql  # DDL for rental_requests (manual/ops)
 │
 └── src/
@@ -119,7 +123,7 @@ eweeha/
     │   ├── booking/                   # Multi-step booking wizard + lookup
     │   ├── quote/[token]/             # Payable quote commitment page
     │   ├── fleet/[id]/                # Vehicle detail pages
-    │   ├── services/                  # wedding-cortege, bridal-car, photoshoot-cars, guest-shuttle
+    │   ├── services/                  # wedding-convoy, bridal-car, photoshoot-cars, guest-shuttle
     │   ├── routes/ + routes/[slug]/   # Wedding area + experience landing pages (static data)
     │   ├── blog/ + blog/[slug]/ + blog/category/[slug]/
     │   ├── payment/                   # stripe, omt, bank-transfer, whish-money, success, cancelled
@@ -193,7 +197,7 @@ eweeha/
 
 - **`package.json`** — Scripts: `dev`, `build`, `start`, `lint`, `migrate`, `db:init` (fresh-DB bootstrap via `scripts/init-db.ts`), `analyze`. Declares all runtime and dev dependencies.
 - **`next.config.ts`** — Image remote patterns (Unsplash, Cloudinary), production console stripping, per-route `Cache-Control` and security headers.
-- **`vercel.json`** — Vercel build/install commands and Paris (`cdg1`) region pinning.
+- **`vercel.json`** — Vercel build/install commands and Paris (`cdg1`) region pinning. `buildCommand` runs `npm run migrate` before `next build` so Turso schema is applied at deploy time.
 - **`scripts/migrate.ts`** — Standalone migration runner; requires `TURSO_*` env vars.
 
 #### `public/`
@@ -348,8 +352,9 @@ eweeha/
 **Authentication:**
 
 - `POST /api/admin/auth` — bcrypt password check against `users` table, sets `admin-token` JWT (7-day TTL).
-- Default admin seeded by `seedAdmin.ts` (username `admin`; password change expected on first login per README).
+- Default admin seeded by `seedAdmin.ts` (username `admin`; password change expected on first login per README). Local dev uses the `yelramy` user (credentials in `.env.local`, synced into `dev.db`).
 - All `/admin/*` pages and `/api/admin/*` routes gated by `src/proxy.ts` except login/auth.
+- Login page (`/admin/login`) is Eweeha-branded (logo + wine palette) and uses a full-page navigation to `/admin/bookings` after auth so the fresh `admin-token` cookie is always sent.
 
 **Modules:**
 
@@ -390,7 +395,7 @@ eweeha/
 - **Structured data:** Organization, LocalBusiness, Product, FAQ, Breadcrumb schemas in layout and page components.
 - **Sitemaps:** `sitemap.ts` (pages + fleet + routes + blog), `image-sitemap.xml/route.ts`.
 - **Dynamic OG:** `/og-image` route generates social preview images (wedding gold/ivory theme).
-- **Static routes catalog:** `src/lib/routes.ts` — 9 wedding-area pages (Beirut, Jounieh/Harissa, Byblos/Batroun, Broummana/Metn, Faraya/Faqra, Chouf, Zahle/Bekaa, South, North) + 3 experience pages (classic-car photoshoot, convertible cortège, zaffe grand arrival), each with FAQs and price ranges.
+- **Static routes catalog:** `src/lib/routes.ts` — 10 wedding-area pages (Beirut, Jounieh/Harissa, Byblos/Batroun, Broummana/Metn, Aley/Bhamdoun, Faraya/Faqra, Chouf, Zahle/Bekaa incl. Baalbek, South incl. Tyre/Nabatieh, North incl. Akkar) + 3 experience pages (classic-car photoshoot, convertible convoy, zaffe grand arrival), each with FAQs and price ranges ($250–300 min, $800–1500 max — benchmarked against sister-site rates Jul 2026).
 - **Blog:** `blog_posts` + `blog_categories` + junction table; statuses `published` | `draft` | `scheduled`.
 
 ### 8. AI-Powered Tools (Optional — requires API keys)
@@ -669,7 +674,7 @@ Admin client helper: `src/utils/adminApi.ts` (`ApiResponse<T>`).
 
 *Generated from repository scan. For changes to architecture, update this file alongside significant structural commits.*
 
-**Recent (Jul 2026):** Quote-commitment flow implemented — admin creates payable `/quote/[token]` links from rental requests; customers pay deposit or full online; bookings auto-created on accept. Run `npm run migrate` after deploy for new `rental_requests` / `bookings` columns.
+**Jul 4 2026 — Admin login fixes:** Removed default `admin`/`admin123` production seeding (requires `ADMIN_USERNAME`/`ADMIN_PASSWORD` env). Login rate limit now only counts failed attempts. Turso production user: `eweehaadmin` only.
 
 **Jul 2026 — Eweeha rebrand (fork of the legacy codebase):**
 - Brand: Eweeha / eweeha.com / info@eweeha.com; booking IDs now `EW-*`; package name `eweeha`.
@@ -693,4 +698,56 @@ Admin client helper: `src/utils/adminApi.ts` (`ApiResponse<T>`).
 - dev.db seed rows updated: `business_name`=Eweeha, `contact_email`/admin email → eweeha.com, `seo_settings.site_title` → Eweeha.
 - Theme unification across ALL pages (public + admin): `cedar-*` (olive) → `primary-*` (wine) in 20 files; `blue-*` → `primary-*` in 25 files; OMT page `orange-*` → `primary-*`; Whish page `purple/pink-*` → `primary-*`; `yellow-*` → `gold-*` on booking/confirmation/date-picker; `/auth/signin` and `/profile` restyled to cream/wine theme. Semantic green (success/WhatsApp), red (errors), amber (stars/warnings) kept.
 - Verified: `npm run build` passes (104 pages); zero `beirutvans|limousinelebanon|limobeirut|lecortege|sister` matches in src/ or public/. Booking IDs are `EW-*`.
-- Remaining intentional: `van_type` DB column (internal, schema contract), "cortège" as wedding vocabulary, `cedar`/`blue` scales still defined in `tailwind.config.ts` (unused by src, safe to keep or drop later).
+- Remaining intentional: `van_type` DB column (internal, schema contract), "cortège" as wedding vocabulary.
+
+**Jul 3 2026 (night) — GitHub:** Repo initialized and pushed to https://github.com/yelramy/eweeha.git (`main`, commit `322f166`). `.env.local` and `dev.db` excluded via `.gitignore`.
+
+**Jul 3 2026 (late night) — Admin login fix + last green purge (user report: "logged in but stayed on login page; page shows BV and green theme"):**
+- `/admin/login`: hardcoded "BV" logo circle replaced with `/logo.svg` + "Eweeha Admin" heading; submit button now wine `primary`. Redirect fixed: `router.push('/admin/dashboard')` → `window.location.assign('/admin/bookings')` (full navigation guarantees the fresh `admin-token` cookie is sent; also skips the dashboard→bookings double redirect).
+- `SocialPreview.tsx`: three "BV" avatar initials → "E".
+- Last legacy-green sweep — the old brand green `#0B6B3A` (+ hovers `#095c31`/`#094f2b`/`#073d22`, tint `#eefcf3`) replaced with wine (`#742F38`/`#5C262D`/`#4A1F25`/`#FBF3F4`) in 13 files: `emailTemplates.ts` (all customer/admin emails), `invoiceTemplate.ts`, `email.ts`, `BookingClient`, `Calendar`, `DateTimePicker`, `QuoteCard`, `QuoteActions`, `RentalRequestForm`, `AIBookingAssistant`, `PhoneInput`, `MobileContactBar`, admin invoices page.
+- `Button.tsx` `success` variant: olive `#55683D` → WhatsApp green `#25D366` (only used on WhatsApp CTAs). `cedar` palette deleted from `tailwind.config.ts` (zero remaining usages).
+- `public/sw.js` added: kill-switch service worker that unregisters + wipes caches left by the legacy PWA worker in returning visitors' browsers (`/sw.js` was 404ing in logs). Keep deployed permanently.
+- Verified: `npm run build` passes; browser test of login (yelramy) lands on `/admin/bookings`; zero `BV`/`cedar`/`#0B6B3A` matches in src. Note: dev-overlay hydration warning on the login page is caused by the IDE browser's inspection attributes (`data-cursor-ref`), not app code.
+
+**Jul 4 2026 — Tailwind-green purge on customer pages + hero tagline + logo concepts:**
+- All remaining *theme* greens (`green-*`/`emerald-*` Tailwind classes) removed from customer-facing pages (~30 files). Booking wizard: Continue/Complete button green gradient → champagne-gold gradient (`#F6EEDD→#DEC690`, wine text `#4A1F25`, gold border `#BA9348`, same look as the gold `Button` variant); hour-package cards' selected/hover green → `primary`. `BookingSummary`: Pickup box green → wine, Return box red → gold. Payment pages (OMT/Whish/bank-transfer/stripe/success), confirmation, lookup, FAQ, contact, reviews, services CTAs, `QuoteCard`/`QuoteActions`, `RentalRequestForm`, `ReviewsSection`, `MobileMenu`, review submit form: leftover greens → `primary`/`gold`; WhatsApp-related buttons/links standardized on official WhatsApp palette (`#25D366` bg / `#128C7E` text / `#075E54` hover).
+- KEPT (intentional, semantic): success-state greens — CheckCircle icons + "payment received/confirmed" boxes on confirmation/success/thank-you pages, paid badges, admin status chips, notification toasts.
+- Homepage hero: added "Smalla 3layki" next to "Eweeha!" (`HomeClient.tsx` h1) — Cormorant Garamond italic (`font-serif`), gold, smaller size; "Eweeha!" stays Great Vibes wine. (It's the zaffe blessing shouted when the cortège arrives — protection from the evil eye.)
+- 4 logo concepts generated to `~/.cursor/projects/.../assets/logo-concept-{1..4}-*.png` (gold line-art car, wine monogram medallion, script wordmark w/ ribbon, art-deco arch badge). Current live logo is still `public/logo.svg` (rings medallion) — swap pending user pick.
+
+**Jul 4 2026 (afternoon) — New logo adopted (circle badge, user-picked):**
+- Final design: circular gold-ring badge, front-facing wine vintage car w/ ribbon bow, gold confetti, "EWEEHA!" in art-deco serif caps (gold `!`), curved "WEDDING CARS IN LEBANON" flanked by gold cedars. Master render: `~/.cursor/projects/.../assets/logo-final-circle-deco-cedars.png` (1536×1024 — keep as source).
+- `public/logo.svg` (rings medallion) DELETED. New raster set generated (square-cropped via System.Drawing, cream bg `#FFFEF9`): `public/logo.png` (512), `icon-512.png`, `icon-192.png`, `apple-touch-icon.png` (180), `favicon-32x32.png`, `favicon.ico` (PNG-in-ICO, 32px).
+- All 13 `/logo.svg` refs switched to `/logo.png`: `HomeClient` header, `Footer`, `admin/login`, `reviews/page`, review submit + thank-you, `seoManager.ts` (schema logo/image), `layout.tsx` (LocalBusiness schema), `invoices.ts` (PDF logoUrl), `image-sitemap.xml`, `blog/[slug]` (publisher logo), `og-image.jpg/route.tsx` (now reads logo.png → data:image/png).
+- Verified in browser: header serves `/_next/image?url=%2Flogo.png`, loads OK. Note: logo has cream circle bg (not transparent) — sits on cream header fine; in wine footer it reads as a coin/badge, intentional.
+
+**Jul 4 2026 (afternoon) — Contact info changed:**
+- Phone `+961-76-103-365` → `+961-70-971-841` (wa.me: `96176103365` → `96170971841`), email `info@eweeha.com` → `eweehalebanon@gmail.com`. Swept 36 files (all tel:/wa.me/mailto links, config defaults, email templates, invoices, schema.org, llms.txt, README env examples).
+- DB `settings` table (`contact_phone`/`contact_whatsapp`/`contact_email`) updated in BOTH local `dev.db` AND production Turso (`eweehadb`) via one-off script (deleted after). Config cache tag busted locally via admin `/api/admin/clear-cache` (needs same-origin headers; login as admin first). Verified `/api/config` now returns new values locally. Deployed Vercel site: DB values will surface when its 1h config cache expires or on next deploy.
+- NOTE: email env vars (`EMAIL_FROM`/`EMAIL_REPLY_TO`/`EMAIL_ADMIN`) on Vercel still need updating to `eweehalebanon@gmail.com` when email sending (Resend) is set up.
+- Footer: user said leave as-is (several pages simply don't render `Footer`; not a bug in the component).
+
+**Jul 4 2026 (evening) — cortège→convoy, hero photo, ConvoyPicker, inclusive copy, bold favicon:**
+- **"Cortège" fully replaced by "convoy"** in all copy, slugs, and data. Route folder `services/wedding-cortege` → `services/wedding-convoy`; `routes.ts` slug `convertible-cortege` → `convertible-convoy`; permanent redirects for both old URLs added to `next.config.ts`. DB content (`content_sections`, `seo_settings`) updated in BOTH local `dev.db` and production Turso.
+- **Hero reworked** (`HomeClient.tsx`): h1 is now "Eweeha!" (Great Vibes, wine) + "Smalla 3layke" (Cormorant italic, gold); old `WeddingCarIllustration` removed. Full-bleed background photo `public/images/hero-bg.jpg` — regenerated as a vivid golden-hour shot (classic white ribbon car, coastal street, bougainvillea; source PNG in `~/.cursor/projects/.../assets/hero-bg-vivid.png`). Overlays: mobile gets a uniform cream wash (`sm:hidden`) for centered-text readability; desktop gets a left→right cream gradient so the car side stays rich. Hero paragraph now ends "on time wherever you celebrate".
+- **ConvoyPicker** (`src/components/ConvoyPicker.tsx`, new): modal car picker opened by the hero "Pick My Cars" button (was "Plan My Cortège"). Tap-to-select car cards (photo grid, check badge), optional date field, sends selected car NAMES (not photos) via `wa.me` message "Are these cars available on …?". Empty-fleet state falls back to a WhatsApp prompt. Verified end-to-end with temporary seeded cars (then removed via `scripts/seed-test-cars.mjs clear`).
+- **WhatsApp FAB now shows on mobile too** (`ContactButtons.tsx` unhidden; `WhatsAppButton.tsx` sits `bottom-20` above `MobileContactBar` on small screens, `bottom-6` on `md+`).
+- **Inclusive wording sweep** (user: "we're not only targeting churches/Christians"): generic "church" phrasing → "ceremony"/"wherever you celebrate" across ~15 files (home, layout meta, seoManager, contentDefaults, AIBookingAssistant prompts/placeholders, routes/about/faq/services pages) AND in `content_sections`/`seo_settings` of both dev.db and production Turso. Proper-noun landmarks (St. George Cathedral, Harissa Basilica, St. Stephen's, Mar Chaaya) kept as venue examples inside broader lists.
+- **Favicon redesigned** (was the full circle badge → unreadable speck at 16px): new bold flat "E!" mark — rounded wine square, cream E, gold `!`. Files: `src/app/icon.svg` (rewritten) + regenerated `favicon-32x32.png`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` (full-bleed square for iOS), and `favicon.ico` now a REAL multi-size ICO (16+32+48 PNG entries). Regenerate anytime with `scripts/make-favicons.ps1`. `public/logo.png` (full badge) unchanged — it remains the header/footer/schema logo.
+- Production Turso one-off updates were run with credentials from the Vercel env (URL `libsql://eweehadb-...turso.io`); one-off sweep scripts were deleted after use.
+- Verified: picker flow (2 cars + date → correct `wa.me` URL), hero on desktop + mobile emulation, favicon renders at 32px. `npx tsc --noEmit` clean.
+
+**Jul 4 2026 (late) — Header wordmark removed, Lebanese flag, "What does Eweeha mean?" section:**
+- Homepage header (`HomeClient.tsx`): script "Eweeha" wordmark next to the logo REMOVED (user: redundant — the logo badge already says EWEEHA!). Tagline now reads "WEDDING CARS / LEBANON" (two-line small caps).
+- `src/components/LebanonFlag.tsx` (new): inline SVG Lebanese flag (red/white/red + green cedar) — SVG, not emoji, because Windows browsers don't render flag emojis. First tried as a clickable header chip, but the saturated red/green clashed with the muted header — final placement (user-approved) is inline in the HERO EYEBROW: "Chauffeured wedding cars · All of Lebanon [flag]", non-clickable, `whitespace-nowrap` keeps "All of Lebanon + flag" together when the line wraps on mobile.
+- New homepage section `#eweeha` ("What Does "Eweeha!" Mean?") between Why-Choose-Us and Contact: wine background, oversized script watermark, dictionary-entry card (/ew-wee-ha/, 3 fun definitions) + story copy, link to `/about`. Fun/cultural tone per user request. CULTURAL ACCURACY (user-corrected): the radde LEADER calls "Eweeeeha! Smalla 3laykiii…" verse after verse, and the crowd ANSWERS with the zalghouta (lilililiii) — not the other way around.
+- Verified on desktop + mobile emulation; `tsc --noEmit` clean.
+
+**Jul 4 2026 (night) — pricing sections removed, Beirut Vans partner blurb, routes country-wide:**
+- "zaghrouta" → "zalghouta" (correct spelling) in `services/wedding-convoy`, `about`, and `public/llms.txt`.
+- **Visible pricing tables REMOVED from service pages** (user: numbers were inaccurate; re-add later when real prices exist): "Typical Convoy Packages" section deleted from `services/wedding-convoy`, "Bridal Car Packages" deleted from `services/bridal-car`. Photoshoot + guest-shuttle pages never had visible price tables. Invisible schema.org `priceRange` values kept but broadened ($250-$1500 convoy, $250-$900 bridal, $250-$800 photoshoot, $200-$800 shuttle, $250-$1500 on about-page LocalBusiness) — do NOT omit the prop; `ServiceSchema` falls back to a bogus `$50-$120` default.
+- **Beirut Vans partnership block added to `services/guest-shuttle`** (between What's-Included and FAQs): "Guest Shuttles Run with Beirut Vans" — one outbound link to beirutvans.com (sister company, van specialists) + "Bundle & save" line (combined convoy+shuttle quote costs less; no specific numbers yet). This is the ONLY deliberate cross-link to the sister brands anywhere on eweeha — kept single and contextual on purpose (brand separation still the rule; limobeirut NOT linked, doesn't fit shuttle context).
+- **Routes price ranges corrected** in `src/lib/routes.ts` after checking sister sites (limousinelebanon.com FAQ: Chrysler limo $250-350, Hummer $350-500, Beetle from $450; limobeirut.com publishes no prices): area mins now $250-300 (was $150-200), maxes $1200-1500 (was $500-700) representing single bridal car → full convoy. Experience pages: photoshoot $250-800, convertible $280-1200, zaffe $250-1000. Route page pricing caption now says "Indicative range, from a single bridal car to a full multi-car convoy".
+- **Country-wide coverage:** NEW route `wedding-cars-aley-bhamdoun` (Aley/Bhamdoun/Sawfar — old Damascus road summer weddings; auto-appears in /routes listing + sitemap). South route extended to Tyre (Sour) + Nabatieh (title/desc/highlights), North extended to Akkar, Zahle/Bekaa extended to Baalbek + West Bekaa. Region enumerations updated everywhere: HomeClient Wedding Coverage box, about-page coverage links (now 10 links incl. separate North/South), faq answer, routes page meta, bridal-car "All Lebanon" card, BookingSSRFallback, layout.tsx areaServed schema (+Aley, Bhamdoun, Baalbek, Tyre).
+- Verified: all 5 changed pages return 200 on dev with expected content (beirutvans link present, "$150" gone, zalghouta correct, Aley page live). `tsc --noEmit` clean.

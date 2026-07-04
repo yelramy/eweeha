@@ -46,7 +46,7 @@ const getInlineStyles = (variant: ButtonVariant): React.CSSProperties => {
     secondary: { backgroundColor: '#8A7A69', color: '#ffffff', cursor: 'pointer' },
     outline: { backgroundColor: 'transparent', color: '#742F38', border: '2px solid #742F38', cursor: 'pointer' },
     ghost: { backgroundColor: 'transparent', color: '#742F38', cursor: 'pointer' },
-    success: { backgroundColor: '#55683D', color: '#ffffff', cursor: 'pointer' },
+    success: { backgroundColor: '#25D366', color: '#ffffff', cursor: 'pointer' },
     warning: {
       background: 'linear-gradient(to bottom right, #F6EEDD, #DEC690)',
       color: '#4A1F25',

@@ -119,9 +119,9 @@ function StripePaymentContent() {
             <Link href="/" className="text-xl md:text-2xl font-bold text-charcoal-500 dark:text-white">
               Eweeha
             </Link>
-            <a href={`tel:${config?.contact?.phone || '+96176103365'}`} className="flex items-center text-charcoal-500 dark:text-gray-300 hover:text-charcoal-500 dark:hover:text-primary-400 text-sm md:text-base min-h-[48px] px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-charcoal-500 dark:text-gray-300 hover:text-charcoal-500 dark:hover:text-primary-400 text-sm md:text-base min-h-[48px] px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
               <PhoneIcon className="h-5 w-5 md:h-6 md:w-6 mr-2" />
-              <span className="hidden sm:inline">{config?.contact?.phone || '+961-76-103-365'}</span>
+              <span className="hidden sm:inline">{config?.contact?.phone || '+961-70-971-841'}</span>
               <span className="sm:hidden">Call</span>
             </a>
           </div>
@@ -205,10 +205,10 @@ function StripePaymentContent() {
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <div className="mt-6 p-4 bg-gold-50 border border-gold-200 rounded-lg">
               <div className="flex items-start">
-                <CheckCircleIcon className="h-5 w-5 text-green-600 mt-0.5 mr-2 flex-shrink-0" />
-                <div className="text-sm text-green-800">
+                <CheckCircleIcon className="h-5 w-5 text-gold-600 mt-0.5 mr-2 flex-shrink-0" />
+                <div className="text-sm text-gold-800">
                   <p className="font-semibold mb-1">🔒 Secure Payment</p>
                   <p>Your payment information is encrypted and secure. Stripe is trusted by millions of businesses worldwide.</p>
                 </div>
@@ -226,15 +226,15 @@ function StripePaymentContent() {
           <h3 className="font-bold text-charcoal-500 mb-4 text-lg md:text-xl">Need Help?</h3>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <a
-              href={`tel:${config?.contact?.phone || '+96176103365'}`}
+              href={`tel:${config?.contact?.phone || '+96170971841'}`}
               className="flex items-center justify-center text-primary-600 hover:text-primary-800 text-sm md:text-base font-semibold py-2.5 px-5 rounded-lg hover:bg-primary-50 transition-colors min-h-[44px]"
             >
               <PhoneIcon className="h-4 w-4 md:h-5 md:w-5 mr-2" />
               Call Support
             </a>
             <a
-              href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}`}
-              className="flex items-center justify-center text-green-600 hover:text-green-800 text-sm md:text-base font-semibold py-2.5 px-5 rounded-lg hover:bg-green-50 transition-colors min-h-[44px]"
+              href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+              className="flex items-center justify-center text-[#128C7E] hover:text-[#075E54] text-sm md:text-base font-semibold py-2.5 px-5 rounded-lg hover:bg-[#25D366]/10 transition-colors min-h-[44px]"
             >
               💬 WhatsApp
             </a>

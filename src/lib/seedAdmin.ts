@@ -8,12 +8,14 @@ import { randomUUID } from 'crypto'
 
 export async function seedAdminUser() {
   try {
-    const username = process.env.ADMIN_USERNAME || 'admin'
-    const password = process.env.ADMIN_PASSWORD || 'admin123'
+    const username = process.env.ADMIN_USERNAME
+    const password = process.env.ADMIN_PASSWORD
 
-    // Warn if using default credentials in production
-    if (process.env.NODE_ENV === 'production' && (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD)) {
-      console.error('⚠️  WARNING: Using default admin credentials in production! Set ADMIN_USERNAME and ADMIN_PASSWORD environment variables.')
+    if (!username || !password) {
+      if (process.env.NODE_ENV === 'production') {
+        console.error('❌ ADMIN_USERNAME and ADMIN_PASSWORD must be set in production — skipping admin seed.')
+      }
+      return
     }
 
     // Check if admin user already exists
@@ -23,7 +25,12 @@ export async function seedAdminUser() {
     })
 
     if (existing.rows.length > 0) {
-      console.log('✅ Admin user already exists')
+      const passwordHash = await bcrypt.hash(password, 10)
+      await turso.execute({
+        sql: 'UPDATE users SET password_hash = ?, email = ? WHERE username = ?',
+        args: [passwordHash, process.env.ADMIN_EMAIL || 'admin@eweeha.com', username],
+      })
+      console.log(`✅ Admin user password synced for ${username}`)
       return
     }
 

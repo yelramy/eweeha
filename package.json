@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "migrate": "tsx --env-file=.env.local scripts/migrate.ts",
-    "db:init": "tsx --env-file=.env.local scripts/init-db.ts",
+    "migrate": "tsx --env-file-if-exists=.env.local scripts/migrate.ts",
+    "db:init": "tsx --env-file-if-exists=.env.local scripts/init-db.ts",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {

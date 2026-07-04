@@ -47,6 +47,22 @@ const nextConfig: NextConfig = {
     } : false,
   },
 
+  // Old cortège URLs → new convoy URLs
+  async redirects() {
+    return [
+      {
+        source: '/services/wedding-cortege',
+        destination: '/services/wedding-convoy',
+        permanent: true,
+      },
+      {
+        source: '/routes/convertible-cortege',
+        destination: '/routes/convertible-convoy',
+        permanent: true,
+      },
+    ];
+  },
+
   // Headers for better caching and security
   async headers() {
     return [

@@ -70,7 +70,7 @@ export default function ReviewsSection({
               <div className="flex items-center justify-between mb-3">
                 <ReviewStars rating={review.rating} size="sm" />
                 {review.verified && (
-                  <span className="text-[10px] uppercase tracking-wide font-medium text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded">
+                  <span className="text-[10px] uppercase tracking-wide font-medium text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-900/30 px-2 py-0.5 rounded">
                     Verified
                   </span>
                 )}
@@ -85,8 +85,8 @@ export default function ReviewsSection({
               </p>
 
               {review.response && (
-                <div className="mt-3 mb-3 p-3 bg-slate-50 dark:bg-gray-700/50 rounded border-l-2 border-green-600 dark:border-green-400">
-                  <p className="text-[11px] uppercase tracking-wide font-semibold text-green-700 dark:text-green-300 mb-1">
+                <div className="mt-3 mb-3 p-3 bg-slate-50 dark:bg-gray-700/50 rounded border-l-2 border-primary-600 dark:border-primary-400">
+                  <p className="text-[11px] uppercase tracking-wide font-semibold text-primary-700 dark:text-primary-300 mb-1">
                     Eweeha replied
                   </p>
                   <p className="text-xs text-warm-700 dark:text-gray-300 line-clamp-3">
@@ -107,7 +107,7 @@ export default function ReviewsSection({
           <div className="text-center mt-8">
             <Link
               href="/reviews"
-              className="text-sm text-warm-600 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-300 font-medium inline-flex items-center gap-1 transition-colors"
+              className="text-sm text-warm-600 dark:text-gray-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium inline-flex items-center gap-1 transition-colors"
             >
               See all reviews <span>→</span>
             </Link>

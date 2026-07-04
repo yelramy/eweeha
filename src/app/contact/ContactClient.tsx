@@ -100,7 +100,7 @@ export default function ContactPageClient() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-green-500 focus:border-warm-500 dark:focus:border-green-500 transition-colors"
+                    className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-primary-500 focus:border-warm-500 dark:focus:border-primary-500 transition-colors"
                     placeholder="John Doe"
                   />
                 </div>
@@ -115,7 +115,7 @@ export default function ContactPageClient() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-green-500 focus:border-warm-500 dark:focus:border-green-500 transition-colors"
+                    className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-primary-500 focus:border-warm-500 dark:focus:border-primary-500 transition-colors"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -129,8 +129,8 @@ export default function ContactPageClient() {
                     id="phone"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-green-500 focus:border-warm-500 dark:focus:border-green-500 transition-colors"
-                    placeholder="+961-76-103-365"
+                    className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-primary-500 focus:border-warm-500 dark:focus:border-primary-500 transition-colors"
+                    placeholder="+961-70-971-841"
                   />
                 </div>
 
@@ -144,7 +144,7 @@ export default function ContactPageClient() {
                     rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-slate-500 dark:focus:ring-green-500 focus:border-slate-500 dark:focus:border-green-500 transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-warm-500 dark:focus:ring-primary-500 focus:border-warm-500 dark:focus:border-primary-500 transition-all resize-none"
                     placeholder="Tell us how we can help you..."
                   />
                 </div>
@@ -176,10 +176,10 @@ export default function ContactPageClient() {
                     <div>
                       <h3 className="text-lg font-semibold text-charcoal-500 dark:text-white mb-1">Phone</h3>
                       <a 
-                        href="tel:+96176103365" 
+                        href="tel:+96170971841" 
                         className="text-slate-600 dark:text-gray-300 hover:text-charcoal-600 dark:hover:text-white transition-colors"
                       >
-                        +961-76-103-365
+                        +961-70-971-841
                       </a>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Available 24/7</p>
                     </div>
@@ -195,10 +195,10 @@ export default function ContactPageClient() {
                     <div>
                       <h3 className="text-lg font-semibold text-charcoal-500 dark:text-white mb-1">Email</h3>
                       <a 
-                        href="mailto:info@eweeha.com" 
+                        href="mailto:eweehalebanon@gmail.com" 
                         className="text-slate-600 dark:text-gray-300 hover:text-charcoal-600 dark:hover:text-white transition-colors"
                       >
-                        info@eweeha.com
+                        eweehalebanon@gmail.com
                       </a>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">We respond within 24 hours</p>
                     </div>
@@ -207,14 +207,14 @@ export default function ContactPageClient() {
                   {/* WhatsApp */}
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                        <ChatBubbleLeftRightIcon className="h-6 w-6 text-green-700 dark:text-green-400" />
+                      <div className="w-12 h-12 bg-[#25D366]/15 dark:bg-[#25D366]/20 rounded-lg flex items-center justify-center">
+                        <ChatBubbleLeftRightIcon className="h-6 w-6 text-[#128C7E] dark:text-[#25D366]" />
                       </div>
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-charcoal-500 dark:text-white mb-1">WhatsApp</h3>
                       <a 
-                        href="https://wa.me/96176103365" 
+                        href="https://wa.me/96170971841" 
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-slate-600 dark:text-gray-300 hover:text-charcoal-600 dark:hover:text-white transition-colors"
@@ -264,7 +264,7 @@ export default function ContactPageClient() {
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-4">
                 <a
-                  href="https://wa.me/96176103365"
+                  href="https://wa.me/96170971841"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center px-6 py-4 bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white border border-primary-700 rounded-lg transition-all font-semibold"
@@ -273,7 +273,7 @@ export default function ContactPageClient() {
                   WhatsApp
                 </a>
                 <a
-                  href="tel:+96176103365"
+                  href="tel:+96170971841"
                   className="flex items-center justify-center px-6 py-4 bg-clay-400 text-white rounded-lg hover:bg-clay-500 transition-colors font-semibold"
                 >
                   <PhoneIcon className="h-5 w-5 mr-2" />

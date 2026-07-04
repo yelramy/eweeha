@@ -39,7 +39,7 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   ...generateMetadata({
     title: "Wedding Car Rental in Lebanon | Eweeha",
-    description: "Wedding cars in Lebanon with chauffeur: decorated bridal cars, classic & convertible cars, and full wedding cortège convoys. Serving churches and venues across Beirut, Jounieh, Byblos, the Metn, Chouf & all Lebanon. Book online or on WhatsApp.",
+    description: "Wedding cars in Lebanon with chauffeur: decorated bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Jounieh, Byblos, the Metn, Chouf & all Lebanon. Book online or on WhatsApp.",
   }),
   icons: [
     {
@@ -94,14 +94,14 @@ export default async function RootLayout({
     '@id': 'https://eweeha.com/#business',
     name: 'Eweeha',
     alternateName: ['Eweeha', 'Eweeha Lebanon', 'Wedding Cars Lebanon'],
-    image: 'https://eweeha.com/logo.svg',
+    image: 'https://eweeha.com/logo.png',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://eweeha.com/logo.svg',
+      url: 'https://eweeha.com/logo.png',
       width: 512,
       height: 512
     },
-    description: 'Wedding car rental in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding cortège convoys. Serving churches and venues across Beirut, Mount Lebanon, and all Lebanon.',
+    description: 'Wedding car rental in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Mount Lebanon, and all Lebanon.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Beirut',
@@ -114,12 +114,12 @@ export default async function RootLayout({
       longitude: 35.5018
     },
     url: 'https://eweeha.com',
-    telephone: '+961-76-103-365',
+    telephone: '+961-70-971-841',
     priceRange: '$$',
     openingHours: 'Mo-Su 00:00-24:00',
     knowsAbout: [
       'wedding car rental',
-      'wedding cortège',
+      'wedding convoy',
       'bridal car with chauffeur',
       'classic car rental for weddings',
       'convertible wedding cars',
@@ -131,14 +131,18 @@ export default async function RootLayout({
       { '@type': 'City', name: 'Byblos' },
       { '@type': 'City', name: 'Batroun' },
       { '@type': 'City', name: 'Broummana' },
+      { '@type': 'City', name: 'Aley' },
+      { '@type': 'City', name: 'Bhamdoun' },
       { '@type': 'City', name: 'Faraya' },
       { '@type': 'City', name: 'Deir el Qamar' },
       { '@type': 'City', name: 'Zahle' },
+      { '@type': 'City', name: 'Baalbek' },
       { '@type': 'City', name: 'Tripoli' },
-      { '@type': 'City', name: 'Saida' }
+      { '@type': 'City', name: 'Saida' },
+      { '@type': 'City', name: 'Tyre' }
     ],
     makesOffer: [
-      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wedding cortège convoy' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wedding convoy' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Bridal car with chauffeur' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Classic & convertible photoshoot cars' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Wedding guest shuttle vans' } }

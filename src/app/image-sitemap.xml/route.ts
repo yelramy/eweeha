@@ -62,7 +62,7 @@ export async function GET() {
       loc: baseUrl,
       images: [
         {
-          loc: `${baseUrl}/logo.svg`,
+          loc: `${baseUrl}/logo.png`,
           title: 'Eweeha — Wedding Cars Lebanon',
           caption: 'Wedding car rental with chauffeur across Lebanon'
         }

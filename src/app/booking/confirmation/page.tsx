@@ -148,9 +148,9 @@ function BookingConfirmationContent() {
             <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
               Eweeha
             </Link>
-            <a href={`tel:${config?.contact?.phone || '+96176103365'}`} className="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-primary-400">
+            <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-primary-400">
               <PhoneIcon className="h-5 w-5 mr-2" />
-              {config?.contact?.phone || '+961-76-103-365'}
+              {config?.contact?.phone || '+961-70-971-841'}
             </a>
           </div>
         </div>
@@ -323,7 +323,7 @@ function BookingConfirmationContent() {
                         💳 Submit Payment Details
                       </Button>
                       <Button
-                        href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}?text=Booking%20ID:%20${booking.booking_id}%20-%20Sending%20OMT%20receipt`}
+                        href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}?text=Booking%20ID:%20${booking.booking_id}%20-%20Sending%20OMT%20receipt`}
                         variant="success"
                         size="lg"
                         className="w-full sm:w-auto"
@@ -355,7 +355,7 @@ function BookingConfirmationContent() {
                         💳 Submit Payment Details
                       </Button>
                       <Button
-                        href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}?text=Booking%20ID:%20${booking.booking_id}%20-%20Sending%20Wish%20Money%20receipt`}
+                        href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}?text=Booking%20ID:%20${booking.booking_id}%20-%20Sending%20Wish%20Money%20receipt`}
                         variant="success"
                         size="lg"
                         className="w-full sm:w-auto"
@@ -372,7 +372,7 @@ function BookingConfirmationContent() {
                       We'll contact you shortly with payment instructions for {booking.paymentMethod}.
                     </p>
                     <Button
-                      href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}?text=Booking%20ID:%20${booking.booking_id}%20-%20Payment%20inquiry`}
+                      href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}?text=Booking%20ID:%20${booking.booking_id}%20-%20Payment%20inquiry`}
                       variant="success"
                       size="lg"
                       className="w-full sm:w-auto"
@@ -408,7 +408,7 @@ function BookingConfirmationContent() {
                   </p>
                 )}
                 <a
-                  href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}?text=${encodeURIComponent(`Hi, I'd like to request a change to booking ${booking.booking_id}`)}`}
+                  href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}?text=${encodeURIComponent(`Hi, I'd like to request a change to booking ${booking.booking_id}`)}`}
                   className="inline-flex mt-4 px-4 py-2 bg-[#25D366] text-white rounded-lg text-sm font-medium"
                 >
                   Request a change on WhatsApp
@@ -422,7 +422,7 @@ function BookingConfirmationContent() {
         <div className="bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6 mt-8">
           <h3 className="text-lg font-semibold text-primary-900 dark:text-primary-300 mb-3">Important Information</h3>
           <ul className="space-y-2 text-primary-800 dark:text-primary-300">
-            <li>• For any changes, please contact us at {config?.contact?.phone || '+961-76-103-365'}</li>
+            <li>• For any changes, please contact us at {config?.contact?.phone || '+961-70-971-841'}</li>
           </ul>
         </div>
 
@@ -441,7 +441,7 @@ function BookingConfirmationContent() {
             Book Another Car
           </Button>
           <Button
-            href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}`}
+            href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
             variant="success"
             size="lg"
             className="flex items-center justify-center"
@@ -455,15 +455,15 @@ function BookingConfirmationContent() {
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Need Help?</h3>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             <a
-              href={`tel:${config?.contact?.phone || '+96176103365'}`}
+              href={`tel:${config?.contact?.phone || '+96170971841'}`}
               className="flex items-center justify-center text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300"
             >
               <PhoneIcon className="h-5 w-5 mr-2" />
-              {config?.contact?.phone || '+961-76-103-365'}
+              {config?.contact?.phone || '+961-70-971-841'}
             </a>
             <a
-              href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}`}
-              className="flex items-center justify-center text-green-600 hover:text-green-800"
+              href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+              className="flex items-center justify-center text-[#128C7E] hover:text-[#075E54]"
             >
               💬 WhatsApp Support
             </a>

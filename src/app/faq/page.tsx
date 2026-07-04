@@ -111,7 +111,7 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Booking',
     question: 'How do I book a wedding car?', 
-    answer: 'Use our online booking form or message us on WhatsApp: tell us your wedding date, church, and venue, pick your car, and confirm with a deposit. You\'ll receive confirmation right away, and we finalize the timeline with you before the big day.' 
+    answer: 'Use our online booking form or message us on WhatsApp: tell us your wedding date, ceremony, and venue, pick your car, and confirm with a deposit. You\'ll receive confirmation right away, and we finalize the timeline with you before the big day.' 
   },
   { 
     category: 'Booking',
@@ -121,12 +121,12 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Booking',
     question: 'Can I modify or cancel my booking?', 
-    answer: 'Yes. Dates, cars, and cortège size can be adjusted based on availability — just message us on WhatsApp. Cancellations follow the refund policy below; wedding date changes are treated as modifications, not cancellations, whenever we can accommodate the new date.' 
+    answer: 'Yes. Dates, cars, and convoy size can be adjusted based on availability — just message us on WhatsApp. Cancellations follow the refund policy below; wedding date changes are treated as modifications, not cancellations, whenever we can accommodate the new date.' 
   },
   { 
     category: 'Booking',
     question: 'What packages do you offer?', 
-    answer: 'Three wedding packages: Ceremony (6 hours — prep, church, photos), Celebration (10 hours — through the venue grand entrance), and Full Day (24 hours — from the morning zaffe to the after-party exit). Photoshoot-only bookings of 2-6 hours are also available for classic cars.' 
+    answer: 'Three wedding packages: Ceremony (6 hours — prep, ceremony, photos), Celebration (10 hours — through the venue grand entrance), and Full Day (24 hours — from the morning zaffe to the after-party exit). Photoshoot-only bookings of 2-6 hours are also available for classic cars.' 
   },
 
   // Payment Questions
@@ -150,7 +150,7 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Cars & Decoration',
     question: 'What areas do you serve?', 
-    answer: 'All of Lebanon: Beirut, Jounieh & Harissa, Byblos & Batroun, Broummana & the Metn, Faraya & Faqra, the Chouf, Zahle & the Bekaa, the South (Saida, Maghdouche, Jezzine) and the North (Balamand, Ehden, Zgharta, Tripoli). Same cars, same standard, everywhere.' 
+    answer: 'All of Lebanon: Beirut, Jounieh & Harissa, Byblos & Batroun, Broummana & the Metn, Aley & Bhamdoun, Faraya & Faqra, the Chouf, Zahle & the Bekaa (Baalbek included), the South (Saida, Maghdouche, Jezzine, Tyre, Nabatieh) and the North (Balamand, Ehden, Zgharta, Tripoli, Akkar). Same cars, same standard, everywhere.' 
   },
   { 
     category: 'Cars & Decoration',
@@ -182,7 +182,7 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Policies',
     question: 'What if the car breaks down on the wedding day?', 
-    answer: 'A standby plan exists behind every wedding booking: immediate roadside response and a replacement vehicle at no additional cost. In the worst case, cortège cars cover the bridal car — you will get to the church on time.' 
+    answer: 'A standby plan exists behind every wedding booking: immediate roadside response and a replacement vehicle at no additional cost. In the worst case, convoy cars cover the bridal car — you will get to your ceremony on time.' 
   },
   { 
     category: 'Policies',
@@ -197,7 +197,7 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Policies',
     question: 'Can you also transport our guests?', 
-    answer: 'Yes — guest shuttle vans and minibuses are coordinated with your cortège by the same team. Hotel pickups, church-to-venue waves, and late-night returns included.' 
+    answer: 'Yes — guest shuttle vans and minibuses are coordinated with your convoy by the same team. Hotel pickups, ceremony-to-venue waves, and late-night returns included.' 
   },
   { 
     category: 'Policies',

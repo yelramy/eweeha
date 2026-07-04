@@ -22,11 +22,11 @@ export default function BridalCarPage() {
     },
     {
       question: "How long do we have the car for?",
-      answer: "Packages run 6 hours (prep, church, photos), 10 hours (through the venue entrance), or 24 hours (the whole day until the after-party exit). The chauffeur stays with you the entire time — the car never leaves your wedding."
+      answer: "Packages run 6 hours (prep, ceremony, photos), 10 hours (through the venue entrance), or 24 hours (the whole day until the after-party exit). The chauffeur stays with you the entire time — the car never leaves your wedding."
     },
     {
       question: "Can the chauffeur pick up the groom separately first?",
-      answer: "Yes. A common flow: the car takes the groom to the church, then returns for the bride's grand departure. We fit the plan to your traditions, not the other way around."
+      answer: "Yes. A common flow: the car takes the groom to the ceremony, then returns for the bride's grand departure. We fit the plan to your traditions, not the other way around."
     },
     {
       question: "What does the chauffeur wear?",
@@ -34,7 +34,7 @@ export default function BridalCarPage() {
     },
     {
       question: "What if the car breaks down on the wedding day?",
-      answer: "In years of running fleets across Lebanon it's almost never happened — but a backup plan always exists: a standby vehicle can reach any of our wedding routes, and the cortège cars can cover the bridal car in the worst case. You will get to the church."
+      answer: "In years of running fleets across Lebanon it's almost never happened — but a backup plan always exists: a standby vehicle can reach any of our wedding routes, and the convoy cars can cover the bridal car in the worst case. You will get to your ceremony."
     }
   ]
 
@@ -47,7 +47,7 @@ export default function BridalCarPage() {
           description: "Decorated bridal car rental with professional suited chauffeur in Lebanon, from bridal prep to venue entrance",
           provider: "Eweeha",
           areaServed: "Lebanon",
-          priceRange: "$150-$600"
+          priceRange: "$250-$900"
         }}
       />
 
@@ -90,7 +90,7 @@ export default function BridalCarPage() {
             </h2>
             <div className="max-w-none">
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed mb-4">
-                Between the salon, the photographer, the church, and three hundred guests, the bridal car is the only quiet
+                Between the salon, the photographer, the ceremony, and three hundred guests, the bridal car is the only quiet
                 place a couple gets all day. We treat it that way: a spotless, decorated car with climate control set before
                 you step in, water waiting, and a chauffeur who knows when to talk and when to just drive.
               </p>
@@ -101,9 +101,9 @@ export default function BridalCarPage() {
                 arrive intact.
               </p>
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed">
-                From the church exit under the rice to the golden-hour photo stop to the venue&apos;s grand entrance, the same
+                From the ceremony exit under the rice to the golden-hour photo stop to the venue&apos;s grand entrance, the same
                 car and the same person stay dedicated to you until the end of your package — in Beirut, on the coast, or up
-                the mountain. Add convoy cars anytime through our <Link href="/services/wedding-cortege" className="underline hover:text-primary-600">full cortège service</Link>.
+                the mountain. Add convoy cars anytime through our <Link href="/services/wedding-convoy" className="underline hover:text-primary-600">full convoy service</Link>.
               </p>
             </div>
           </section>
@@ -148,7 +148,7 @@ export default function BridalCarPage() {
                   Dedicated All Day
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  The car never leaves your wedding — it stages at the church for the exit photos and waits at the venue for as long as your package runs.
+                  The car never leaves your wedding — it stages at the ceremony for the exit photos and waits at the venue for as long as your package runs.
                 </p>
               </div>
 
@@ -166,42 +166,12 @@ export default function BridalCarPage() {
                   All Lebanon Covered
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  Beirut, Jounieh, Byblos, Broummana, Faraya, the Chouf, the Bekaa, the South, the North — same standard everywhere.
+                  Beirut, Jounieh, Byblos, Broummana, Aley, Faraya, the Chouf, the Bekaa, the South, the North — same standard everywhere.
                 </p>
               </div>
             </div>
           </div>
         </section>
-
-        {/* Pricing */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-black dark:text-white mb-6">
-              Bridal Car Packages
-            </h2>
-            <div className="grid md:grid-cols-2 gap-4 text-warm-700 dark:text-gray-300">
-              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
-                <span>Ceremony package — 6 hours</span>
-                <span className="font-semibold text-primary-600 dark:text-primary-400">from $150</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
-                <span>Celebration package — 10 hours</span>
-                <span className="font-semibold text-primary-600 dark:text-primary-400">from $250</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
-                <span>Full day — 24 hours</span>
-                <span className="font-semibold text-primary-600 dark:text-primary-400">from $350</span>
-              </div>
-              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
-                <span>Luxury &amp; classic cars</span>
-                <span className="font-semibold text-primary-600 dark:text-primary-400">see fleet</span>
-              </div>
-            </div>
-            <p className="text-sm text-warm-600 dark:text-gray-400 mt-4">
-              *Starting prices for a decorated sedan with chauffeur. Browse the <Link href="/#fleet" className="underline hover:text-primary-600">wedding fleet</Link> for exact per-car pricing, including classics and convertibles.
-            </p>
-          </section>
-        </div>
 
         {/* FAQs */}
         <section className="py-16 bg-cream-100 dark:bg-gray-800">
@@ -220,7 +190,7 @@ export default function BridalCarPage() {
               Reserve the Bridal Car
             </h2>
             <p className="text-xl text-white mb-8">
-              Tell us your date, church, and venue — we&apos;ll recommend the perfect car
+              Tell us your date, ceremony, and venue — we&apos;ll recommend the perfect car
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -230,10 +200,10 @@ export default function BridalCarPage() {
                 Book Now
               </Link>
               <a
-                href="https://wa.me/96176103365"
+                href="https://wa.me/96170971841"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                className="inline-block bg-[#25D366] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#1DA851] transition-colors"
               >
                 WhatsApp Us
               </a>

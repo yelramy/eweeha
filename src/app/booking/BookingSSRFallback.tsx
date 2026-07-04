@@ -43,8 +43,8 @@ export default function BookingSSRFallback() {
               </p>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 <li>• Decorated bridal sedans for the couple</li>
-                <li>• Classic &amp; convertible cars for the photos and the church exit</li>
-                <li>• Luxury sedans &amp; SUVs for family and cortège cars</li>
+                <li>• Classic &amp; convertible cars for the photos and the grand exit</li>
+                <li>• Luxury sedans &amp; SUVs for family and convoy cars</li>
                 <li>• Guest shuttle vans and minibuses for your guests</li>
                 <li>• All cars include a suited chauffeur, fuel, and tolls</li>
               </ul>
@@ -71,7 +71,7 @@ export default function BookingSSRFallback() {
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
                 Weddings everywhere in Lebanon: Beirut, Jounieh &amp; Harissa, Byblos &amp; Batroun, Broummana,
-                Faraya &amp; Faqra, the Chouf, Zahle &amp; the Bekaa, the South and the North.
+                Aley &amp; Bhamdoun, Faraya &amp; Faqra, the Chouf, Zahle &amp; the Bekaa, the South and the North.
               </p>
             </div>
           </div>
@@ -86,13 +86,13 @@ export default function BookingSSRFallback() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href="tel:+96176103365"
+              href="tel:+96170971841"
               className="px-6 py-3 bg-charcoal-500 text-white rounded-lg font-semibold text-center hover:bg-charcoal-600 transition-colors"
             >
-              Call Us: +961 76 103 365
+              Call Us: +961 70 971 841
             </a>
             <a
-              href="https://wa.me/96176103365"
+              href="https://wa.me/96170971841"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-md font-light text-center transition-all border border-primary-700 tracking-wider"

@@ -6,13 +6,13 @@ import { routes } from '@/lib/routes'
 
 export const metadata: Metadata = {
   title: 'Wedding Car Areas & Experiences in Lebanon | Eweeha',
-  description: 'Wedding cars everywhere in Lebanon: Beirut, Jounieh & Harissa, Byblos & Batroun, Broummana, Faraya, the Chouf, Zahle, the South and the North. Plus classic car photoshoots, convertibles, and zaffe arrivals.',
+  description: 'Wedding cars everywhere in Lebanon: Beirut, Jounieh & Harissa, Byblos & Batroun, Broummana, Aley & Bhamdoun, Faraya, the Chouf, Zahle & the Bekaa, the South and the North. Plus classic car photoshoots, convertibles, and zaffe arrivals.',
   alternates: {
     canonical: 'https://eweeha.com/routes'
   },
   openGraph: {
     title: 'Wedding Car Areas & Experiences in Lebanon',
-    description: 'Chauffeured wedding cars for every church, monastery, and venue across Lebanon — plus classic car photoshoots and convertible cortèges.',
+    description: 'Chauffeured wedding cars for every ceremony and venue across Lebanon — plus classic car photoshoots and convertible convoys.',
     url: 'https://eweeha.com/routes',
     type: 'website'
   }
@@ -27,13 +27,13 @@ const routeCategories = [
   {
     id: 'areas',
     title: 'Wedding Areas We Serve',
-    description: 'From the coast to the cedars — bridal cars and cortège convoys for every region\'s churches and venues',
+    description: 'From the coast to the cedars — bridal cars and wedding convoys for every region\'s ceremonies and venues',
     routes: getRoutesByCategory('areas')
   },
   {
     id: 'experiences',
     title: 'Signature Experiences',
-    description: 'The moments that make a Lebanese wedding: classics for the photos, convertibles for the cortège, and the grand zaffe arrival',
+    description: 'The moments that make a Lebanese wedding: classics for the photos, convertibles for the convoy, and the grand zaffe arrival',
     routes: getRoutesByCategory('experiences')
   }
 ]
@@ -75,7 +75,7 @@ export default function RoutesIndexPage() {
               Wedding Areas &amp; Experiences
             </h1>
             <p className="text-lg md:text-xl text-warm-700 dark:text-gray-300 max-w-3xl">
-              Chauffeured wedding cars for every church, monastery, and venue in Lebanon.
+              Chauffeured wedding cars for every ceremony and venue in Lebanon.
               Every booking includes a suited chauffeur, fuel, tolls, and coordinated timing.
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function RoutesIndexPage() {
                 Getting married somewhere else?
               </h2>
               <p className="text-gray-700 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-                We cover every village and venue in Lebanon. Tell us your church and venue and we&apos;ll plan the cortège around them.
+                We cover every village and venue in Lebanon. Tell us your ceremony and venue and we&apos;ll plan the convoy around them.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

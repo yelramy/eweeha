@@ -62,7 +62,7 @@ function OMTPaymentContent() {
 
   const recipientDetails = {
     name: config?.business?.name || 'Eweeha LLC',
-    phone: config?.contact?.phone || '+961-76-103-365'
+    phone: config?.contact?.phone || '+961-70-971-841'
   }
 
   const scheduleCopyFeedbackClear = () => {
@@ -171,9 +171,9 @@ function OMTPaymentContent() {
             <Link href="/" className="text-2xl font-bold text-charcoal-500">
               Eweeha
             </Link>
-            <a href={`tel:${config?.contact?.phone || '+96176103365'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
+            <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
               <PhoneIcon className="h-5 w-5 mr-2" />
-              {config?.contact?.phone || '+961-76-103-365'}
+              {config?.contact?.phone || '+961-70-971-841'}
             </a>
           </div>
         </div>
@@ -360,13 +360,13 @@ function OMTPaymentContent() {
 
             {step === 3 && (
               <div className="text-center space-y-6">
-                <div className="text-green-600">
+                <div className="text-primary-700">
                   <div className="text-6xl mb-4">✅</div>
                   <h2 className="text-2xl font-bold text-charcoal-500">Payment Information Received!</h2>
                 </div>
                 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                  <p className="text-green-800">
+                <div className="bg-gold-50 border border-gold-200 rounded-lg p-4">
+                  <p className="text-gold-800">
                     We've received your OMT payment information. Our team will verify the transfer within 1-2 hours 
                     and confirm your booking.
                   </p>
@@ -380,7 +380,7 @@ function OMTPaymentContent() {
                 <div className="space-y-3">
                   <Link
                     href="/"
-                    className="block bg-green-600 text-white py-3 px-4 rounded-md hover:bg-green-700 transition-colors"
+                    className="block bg-primary-700 text-white py-3 px-4 rounded-md hover:bg-primary-800 transition-colors"
                   >
                     Back to Home
                   </Link>
@@ -410,15 +410,15 @@ function OMTPaymentContent() {
           <h3 className="font-semibold text-charcoal-500 mb-2">Need Help with OMT Payment?</h3>
           <div className="flex justify-center space-x-6">
             <a
-              href={`tel:${config?.contact?.phone || '+96176103365'}`}
+              href={`tel:${config?.contact?.phone || '+96170971841'}`}
               className="flex items-center text-primary-600 hover:text-primary-800"
             >
               <PhoneIcon className="h-4 w-4 mr-1" />
               Call Support
             </a>
             <a
-              href={`https://wa.me/${config?.contact?.whatsapp || '96176103365'}`}
-              className="flex items-center text-green-600 hover:text-green-800"
+              href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+              className="flex items-center text-[#128C7E] hover:text-[#075E54]"
             >
               💬 WhatsApp
             </a>

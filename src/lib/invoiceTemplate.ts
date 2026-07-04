@@ -208,12 +208,12 @@ export function renderInvoiceHTML(
     justify-content: space-between;
     align-items: flex-start;
     gap: 24px;
-    border-bottom: 3px solid #0B6B3A;
+    border-bottom: 3px solid #742F38;
     padding-bottom: 20px;
   }
   .brand { display: flex; align-items: center; gap: 14px; }
   .brand img { height: 56px; width: auto; border-radius: 6px; }
-  .brand h1 { font-size: 20px; margin: 0; color: #0B6B3A; }
+  .brand h1 { font-size: 20px; margin: 0; color: #742F38; }
   .company-meta { font-size: 12px; color: #555; line-height: 1.6; margin-top: 4px; }
   .doc { text-align: right; }
   .doc h2 { font-size: 30px; letter-spacing: 2px; margin: 0; color: #111; text-transform: uppercase; }
@@ -225,7 +225,7 @@ export function renderInvoiceHTML(
   .parties .who .name { font-weight: 700; font-size: 15px; }
   table.items { width: 100%; border-collapse: collapse; margin-top: 8px; }
   table.items thead th {
-    background: #0B6B3A; color: #fff; font-size: 12px; text-transform: uppercase;
+    background: #742F38; color: #fff; font-size: 12px; text-transform: uppercase;
     letter-spacing: .5px; padding: 10px 12px; text-align: left;
   }
   table.items thead th.num { text-align: right; }
@@ -243,7 +243,7 @@ export function renderInvoiceHTML(
   table.totals td.tlabel { color: #555; }
   table.totals td.tval { text-align: right; font-weight: 600; }
   table.totals tr.grand td { border-top: 2px solid #111; font-size: 16px; font-weight: 800; padding-top: 10px; }
-  table.totals tr.due td { color: #0B6B3A; }
+  table.totals tr.due td { color: #742F38; }
   .notes { margin-top: 28px; font-size: 12px; color: #555; border-top: 1px solid #eee; padding-top: 14px; white-space: pre-wrap; }
   .footer { margin-top: 34px; text-align: center; font-size: 11px; color: #999; }
   @media print {

@@ -91,8 +91,8 @@ export const rateLimiters = {
   // 10 requests per 10 seconds for booking creation
   bookings: new RateLimiter(10, 10 * 1000),
 
-  // 5 attempts per 15 minutes for login
-  login: new RateLimiter(5, 15 * 60 * 1000),
+  // 10 failed attempts per 15 minutes (only counted on wrong password)
+  login: new RateLimiter(10, 15 * 60 * 1000),
 
   // 100 requests per minute for general API
   api: new RateLimiter(100, 60 * 1000),

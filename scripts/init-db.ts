@@ -19,8 +19,6 @@ async function main() {
   try {
     const { initializeDatabase } = await import('../src/lib/turso')
     await initializeDatabase()
-    const { runAllMigrations } = await import('../src/lib/migrations')
-    await runAllMigrations()
     console.log('Database initialized and migrated successfully.')
     process.exit(0)
   } catch (error) {

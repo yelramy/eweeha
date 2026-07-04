@@ -215,7 +215,7 @@ export default function DateTimePicker({
                       type="button"
                       disabled={!slot.available}
                       onClick={() => onTimeChange(slotTime)}
-                      style={isSelected ? { backgroundColor: '#0B6B3A', color: '#ffffff', borderColor: '#0B6B3A' } : {}}
+                      style={isSelected ? { backgroundColor: '#742F38', color: '#ffffff', borderColor: '#742F38' } : {}}
                       className={`px-2 py-2 rounded-md text-sm font-medium transition-all duration-200 border ${
                         isSelected
                           ? ''

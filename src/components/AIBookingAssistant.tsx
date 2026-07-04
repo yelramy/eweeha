@@ -31,12 +31,12 @@ const CHAT_QUESTIONS = [
   },
   {
     id: 'dates',
-    botMessage: 'Where is the church, and where is the venue?',
-    placeholder: 'e.g. Mar Mikhael church, venue in Broummana',
+    botMessage: 'Where is the ceremony, and where is the venue?',
+    placeholder: 'e.g. ceremony in Mar Mikhael, venue in Broummana',
   },
   {
     id: 'plan',
-    botMessage: 'What do you need on wheels?\n• Bridal car only\n• Bridal car + family cortège cars\n• Classic or convertible for photos\n• Guest shuttle vans',
+    botMessage: 'What do you need on wheels?\n• Bridal car only\n• Bridal car + family convoy cars\n• Classic or convertible for photos\n• Guest shuttle vans',
     placeholder: 'e.g. bridal car + 3 family cars + shuttle for 60 guests',
   },
   {
@@ -57,10 +57,10 @@ const CHAT_QUESTIONS = [
 ]
 
 const EXAMPLE_PROMPTS = [
-  { label: 'Bridal car + cortège', text: 'Wedding on Saturday June 20: bridal car from Achrafieh, church in Mar Mikhael, venue in Broummana, plus 3 family cars.' },
+  { label: 'Bridal car + convoy', text: 'Wedding on Saturday June 20: bridal car from Achrafieh, ceremony in Mar Mikhael, venue in Broummana, plus 3 family cars.' },
   { label: 'بدي سيارة للعرس', text: 'بدي سيارة مزينة للعروس مع شوفير، الكنيسة بجونية والعشاء بفقرا، عرسنا بشهر تموز' },
-  { label: 'Cortège pour notre mariage', text: 'Je cherche une voiture décorée avec chauffeur pour notre mariage le 15 août: église à Harissa, réception à Faqra, avec 2 voitures pour la famille.' },
-  { label: 'Classic for the photoshoot', text: 'We want a classic convertible for our wedding photoshoot in old Byblos, around 4 hours in the afternoon, plus a bridal car for the church.' },
+  { label: 'Voitures pour notre mariage', text: 'Je cherche une voiture décorée avec chauffeur pour notre mariage le 15 août: église à Harissa, réception à Faqra, avec 2 voitures pour la famille.' },
+  { label: 'Classic for the photoshoot', text: 'We want a classic convertible for our wedding photoshoot in old Byblos, around 4 hours in the afternoon, plus a bridal car for the ceremony.' },
 ]
 
 interface AIBookingAssistantProps {
@@ -102,7 +102,7 @@ export default function AIBookingAssistant({ className = '' }: AIBookingAssistan
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatInputRef = useRef<HTMLInputElement>(null)
   const quoteRef = useRef<HTMLDivElement>(null)
-  const whatsappNumber = appConfig?.contact?.whatsapp || '96176103365'
+  const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
 
   // Auto-scroll chat container to bottom (without moving the page)
   useEffect(() => {
@@ -373,13 +373,13 @@ Customer's modification request: ${text}`
                       value={editValue}
                       onChange={(e) => setEditValue(e.target.value)}
                       onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSaveEdit() } if (e.key === 'Escape') { setEditingMsgIndex(null) } }}
-                      className="flex-1 min-w-0 px-3 py-2 text-sm border border-[#0B6B3A] rounded-full focus:ring-2 focus:ring-[#0B6B3A] dark:bg-gray-700 dark:text-white"
+                      className="flex-1 min-w-0 px-3 py-2 text-sm border border-[#742F38] rounded-full focus:ring-2 focus:ring-[#742F38] dark:bg-gray-700 dark:text-white"
                       dir="auto"
                       autoFocus
                     />
                     <button
                       onClick={handleSaveEdit}
-                      className="px-2.5 py-1.5 text-xs font-medium bg-[#0B6B3A] text-white rounded-full hover:bg-[#095c31] transition-colors flex-shrink-0"
+                      className="px-2.5 py-1.5 text-xs font-medium bg-[#742F38] text-white rounded-full hover:bg-[#5C262D] transition-colors flex-shrink-0"
                     >
                       Save
                     </button>
@@ -395,7 +395,7 @@ Customer's modification request: ${text}`
                     className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
                       msg.role === 'bot'
                         ? 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-tl-md'
-                        : 'bg-[#0B6B3A] text-white rounded-tr-md'
+                        : 'bg-[#742F38] text-white rounded-tr-md'
                     }`}
                     dir="auto"
                   >
@@ -444,13 +444,13 @@ Customer's modification request: ${text}`
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleChatAnswer() } }}
                 placeholder={CHAT_QUESTIONS[currentStep]?.placeholder || 'Type your answer...'}
-                className="flex-1 min-w-0 px-3 py-2.5 text-base border border-gray-300 dark:border-gray-600 rounded-full focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
+                className="flex-1 min-w-0 px-3 py-2.5 text-base border border-gray-300 dark:border-gray-600 rounded-full focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                 dir="auto"
               />
               <button
                 onClick={handleChatAnswer}
                 disabled={!chatInput.trim()}
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0B6B3A] hover:bg-[#095c31] text-white transition-colors disabled:opacity-30 disabled:hover:bg-[#0B6B3A] flex-shrink-0"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-[#742F38] hover:bg-[#5C262D] text-white transition-colors disabled:opacity-30 disabled:hover:bg-[#742F38] flex-shrink-0"
                 aria-label="Send"
               >
                 <PaperAirplaneIcon className="w-4.5 h-4.5" />
@@ -483,10 +483,10 @@ Customer's modification request: ${text}`
                 ref={textareaRef}
                 value={freeTextMessage}
                 onChange={(e) => setFreeTextMessage(e.target.value)}
-                placeholder="e.g. Wedding July 18: bridal car from Achrafieh, church in Jounieh, venue in Faqra, plus 3 family cars..."
+                placeholder="e.g. Wedding July 18: bridal car from Achrafieh, ceremony in Jounieh, venue in Faqra, plus 3 family cars..."
                 rows={4}
                 maxLength={2000}
-                className="w-full px-3 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] transition-all resize-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 leading-relaxed"
+                className="w-full px-3 py-3 text-base border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] transition-all resize-none dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 leading-relaxed"
                 dir="auto"
               />
               {freeTextMessage.length > 1500 && (
@@ -577,13 +577,13 @@ Customer's modification request: ${text}`
                   onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleRefineQuote() } }}
                   placeholder="e.g. make it 3 days instead, or add a baby seat..."
                   disabled={refining}
-                  className="flex-1 min-w-0 px-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 disabled:opacity-50"
+                  className="flex-1 min-w-0 px-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 disabled:opacity-50"
                   dir="auto"
                 />
                 <button
                   onClick={handleRefineQuote}
                   disabled={!refineInput.trim() || refining}
-                  className="px-3 py-2.5 bg-[#0B6B3A] hover:bg-[#095c31] text-white rounded-lg transition-colors disabled:opacity-30 flex-shrink-0 flex items-center gap-1.5 text-sm"
+                  className="px-3 py-2.5 bg-[#742F38] hover:bg-[#5C262D] text-white rounded-lg transition-colors disabled:opacity-30 flex-shrink-0 flex items-center gap-1.5 text-sm"
                 >
                   {refining ? (
                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

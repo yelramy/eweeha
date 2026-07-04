@@ -762,17 +762,17 @@ function SimplifiedBookingPageContent() {
                   onClick={() => setHoursPerDay(6)}
                   disabled={!selectedVehicle?.price6h}
                   className={`p-6 rounded-xl border-4 transition-all ${hoursPerDay === 6
-                      ? 'border-green-600 bg-green-50 dark:bg-green-900/30 shadow-lg'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-green-400'
+                      ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/30 shadow-lg'
+                      : 'border-gray-200 dark:border-gray-600 hover:border-primary-400'
                     } ${!selectedVehicle?.price6h ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  style={hoursPerDay === 6 ? { borderColor: '#0B6B3A', backgroundColor: '#eefcf3' } : {}}
+                  style={hoursPerDay === 6 ? { borderColor: '#742F38', backgroundColor: '#FBF3F4' } : {}}
                 >
                   <div className="text-center">
-                    <div className="text-4xl font-bold mb-2" style={{ color: hoursPerDay === 6 ? '#0B6B3A' : '#3D3935' }}>6</div>
-                    <div className="text-base font-semibold mb-1" style={{ color: hoursPerDay === 6 ? '#0B6B3A' : '#6B5D50' }}>Hours</div>
+                    <div className="text-4xl font-bold mb-2" style={{ color: hoursPerDay === 6 ? '#742F38' : '#3D3935' }}>6</div>
+                    <div className="text-base font-semibold mb-1" style={{ color: hoursPerDay === 6 ? '#742F38' : '#6B5D50' }}>Hours</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Half day</div>
                     {selectedVehicle?.price6h && rentalDays > 0 && (
-                      <div className="text-lg font-bold mt-3" style={{ color: '#0B6B3A' }}>
+                      <div className="text-lg font-bold mt-3" style={{ color: '#742F38' }}>
                         ${selectedVehicle.price6h}/day
                       </div>
                     )}
@@ -786,17 +786,17 @@ function SimplifiedBookingPageContent() {
                   onClick={() => setHoursPerDay(10)}
                   disabled={!selectedVehicle?.price10h}
                   className={`p-6 rounded-xl border-4 transition-all ${hoursPerDay === 10
-                      ? 'border-green-600 bg-green-50 dark:bg-green-900/30 shadow-lg'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-green-400'
+                      ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/30 shadow-lg'
+                      : 'border-gray-200 dark:border-gray-600 hover:border-primary-400'
                     } ${!selectedVehicle?.price10h ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  style={hoursPerDay === 10 ? { borderColor: '#0B6B3A', backgroundColor: '#eefcf3' } : {}}
+                  style={hoursPerDay === 10 ? { borderColor: '#742F38', backgroundColor: '#FBF3F4' } : {}}
                 >
                   <div className="text-center">
-                    <div className="text-4xl font-bold mb-2" style={{ color: hoursPerDay === 10 ? '#0B6B3A' : '#3D3935' }}>10</div>
-                    <div className="text-base font-semibold mb-1" style={{ color: hoursPerDay === 10 ? '#0B6B3A' : '#6B5D50' }}>Hours</div>
+                    <div className="text-4xl font-bold mb-2" style={{ color: hoursPerDay === 10 ? '#742F38' : '#3D3935' }}>10</div>
+                    <div className="text-base font-semibold mb-1" style={{ color: hoursPerDay === 10 ? '#742F38' : '#6B5D50' }}>Hours</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Standard day</div>
                     {selectedVehicle?.price10h && rentalDays > 0 && (
-                      <div className="text-lg font-bold mt-3" style={{ color: '#0B6B3A' }}>
+                      <div className="text-lg font-bold mt-3" style={{ color: '#742F38' }}>
                         ${selectedVehicle.price10h}/day
                       </div>
                     )}
@@ -810,17 +810,17 @@ function SimplifiedBookingPageContent() {
                   onClick={() => setHoursPerDay(24)}
                   disabled={!selectedVehicle?.price24h}
                   className={`p-6 rounded-xl border-4 transition-all ${hoursPerDay === 24
-                      ? 'border-green-600 bg-green-50 dark:bg-green-900/30 shadow-lg'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-green-400'
+                      ? 'border-primary-600 bg-primary-50 dark:bg-primary-900/30 shadow-lg'
+                      : 'border-gray-200 dark:border-gray-600 hover:border-primary-400'
                     } ${!selectedVehicle?.price24h ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  style={hoursPerDay === 24 ? { borderColor: '#0B6B3A', backgroundColor: '#eefcf3' } : {}}
+                  style={hoursPerDay === 24 ? { borderColor: '#742F38', backgroundColor: '#FBF3F4' } : {}}
                 >
                   <div className="text-center">
-                    <div className="text-4xl font-bold mb-2" style={{ color: hoursPerDay === 24 ? '#0B6B3A' : '#3D3935' }}>24</div>
-                    <div className="text-base font-semibold mb-1" style={{ color: hoursPerDay === 24 ? '#0B6B3A' : '#6B5D50' }}>Hours</div>
+                    <div className="text-4xl font-bold mb-2" style={{ color: hoursPerDay === 24 ? '#742F38' : '#3D3935' }}>24</div>
+                    <div className="text-base font-semibold mb-1" style={{ color: hoursPerDay === 24 ? '#742F38' : '#6B5D50' }}>Hours</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Full day</div>
                     {selectedVehicle?.price24h && rentalDays > 0 && (
-                      <div className="text-lg font-bold mt-3" style={{ color: '#0B6B3A' }}>
+                      <div className="text-lg font-bold mt-3" style={{ color: '#742F38' }}>
                         ${selectedVehicle.price24h}/day
                       </div>
                     )}
@@ -1023,7 +1023,7 @@ function SimplifiedBookingPageContent() {
                               </p>
                               {/* Show per-day total if schedule exists */}
                               {totalPrice > 0 && rentalDays > 0 && (
-                                <p className="text-sm sm:text-base font-semibold text-[#0B6B3A] dark:text-green-400 tracking-wide">
+                                <p className="text-sm sm:text-base font-semibold text-[#742F38] dark:text-primary-300 tracking-wide">
                                   {priceDisplay} = ${totalPrice.toFixed(2)}
                                 </p>
                               )}
@@ -1365,7 +1365,7 @@ function SimplifiedBookingPageContent() {
               onClick={currentStep === STEPS.length - 1 ? handleSubmit : nextStep}
               type="button"
               disabled={isSubmitting}
-              style={{ background: 'linear-gradient(to bottom right, #bbf7d0, #86efac)', color: '#111827', borderColor: '#4ade80' }}
+              style={{ background: 'linear-gradient(to bottom right, #F6EEDD, #DEC690)', color: '#4A1F25', borderColor: '#BA9348' }}
               className="flex-1 sm:flex-none sm:px-12 py-4 rounded-md font-light hover:opacity-90 transition-all text-base sm:text-lg border disabled:opacity-50 disabled:cursor-not-allowed tracking-wider"
             >
               {isSubmitting ? 'Processing...' : (currentStep === STEPS.length - 1 ? 'Complete Booking' : 'Continue')}

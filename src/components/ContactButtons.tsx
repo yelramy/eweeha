@@ -14,10 +14,8 @@ export default function ContactButtons() {
 
   return (
     <>
-      {/* WhatsApp Floating Button - Hidden on mobile when sticky bar is visible */}
-      <div className="hidden md:block">
-        <WhatsAppButton />
-      </div>
+      {/* WhatsApp Floating Button - the familiar green circle, on all screen sizes */}
+      <WhatsAppButton />
 
       {/* Sticky Mobile Contact Bar */}
       <MobileContactBar />

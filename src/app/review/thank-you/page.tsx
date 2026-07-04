@@ -15,7 +15,7 @@ export default function ReviewThankYouPage() {
       <div className="max-w-xl w-full text-center">
         <Link href="/" className="inline-flex items-center gap-2 mb-8">
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="Eweeha"
             width={56}
             height={56}
@@ -40,7 +40,7 @@ export default function ReviewThankYouPage() {
               Back to home
             </Link>
             <a
-              href="https://wa.me/96176103365"
+              href="https://wa.me/96170971841"
               className="px-6 py-3 rounded-md font-medium border border-warm-200 dark:border-gray-600 text-charcoal-500 dark:text-white hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors"
             >
               Chat with us on WhatsApp

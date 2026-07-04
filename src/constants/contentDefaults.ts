@@ -21,7 +21,7 @@ const CONTENT_DEFAULT_TEMPLATE: Record<string, ContentSection> = {
     id: 'hero-title',
     name: 'Hero Section Title',
     type: 'text',
-    content: 'Wedding Cars & Cortège in Lebanon',
+    content: 'Wedding Cars & Convoys in Lebanon',
     lastUpdated: new Date().toISOString(),
     status: 'published'
   },
@@ -30,7 +30,7 @@ const CONTENT_DEFAULT_TEMPLATE: Record<string, ContentSection> = {
     name: 'Hero Section Subtitle',
     type: 'rich_text',
     content:
-      'Chauffeured bridal cars, classic convertibles, and full wedding convoys — decorated with ribbons and fresh flowers, on time at every church and venue from Beirut to the mountains.',
+      'Chauffeured bridal cars, classic convertibles, and full wedding convoys — decorated with ribbons and fresh flowers, on time wherever you celebrate, from Beirut to the mountains.',
     lastUpdated: new Date().toISOString(),
     status: 'published'
   },
@@ -40,7 +40,7 @@ const CONTENT_DEFAULT_TEMPLATE: Record<string, ContentSection> = {
     type: 'list',
     content: [
       {
-        title: 'The Wedding Cortège',
+        title: 'The Wedding Convoy',
         description: 'A full convoy for the big day — bridal car, family cars, and groomsmen vehicles moving together',
         icon: 'celebration',
         image:
@@ -55,14 +55,14 @@ const CONTENT_DEFAULT_TEMPLATE: Record<string, ContentSection> = {
       },
       {
         title: 'Classic & Convertible Cars',
-        description: 'Timeless classics and open-top cars for the church exit and the photo session',
+        description: 'Timeless classics and open-top cars for the ceremony exit and the photo session',
         icon: 'briefcase',
         image:
           'https://images.unsplash.com/photo-1502161254066-6c74afbf07aa?w=300&h=200&fit=crop&crop=center'
       },
       {
         title: 'Guest Shuttle Vans',
-        description: 'Comfortable vans and buses that move your guests between church, venue, and hotels',
+        description: 'Comfortable vans and buses that move your guests between ceremony, venue, and hotels',
         icon: 'calendar',
         image:
           'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=300&h=200&fit=crop&crop=center'

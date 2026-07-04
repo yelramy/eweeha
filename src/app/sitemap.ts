@@ -19,7 +19,7 @@ const staticRouteConfigs: StaticRouteConfig[] = [
   { path: '/booking', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
-  { path: '/services/wedding-cortege', priority: 0.85, changeFrequency: 'monthly' },
+  { path: '/services/wedding-convoy', priority: 0.85, changeFrequency: 'monthly' },
   { path: '/services/bridal-car', priority: 0.85, changeFrequency: 'monthly' },
   { path: '/services/photoshoot-cars', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/services/guest-shuttle', priority: 0.75, changeFrequency: 'monthly' },

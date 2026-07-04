@@ -158,8 +158,8 @@ export default function QuoteActions({ quote, phone, whatsappNumber, onReset }: 
         <div className="flex items-center justify-between mb-3">
           <div>
             <div className="text-xs text-gray-500 dark:text-gray-400 line-through">${quote.pricing.subtotal.toFixed(2)}</div>
-            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">${quote.pricing.onlineTotal.toFixed(2)}
-              <span className="text-xs font-normal ml-1 text-emerald-600 dark:text-emerald-400">with 10% off</span>
+            <div className="text-lg font-bold text-primary-700 dark:text-primary-300">${quote.pricing.onlineTotal.toFixed(2)}
+              <span className="text-xs font-normal ml-1 text-primary-600 dark:text-primary-400">with 10% off</span>
             </div>
           </div>
           <button
@@ -172,13 +172,13 @@ export default function QuoteActions({ quote, phone, whatsappNumber, onReset }: 
 
         {/* Pay online inline form */}
         {showPayForm && (
-          <div className="mb-3 p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg border border-emerald-200 dark:border-emerald-800 space-y-2">
+          <div className="mb-3 p-3 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-primary-200 dark:border-primary-800 space-y-2">
             <input
               type="text"
               value={payName}
               onChange={(e) => setPayName(e.target.value)}
               placeholder="Your name *"
-              className="w-full px-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] dark:bg-gray-700 dark:text-white"
               autoFocus
               onKeyDown={(e) => { if (e.key === 'Enter') handlePayOnline() }}
             />
@@ -187,7 +187,7 @@ export default function QuoteActions({ quote, phone, whatsappNumber, onReset }: 
               value={payEmail}
               onChange={(e) => setPayEmail(e.target.value)}
               placeholder="Email (optional — for receipt)"
-              className="w-full px-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#0B6B3A] focus:border-[#0B6B3A] dark:bg-gray-700 dark:text-white"
+              className="w-full px-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] dark:bg-gray-700 dark:text-white"
               onKeyDown={(e) => { if (e.key === 'Enter') handlePayOnline() }}
             />
           </div>
@@ -198,7 +198,7 @@ export default function QuoteActions({ quote, phone, whatsappNumber, onReset }: 
           <button
             onClick={handlePayOnline}
             disabled={paying}
-            className="flex-1 bg-[#0B6B3A] hover:bg-[#095c31] text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm disabled:opacity-60"
+            className="flex-1 bg-[#742F38] hover:bg-[#5C262D] text-white font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm disabled:opacity-60"
           >
             <CreditCardIcon className="w-4 h-4" />
             {paying ? 'Redirecting to payment...' : showPayForm ? 'Proceed to Payment' : 'Pay Online & Save 10%'}

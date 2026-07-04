@@ -5,36 +5,33 @@ import { sanitizeText } from '@/utils/sanitize'
 
 export async function POST(request: NextRequest) {
   try {
-    // 1. Rate limiting - prevent brute force attacks
-    const rateLimitResult = await checkRateLimit(request, rateLimiters.login)
-    if (!rateLimitResult.success) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Too many login attempts. Please try again later.',
-          retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000)
-        },
-        { 
-          status: 429,
-          headers: {
-            'Retry-After': String(Math.ceil((rateLimitResult.reset - Date.now()) / 1000))
-          }
-        }
-      )
-    }
-
-    // 2. Parse and sanitize input
     const body = await request.json()
     const username = sanitizeText(body.username || '')
     const password = body.password || '' // Don't sanitize passwords - they may contain special chars
 
-    // Database authentication ONLY - no fallbacks for security
     const dbUser = await authUser(username, password)
-    
+
     if (!dbUser) {
-      return NextResponse.json({ 
-        success: false, 
-        error: 'Invalid credentials' 
+      const rateLimitResult = await checkRateLimit(request, rateLimiters.login)
+      if (!rateLimitResult.success) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Too many login attempts. Please try again later.',
+            retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000),
+          },
+          {
+            status: 429,
+            headers: {
+              'Retry-After': String(Math.ceil((rateLimitResult.reset - Date.now()) / 1000)),
+            },
+          }
+        )
+      }
+
+      return NextResponse.json({
+        success: false,
+        error: 'Invalid credentials',
       }, { status: 401 })
     }
 

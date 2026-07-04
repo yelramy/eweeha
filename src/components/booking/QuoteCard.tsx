@@ -117,7 +117,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
           </h3>
           <button
             onClick={addDay}
-            className="text-xs text-[#0B6B3A] dark:text-green-400 hover:text-[#095c31] font-medium flex items-center gap-1"
+            className="text-xs text-[#742F38] dark:text-primary-300 hover:text-[#5C262D] font-medium flex items-center gap-1"
           >
             <PlusIcon className="w-3.5 h-3.5" /> Add Day
           </button>
@@ -133,7 +133,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                     value={editDate}
                     onChange={(e) => setEditDate(e.target.value)}
                     min={today}
-                    className="flex-1 min-w-0 px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#0B6B3A] dark:bg-gray-800 dark:text-white"
+                    className="flex-1 min-w-0 px-2 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#742F38] dark:bg-gray-800 dark:text-white"
                   />
                   <div className="flex gap-1 flex-wrap">
                     {(['airport', '6h', '10h', 'full-day'] as const).map(st => (
@@ -142,7 +142,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                         onClick={() => setEditService(st)}
                         className={`px-2 py-1 text-xs rounded-md transition-all ${
                           editService === st
-                            ? 'bg-[#0B6B3A] text-white'
+                            ? 'bg-[#742F38] text-white'
                             : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
                         }`}
                       >
@@ -151,7 +151,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                     ))}
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={saveEditDay} className="p-1.5 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded">
+                    <button onClick={saveEditDay} className="p-1.5 text-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 rounded">
                       <CheckIcon className="w-4 h-4" />
                     </button>
                     <button onClick={() => setEditingDayIndex(null)} className="p-1.5 text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
@@ -164,7 +164,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium text-gray-900 dark:text-white">{formatDate(day.date)}</span>
-                      <span className="inline-flex px-1.5 py-0.5 text-[10px] font-medium rounded bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                      <span className="inline-flex px-1.5 py-0.5 text-[10px] font-medium rounded bg-gold-100 dark:bg-gold-900/30 text-gold-800 dark:text-gold-300">
                         {serviceLabels[day.serviceType] || day.serviceType}
                       </span>
                     </div>
@@ -175,7 +175,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                   <div className="flex items-center gap-1 flex-shrink-0 ml-2">
                     <button
                       onClick={() => startEditDay(i)}
-                      className="p-1.5 text-gray-400 hover:text-[#0B6B3A] hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors"
+                      className="p-1.5 text-gray-400 hover:text-[#742F38] hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors"
                       aria-label="Edit day"
                     >
                       <PencilIcon className="w-3.5 h-3.5" />
@@ -224,7 +224,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                     {availableVehicles.length > 1 && (
                       <button
                         onClick={() => setChangingVehicleIndex(changingVehicleIndex === i ? null : i)}
-                        className="text-[11px] text-[#0B6B3A] dark:text-emerald-400 hover:text-[#095c31] font-medium flex-shrink-0 ml-2"
+                        className="text-[11px] text-[#742F38] dark:text-primary-300 hover:text-[#5C262D] font-medium flex-shrink-0 ml-2"
                       >
                         {changingVehicleIndex === i ? 'Cancel' : 'Change'}
                       </button>
@@ -274,7 +274,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                           })
                           setChangingVehicleIndex(null)
                         }}
-                        className="flex items-center gap-3 p-2.5 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-[#0B6B3A] dark:hover:border-emerald-500 hover:bg-emerald-50/50 dark:hover:bg-emerald-900/10 transition-colors text-left"
+                        className="flex items-center gap-3 p-2.5 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-[#742F38] dark:hover:border-primary-400 hover:bg-primary-50/50 dark:hover:bg-primary-900/10 transition-colors text-left"
                       >
                         {av.image && (
                           <div className="w-12 h-9 rounded overflow-hidden flex-shrink-0 bg-gray-100 dark:bg-gray-700">
@@ -337,7 +337,7 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
                       <div key={j} className="flex justify-between text-[11px] text-gray-400 dark:text-gray-500">
                         <button
                           onClick={() => { if (vehicleIdx >= 0 && availableVehicles.length > 1) setChangingVehicleIndex(vehicleIdx) }}
-                          className={`text-left ${availableVehicles.length > 1 ? 'underline decoration-dotted hover:text-[#0B6B3A] dark:hover:text-emerald-400 cursor-pointer' : ''}`}
+                          className={`text-left ${availableVehicles.length > 1 ? 'underline decoration-dotted hover:text-[#742F38] dark:hover:text-primary-300 cursor-pointer' : ''}`}
                         >
                           {vp.vehicleName}{vp.quantity > 1 ? ` x${vp.quantity}` : ''}
                         </button>
@@ -369,8 +369,8 @@ export default function QuoteCard({ quote, onUpdate, availableVehicles = [] }: Q
               <span className="text-gray-900 dark:text-white font-bold text-base">${quote.pricing.subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between items-center text-sm">
-              <span className="text-emerald-700 dark:text-emerald-400 font-medium">Pay online & save 10%</span>
-              <span className="text-emerald-700 dark:text-emerald-400 font-bold text-base">${quote.pricing.onlineTotal.toFixed(2)}</span>
+              <span className="text-primary-700 dark:text-primary-300 font-medium">Pay online & save 10%</span>
+              <span className="text-primary-700 dark:text-primary-300 font-bold text-base">${quote.pricing.onlineTotal.toFixed(2)}</span>
             </div>
           </div>
         </div>

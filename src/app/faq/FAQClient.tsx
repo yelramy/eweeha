@@ -93,7 +93,7 @@ export default function FAQClient({ faqs }: FAQClientProps) {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-lg font-medium transition-all ${
                   selectedCategory === category
-                    ? 'bg-slate-800 dark:bg-green-600 text-white'
+                    ? 'bg-primary-700 dark:bg-primary-600 text-white'
                     : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 hover:border-slate-400 dark:hover:border-gray-500'
                 }`}
               >
@@ -156,10 +156,10 @@ export default function FAQClient({ faqs }: FAQClientProps) {
                 Contact Us
               </Link>
               <a
-                href="https://wa.me/96176103365"
+                href="https://wa.me/96170971841"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                className="px-8 py-3 bg-[#25D366] text-white rounded-lg font-semibold hover:bg-[#1DA851] transition-colors"
               >
                 Chat on WhatsApp
               </a>

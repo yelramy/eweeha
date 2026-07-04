@@ -24,7 +24,7 @@ export default async function ReviewsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/logo.svg"
+              src="/logo.png"
               alt="Eweeha"
               width={48}
               height={48}
@@ -32,7 +32,7 @@ export default async function ReviewsPage() {
             />
             <span className="font-semibold text-charcoal-500 dark:text-white">Eweeha</span>
           </Link>
-          <Link href="/" className="text-sm text-warm-600 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-300">
+          <Link href="/" className="text-sm text-warm-600 dark:text-gray-400 hover:text-primary-700 dark:hover:text-primary-300">
             ← Back home
           </Link>
         </div>

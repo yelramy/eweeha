@@ -20,14 +20,14 @@ const envBaseUrl =
 
 export const siteConfig = {
   name: 'Eweeha',
-  description: 'Wedding car rental in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding cortège convoys across all Lebanon.',
+  description: 'Wedding car rental in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding convoys across all Lebanon.',
   url: envBaseUrl,
   ogImage: `${envBaseUrl}/og-image.jpg`,
   keywords: [
     'wedding car rental lebanon',
     'wedding cars beirut',
-    'wedding cortege lebanon',
-    'cortege mariage liban',
+    'wedding convoy lebanon',
+    'convoi mariage liban',
     'bridal car with chauffeur lebanon',
     'classic car wedding lebanon',
     'convertible wedding car beirut',
@@ -384,7 +384,7 @@ export async function seedInitialSeoSettings(): Promise<void> {
 
     await updateSeoSettings({
       siteTitle: 'Eweeha - Wedding Car Rental in Lebanon',
-      siteDescription: 'Wedding cars in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding cortège convoys. Serving churches and venues across all Lebanon. Book online.',
+      siteDescription: 'Wedding cars in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding convoys. Serving every ceremony and venue across all Lebanon. Book online.',
       keywords: siteConfig.keywords.join(', '),
       ogImage: siteConfig.ogImage,
     })
@@ -520,15 +520,15 @@ export async function generateStructuredData({
       '@id': `${siteConfig.url}/#organization`,
       name: dynamicConfig.name,
       alternateName: ['Eweeha', 'Eweeha Lebanon'],
-      description: 'Wedding car rental in Lebanon with chauffeur — bridal cars, classics, convertibles, and full cortège convoys',
+      description: 'Wedding car rental in Lebanon with chauffeur — bridal cars, classics, convertibles, and full wedding convoys',
       url: siteConfig.url,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteConfig.url}/logo.svg`,
+        url: `${siteConfig.url}/logo.png`,
         width: 512,
         height: 512
       },
-      image: `${siteConfig.url}/logo.svg`,
+      image: `${siteConfig.url}/logo.png`,
       telephone: dynamicConfig.phone,
       email: dynamicConfig.email,
       address: {
@@ -542,7 +542,7 @@ export async function generateStructuredData({
         '@type': 'Country',
         name: 'Lebanon'
       },
-      serviceType: ['Wedding Car Rental', 'Wedding Cortège Convoy', 'Bridal Car with Chauffeur', 'Classic Car Wedding Photoshoot', 'Wedding Guest Shuttle'],
+      serviceType: ['Wedding Car Rental', 'Wedding Convoy', 'Bridal Car with Chauffeur', 'Classic Car Wedding Photoshoot', 'Wedding Guest Shuttle'],
       priceRange: '$150-$700',
       acceptedPaymentMethod: ['Credit Card', 'Bank Transfer', 'OMT'],
       contactPoint: {

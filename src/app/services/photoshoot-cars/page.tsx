@@ -6,7 +6,7 @@ import { FAQAccordion } from '@/components/Accordion'
 
 export const metadata: Metadata = generateSeoMetadata({
   title: 'Classic & Convertible Wedding Cars in Lebanon - Photoshoot Rentals',
-  description: 'Rent classic and convertible cars for your Lebanese wedding and photoshoot. Vintage classics with chauffeur for church exits, old souk sessions, and coastal golden-hour photos in Byblos, Batroun, Beirut & beyond.',
+  description: 'Rent classic and convertible cars for your Lebanese wedding and photoshoot. Vintage classics with chauffeur for ceremony exits, old souk sessions, and coastal golden-hour photos in Byblos, Batroun, Beirut & beyond.',
   path: '/services/photoshoot-cars',
 })
 
@@ -22,11 +22,11 @@ export default function PhotoshootCarsPage() {
     },
     {
       question: "Which locations work best with a classic car?",
-      answer: "The old souks and harbor of Byblos, Batroun's stone alleys and seaside church, Beirut's heritage streets in Achrafieh and Gemmayzeh, and mountain village squares like Deir el Qamar. We know the parking and permission realities at each."
+      answer: "The old souks and harbor of Byblos, Batroun's stone alleys and seafront, Beirut's heritage streets in Achrafieh and Gemmayzeh, and mountain village squares like Deir el Qamar. We know the parking and permission realities at each."
     },
     {
-      question: "What about a convertible for the cortège?",
-      answer: "The open-top cortège is its own experience — standing in the car, waving, horns singing. We run the top down for the moments and up for the highway so hair and veil survive. See the convertible cortège experience page for details."
+      question: "What about a convertible for the convoy?",
+      answer: "The open-top convoy is its own experience — standing in the car, waving, horns singing. We run the top down for the moments and up for the highway so hair and veil survive. See the convertible convoy experience page for details."
     },
     {
       question: "What if it rains on a convertible booking?",
@@ -47,7 +47,7 @@ export default function PhotoshootCarsPage() {
           description: "Classic and convertible car rental with chauffeur for weddings and wedding photoshoots across Lebanon",
           provider: "Eweeha",
           areaServed: "Lebanon",
-          priceRange: "$250-$700"
+          priceRange: "$250-$800"
         }}
       />
 
@@ -102,8 +102,8 @@ export default function PhotoshootCarsPage() {
               </p>
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed">
                 Book a classic as your <Link href="/services/bridal-car" className="underline hover:text-primary-600">bridal car</Link>, add one to the
-                {' '}<Link href="/services/wedding-cortege" className="underline hover:text-primary-600">cortège</Link> just for the session, or go open-top with the
-                {' '}<Link href="/routes/convertible-cortege" className="underline hover:text-primary-600">convertible cortège experience</Link>.
+                {' '}<Link href="/services/wedding-convoy" className="underline hover:text-primary-600">convoy</Link> just for the session, or go open-top with the
+                {' '}<Link href="/routes/convertible-convoy" className="underline hover:text-primary-600">convertible convoy experience</Link>.
               </p>
             </div>
           </section>
@@ -182,10 +182,10 @@ export default function PhotoshootCarsPage() {
                 Check Availability
               </Link>
               <a
-                href="https://wa.me/96176103365"
+                href="https://wa.me/96170971841"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                className="inline-block bg-[#25D366] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#1DA851] transition-colors"
               >
                 WhatsApp Us
               </a>
