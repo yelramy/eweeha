@@ -1,0 +1,57 @@
+// Vehicle type definitions
+export interface VehicleVariant {
+  id: string
+  name: string // "4-seat (2+2)", "5-seat (3+2)", "9-seat standard"
+  seating: string
+  maxPassengers: number
+}
+
+export interface VehicleExtra {
+  id: string
+  name: string // "English speaking driver", "Baby seat", "Meet & greet"
+  price: number
+  perDay: boolean // true if charged per day, false if one-time
+}
+
+export interface Vehicle {
+  id: string
+  slug: string
+  name: string
+  category?: 'compact' | 'standard' | 'luxury' // Legacy field, kept for database compatibility
+  capacity?: string // Legacy field, kept for backward compatibility
+  price: number // Legacy field, kept for backward compatibility
+  features: string[]
+  description: string
+  images: {
+    main: string
+    gallery: string[]
+  }
+  specifications: {
+    seating: string
+    luggage: string
+    transmission: string
+  }
+  extras?: { name: string; price: number }[] // Legacy field
+  available: boolean
+  quantity: number
+  // Homepage display settings
+  showOnHomepage?: boolean // Display this vehicle on homepage fleet section
+  displayOrder?: number // Order to display on homepage (lower numbers first)
+  // Rental fields
+  model?: string // 'h1' | 'staria' | 'hiace' | 'v-class-2020' | 'v-class-2024' | 'maybach'
+  year?: number
+  variants?: VehicleVariant[]
+  price6h?: number // Up to 6-hour rate
+  price10h?: number // 10-hour day rate
+  price24h?: number // 24-hour/full day rate
+  extraHourRate?: number // For flexible hourly bookings
+  maxPassengers?: number
+  maxLuggage?: number
+  seatingLayout?: string // e.g., "2+2+3 configuration"
+  ceilingType?: 'standard' | 'high' // For Hiace
+  availableExtras?: VehicleExtra[]
+  createdAt: string
+}
+
+export type CreateVehicleData = Omit<Vehicle, 'id' | 'slug' | 'createdAt'>
+export type UpdateVehicleData = Partial<CreateVehicleData>

@@ -1,0 +1,66 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#FBF8F1"/>
+  <rect x="14" y="14" width="372" height="272" rx="10" fill="none" stroke="#EBDCB8" stroke-width="2"/>
+
+  <!-- Ribbon V on the hood -->
+  <g stroke="#DBA396" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M 305 148 Q 330 130 352 118"/>
+    <path d="M 305 148 Q 322 122 330 104"/>
+  </g>
+  <g fill="#DBA396">
+    <circle cx="305" cy="148" r="6"/>
+  </g>
+
+  <!-- Classic car silhouette -->
+  <g>
+    <!-- body -->
+    <path d="M 60 190
+             Q 62 168 84 164
+             L 118 158
+             Q 148 128 186 126
+             L 236 126
+             Q 268 128 288 154
+             L 322 160
+             Q 344 164 346 184
+             L 346 196
+             Q 346 204 338 204
+             L 68 204
+             Q 60 204 60 196 Z"
+          fill="#3D3935"/>
+    <!-- windows -->
+    <path d="M 150 156 Q 172 134 190 133 L 228 133 Q 252 135 268 154 Z" fill="#F6EEDD"/>
+    <line x1="208" y1="133" x2="208" y2="156" stroke="#3D3935" stroke-width="4"/>
+    <!-- gold trim line -->
+    <path d="M 70 182 L 336 182" stroke="#BA9348" stroke-width="3"/>
+    <!-- wheels -->
+    <circle cx="122" cy="204" r="26" fill="#1F1C19"/>
+    <circle cx="122" cy="204" r="12" fill="#CEAC64"/>
+    <circle cx="284" cy="204" r="26" fill="#1F1C19"/>
+    <circle cx="284" cy="204" r="12" fill="#CEAC64"/>
+  </g>
+
+  <!-- Trailing "just married" cans -->
+  <g stroke="#9C7838" stroke-width="2" fill="none">
+    <path d="M 60 196 Q 44 208 34 222"/>
+    <path d="M 60 190 Q 40 196 26 206"/>
+  </g>
+  <g fill="#CEAC64" stroke="#9C7838" stroke-width="1.5">
+    <rect x="26" y="220" width="12" height="14" rx="2"/>
+    <rect x="16" y="202" width="12" height="14" rx="2" transform="rotate(-14 22 209)"/>
+  </g>
+
+  <!-- Flowers on the hood corner -->
+  <g>
+    <circle cx="322" cy="158" r="7" fill="#DBA396"/>
+    <circle cx="334" cy="164" r="5" fill="#EBC8BF"/>
+    <circle cx="328" cy="150" r="4" fill="#F6E4DF"/>
+    <ellipse cx="314" cy="166" rx="8" ry="3.5" fill="#6F8452" transform="rotate(-16 314 166)"/>
+  </g>
+
+  <text x="200" y="252" text-anchor="middle" fill="#3D3935" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="500">
+    Wedding Car
+  </text>
+  <text x="200" y="274" text-anchor="middle" fill="#9C7838" font-family="Georgia, 'Times New Roman', serif" font-size="12" font-style="italic">
+    photo coming soon
+  </text>
+</svg>

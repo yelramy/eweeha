@@ -1,0 +1,50 @@
+import { cached } from '@/lib/cache'
+import HomeClient from './HomeClient'
+import { Metadata } from 'next'
+import { getRecentReviews, getOverallRating } from '@/lib/reviews'
+
+// ISR: Revalidate every 5 minutes
+export const revalidate = 300
+
+export const metadata: Metadata = {
+  title: 'Wedding Cars in Lebanon with Chauffeur | Eweeha',
+  description: 'Wedding car rental in Lebanon: decorated bridal cars, classic & convertible cars, and full wedding cortège convoys with suited chauffeurs. Serving churches and venues in Beirut, Jounieh, Byblos, Broummana, Faraya, the Chouf & all Lebanon.',
+  alternates: {
+    canonical: 'https://eweeha.com',
+  },
+  openGraph: {
+    title: 'Wedding Cars in Lebanon with Chauffeur - Eweeha',
+    description: 'Decorated bridal cars, classic convertibles, and full wedding cortège convoys with professional chauffeurs, across all Lebanon.',
+    type: 'website',
+    url: 'https://eweeha.com',
+  },
+}
+
+export default async function Home() {
+  // Fetch all data on server in parallel
+  const [vehicles, config, content, reviews, ratingStats] = await Promise.all([
+    cached.vehicles.getHomepageVehicles(),
+    cached.config(),
+    cached.content(),
+    getRecentReviews(6),
+    getOverallRating(),
+  ])
+
+  // Extract services from content
+  const services = (Array.isArray(content.services?.content) ? content.services.content : []) as Array<{
+    title: string
+    description: string
+    icon: string
+    image?: string
+  }>
+
+  return (
+    <HomeClient
+      initialVehicles={vehicles}
+      config={config}
+      services={services}
+      reviews={reviews}
+      ratingStats={ratingStats}
+    />
+  )
+}

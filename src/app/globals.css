@@ -1,0 +1,642 @@
+@import "tailwindcss";
+
+/* Tailwind v4 does not auto-load tailwind.config.ts. Without this directive the
+ * brand palette (cedar/warm/cream/charcoal/clay/primary) and the gray/slate/blue
+ * rebrands generate no CSS, so those utility classes silently do nothing. */
+@config "../../tailwind.config.ts";
+
+:root {
+  --background: #FFFEF9;
+  --foreground: #3D3935;
+  --accent: #742F38;
+  --warm: #9C8D7B;
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a1a;
+    --foreground: #f5f5f5;
+    --accent: #DA9AA4;
+    --warm: #a8a29e;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Editorial garamond for headings - wedding invitation feel.
+ * Cormorant runs light, so headings need the heavier weights. */
+h1,
+h2 {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* Calligraphy script accents ("Eweeha!", "just married"...) */
+.script-accent {
+  font-family: var(--font-greatvibes), cursive;
+  letter-spacing: 0.02em;
+}
+
+/* Slow floating petals/ornaments in the hero */
+@keyframes floatPetal {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(6deg); }
+}
+
+.animate-float {
+  animation: floatPetal 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatPetal 9s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile touch target optimization
+ * NOTE: button/input rules are wrapped in @layer base so that explicit Tailwind
+ * utilities (e.g. p-0.5 on star-rating buttons, py-1 on small icon buttons)
+ * can override them. Without the layer, unlayered element-selector CSS beats
+ * Tailwind utilities regardless of specificity, which silently broke explicit
+ * paddings sitewide (e.g. the 5-star review row overflowed on phones because
+ * each star button got an extra 40px of horizontal padding from this rule). */
+@layer base {
+  @media (max-width: 768px) {
+    /* Ensure minimum touch target size of 44x44px for mobile */
+    button,
+    a,
+    input[type="button"],
+    input[type="submit"] {
+      min-height: 44px;
+    }
+  }
+}
+
+/* Body font size override stays outside layers — it sets a baseline and
+ * doesn't conflict with utilities. */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+/* Minimal animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Stagger animation delays */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Subtle shadows - no heavy effects */
+.shadow-soft {
+  box-shadow: 0 1px 3px rgba(61, 57, 53, 0.08);
+}
+
+.shadow-medium {
+  box-shadow: 0 2px 8px rgba(61, 57, 53, 0.1);
+}
+
+/* Gentle hover - no dramatic lifts */
+.hover-lift {
+  transition: all 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-1px);
+}
+
+/* Text utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Screen reader only - accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Clean scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F0E6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9C8D7B;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8A7A69;
+}
+
+/* ::selection brand tint (light) */
+::selection {
+  background-color: #F6E3E6;
+  color: #1F1C19;
+}
+
+/* Dark-mode overrides for the hardcoded light-only colors above. These are raw
+ * CSS (not Tailwind utilities), so they don't follow the `dark:` variant and
+ * must be flipped manually under the same prefers-color-scheme query the theme
+ * vars use. */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: #2a2a2a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6b6b6b;
+  }
+
+  ::selection {
+    background-color: #8E3B46;
+    color: #ffffff;
+  }
+}
+
+/* Mobile optimizations for forms and inputs
+ * Wrapped in @layer base so Tailwind utilities (px-2, py-1, p-0.5, etc.)
+ * applied directly on inputs/buttons still win. The iOS 16px font rule stays
+ * because it must apply unconditionally to prevent input zoom on focus. */
+@media (max-width: 768px) {
+  /* Prevent zoom on input focus on iOS — must not be overridden by utilities */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+@layer base {
+  @media (max-width: 768px) {
+    /* Better default spacing for mobile form fields; explicit Tailwind padding wins */
+    input,
+    select,
+    textarea {
+      padding: 12px 16px;
+    }
+
+    /* Default mobile button padding; explicit Tailwind padding (e.g. p-0.5 on
+     * icon-only buttons like star ratings) wins. */
+    button {
+      padding: 12px 20px;
+    }
+  }
+}
+
+/* Improve tap interaction feedback */
+button,
+a {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Active state for better mobile feedback */
+button:active,
+a:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Fix for date input overflow on mobile - FORCE override browser defaults */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure date input internals don't cause overflow */
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  display: block;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ensure date input calendar icon doesn't cause overflow */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ============================================
+   TipTap Editor Styles (Blog Editor)
+   ============================================ */
+
+/* Editor container */
+.ProseMirror {
+  outline: none;
+  min-height: 400px;
+  padding: 1rem;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9CA3AF;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Headings in editor - matches published output */
+.ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem;
+  line-height: 1.2;
+  font-family: inherit;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.75rem;
+  line-height: 1.3;
+  font-family: inherit;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+/* Paragraphs */
+.ProseMirror p {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+}
+
+/* Bold, italic, strikethrough */
+.ProseMirror strong {
+  font-weight: 700;
+}
+
+.ProseMirror em {
+  font-style: italic;
+}
+
+.ProseMirror s {
+  text-decoration: line-through;
+}
+
+/* Links */
+.ProseMirror a {
+  color: #8E3B46;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ProseMirror a:hover {
+  color: #5C262D;
+}
+
+/* Lists */
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.ProseMirror li {
+  margin: 0.25rem 0;
+  line-height: 1.6;
+}
+
+.ProseMirror li p {
+  margin: 0;
+}
+
+/* Nested lists */
+.ProseMirror ul ul,
+.ProseMirror ol ol,
+.ProseMirror ul ol,
+.ProseMirror ol ul {
+  margin: 0.25rem 0;
+}
+
+/* Blockquote */
+.ProseMirror blockquote {
+  border-left: 4px solid #8E3B46;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: #6B5D50;
+  background-color: #FAF7F2;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.ProseMirror blockquote p {
+  margin: 0;
+}
+
+/* Code */
+.ProseMirror code {
+  background-color: #F0EAE1;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.ProseMirror pre {
+  background-color: #2D2925;
+  color: #F5F0E6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.ProseMirror pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Images */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* Horizontal rule */
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid #E5DDD1;
+  margin: 2rem 0;
+}
+
+/* Selection */
+.ProseMirror ::selection {
+  background-color: #F6E3E6;
+}
+
+/* ============================================
+   Blog Content Styles (Published Posts)
+   Renders EXACTLY as styled in TipTap editor
+   ============================================ */
+
+/* Use system/body font as base for blog content */
+.blog-content {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif !important;
+}
+
+/* Match EXACT heading sizes from TipTap editor */
+.blog-content h1 {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  margin: 1.5rem 0 1rem !important;
+  line-height: 1.2 !important;
+  font-family: inherit !important;
+  letter-spacing: normal !important;
+}
+
+.blog-content h2 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin: 1.25rem 0 0.75rem !important;
+  line-height: 1.3 !important;
+  font-family: inherit !important;
+  letter-spacing: normal !important;
+}
+
+.blog-content h3 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin: 1rem 0 0.5rem !important;
+  line-height: 1.4 !important;
+  font-family: inherit !important;
+  letter-spacing: normal !important;
+}
+
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  font-family: inherit !important;
+  letter-spacing: normal !important;
+}
+
+/* Paragraphs - match editor */
+.blog-content p {
+  margin: 0.75rem 0 !important;
+  line-height: 1.7 !important;
+}
+
+/*
+ * IMPORTANT: Do NOT set font-family/color on [style] elements.
+ * TipTap generates inline styles like style="font-family: Georgia; color: red"
+ * These inline styles must be allowed to apply naturally.
+ * CSS cannot override inline styles unless using !important.
+ */
+
+/* ============================================
+   Blog Content element styling (light + dark)
+   The published blog uses `prose dark:prose-invert`, but
+   @tailwindcss/typography is NOT installed, so those modifiers are inert.
+   These rules give links/quotes/code/rules/lists intentional styling in BOTH
+   color schemes. Body text + headings already inherit the foreground var, so
+   they adapt to dark mode on their own.
+   NOTE: scoped to .blog-content only (NOT .ProseMirror) so the admin editor,
+   which is locked to a light scheme, is unaffected.
+   ============================================ */
+.blog-content a {
+  color: #8E3B46;
+  text-decoration: underline;
+}
+
+.blog-content a:hover {
+  color: #5C262D;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid #8E3B46;
+  background-color: #FAF7F2;
+  color: #6B5D50;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+.blog-content code {
+  background-color: #F0EAE1;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.blog-content pre {
+  background-color: #2D2925;
+  color: #F5F0E6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.blog-content pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.blog-content hr {
+  border: none;
+  border-top: 2px solid #E5DDD1;
+  margin: 2rem 0;
+}
+
+.blog-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.blog-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.blog-content li {
+  margin: 0.25rem 0;
+  line-height: 1.7;
+}
+
+@media (prefers-color-scheme: dark) {
+  .blog-content a {
+    color: #DA9AA4;
+  }
+
+  .blog-content a:hover {
+    color: #EBC3C9;
+  }
+
+  .blog-content blockquote {
+    border-left-color: #C56E7D;
+    background-color: #242424;
+    color: #cfc8bf;
+  }
+
+  .blog-content code {
+    background-color: #2f2b27;
+    color: #f0eae1;
+  }
+
+  .blog-content hr {
+    border-top-color: #3a3a3a;
+  }
+}

@@ -1,0 +1,246 @@
+import { Metadata } from 'next'
+import Link from 'next/link'
+import { generateMetadata as generateSeoMetadata } from '@/lib/seoManager'
+import { ServiceSchema } from '@/components/StructuredDataEnhanced'
+import { FAQAccordion } from '@/components/Accordion'
+
+export const metadata: Metadata = generateSeoMetadata({
+  title: 'Bridal Car with Chauffeur in Lebanon - Decorated Wedding Car',
+  description: 'Rent a decorated bridal car with a suited chauffeur in Lebanon. Ribbon and fresh flower décor, dress-friendly seating, and calm, punctual service from the bride\'s prep to the venue entrance. All regions covered.',
+  path: '/services/bridal-car',
+})
+
+export default function BridalCarPage() {
+  const faqs = [
+    {
+      question: "Is the decoration included in the price?",
+      answer: "Ribbon decoration is included. Fresh flower arrangements are arranged on request and priced by your chosen florist's design — or we coordinate directly with your wedding florist so the car matches the bouquet exactly."
+    },
+    {
+      question: "Will the car fit the wedding dress?",
+      answer: "Yes — this is our specialty. We recommend cars by dress style: princess gowns need wide rear doors and flat floors, mermaid cuts ride better in higher seats. Tell us about the dress and we'll recommend the right car, and the chauffeur is trained to assist without touching the fabric."
+    },
+    {
+      question: "How long do we have the car for?",
+      answer: "Packages run 6 hours (prep, church, photos), 10 hours (through the venue entrance), or 24 hours (the whole day until the after-party exit). The chauffeur stays with you the entire time — the car never leaves your wedding."
+    },
+    {
+      question: "Can the chauffeur pick up the groom separately first?",
+      answer: "Yes. A common flow: the car takes the groom to the church, then returns for the bride's grand departure. We fit the plan to your traditions, not the other way around."
+    },
+    {
+      question: "What does the chauffeur wear?",
+      answer: "A dark suit, white shirt, and tie by default. If your wedding has a color theme or dress code, tell us — we'll match it."
+    },
+    {
+      question: "What if the car breaks down on the wedding day?",
+      answer: "In years of running fleets across Lebanon it's almost never happened — but a backup plan always exists: a standby vehicle can reach any of our wedding routes, and the cortège cars can cover the bridal car in the worst case. You will get to the church."
+    }
+  ]
+
+  return (
+    <>
+      {/* Structured Data */}
+      <ServiceSchema
+        service={{
+          name: "Bridal Car with Chauffeur",
+          description: "Decorated bridal car rental with professional suited chauffeur in Lebanon, from bridal prep to venue entrance",
+          provider: "Eweeha",
+          areaServed: "Lebanon",
+          priceRange: "$150-$600"
+        }}
+      />
+
+      <div className="min-h-screen bg-white dark:bg-gray-900">
+        {/* Simple Header */}
+        <div className="bg-white dark:bg-gray-800 border-b border-warm-200 dark:border-gray-700 sticky top-0 z-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <Link href="/" className="inline-flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
+              ← Back to Home
+            </Link>
+          </div>
+        </div>
+
+        {/* Hero Section */}
+        <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <p className="script-accent text-3xl text-primary-100 mb-4">for the bride…</p>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Bridal Car &amp; Chauffeur
+              </h1>
+              <p className="text-xl md:text-2xl text-white mb-8">
+                One elegant, decorated car and one calm professional — dedicated to the couple all day
+              </p>
+              <Link
+                href="/booking"
+                className="inline-block bg-white text-primary-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-cream-100 transition-colors"
+              >
+                Book the Bridal Car
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Service Overview */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-6">
+              The Calmest Seat at the Wedding
+            </h2>
+            <div className="max-w-none">
+              <p className="text-black dark:text-gray-300 text-lg leading-relaxed mb-4">
+                Between the salon, the photographer, the church, and three hundred guests, the bridal car is the only quiet
+                place a couple gets all day. We treat it that way: a spotless, decorated car with climate control set before
+                you step in, water waiting, and a chauffeur who knows when to talk and when to just drive.
+              </p>
+              <p className="text-black dark:text-gray-300 text-lg leading-relaxed mb-4">
+                The car is dressed the morning of the wedding — ribbons in your colors, fresh flowers coordinated with your
+                florist if you wish — and photographed-checked before pickup. Your chauffeur arrives early at the prep
+                location, plans the dress into the seating, and keeps a steady, gentle pace so hair, veil, and nerves all
+                arrive intact.
+              </p>
+              <p className="text-black dark:text-gray-300 text-lg leading-relaxed">
+                From the church exit under the rice to the golden-hour photo stop to the venue&apos;s grand entrance, the same
+                car and the same person stay dedicated to you until the end of your package — in Beirut, on the coast, or up
+                the mountain. Add convoy cars anytime through our <Link href="/services/wedding-cortege" className="underline hover:text-primary-600">full cortège service</Link>.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        {/* Key Features */}
+        <section className="py-16 bg-cream-100 dark:bg-gray-800">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-6">
+              What&apos;s Included
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
+                <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
+                  Ribbon &amp; Flower Décor
+                </h3>
+                <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
+                  Classic ribbon V on the hood included; fresh flower arrangements coordinated with your florist so the car matches the bouquet.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
+                <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
+                  Dress-First Logistics
+                </h3>
+                <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
+                  Car recommended by dress style, seating planned with your stylist, and a chauffeur trained to assist without ever touching the fabric.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
+                <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
+                  Suited Professional Chauffeur
+                </h3>
+                <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
+                  Dark suit, discreet manner, wedding-day experience. Doors held, routes rehearsed, timing owned.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
+                <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
+                  Dedicated All Day
+                </h3>
+                <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
+                  The car never leaves your wedding — it stages at the church for the exit photos and waits at the venue for as long as your package runs.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
+                <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
+                  Photo-Stop Planning
+                </h3>
+                <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
+                  Golden-hour viewpoints, old streets, or the corniche — the stop is planned with your photographer before the day.
+                </p>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
+                <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
+                  All Lebanon Covered
+                </h3>
+                <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
+                  Beirut, Jounieh, Byblos, Broummana, Faraya, the Chouf, the Bekaa, the South, the North — same standard everywhere.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-6">
+              Bridal Car Packages
+            </h2>
+            <div className="grid md:grid-cols-2 gap-4 text-warm-700 dark:text-gray-300">
+              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
+                <span>Ceremony package — 6 hours</span>
+                <span className="font-semibold text-primary-600 dark:text-primary-400">from $150</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
+                <span>Celebration package — 10 hours</span>
+                <span className="font-semibold text-primary-600 dark:text-primary-400">from $250</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
+                <span>Full day — 24 hours</span>
+                <span className="font-semibold text-primary-600 dark:text-primary-400">from $350</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-warm-200 dark:border-gray-700">
+                <span>Luxury &amp; classic cars</span>
+                <span className="font-semibold text-primary-600 dark:text-primary-400">see fleet</span>
+              </div>
+            </div>
+            <p className="text-sm text-warm-600 dark:text-gray-400 mt-4">
+              *Starting prices for a decorated sedan with chauffeur. Browse the <Link href="/#fleet" className="underline hover:text-primary-600">wedding fleet</Link> for exact per-car pricing, including classics and convertibles.
+            </p>
+          </section>
+        </div>
+
+        {/* FAQs */}
+        <section className="py-16 bg-cream-100 dark:bg-gray-800">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-black dark:text-white mb-6">
+              Frequently Asked Questions
+            </h2>
+            <FAQAccordion items={faqs} />
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <section className="text-center bg-gradient-to-br from-primary-600 to-primary-800 rounded-xl p-12 text-white">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Reserve the Bridal Car
+            </h2>
+            <p className="text-xl text-white mb-8">
+              Tell us your date, church, and venue — we&apos;ll recommend the perfect car
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/booking"
+                className="inline-block bg-white text-primary-700 px-8 py-3 rounded-lg font-semibold hover:bg-cream-100 transition-colors"
+              >
+                Book Now
+              </Link>
+              <a
+                href="https://wa.me/96176103365"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              >
+                WhatsApp Us
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </>
+  )
+}
