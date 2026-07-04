@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Great_Vibes, Outfit, Cormorant_Garamond } from "next/font/google";
+import { Kaushan_Script, Outfit, Cormorant_Garamond } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import { generateMetadata, generateStructuredData, generateWebSiteStructuredData, siteConfig } from '@/lib/seoManager';
@@ -12,9 +12,10 @@ import ContactButtons from '@/components/ContactButtons';
 import { TrackingProvider } from '@/components/TrackingProvider';
 import { PostHogProvider, PostHogPageView } from '@/providers/PostHogProvider';
 
-// Calligraphy script for the Eweeha wordmark and celebratory accents
-const greatVibes = Great_Vibes({
-  variable: "--font-greatvibes",
+// Celebratory brush script for the Eweeha wordmark and accents — energetic
+// and festive, legible at every size (single 400 weight)
+const scriptFont = Kaushan_Script({
+  variable: "--font-script",
   subsets: ["latin"],
   display: 'swap',
   weight: '400',
@@ -143,7 +144,7 @@ export default async function RootLayout({
         <meta name="format-detection" content="telephone=no" />
       </head>
       <body
-        className={`${greatVibes.variable} ${outfit.variable} ${cormorant.variable} antialiased`}
+        className={`${scriptFont.variable} ${outfit.variable} ${cormorant.variable} antialiased`}
       >
         <PostHogProvider>
           <Suspense fallback={null}>

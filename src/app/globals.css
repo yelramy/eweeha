@@ -49,9 +49,12 @@ h6 {
   letter-spacing: 0;
 }
 
-/* Calligraphy script accents ("Eweeha!", "just married"...) */
+/* Calligraphy script accents ("Eweeha!", "just married"...).
+ * Kaushan Script only ships weight 400 — pin it so headings (weight 600)
+ * don't force an ugly synthesized bold. */
 .script-accent {
-  font-family: var(--font-greatvibes), cursive;
+  font-family: var(--font-script), cursive;
+  font-weight: 400;
   letter-spacing: 0.02em;
 }
 

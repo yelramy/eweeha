@@ -18,7 +18,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-inter)', 'monospace'],
-        display: ['var(--font-greatvibes)', 'cursive'],
+        display: ['var(--font-script)', 'cursive'],
         serif: ['var(--font-cormorant)', 'serif'],
       },
       colors: {

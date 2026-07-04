@@ -28,7 +28,7 @@ Production-grade anatomy map for the `eweeha` codebase — **eweeha.com**, weddi
 | XSS | `xss` + custom sanitizers | `src/utils/sanitize.ts` |
 | Rich text (admin) | TipTap | Blog editor |
 | UI primitives | Headless UI, Heroicons | Components, icons |
-| Fonts | Google Fonts (next/font) | Outfit (sans), Great Vibes (script accent), Cormorant Garamond (serif) |
+| Fonts | Google Fonts (next/font) | Outfit (sans), Dancing Script (script accent, `--font-script`), Cormorant Garamond (serif) |
 | Deployment | Vercel | Region `cdg1` (`vercel.json`) |
 
 ### Architectural Pattern
@@ -767,3 +767,10 @@ Admin client helper: `src/utils/adminApi.ts` (`ApiResponse<T>`).
 - **llms.txt rewritten to the llmstxt.org spec** (H1 + blockquote summary + linked sections: Services / Coverage Areas incl. new Aley page / Booking / Optional) with CORRECTED pricing (from ~$250 single car to ~$1,500 full convoy — old file still claimed "from $150" packages) and Beirut Vans partnership. NEW `public/llms-full.txt`: full AI knowledge base (entity facts, Eweeha/radde/zalghouta meaning, all services + URLs, service model, pricing guidance, all coverage areas, booking process, 12 FAQs).
 - **sitemap.ts**: `/blog` index now included ONLY when published posts exist (was priority 0.8/daily while blog is empty & unlinked); re-add automatically once posts are published.
 - Verified on dev: robots.txt correct rule groups, sitemap has 0 blog URLs + Aley page, llms-full.txt serves 200, home emits single @graph (old `#business` gone), convoy page emits FAQPage, /faq emits exactly ONE FAQPage. `tsc --noEmit` clean.
+
+**Jul 4 2026 (night 3) — script font swapped + Smalla 3layke more prominent (user/wife request):**
+- **Great Vibes → Kaushan Script** sitewide (wife disliked Great Vibes; tried Dancing Script first, user then picked Kaushan from a rendered sampler — still "trial" status, may change again after wife review). One font var powers everything: `layout.tsx` loads the script font as `--font-script` (old var `--font-greatvibes` renamed); consumers unchanged — `.script-accent` in `globals.css` and Tailwind `font-display` just point at the var. All script accents follow automatically (hero "Eweeha!", footer wordmark, service-page kickers, #eweeha watermark + dictionary card, admin login). **To swap fonts again: change ONLY the import + font config in `layout.tsx`.** Kaushan ships a single 400 weight, so `.script-accent` now pins `font-weight: 400` (prevents synthesized bold inside h1/h2 which set weight 600).
+- **Hero "Smalla 3layke" bumped** (was barely visible): `text-2xl/3xl/4xl` → `text-3xl/4xl/5xl`, `font-medium` → `font-semibold` (`HomeClient.tsx`). Colors unchanged (gold-700 light / gold-300 dark).
+- Font sampler technique for user preview: inject overlay div into the live page with candidate Google Fonts loaded via `<link>`, screenshot, show in chat (candidates shown: Great Vibes, Dancing Script, Parisienne, Kaushan, Pacifico, Berkshire Swash, Playfair italic).
+- NOTE: these changes are LOCAL ONLY (not committed/deployed as of this entry) — user reported "don't see the new font" while dev server verifiably served it; likely they were viewing deployed eweeha.com or a stale tab. Remind to check localhost:3000 with hard refresh, and commit+deploy when font is finalized.
+- Verified in browser: desktop light + dark, mobile 390px, and #eweeha section. `tsc --noEmit` clean.

@@ -163,7 +163,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                 <span className="script-accent block text-primary-600 dark:text-primary-300 text-6xl sm:text-7xl md:text-8xl leading-none">
                   Eweeha!
                 </span>
-                <span className="font-serif italic font-medium block text-gold-700 dark:text-gold-300 text-2xl sm:text-3xl md:text-4xl tracking-wide mt-3">
+                <span className="font-serif italic font-semibold block text-gold-700 dark:text-gold-300 text-3xl sm:text-4xl md:text-5xl tracking-wide mt-3">
                   Smalla 3layke
                 </span>
               </h1>
