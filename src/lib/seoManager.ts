@@ -20,7 +20,8 @@ const envBaseUrl =
 
 export const siteConfig = {
   name: 'Eweeha',
-  description: 'Wedding car rental in Lebanon with chauffeur: bridal cars, classic and convertible cars, and full wedding convoys across all Lebanon.',
+  description:
+    'Wedding car rental in Lebanon with chauffeur — bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony across Beirut, Jounieh, Byblos & all Lebanon. Book online or WhatsApp.',
   url: envBaseUrl,
   ogImage: `${envBaseUrl}/og-image.jpg`,
   keywords: [
@@ -35,6 +36,23 @@ export const siteConfig = {
     'zaffe wedding cars',
     'wedding guest shuttle lebanon'
   ]
+}
+
+/** Avoid "Title | Eweeha | Eweeha" when callers already include a brand suffix. */
+export function formatPageTitle(title: string, brand = siteConfig.name): string {
+  if (!title.trim()) return brand
+  if (title.includes('|')) return title.trim()
+  return `${title.trim()} | ${brand}`
+}
+
+/** Segment-only title for Next.js `title.template` in the root layout. */
+export function pageTitleSegment(title: string, brand = siteConfig.name): string {
+  const trimmed = title.trim()
+  if (!trimmed) return ''
+  if (!trimmed.includes('|')) return trimmed
+  const [segment] = trimmed.split('|')
+  const normalized = segment.trim()
+  return normalized.toLowerCase() === brand.toLowerCase() ? '' : normalized
 }
 
 // Get dynamic site config from database settings
@@ -302,7 +320,8 @@ export async function generateSeoMetadata({
 
   // Build title
   const title = pageSeo?.title || defaultTitle || globalSeo?.siteTitle || siteConfig.name
-  const pageTitle = title.includes('|') ? title : `${title} | ${globalSeo?.siteTitle || siteConfig.name}`
+  const pageTitle = formatPageTitle(title, globalSeo?.siteTitle || siteConfig.name)
+  const titleSegment = pageTitleSegment(title, globalSeo?.siteTitle || siteConfig.name)
 
   // Build description
   const description = pageSeo?.description || defaultDescription || globalSeo?.siteDescription || siteConfig.description
@@ -319,7 +338,7 @@ export async function generateSeoMetadata({
   const noFollow = pageSeo?.noFollow || false
 
   return {
-    title: pageTitle,
+    title: titleSegment || undefined,
     description,
     authors: [{ name: globalSeo?.siteTitle || siteConfig.name }],
     creator: globalSeo?.siteTitle || siteConfig.name,
@@ -404,15 +423,18 @@ export function generateMetadata({
   description,
   path = '/',
   images = [],
-  noIndex = false
+  noIndex = false,
+  omitTitle = false,
 }: {
   title?: string
   description?: string
   path?: string
   images?: string[]
   noIndex?: boolean
+  omitTitle?: boolean
 }): Metadata {
-  const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name
+  const pageTitle = title ? formatPageTitle(title) : siteConfig.name
+  const titleSegment = title ? pageTitleSegment(title) : ''
   const pageDescription = description || siteConfig.description
 
   const normalizedPath = path
@@ -439,11 +461,12 @@ export function generateMetadata({
   const canonicalUrl = pageUrl
 
   return {
-    title: pageTitle,
+    ...(omitTitle || !titleSegment ? {} : { title: titleSegment }),
     description: pageDescription,
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
     publisher: siteConfig.name,
+    keywords: siteConfig.keywords.join(', '),
     alternates: {
       canonical: canonicalUrl,
       languages: {
@@ -525,11 +548,23 @@ export async function generateStructuredData({
       url: siteConfig.url,
       logo: {
         '@type': 'ImageObject',
+        '@id': `${siteConfig.url}/#logo`,
         url: `${siteConfig.url}/logo.png`,
+        contentUrl: `${siteConfig.url}/logo.png`,
         width: 512,
-        height: 512
+        height: 512,
+        caption: 'Eweeha — Wedding Cars in Lebanon',
       },
-      image: [`${siteConfig.url}/og-image.jpg`, `${siteConfig.url}/logo.png`],
+      image: [
+        {
+          '@type': 'ImageObject',
+          url: `${siteConfig.url}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          caption: 'Eweeha wedding cars in Lebanon — chauffeur included',
+        },
+        `${siteConfig.url}/logo.png`,
+      ],
       telephone: dynamicConfig.phone,
       email: dynamicConfig.email,
       address: {
@@ -610,10 +645,11 @@ export function generateWebSiteStructuredData() {
     '@id': `${siteConfig.url}/#website`,
     url: siteConfig.url,
     name: 'Eweeha',
-    alternateName: 'Eweeha Wedding Cars Lebanon',
+    alternateName: ['Eweeha Wedding Cars Lebanon', 'eweeha.com'],
     description: siteConfig.description,
     inLanguage: 'en',
-    publisher: { '@id': `${siteConfig.url}/#organization` }
+    publisher: { '@id': `${siteConfig.url}/#organization` },
+    image: `${siteConfig.url}/og-image.jpg`,
   }
 }
 

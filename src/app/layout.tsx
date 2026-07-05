@@ -39,9 +39,15 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  title: {
+    default: 'Wedding Car Rental in Lebanon',
+    template: '%s | Eweeha',
+  },
   ...generateMetadata({
-    title: "Wedding Car Rental in Lebanon | Eweeha",
-    description: "Wedding cars in Lebanon with chauffeur: bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Jounieh, Byblos, the Metn, Chouf & all Lebanon. Book online or on WhatsApp.",
+    description:
+      'Wedding cars in Lebanon with chauffeur: bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Jounieh, Byblos, the Metn, Chouf & all Lebanon. Book online or on WhatsApp.',
+    path: '/',
+    omitTitle: true,
   }),
   icons: [
     {
@@ -142,6 +148,8 @@ export default async function RootLayout({
 
         {/* Additional SEO */}
         <meta name="format-detection" content="telephone=no" />
+        <link rel="logo" type="image/png" href="/logo.png" />
+        <meta name="application-name" content="Eweeha" />
       </head>
       <body
         className={`${scriptFont.variable} ${outfit.variable} ${cormorant.variable} antialiased`}

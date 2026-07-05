@@ -31,7 +31,7 @@ export default function SocialPreview({
     return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
   }
 
-  const defaultImage = '/images/areas/ornament.svg'
+  const defaultImage = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://eweeha.com'}/og-image.jpg`
   const previewImage = image || defaultImage
 
   return (
