@@ -49,3 +49,4 @@ dev.db
 .cursor/
 
 posthog_tracking.md
+.vercel

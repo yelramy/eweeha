@@ -155,7 +155,7 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Cars & Decoration',
     question: 'What\'s included with every wedding car?', 
-    answer: 'A professional chauffeur in a suit, fuel and tolls, waiting time throughout your package, ribbon decoration, air conditioning, and a route scouted before the day. Fresh flower décor is arranged on request with your florist.' 
+    answer: 'A professional chauffeur in a suit, fuel, waiting time throughout your package, ribbon decoration, air conditioning, and a route scouted before the day. Fresh flower décor is arranged on request with your florist.' 
   },
   { 
     category: 'Cars & Decoration',

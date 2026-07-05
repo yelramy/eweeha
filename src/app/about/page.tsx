@@ -103,7 +103,7 @@ export default function AboutPage() {
                   Transparent Pricing
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Clear per-car pricing with chauffeur, fuel, and tolls included. The quote you approve is the price you pay — no wedding-day surprises.
+                  Clear per-car pricing with chauffeur and fuel included. The quote you approve is the price you pay — no wedding-day surprises.
                 </p>
               </div>
 

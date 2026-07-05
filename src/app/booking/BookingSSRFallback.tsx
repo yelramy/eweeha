@@ -46,7 +46,7 @@ export default function BookingSSRFallback() {
                 <li>• Classic &amp; convertible cars for the photos and the grand exit</li>
                 <li>• Luxury sedans &amp; SUVs for family and convoy cars</li>
                 <li>• Guest shuttle vans and minibuses for your guests</li>
-                <li>• All cars include a suited chauffeur, fuel, and tolls</li>
+                <li>• All cars include a suited chauffeur and fuel</li>
               </ul>
             </div>
 

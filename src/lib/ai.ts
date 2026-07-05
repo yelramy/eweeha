@@ -29,7 +29,9 @@ function getAIConfig(): AIConfig | null {
     return {
       provider: 'openai',
       apiKey: openaiKey,
-      model: process.env.OPENAI_MODEL || 'gpt-5-nano'  // 70% cheaper, still great quality
+      // gpt-5.4-mini: strongest small model (Mar 2026) — handles Arabic/Arabizi/French
+      // booking messages reliably; ~$0.002 per interpret call. Override with OPENAI_MODEL.
+      model: process.env.OPENAI_MODEL || 'gpt-5.4-mini'
     }
   }
 

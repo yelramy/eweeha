@@ -52,7 +52,7 @@ This file provides detailed, structured information for AI language models and a
 ## Service Model
 
 - Every car is chauffeur-driven by a professional in a suit — no self-drive rentals
-- Fuel, tolls, and waiting time are included in every price
+- Fuel and waiting time are included in every price
 - Pricing is per car/van, not per person; no surge pricing
 - Routes are scouted before the wedding day; timing is coordinated with the planner, zaffe, and photographer
 - The car stays dedicated to the wedding for the whole package duration
@@ -114,7 +114,7 @@ Q: Can you also move our guests?
 A: Yes — guest shuttle vans and minibuses run under the same coordinator as the convoy, operated with sister fleet Beirut Vans.
 
 Q: Is pricing per person?
-A: No — pricing is per car/van with chauffeur, fuel, and tolls included.
+A: No — pricing is per car/van with chauffeur and fuel included.
 
 Q: Will the car fit the wedding dress?
 A: Yes — cars are recommended by dress style, and chauffeurs are trained to assist without touching the fabric.

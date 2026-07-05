@@ -14,7 +14,7 @@ export default function WeddingConvoyPage() {
   const faqs = [
     {
       question: "What exactly is included in a wedding convoy booking?",
-      answer: "A decorated lead car for the couple plus as many matching convoy cars as you need for parents, bridesmaids, and groomsmen. Every car comes with a suited chauffeur, fuel, and tolls included. We brief all drivers on the route, order, and timing before the day."
+      answer: "A decorated lead car for the couple plus as many matching convoy cars as you need for parents, bridesmaids, and groomsmen. Every car comes with a suited chauffeur and fuel included. We brief all drivers on the route, order, and timing before the day."
     },
     {
       question: "How many cars can the convoy include?",

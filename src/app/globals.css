@@ -217,6 +217,16 @@ html {
   background: #8A7A69;
 }
 
+/* Swipeable fleet rows: hide the scrollbar for an app-like feel */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* ::selection brand tint (light) */
 ::selection {
   background-color: #F6E3E6;

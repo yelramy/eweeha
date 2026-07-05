@@ -150,7 +150,7 @@ export default function GuestShuttlePage() {
                   10 to 28 Seats per Vehicle
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  Vans and minibuses sized to your guest list, all air-conditioned, all with professional drivers, fuel and tolls included.
+                  Vans and minibuses sized to your guest list, all air-conditioned, all with professional drivers and fuel included.
                 </p>
               </div>
             </div>

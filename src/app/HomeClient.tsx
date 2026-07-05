@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { PhoneIcon, ChatBubbleLeftRightIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import ImageWithFallback from '@/components/ImageWithFallback'
+import FleetCategoryRows from '@/components/FleetCategoryRows'
 import AIBookingAssistant from '@/components/AIBookingAssistant'
 import Button from '@/components/Button'
 import MobileMenu from '@/components/MobileMenu'
@@ -12,6 +13,7 @@ import ConvoyPicker from '@/components/ConvoyPicker'
 import LebanonFlag from '@/components/LebanonFlag'
 import Footer from '@/components/Footer'
 import ServiceCard, { ServiceCardsGrid } from '@/components/ServiceCard'
+import { sortFleetForDisplay } from '@/lib/fleetCategories'
 import { Vehicle } from '@/types/vehicle'
 import { AppConfig } from '@/constants/configDefaults'
 import ReviewsSection from '@/components/ReviewsSection'
@@ -25,7 +27,7 @@ interface ServiceItem {
 }
 
 interface HomeClientProps {
-  initialVehicles: Vehicle[]
+  allVehicles: Vehicle[]
   config: AppConfig
   services: ServiceItem[]
   reviews?: Review[]
@@ -47,7 +49,7 @@ function RibbonDivider({ className = '' }: { className?: string }) {
   )
 }
 
-export default function HomeClient({ initialVehicles, config, reviews = [], ratingStats }: HomeClientProps) {
+export default function HomeClient({ allVehicles, config, reviews = [], ratingStats }: HomeClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isConvoyPickerOpen, setIsConvoyPickerOpen] = useState(false)
 
@@ -89,6 +91,12 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                   >
                     The Cars
                   </a>
+                  <Link
+                    href="/fleet"
+                    className="text-gray-700 dark:text-gray-200 hover:text-primary-700 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                  >
+                    Full Fleet
+                  </Link>
                   <a
                     href="#services"
                     onClick={(e) => handleSmoothScroll(e, '#services')}
@@ -216,81 +224,17 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
               </p>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
-              {initialVehicles.map((vehicle) => {
-                const hasPricing = vehicle.price6h || vehicle.price10h || vehicle.price24h
+            <FleetCategoryRows vehicles={allVehicles} />
 
-                return (
-                  <div
-                    key={vehicle.id}
-                    className="bg-cream-50 dark:bg-gray-700 border border-warm-200 dark:border-gray-600 rounded-lg overflow-hidden hover-lift flex flex-col h-full"
-                  >
-                    <Link href={`/fleet/${vehicle.id}`} className="block h-52 sm:h-48 overflow-hidden relative flex-shrink-0">
-                      <ImageWithFallback
-                        src={vehicle.images.main}
-                        alt={`${vehicle.name} — wedding car with chauffeur in Lebanon`}
-                        width={400}
-                        height={300}
-                        quality={60}
-                        className="w-full h-full object-cover group-hover:opacity-90 transition-opacity"
-                        fallback={<div className="w-full h-full bg-warm-100"></div>}
-                      />
-                    </Link>
-                    <div className="p-4 sm:p-5 flex flex-col h-full">
-                      {/* Title and price */}
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex-1">
-                          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-charcoal-500 dark:text-white mb-1 leading-tight">{vehicle.name}</h3>
-                          <p className="text-xs sm:text-sm text-warm-600 dark:text-gray-400">
-                            {vehicle.maxPassengers ? `${vehicle.maxPassengers} passengers` : vehicle.capacity}
-                          </p>
-                        </div>
-                        <div className="text-right ml-2 sm:ml-3 flex-shrink-0">
-                          {hasPricing ? (
-                            <div className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-300 space-y-0.5">
-                              {vehicle.price6h && <div><span className="text-gray-400">6h:</span> <span className="font-semibold">${vehicle.price6h}</span></div>}
-                              {vehicle.price10h && <div><span className="text-gray-400">10h:</span> <span className="font-semibold">${vehicle.price10h}</span></div>}
-                              {vehicle.price24h && <div><span className="text-gray-400">24h:</span> <span className="font-semibold">${vehicle.price24h}</span></div>}
-                            </div>
-                          ) : (
-                            <div className="text-sm text-gray-500 dark:text-gray-400">Contact us</div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Spacer that grows */}
-                      <div className="flex-1"></div>
-
-                      {/* Badges section */}
-                      <div className="space-y-1.5 sm:space-y-2 text-xs mb-3">
-                        <span className="inline-flex px-2.5 sm:px-3 py-1 sm:py-1.5 bg-primary-50 text-primary-700 border border-primary-200 rounded text-[11px] sm:text-xs">
-                          Chauffeur included
-                        </span>
-                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                          {vehicle.features.slice(0, 2).map((feature, i) => (
-                            <span key={i} className="px-2.5 sm:px-3 py-1 sm:py-1.5 bg-cream-100 text-charcoal-500 border border-warm-200 rounded text-[11px] sm:text-xs">
-                              {feature}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Buttons at bottom */}
-                      <div className="flex gap-2">
-                        <Button href={`/fleet/${vehicle.id}`} variant="outline" size="sm" className="flex-1 font-medium">
-                          Details
-                        </Button>
-                        <Button href={`/booking?vehicle=${vehicle.id}`} variant="warning" size="sm" className="flex-1 font-semibold" aria-label={`Book ${vehicle.name} wedding car with chauffeur included`}>
-                          Book
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            <div className="mt-8 text-center">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              {allVehicles.length > 0 ? (
+                <Link
+                  href="/fleet"
+                  className="inline-block w-full sm:w-auto text-center border-2 border-primary-600 dark:border-primary-400 text-primary-700 dark:text-primary-200 px-8 py-3 rounded-md font-medium tracking-wider transition-all hover:bg-primary-600 hover:text-white dark:hover:bg-primary-500"
+                >
+                  View the Full Fleet ({allVehicles.length} cars) →
+                </Link>
+              ) : null}
               <a
                 href="#booking"
                 onClick={(e) => handleSmoothScroll(e, '#booking')}
@@ -325,7 +269,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
                     </div>
                     <div className="flex items-start gap-2">
                       <span className="text-primary-600 dark:text-primary-300 font-bold">✓</span>
-                      <span>Fuel, tolls, and waiting time included in the price</span>
+                      <span>Fuel and waiting time included in the price</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <span className="text-primary-600 dark:text-primary-300 font-bold">✓</span>
@@ -636,7 +580,7 @@ export default function HomeClient({ initialVehicles, config, reviews = [], rati
       <ConvoyPicker
         isOpen={isConvoyPickerOpen}
         onClose={() => setIsConvoyPickerOpen(false)}
-        vehicles={initialVehicles}
+        vehicles={sortFleetForDisplay(allVehicles)}
       />
     </>
   )

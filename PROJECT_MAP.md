@@ -320,10 +320,14 @@ eweeha/
 ### 3. Fleet Management & Showcase
 
 - Vehicles stored in Turso with JSON-serialized `features`, `gallery_images`, `variants`, `available_extras`.
-- **Homepage display:** `show_on_homepage` + `display_order` flags filter homepage fleet section.
+- **Homepage display:** `show_on_homepage` + `display_order` flags — only featured cars on `/` (via `cached.vehicles.getHomepageVehicles()`). Full catalog at **`/fleet`** (`FleetIndexClient` + `FleetGrid`, 12 cars/page).
+- **Image framing:** `FleetVehicleImage` + `fleetCardImageUrl()` (Cloudinary `c_fit`) — consistent 4:3 cards, no cropped/hidden cars.
+- **ConvoyPicker** (`Pick My Cars` hero CTA): receives **all** available vehicles; **9 cars/page**, prev/next, search by name; selections persist across pages.
+- **Admin:** toggle `showOnHomepage` + `displayOrder` per vehicle at `/admin/fleet`.
 - **Capacity recommendations:** `recommendVehiclesByCapacity()` labels matches as `perfect` | `good` | `tight` | `insufficient`.
 - Admin CRUD via `/api/vehicles` (POST/PUT/DELETE require admin JWT).
 - Slug auto-generation with uniqueness suffix.
+- **Import:** `scripts/import-fleet.mjs` (local organized photos → Cloudinary + Turso); `scripts/fix-fleet-heroes.mjs` picks best exterior hero per slug.
 
 ### 4. Payment Gateways
 
@@ -774,3 +778,29 @@ Admin client helper: `src/utils/adminApi.ts` (`ApiResponse<T>`).
 - Font sampler technique for user preview: inject overlay div into the live page with candidate Google Fonts loaded via `<link>`, screenshot, show in chat (candidates shown: Great Vibes, Dancing Script, Parisienne, Kaushan, Pacifico, Berkshire Swash, Playfair italic).
 - User approved Kaushan Script → committed to `main` (`f3f9fda`) and pushed; Vercel auto-deploys from main. (Earlier "don't see the new font" report was the user viewing deployed eweeha.com / stale tab while the change was local-only.)
 - Verified in browser: desktop light + dark, mobile 390px, and #eweeha section. `tsc --noEmit` clean.
+
+**Jul 4 2026 (night 4) — full fleet import, homepage vs catalog split, paginated picker:**
+- **37 vehicles imported** from organized photo folders via `scripts/import-fleet.mjs` (Cloudinary `eweeha/fleet/` + local `dev.db`; production Turso pending user approval). 11 flagged `show_on_homepage` for featured homepage grid.
+- **Homepage stays curated:** `/` fleet section shows only `getHomepageVehicles()` (featured picks). Link **"Browse all N wedding cars →"** goes to new **`/fleet`** index (`FleetIndexClient` + shared `FleetGrid`, 12 cars/page). Sitemap includes `/fleet`.
+- **Pick My Cars modal paginated:** `ConvoyPicker` receives full `allVehicles`; **9 cars/page**, prev/next, **search by name**; selections persist when paging. Uses compact `FleetVehicleImage`.
+- **Image framing:** `FleetVehicleImage` + `fleetCardImageUrl()` (Cloudinary `c_fit,w_900,h_675,g_center`) — cars centered in 4:3 cards, cream background, no cropped/hidden vehicles.
+- **Hero photo fix script:** `scripts/fix-fleet-heroes.mjs` picks best exterior shot per slug from organized folders (penalizes interior/collage).
+- Admin: toggle **Show on homepage** + **Display order** per car at `/admin/fleet` to change featured set without code changes.
+- **Placeholder prices REMOVED** (user caught them — import script had invented estimates): all 37 vehicles now `price=0`, `price_6h/10h/24h=NULL` in dev.db; `import-fleet.mjs` no longer writes prices (so a future prod import stays price-free). Cards show "Contact us"; booking wizard throws "pricing not configured" → quote/WhatsApp path. Real prices to be set per car in `/admin/fleet`.
+- **/fleet discoverability fixed** (user: "no fleet button"): desktop header nav + MobileMenu got "Full Fleet" links; homepage under-grid text link upgraded to a bordered button "View the Full Fleet (N cars) →"; Footer Services column links "Wedding Car Fleet"; `/fleet` page itself got a sticky header (logo + Home + Book Now) — it previously had NO navigation at all.
+- NOTE: all fleet work so far is LOCAL ONLY (dev.db + uncommitted code). Production Turso import + deploy pending user go-ahead.
+
+**Jul 4 2026 (night 5) — homepage fleet = Starbucks-style swipe rows (user idea, confirmed via 3-question form):**
+- **Homepage fleet section replaced FleetGrid with `FleetCategoryRows`** (`src/components/FleetCategoryRows.tsx`, new): ALL 37 cars in 5 horizontally swipeable category rows — mobile: scroll-snap cards (~70vw, max 270px, next card peeks, `.no-scrollbar` in globals.css); desktop (`md+`): same rows + round chevron arrow buttons in each row header (scroll ~85% of visible width, disabled at ends via scroll listener + ResizeObserver).
+- **Categories in `src/lib/fleetCategories.ts`** (new, name/slug keyword rules — ORDER MATTERS: brands → vintage → stretch/limo → convertible → SUV → default sedan): Rolls-Royce & Bentley (8), Classic & Vintage (4), Sports & Convertibles (8), Luxury Bridal Sedans (8), SUVs & Stretch Limousines (9). New admin-added cars auto-categorize by name keywords.
+- `sortFleetForDisplay()` (same file) flattens rows order → applied to **/fleet grid** and **ConvoyPicker** so every list starts Rolls-first instead of DB insert order.
+- `page.tsx` no longer fetches `getHomepageVehicles()`; `HomeClient` dropped the `initialVehicles` prop. `show_on_homepage` flag now UNUSED by the homepage (row membership = category, order = display_order); flag kept in DB/admin for possible future use.
+- Verified in browser (dev): mobile 390px snap rows with peeking cards + arrows hidden; desktop 1366px arrows visible, click scrolls row 0→816px; /fleet reorders Rolls-first; picker unchanged (9/page + search). `tsc --noEmit` clean. Dev overlay's 1 remaining issue = pre-existing PostHog env-missing console.error, unrelated.
+
+**Jul 4 2026 (night 6) — PRODUCTION fleet import + tolls purge + picker message + AI model (user go-ahead):**
+- **37 vehicles copied to production Turso** (one-off script, deleted after; prod creds live as comments in `.env.local`). Production rows carry photo + name + description ONLY: `features='[]'`, `price=0`, `price_6h/10h/24h=NULL` — verified `{"n":37,"priced":0,"withFeatures":0}`. Owner adds real prices/features via `/admin/fleet` (user's explicit plan). `import-fleet.mjs` also writes `features='[]'` now, so future imports stay clean. SEO for cars lives in metadata/alt/schema (detail-page meta, image sitemap, JSON-LD), NOT in visible names — display names stay simple.
+- **"Tolls" removed sitewide** (user: no toll mentions anywhere): 12 spots reworded ("fuel and waiting time included" etc.) in HomeClient, about, faq, routes index + [slug], BookingSSRFallback, wedding-convoy FAQ, guest-shuttle, llms.txt, llms-full.txt (×2). Both dev.db and production DB scanned for 'toll' in content/settings/vehicles — clean.
+- **ConvoyPicker WhatsApp message** now exactly per user spec: `Hi Eweeha!\nAre these cars available on 15 July 2026?\n* Car\n* Car` (asterisk bullets, no convoy phrasing; date omitted → "Are these cars available?").
+- **AI booking model:** default in `src/lib/ai.ts` `gpt-5-nano` → **`gpt-5.4-mini`** (Mar 2026 release, $0.75/$4.50 per MTok, ~$0.002 per booking interpretation; markedly better multilingual + structured-output than nano — needed for Arabic/Arabizi/French wedding requests). Override with `OPENAI_MODEL` env. User added `OPENAI_API_KEY` to Vercel (Preview+Production) — AI booking goes live with this deploy.
+- **Vercel CLI now linked to project `eweeha`** (`.vercel/` gitignored). CAUTION: bare `vercel link --yes` auto-CREATED a stray project `weddingscarslebanon` and connected the GitHub repo to it (double-deploy risk) — deleted via `vercel project rm`; always link with `--project eweeha`. Env pull returns empty values (vars are sensitive-encrypted) — use the `.env.local` comment creds for prod DB one-offs instead.
+- Pending user discussion (NO changes made): copy simplification tour for Lebanese audience (point 2); range-based wedding pricing model replacing 6h/10h/24h + AI quote rework (point 3).

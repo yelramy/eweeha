@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   // Fetch all data on server in parallel
-  const [vehicles, config, content, reviews, ratingStats] = await Promise.all([
-    cached.vehicles.getHomepageVehicles(),
+  const [allVehicles, config, content, reviews, ratingStats] = await Promise.all([
+    cached.vehicles.getAvailable(),
     cached.config(),
     cached.content(),
     getRecentReviews(6),
@@ -40,7 +40,7 @@ export default async function Home() {
 
   return (
     <HomeClient
-      initialVehicles={vehicles}
+      allVehicles={allVehicles}
       config={config}
       services={services}
       reviews={reviews}

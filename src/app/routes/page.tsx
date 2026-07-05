@@ -76,7 +76,7 @@ export default function RoutesIndexPage() {
             </h1>
             <p className="text-lg md:text-xl text-warm-700 dark:text-gray-300 max-w-3xl">
               Chauffeured wedding cars for every ceremony and venue in Lebanon.
-              Every booking includes a suited chauffeur, fuel, tolls, and coordinated timing.
+              Every booking includes a suited chauffeur, fuel, and coordinated timing.
             </p>
           </div>
         </section>

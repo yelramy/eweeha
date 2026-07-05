@@ -221,7 +221,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
                   )}
                   <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
                     <li>• Suited chauffeur included</li>
-                    <li>• Fuel &amp; tolls included</li>
+                    <li>• Fuel included</li>
                     <li>• Ribbon &amp; flower décor on request</li>
                   </ul>
                 </div>
