@@ -1,33 +1,20 @@
-import { ImageResponse } from 'next/og'
-import { OgImageCard } from '@/lib/og-image-template'
-import { loadOgImageAssets } from '@/lib/ogImageAssets'
+import { generateOgImageBuffer } from '@/lib/generateOgImage'
 
 /**
- * Default Open Graph image (1200x630)
- * Referenced as /og-image.jpg for social sharing and JSON-LD.
+ * Default Open Graph image (1200×630 JPEG, under WhatsApp's 600KB limit).
  */
 
 export const revalidate = 86400
 
 export async function GET() {
-  const { logoSrc, heroSrc } = await loadOgImageAssets()
+  const { buffer, contentType } = await generateOgImageBuffer()
 
-  return new ImageResponse(
-    (
-      <OgImageCard
-        logoSrc={logoSrc}
-        heroSrc={heroSrc}
-        title="Eweeha!"
-        subtitle="Wedding Cars in Lebanon"
-        badge="Chauffeur included · Bridal cars · Full convoys · All Lebanon"
-      />
-    ),
-    {
-      width: 1200,
-      height: 630,
-      headers: {
-        'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
-      },
-    }
-  )
+  return new Response(new Uint8Array(buffer), {
+    headers: {
+      'Content-Type': contentType,
+      'Content-Disposition': 'inline',
+      'Cross-Origin-Resource-Policy': 'cross-origin',
+      'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800',
+    },
+  })
 }

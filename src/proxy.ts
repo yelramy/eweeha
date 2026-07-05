@@ -184,6 +184,7 @@ export async function proxy(request: NextRequest) {
   const isProd = process.env.NODE_ENV === 'production'
   const isDev = !isProd
   const requestHost = request.headers.get('host')?.toLowerCase() || ''
+  const isSocialPreviewAsset = path === '/og-image.jpg' || path.startsWith('/og-image')
 
   let response = NextResponse.next()
 
@@ -280,6 +281,12 @@ export async function proxy(request: NextRequest) {
   }
 
   applySecurityHeaders(response, isProd, isDev)
+
+  // WhatsApp / Facebook crawlers fetch og:image cross-origin — CORP must not block them.
+  if (isSocialPreviewAsset) {
+    response.headers.set('Cross-Origin-Resource-Policy', 'cross-origin')
+  }
+
   return response
 }
 

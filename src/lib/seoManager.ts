@@ -360,7 +360,8 @@ export async function generateSeoMetadata({
         url: img,
         width: 1200,
         height: 630,
-        alt: pageTitle
+        alt: pageTitle,
+        type: 'image/jpeg',
       })),
       locale: 'en_US',
       type: (pageSeo?.ogType || defaultType) as 'website' | 'article',
@@ -483,7 +484,8 @@ export function generateMetadata({
         url: img,
         width: 1200,
         height: 630,
-        alt: pageTitle
+        alt: pageTitle,
+        type: 'image/jpeg',
       })),
       locale: 'en_US',
       type: 'website',
