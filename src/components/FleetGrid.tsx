@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Button from '@/components/Button'
-import FleetVehicleImage from '@/components/FleetVehicleImage'
+import CardImageCarousel from '@/components/CardImageCarousel'
 import { Vehicle } from '@/types/vehicle'
 
 const PAGE_SIZE = 12
@@ -54,17 +54,21 @@ export default function FleetGrid({
               key={vehicle.id}
               className="bg-cream-50 dark:bg-gray-700 border border-warm-200 dark:border-gray-600 rounded-lg overflow-hidden hover-lift flex flex-col h-full"
             >
-              <Link href={`/fleet/${vehicle.id}`} className="block flex-shrink-0">
-                <FleetVehicleImage
-                  src={vehicle.images.main}
+              <div className="flex-shrink-0">
+                <CardImageCarousel
+                  images={[vehicle.images.main, ...(vehicle.images.gallery || [])]}
                   alt={`${vehicle.name} — wedding car with chauffeur in Lebanon`}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  quality={75}
                 />
-              </Link>
+              </div>
               <div className="p-4 sm:p-5 flex flex-col flex-1">
                 <div className="flex items-start justify-between mb-3 gap-2">
                   <div className="flex-1 min-w-0">
                     <h3 className="text-base sm:text-lg font-semibold text-charcoal-500 dark:text-white mb-1 leading-tight">
-                      {vehicle.name}
+                      <Link href={`/fleet/${vehicle.id}`} className="hover:text-primary-700 dark:hover:text-primary-300 transition-colors">
+                        {vehicle.name}
+                      </Link>
                     </h3>
                     <p className="text-xs sm:text-sm text-warm-600 dark:text-gray-400">
                       {vehicle.maxPassengers ? `${vehicle.maxPassengers} passengers` : vehicle.capacity}

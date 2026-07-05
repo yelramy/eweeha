@@ -5,8 +5,8 @@ import BookingClient from './BookingClient'
 export const revalidate = 300
 
 export const metadata: Metadata = generateSeoMetadata({
-  title: 'Book Your Wedding Car Rental in Lebanon',
-  description: 'Reserve your Eweeha ride online. Choose your car, set your travel dates, and confirm secure payment for premium transportation anywhere in Lebanon.',
+  title: 'Book Your Wedding Cars in Lebanon',
+  description: 'Request your wedding cars online: pick your wedding date, choose the cars and add-ons, and we confirm availability and the price on WhatsApp. All Lebanon covered.',
   path: '/booking',
 })
 

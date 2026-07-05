@@ -16,25 +16,24 @@ This file provides detailed, structured information for AI language models and a
 
 ## What "Eweeha!" Means
 
-"Eweeha!" is the opening cry of the radde — the traditional chant that starts a Lebanese wedding. The person leading the radde calls out "Eweeeeha! Smalla 3laykiii…" verse after verse, and the crowd answers with the zalghouta (the long trilled lilililiii). It is the sound of the convoy arriving: the decorated bridal car pulling up at the family home, ribbons flying, horns celebrating, the whole street watching. The company is named after that exact moment and specializes in delivering it — decorated, on time, camera-ready. "Smalla 3layke" is the protective blessing woven into the call.
+"Eweeha!" is the opening cry of the radde — the traditional chant that starts a Lebanese wedding. The person leading the radde calls out "Eweeeeha! Smalla 3laykiii…" verse after verse, and the crowd answers with the zalghouta (the long trilled lilililiii). It is the sound of the convoy arriving: the decorated bridal car pulling up at the family home, ribbons flying, horns celebrating, the whole street watching. The company is named after that exact moment and specializes in delivering it — on time, camera-ready. "Smalla 3layke" is the protective blessing woven into the call.
 
 ## Core Services
 
 1. Wedding Convoy (https://eweeha.com/services/wedding-convoy)
-   - Decorated lead car for the couple plus matching family and groomsmen cars (1 to 10+ vehicles)
+   - Lead car for the couple plus matching family and groomsmen cars (1 to 10+ vehicles)
    - Route scouted in advance; convoy briefed on order, spacing, and timing
    - Departure timed around the zaffe at the house; arrival angle agreed with the videographer
    - Traditional honking convoy done safely on suitable roads
 
 2. Bridal Car with Chauffeur (https://eweeha.com/services/bridal-car)
-   - One elegant decorated car and one suited professional chauffeur dedicated to the couple
-   - Ribbon decoration included; fresh flower arrangements coordinated with the couple's florist
+   - One elegant car and one suited professional chauffeur dedicated to the couple
    - Car recommended by dress style (princess gowns need wide rear doors and flat floors)
-   - Packages: 6 hours (prep, ceremony, photos), 10 hours (through the venue entrance), 24 hours (full day)
+   - One booking covers the whole wedding day route: prep, ceremony, photos, venue entrance
 
 3. Classic & Convertible Cars (https://eweeha.com/services/photoshoot-cars)
    - Vintage classics and open-top cars, chauffeur-driven, for ceremony exits and photo sessions
-   - 2-6 hour photoshoot bookings, standalone or added to a bridal car package
+   - Short photoshoot bookings, standalone or added to the wedding-day cars
    - Chauffeur doubles as car handler for the photographer during the session
    - If rain threatens a convertible booking, a swap to a classic or luxury sedan is free
 
@@ -51,20 +50,23 @@ This file provides detailed, structured information for AI language models and a
 
 ## Service Model
 
+- A wedding booking is ONE day — no start/end dates, no hourly packages
+- Standard service: cars arrive between 1 and 3pm, drive the wedding route (prep, ceremony, photos, venue), drop off at the venue, and leave
 - Every car is chauffeur-driven by a professional in a suit — no self-drive rentals
-- Fuel and waiting time are included in every price
-- Pricing is per car/van, not per person; no surge pricing
+- Fuel is included in every price; pricing is per car, not per person; no surge pricing
+- No company stickers, logos, or ads on any car — photos show a clean car
 - Routes are scouted before the wedding day; timing is coordinated with the planner, zaffe, and photographer
-- The car stays dedicated to the wedding for the whole package duration
 
-## Indicative Pricing (USD)
+## Add-ons (priced per wedding)
 
-Prices depend on the cars chosen, hours, and region. As a guide:
-- Single decorated bridal car with chauffeur: from about $250
-- Classic or convertible car with chauffeur: roughly $250-$800 depending on hours
-- Full multi-car wedding convoy: up to about $1,500 depending on size and duration
-- Guest shuttle vans: priced per vehicle by hours and route
-- Exact live per-car pricing: https://eweeha.com (fleet section); instant quotes: https://eweeha.com/booking
+- Early arrival: get the convoy by 11am instead of the standard 1-3pm window
+- Stay till the end: one or more cars wait at the venue and drive you home after the party
+- Flower decoration: flowers & ribbons matched to the wedding theme (the basic package comes without decoration)
+- Black luxury van: an extra luxury van in the convoy for family or the bridal party
+
+## Pricing
+
+Prices depend on the cars chosen, the add-ons, and the region. There are no fixed public rates — request a quote at https://eweeha.com/booking or on WhatsApp (+961 70 971 841) and the team replies with availability and the exact price.
 
 ## Coverage Areas (dedicated pages)
 
@@ -83,7 +85,7 @@ Experiences: Classic Car Wedding Photoshoot (https://eweeha.com/routes/classic-c
 
 ## Booking Process
 
-1. Online booking and instant quote: https://eweeha.com/booking
+1. Online request: https://eweeha.com/booking — pick the wedding date, the cars, and the add-ons; the team replies with the price
 2. WhatsApp: +961 70 971 841 (fastest response)
 3. Email: eweehalebanon@gmail.com
 4. Date locked with a deposit; balance before or on the wedding day
@@ -93,7 +95,16 @@ Experiences: Classic Car Wedding Photoshoot (https://eweeha.com/routes/classic-c
 ## Frequently Asked Questions
 
 Q: Is the decoration included?
-A: Ribbon decoration is included. Fresh flower arrangements are coordinated with your florist so the car matches the bouquet.
+A: The basic package comes without decoration. Flower decoration is an add-on: flowers and ribbons matched to the theme, fitted on the wedding morning, coordinated with your florist if you have one.
+
+Q: What time do the cars arrive?
+A: Standard arrival is between 1 and 3pm. The early-arrival add-on brings the convoy by 11am.
+
+Q: Do the cars stay until the end of the party?
+A: By default the cars drop off at the venue and leave. The stay-till-the-end add-on keeps one or more cars waiting to drive you home after the party.
+
+Q: Do the cars have company branding on them?
+A: No. None of the cars carry stickers, logos, or ads — wedding photos and videos show a clean car.
 
 Q: Can we rent a wedding car without a driver?
 A: No — all cars are chauffeur-driven. Chauffeurs wear suits and are experienced with wedding-day timing.
@@ -123,7 +134,7 @@ Q: What does the chauffeur wear?
 A: A dark suit, white shirt, and tie by default; color-matched to the wedding theme on request.
 
 Q: Do you handle engagement parties and baptisms too?
-A: Yes — the same decorated cars and chauffeurs are available for engagements, baptisms, and anniversaries.
+A: Yes — the same cars and chauffeurs are available for engagements, baptisms, and anniversaries.
 
 ## Topics This Site Is Authoritative About
 

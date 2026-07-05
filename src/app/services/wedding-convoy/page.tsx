@@ -6,7 +6,7 @@ import { FAQAccordion } from '@/components/Accordion'
 
 export const metadata: Metadata = generateSeoMetadata({
   title: 'Wedding Convoy in Lebanon - Full Wedding Car Convoy',
-  description: 'Book a full wedding convoy in Lebanon: decorated bridal car, family cars, and groomsmen vehicles moving as one convoy with suited chauffeurs. Route planning, zaffe timing, and ceremony arrivals handled across all Lebanon.',
+  description: 'Book a full wedding convoy in Lebanon: bridal car, family cars, and groomsmen vehicles moving as one convoy with suited chauffeurs. Route planning, zaffe timing, and ceremony arrivals handled across all Lebanon.',
   path: '/services/wedding-convoy',
 })
 
@@ -14,7 +14,7 @@ export default function WeddingConvoyPage() {
   const faqs = [
     {
       question: "What exactly is included in a wedding convoy booking?",
-      answer: "A decorated lead car for the couple plus as many matching convoy cars as you need for parents, bridesmaids, and groomsmen. Every car comes with a suited chauffeur and fuel included. We brief all drivers on the route, order, and timing before the day."
+      answer: "A lead car for the couple plus as many matching convoy cars as you need for parents, bridesmaids, and groomsmen. Every car comes with a suited chauffeur and fuel included, and none of our cars carry stickers or ads. Flower decoration, early arrival, and staying till the end of the party are optional add-ons."
     },
     {
       question: "How many cars can the convoy include?",
@@ -44,7 +44,7 @@ export default function WeddingConvoyPage() {
       <ServiceSchema
         service={{
           name: "Wedding Convoy",
-          description: "Full wedding car convoy service in Lebanon: decorated bridal car, matching family cars, suited chauffeurs, route planning, and zaffe-coordinated timing",
+          description: "Full wedding car convoy service in Lebanon: bridal car, matching family cars, suited chauffeurs, route planning, and zaffe-coordinated timing",
           provider: "Eweeha",
           areaServed: "Lebanon",
           priceRange: "$250-$1500"
@@ -92,11 +92,11 @@ export default function WeddingConvoyPage() {
             <div className="max-w-none">
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed mb-4">
                 In Lebanon, the wedding doesn&apos;t start at the ceremony — it starts the moment the convoy pulls up at the family
-                home. The decorated lead car, the convoy of family and friends behind it, the horns, the zalghouta from the
+                home. The lead car, the convoy of family and friends behind it, the horns, the zalghouta from the
                 balcony: it&apos;s the most Lebanese moment of the whole day. Eweeha exists to make that moment perfect.
               </p>
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed mb-4">
-                We provide the decorated bridal car and matching convoy cars, each with a professional chauffeur in a suit.
+                We provide the bridal car and matching convoy cars, each with a professional chauffeur in a suit.
                 Before the day, we scout your route — home, ceremony, photo stop, venue — and build a timeline around your
                 ceremony slot, your zaffe, and your photographer&apos;s plan. On the day, the convoy moves in formation, arrives
                 on time, and stages itself for the photos without anyone having to think about it.
@@ -121,10 +121,10 @@ export default function WeddingConvoyPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
                 <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
-                  Decorated Lead Car
+                  The Lead Car
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  The bridal car dressed with ribbons and fresh flowers matched to your bouquet and color theme — spotless, photographed-ready.
+                  The bridal car — spotless, photo-ready, no stickers or ads. Add the flower-decoration add-on to dress it in your colors.
                 </p>
               </div>
 

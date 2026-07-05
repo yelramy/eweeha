@@ -689,24 +689,26 @@ export function adminRentalRequestTemplate(data: RentalRequestData): { subject: 
 
 export interface AIQuoteEmailData {
   phone: string
-  days: Array<{ date: string; serviceType: string; label: string }>
+  weddingDate: string | null
   vehicles: Array<{ name: string; quantity: number; reason: string }>
+  addOns: string[]
   passengers: number | null
   startingLocation: string | null
-  subtotal: number
-  onlineTotal: number
+  venue: string | null
   notes: string
 }
 
 export function adminAIQuoteTemplate(data: AIQuoteEmailData): { subject: string; html: string } {
-  const scheduleRows = data.days.map(d => {
-    const serviceLabel: Record<string, string> = { '6h': '6 Hours', '10h': '10 Hours', 'full-day': 'Full Day' }
-    return `
+  const scheduleRows = `
       <div class="detail-row">
-        <span class="detail-label">${escHtml(d.date)}</span>
-        <span class="detail-value">${escHtml(serviceLabel[d.serviceType] || d.serviceType)} — ${escHtml(d.label)}</span>
-      </div>`
-  }).join('')
+        <span class="detail-label">Wedding date</span>
+        <span class="detail-value">${escHtml(data.weddingDate || 'Not set — ask the customer')}</span>
+      </div>
+      ${data.addOns.length > 0 ? `
+      <div class="detail-row">
+        <span class="detail-label">Add-ons</span>
+        <span class="detail-value">${escHtml(data.addOns.join(', '))}</span>
+      </div>` : ''}`
 
   const vehicleRows = data.vehicles.map(v =>
     `<div class="detail-row">
@@ -716,7 +718,7 @@ export function adminAIQuoteTemplate(data: AIQuoteEmailData): { subject: string;
   ).join('')
 
   return {
-    subject: `AI Quote Request — $${data.subtotal.toFixed(2)} — ${data.days.length} day(s)`,
+    subject: `Wedding request — ${data.weddingDate || 'date TBC'} — ${data.vehicles.length} car(s)`,
     html: `
 <!DOCTYPE html>
 <html>
@@ -728,8 +730,8 @@ export function adminAIQuoteTemplate(data: AIQuoteEmailData): { subject: string;
 <body>
   <div class="container">
     <div class="header" style="background-color: #742F38;">
-      <h1>AI Quote Request</h1>
-      <p style="color: #ffffff; margin: 10px 0 0 0;">Customer got an instant AI quote and wants to proceed</p>
+      <h1>Wedding Car Request</h1>
+      <p style="color: #ffffff; margin: 10px 0 0 0;">Customer built a wedding-day plan on the website — contact them with the price</p>
     </div>
 
     <div class="content">
@@ -746,8 +748,13 @@ export function adminAIQuoteTemplate(data: AIQuoteEmailData): { subject: string;
       <div class="booking-details">
         ${data.startingLocation ? `
         <div class="detail-row">
-          <span class="detail-label">Pickup:</span>
+          <span class="detail-label">Day starts at:</span>
           <span class="detail-value">${escHtml(data.startingLocation)}</span>
+        </div>` : ''}
+        ${data.venue ? `
+        <div class="detail-row">
+          <span class="detail-label">Venue:</span>
+          <span class="detail-value">${escHtml(data.venue)}</span>
         </div>` : ''}
         ${data.passengers ? `
         <div class="detail-row">
@@ -757,14 +764,6 @@ export function adminAIQuoteTemplate(data: AIQuoteEmailData): { subject: string;
         <div class="detail-row">
           <span class="detail-label">Phone:</span>
           <span class="detail-value"><a href="tel:${escHtml(data.phone)}">${escHtml(data.phone)}</a></span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">Quote Total:</span>
-          <span class="detail-value"><strong>$${data.subtotal.toFixed(2)}</strong></span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">Online Price (10% off):</span>
-          <span class="detail-value"><strong>$${data.onlineTotal.toFixed(2)}</strong></span>
         </div>
       </div>
 
@@ -776,7 +775,7 @@ export function adminAIQuoteTemplate(data: AIQuoteEmailData): { subject: string;
 
       <div class="highlight" style="background-color: #fff3e0; border-left: 4px solid #e65100;">
         <p style="margin: 0;"><strong>Action Required</strong></p>
-        <p style="margin: 10px 0 0 0;">Customer chose to email this quote. Contact them to finalize the booking.</p>
+        <p style="margin: 10px 0 0 0;">No price was shown on the website. Contact the customer with a quote to finalize the booking.</p>
       </div>
 
       <div style="text-align: center; margin: 30px 0;">

@@ -20,7 +20,7 @@ const envBaseUrl =
 
 export const siteConfig = {
   name: 'Eweeha',
-  description: 'Wedding car rental in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding convoys across all Lebanon.',
+  description: 'Wedding car rental in Lebanon with chauffeur: bridal cars, classic and convertible cars, and full wedding convoys across all Lebanon.',
   url: envBaseUrl,
   ogImage: `${envBaseUrl}/og-image.jpg`,
   keywords: [
@@ -384,7 +384,7 @@ export async function seedInitialSeoSettings(): Promise<void> {
 
     await updateSeoSettings({
       siteTitle: 'Eweeha - Wedding Car Rental in Lebanon',
-      siteDescription: 'Wedding cars in Lebanon with chauffeur: decorated bridal cars, classic and convertible cars, and full wedding convoys. Serving every ceremony and venue across all Lebanon. Book online.',
+      siteDescription: 'Wedding cars in Lebanon with chauffeur: bridal cars, classic and convertible cars, and full wedding convoys. Serving every ceremony and venue across all Lebanon. Book online.',
       keywords: siteConfig.keywords.join(', '),
       ogImage: siteConfig.ogImage,
     })
@@ -521,7 +521,7 @@ export async function generateStructuredData({
       name: dynamicConfig.name,
       alternateName: ['Eweeha', 'Eweeha Lebanon', 'Wedding Cars Lebanon'],
       slogan: 'Eweeha! Smalla 3layke — wedding cars for the big Lebanese moment',
-      description: 'Wedding car rental in Lebanon with chauffeur — decorated bridal cars, classics, convertibles, and full wedding convoys, serving every ceremony and venue across all Lebanon.',
+      description: 'Wedding car rental in Lebanon with chauffeur — bridal cars, classics, convertibles, and full wedding convoys, serving every ceremony and venue across all Lebanon.',
       url: siteConfig.url,
       logo: {
         '@type': 'ImageObject',

@@ -23,36 +23,23 @@ interface ChatMessage {
   text: string
 }
 
+// Three quick questions — enough for a plan, nothing more. Everything else
+// (add-ons, exact timings) is handled on the plan card or on WhatsApp.
 const CHAT_QUESTIONS = [
   {
-    id: 'passengers',
-    botMessage: 'When is the wedding? (date, or roughly)',
-    placeholder: 'e.g. Saturday July 18, or next summer',
+    id: 'date',
+    botMessage: 'Mabrouk! When is the wedding?',
+    placeholder: 'e.g. Saturday July 18',
   },
   {
-    id: 'dates',
-    botMessage: 'Where is the ceremony, and where is the venue?',
-    placeholder: 'e.g. ceremony in Mar Mikhael, venue in Broummana',
+    id: 'locations',
+    botMessage: 'Where? (ceremony and venue)',
+    placeholder: 'e.g. church in Jounieh, party in Faqra',
   },
   {
-    id: 'plan',
-    botMessage: 'What do you need on wheels?\n• Bridal car only\n• Bridal car + family convoy cars\n• Classic or convertible for photos\n• Guest shuttle vans',
-    placeholder: 'e.g. bridal car + 3 family cars + shuttle for 60 guests',
-  },
-  {
-    id: 'location',
-    botMessage: 'Where does the day start? (bride\'s prep location)',
-    placeholder: 'e.g. family home in Achrafieh, hotel in Jounieh',
-  },
-  {
-    id: 'preference',
-    botMessage: 'Any car preference? Classic, convertible, luxury sedan, SUV — or no preference?',
-    placeholder: 'e.g. white convertible, or recommend something',
-  },
-  {
-    id: 'extras',
-    botMessage: 'Anything else we should know? (flower decoration, zaffe timing, photographer plan — or just say "no")',
-    placeholder: 'e.g. fresh flowers to match bouquet, zaffe at 3pm',
+    id: 'cars',
+    botMessage: 'Which cars? (bridal car only, full convoy, a classic for photos…)',
+    placeholder: 'e.g. bridal car + 3 cars for the family',
   },
 ]
 
@@ -60,7 +47,7 @@ const EXAMPLE_PROMPTS = [
   { label: 'Bridal car + convoy', text: 'Wedding on Saturday June 20: bridal car from Achrafieh, ceremony in Mar Mikhael, venue in Broummana, plus 3 family cars.' },
   { label: 'بدي سيارة للعرس', text: 'بدي سيارة مزينة للعروس مع شوفير، الكنيسة بجونية والعشاء بفقرا، عرسنا بشهر تموز' },
   { label: 'Voitures pour notre mariage', text: 'Je cherche une voiture décorée avec chauffeur pour notre mariage le 15 août: église à Harissa, réception à Faqra, avec 2 voitures pour la famille.' },
-  { label: 'Classic for the photoshoot', text: 'We want a classic convertible for our wedding photoshoot in old Byblos, around 4 hours in the afternoon, plus a bridal car for the ceremony.' },
+  { label: 'Classic for the photoshoot', text: 'We want a classic convertible for our wedding photoshoot in old Byblos, plus a bridal car for the ceremony.' },
 ]
 
 interface AIBookingAssistantProps {
@@ -167,7 +154,7 @@ export default function AIBookingAssistant({ className = '' }: AIBookingAssistan
       setChatMessages(newMessages)
       setCurrentStep(nextStep)
     } else {
-      newMessages.push({ role: 'bot', text: 'Great! Just need your phone number and we\'ll build your quote.' })
+      newMessages.push({ role: 'bot', text: 'Perfect! Drop your WhatsApp number and we\'ll put your plan together.' })
       setChatMessages(newMessages)
       setChatDone(true)
     }
@@ -200,12 +187,9 @@ export default function AIBookingAssistant({ className = '' }: AIBookingAssistan
   // ─── Build message string from chat answers ───
   function buildMessageFromAnswers(ans: Record<string, string>): string {
     const lines: string[] = []
-    if (ans.passengers) lines.push(`Passengers: ${ans.passengers}`)
-    if (ans.dates) lines.push(`Dates: ${ans.dates}`)
-    if (ans.plan) lines.push(`Plan: ${ans.plan}`)
-    if (ans.location) lines.push(`Starting from: ${ans.location}`)
-    if (ans.preference) lines.push(`Vehicle preference: ${ans.preference}`)
-    if (ans.extras) lines.push(`Extras: ${ans.extras}`)
+    if (ans.date) lines.push(`Wedding date: ${ans.date}`)
+    if (ans.locations) lines.push(`Ceremony & venue: ${ans.locations}`)
+    if (ans.cars) lines.push(`Cars needed: ${ans.cars}`)
     return lines.join('\n')
   }
 
@@ -278,13 +262,15 @@ export default function AIBookingAssistant({ className = '' }: AIBookingAssistan
 
     setRefining(true)
     try {
-      const context = `IMPORTANT: The customer already has a quote. They want to MODIFY it, not start over. Keep everything the same EXCEPT what they specifically ask to change. Do NOT add extra vehicles or days unless explicitly requested.
+      const context = `IMPORTANT: The customer already has a wedding plan. They want to MODIFY it, not start over. Keep everything the same EXCEPT what they specifically ask to change. Do NOT add extra cars or add-ons unless explicitly requested.
 
-Current quote:
-- Days: ${quote.interpretation.days.map(d => `${d.date} ${d.serviceType} (${d.label})`).join(', ')}
-- Vehicle: ${quote.vehicles.map(v => `${v.name}${v.quantity > 1 ? ' x' + v.quantity : ''}`).join(', ')}
+Current plan:
+- Wedding date: ${quote.interpretation.weddingDate || 'not set'}
+- Cars: ${quote.vehicles.map(v => `${v.name}${v.quantity > 1 ? ' x' + v.quantity : ''}`).join(', ')}
+- Add-ons: ${quote.interpretation.addOns.join(', ') || 'none'}
 - Passengers: ${quote.interpretation.passengers || 'not specified'}
-- Location: ${quote.interpretation.startingLocation || 'not specified'}
+- Day starts at: ${quote.interpretation.startingLocation || 'not specified'}
+- Venue: ${quote.interpretation.venue || 'not specified'}
 
 Customer's modification request: ${text}`
 
@@ -425,7 +411,7 @@ Customer's modification request: ${text}`
                   className="w-full bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-medium py-3 px-5 rounded-lg transition-all duration-200 hover:shadow-sm flex items-center justify-center gap-2 text-sm tracking-wider border border-primary-700"
                 >
                   <SparklesIcon className="w-4 h-4" />
-                  Get My Quote
+                  Build My Plan
                   <ArrowRightIcon className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -522,12 +508,12 @@ Customer's modification request: ${text}`
               className="w-full bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-medium py-3 px-5 rounded-lg transition-all duration-200 hover:shadow-sm flex items-center justify-center gap-2 text-sm tracking-wider border border-primary-700"
             >
               <SparklesIcon className="w-4 h-4" />
-              <span>Get My Quote Instantly</span>
+              <span>Build My Plan</span>
               <ArrowRightIcon className="w-3.5 h-3.5" />
             </button>
 
             <p className="text-[10px] text-center text-gray-500 dark:text-gray-400">
-              AI-powered instant quotes. Write in English, Arabic, French, or any language.
+              Write in English, Arabic, French — or mix. We answer with the price on WhatsApp.
             </p>
           </form>
         </div>
@@ -540,8 +526,8 @@ Customer's modification request: ${text}`
             <div className="relative mb-4">
               <div className="w-12 h-12 border-4 border-primary-200 dark:border-primary-800 border-t-primary-600 dark:border-t-primary-400 rounded-full animate-spin" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">Building your quote...</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Our AI is analyzing your request and finding the best options.</p>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">Putting your plan together...</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Matching cars from the fleet to your wedding day.</p>
           </div>
         </div>
       )}
@@ -554,9 +540,9 @@ Customer's modification request: ${text}`
               <div>
                 <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                   <SparklesIcon className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-                  Your Quote
+                  Your Wedding Plan
                 </h2>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Review and edit, then choose how to proceed.</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Check it, tweak it, then send it — we reply with the price.</p>
               </div>
             </div>
           </div>
@@ -575,7 +561,7 @@ Customer's modification request: ${text}`
                   value={refineInput}
                   onChange={(e) => setRefineInput(e.target.value)}
                   onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleRefineQuote() } }}
-                  placeholder="e.g. make it 3 days instead, or add a baby seat..."
+                  placeholder="e.g. add a classic for the photos, or make it 5 cars..."
                   disabled={refining}
                   className="flex-1 min-w-0 px-3 py-2.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#742F38] focus:border-[#742F38] dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 disabled:opacity-50"
                   dir="auto"

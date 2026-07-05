@@ -16,7 +16,6 @@ const SENSITIVE_PATHS = [
   '/payment/*',
   '/pay',
   '/booking/confirmation/*',
-  '/booking/request',
   '/profile/*',
   '/auth/*',
   // Tokenized private pages — one-off links sent to customers

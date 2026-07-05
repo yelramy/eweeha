@@ -247,19 +247,20 @@ eweeha/
 
 ### 1. Online Booking System
 
-**Entry points:** `/booking`, deep links with query params (vehicle pre-selection), `/fleet/[id]` → book CTA.
+**Entry points:** `/booking`, deep links with query params (`?vehicle=id` pre-selection), `/fleet/[id]` → book CTA.
 
-**Wizard steps** (`BookingClient.tsx`):
+**Wedding request form** (`BookingClient.tsx`, rewritten Jul 4 2026 — single page, NO wizard, NO dates range, NO payment):
 
-1. Select dates (supports per-day schedule: `6h` | `10h` | `full-day` per date)
-2. Passengers & luggage
-3. Choose vehicle (capacity-based recommendations)
-4. Hours per day (`6` | `10` | `24`) — when not using per-day schedule
-5. Extras (vehicle-specific `availableExtras`)
-6. Customer details (name, email, phone)
-7. Payment method selection
+1. Wedding date (single day — weddings are one day, not start/end ranges)
+2. Pick cars (multi-select grid of the full fleet, search by name)
+3. Add-ons (optional toggles from `src/lib/weddingAddOns.ts`)
+4. Contact details (phone/WhatsApp required, name, starting location, notes)
 
-**Booking ID format:** `EW-{16-char base32}` generated server-side (`/api/bookings`).
+Submits to `POST /api/bookings/request` (rental_requests table); success screen pushes WhatsApp follow-up. Owner replies with the price — no pricing is computed or shown on the site.
+
+**Add-ons catalog** (`src/lib/weddingAddOns.ts`, shared by booking form, AI assistant, QuoteCard, emails): `early-arrival` (convoy by 11am; default arrival 1–3pm), `stay-till-end` (default is drop-off at venue), `flower-decoration` (base package is undecorated), `luxury-van` (black luxury van for family/bridal party).
+
+**Booking ID format:** `EW-{16-char base32}` generated server-side (`/api/bookings`) — the legacy full-booking endpoint still exists for admin/quote-accept flows.
 
 **Server pricing rules** (`calculateRentalPricing` in `bookingUtils.ts`):
 
@@ -301,7 +302,7 @@ eweeha/
 
 ### 2. Flexible Rental Requests & Quote Commitment Flow
 
-**Entry:** `RentalRequestForm` component, `/booking/request` page, admin **New Quote** (WhatsApp-only customers).
+**Entry:** `/booking` wedding request form, `RentalRequestForm` component, admin **New Quote** (WhatsApp-only customers).
 
 - Captures intent without full pricing wizard (multi-day `dayServices[]` or legacy single-date format).
 - Persists to `rental_requests` with `status = 'pending'` (optional `customer_name`, `customer_email`).
@@ -322,7 +323,7 @@ eweeha/
 - Vehicles stored in Turso with JSON-serialized `features`, `gallery_images`, `variants`, `available_extras`.
 - **Homepage display:** `show_on_homepage` + `display_order` flags — only featured cars on `/` (via `cached.vehicles.getHomepageVehicles()`). Full catalog at **`/fleet`** (`FleetIndexClient` + `FleetGrid`, 12 cars/page).
 - **Image framing:** `FleetVehicleImage` + `fleetCardImageUrl()` (Cloudinary `c_fit`) — consistent 4:3 cards, no cropped/hidden cars.
-- **ConvoyPicker** (`Pick My Cars` hero CTA): receives **all** available vehicles; **9 cars/page**, prev/next, search by name; selections persist across pages.
+- **ConvoyPicker** (`Pick My Cars` hero CTA): receives **all** available vehicles in one scrollable list (no pagination), search by name; each card embeds a swipeable `CardImageCarousel` (main + gallery photos, dots + desktop arrows).
 - **Admin:** toggle `showOnHomepage` + `displayOrder` per vehicle at `/admin/fleet`.
 - **Capacity recommendations:** `recommendVehiclesByCapacity()` labels matches as `perfect` | `good` | `tight` | `insufficient`.
 - Admin CRUD via `/api/vehicles` (POST/PUT/DELETE require admin JWT).
@@ -804,3 +805,20 @@ Admin client helper: `src/utils/adminApi.ts` (`ApiResponse<T>`).
 - **AI booking model:** default in `src/lib/ai.ts` `gpt-5-nano` → **`gpt-5.4-mini`** (Mar 2026 release, $0.75/$4.50 per MTok, ~$0.002 per booking interpretation; markedly better multilingual + structured-output than nano — needed for Arabic/Arabizi/French wedding requests). Override with `OPENAI_MODEL` env. User added `OPENAI_API_KEY` to Vercel (Preview+Production) — AI booking goes live with this deploy.
 - **Vercel CLI now linked to project `eweeha`** (`.vercel/` gitignored). CAUTION: bare `vercel link --yes` auto-CREATED a stray project `weddingscarslebanon` and connected the GitHub repo to it (double-deploy risk) — deleted via `vercel project rm`; always link with `--project eweeha`. Env pull returns empty values (vars are sensitive-encrypted) — use the `.env.local` comment creds for prod DB one-offs instead.
 - Pending user discussion (NO changes made): copy simplification tour for Lebanese audience (point 2); range-based wedding pricing model replacing 6h/10h/24h + AI quote rework (point 3).
+
+**Jul 4 2026 (night 7) — fleet photos cleaned for production (`001 Wedding Cars-CLEANED`):**
+- New script `scripts/clean-fleet-photos.py` (`analyze` = dry-run w/ crop-review montages + CSV; `apply` = write output). Processed all 165 photos from `...\001 Wedding Cars-3-001\001 Wedding Cars-ORGANIZED` into sibling **`001 Wedding Cars-CLEANED`** (originals untouched; same subfolder structure; all output .jpg q90).
+- **Screenshot/letterbox cleanup:** auto-detects and crops phone status/nav bars, Facebook UI, and black/white letterbox bars on any side (hard/soft line classifier w/ median+std rules, halo peel, MIN_KEEP guards). 26 images cropped; 1 manual override (`mercedes-g-class-...-floral-decor-01.jpg` FB caption block). Every crop was reviewed visually via generated montages before apply.
+- **Quality pass on all photos:** luminance contrast stretch (0.5–99.5 pct), +6% saturation, mild unsharp, EXIF rotation baked, huge camera originals downscaled to ≤2560px.
+- **AI upscale:** 33 images with long side <1100px run through Real-ESRGAN x4 (portable exe kept at `...\001 Wedding Cars-3-001\_tools\realesrgan\`) then downscaled to ~1600–2000px. Result: NO photo under 1000px long-side in CLEANED.
+- 5 `-duplicate.jpg` files dropped from CLEANED (160 photos); 17 videos copied over unchanged so the folder is a drop-in replacement for a future Cloudinary re-import (`scripts/import-fleet.mjs` still points at ORGANIZED — switch source to CLEANED when re-importing).
+
+**Jul 4 2026 (night 8) — wedding-day booking model, add-ons, swipeable card photos, copy fixes (user directive list):**
+- **Copy:** "White-Glove Service" → **"Suited Chauffeurs"**, "Zero-Stress Timing" → **"Always On Time"** (HomeClient Why-Choose-Us). Hero paragraph REMOVED entirely (user: keep it simpler). #eweeha definition 3 "(this company)" → **"(that's us)"** and "decorated, on time" → "on time" (decoration is a paid add-on now). Homepage auto-scrolls to `#fleet` on load (no-hash guard, `scroll-mt-16`).
+- **Add-ons model** (`src/lib/weddingAddOns.ts`, new): early-arrival (cars normally arrive 1–3pm; convoy by 11am), stay-till-end (default = drop off at venue and leave), flower-decoration (base package undecorated), luxury-van. Homepage "Wedding Packages" section → **"Popular Add-ons"**; FAQ rewritten (how the day works, arrival times, stickers, stay-till-end); services/routes/llms files aligned — every "decorated bridal car"/"décor on request"/"full-day package" claim reworded (decoration = add-on; one day, no hour packages).
+- **No-branding promise** added sitewide (user: "we commit not to put company name on cars"): hero trust chip, Every-Booking-Includes card, /fleet subtitle, FAQ entry, wedding-convoy + photoshoot pages, llms files.
+- **Booking logic REWRITTEN for weddings** (user: "wedding cars are different — it's a day"): `BookingClient.tsx` is now a single-page request form (wedding date, multi-select cars, add-on toggles, phone) → `POST /api/bookings/request` → WhatsApp-first success screen. No start/end dates, no 6h/10h/24h, no payment step, no pricing shown. Old 7-step wizard deleted. Dead code removed: `src/app/booking/request/route.ts` (startDate/endDate form handler) + `sendQuickQuoteRequest` in email.ts + robots.ts entry.
+- **AI assistant simplified** (user: fewer questions): 3 chat questions (date / where / which cars) instead of 6; `interpretBookingRequest` + interpret route + QuoteCard + QuoteActions rewritten for the wedding-day model (weddingDate, addOns[], venue; NO pricing — plan summary sent via WhatsApp or email). `AIQuoteEmailData`/`adminAIQuoteTemplate` updated to match.
+- **Swipeable car photos:** `src/components/CardImageCarousel.tsx` (new) — scroll-snap photo carousel (main + gallery, max 6 slides, dots, desktop hover arrows, stopPropagation so swipes don't trigger card clicks). Used in **ConvoyPicker** (pagination REMOVED → one scrollable list, bigger 4:3 photos, cards are role="button" divs) and **FleetGrid** (name links to detail page).
+- **Rolls-Royce Corniche photo replaced** (user: old main photo showed two girls): AI-generated clean shot of the same navy Corniche convertible (no people) from the original as reference → Cloudinary `eweeha/fleet/rolls-royce-corniche-hero.jpg`; `main_image` updated in BOTH dev.db and production Turso (gallery was empty).
+- Verified in browser: homepage copy + add-ons section, auto-scroll, picker carousel swipe (5 slides), corniche new photo in picker, new booking form renders + car grid loads. `tsc --noEmit` clean, no lints.

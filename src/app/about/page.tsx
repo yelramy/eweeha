@@ -5,7 +5,7 @@ import { LocalBusinessSchema } from '@/components/StructuredDataEnhanced'
 
 export const metadata: Metadata = generateSeoMetadata({
   title: 'About Us - Wedding Car Rental in Lebanon',
-  description: "Eweeha is Lebanon's wedding car specialist — decorated bridal cars, classics, convertibles, and full wedding convoys with suited chauffeurs, everywhere in Lebanon.",
+  description: "Eweeha is Lebanon's wedding car specialist — bridal cars, classics, convertibles, and full wedding convoys with suited chauffeurs, everywhere in Lebanon.",
   path: '/about',
 })
 
@@ -61,7 +61,7 @@ export default function AboutPage() {
               <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed">
                 Eweeha was built by drivers and coordinators who have spent years on Lebanon&apos;s wedding roads — driving
                 couples, families, and guests to ceremonies and venues in every region. We turned that
-                experience into a dedicated wedding operation: decorated bridal cars, classics and convertibles for the
+                experience into a dedicated wedding operation: bridal cars, classics and convertibles for the
                 photos, matching wedding convoys, and guest shuttles — all under one coordinator.
               </p>
               <p className="text-lg text-gray-700 dark:text-gray-200 leading-relaxed">

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   ...generateMetadata({
     title: "Wedding Car Rental in Lebanon | Eweeha",
-    description: "Wedding cars in Lebanon with chauffeur: decorated bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Jounieh, Byblos, the Metn, Chouf & all Lebanon. Book online or on WhatsApp.",
+    description: "Wedding cars in Lebanon with chauffeur: bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony and venue across Beirut, Jounieh, Byblos, the Metn, Chouf & all Lebanon. Book online or on WhatsApp.",
   }),
   icons: [
     {

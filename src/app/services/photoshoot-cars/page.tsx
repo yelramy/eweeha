@@ -14,7 +14,7 @@ export default function PhotoshootCarsPage() {
   const faqs = [
     {
       question: "Can we book a classic car just for the photo session?",
-      answer: "Yes — that's the most popular way to do it. A 2-6 hour booking around your photoshoot, standalone or added to a bridal car package. The classic appears exactly where the photographer wants it, when the light is right."
+      answer: "Yes — that's the most popular way to do it. A short booking around your photoshoot, standalone or added to your wedding-day cars. The classic appears exactly where the photographer wants it, when the light is right."
     },
     {
       question: "Do the classic cars come with a driver?",
@@ -137,10 +137,10 @@ export default function PhotoshootCarsPage() {
 
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
                 <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
-                  Detailed &amp; Decorated
+                  Polished &amp; Photo-Ready
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  Polished the same morning; ribbon and florals added or left off depending on the look you and your photographer want.
+                  Polished the same morning — no stickers or ads on the car. Ribbon and florals can be added with the flower-decoration add-on, or left off for a clean look.
                 </p>
               </div>
 
@@ -149,7 +149,7 @@ export default function PhotoshootCarsPage() {
                   Flexible Booking Windows
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  2-6 hour photoshoot bookings, ceremony add-ons, or full-day packages — the classic works around your timeline.
+                  Photoshoot-only sessions or part of the wedding day — the classic works around your timeline.
                 </p>
               </div>
             </div>

@@ -1,13 +1,11 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { XMarkIcon, CheckIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import FleetVehicleImage from '@/components/FleetVehicleImage'
+import { XMarkIcon, CheckIcon } from '@heroicons/react/24/outline'
+import CardImageCarousel from '@/components/CardImageCarousel'
 import { Vehicle } from '@/types/vehicle'
 import { useConfig } from '@/hooks/useConfig'
 import { events } from '@/lib/posthog'
-
-const PAGE_SIZE = 9
 
 interface ConvoyPickerProps {
   isOpen: boolean
@@ -16,13 +14,13 @@ interface ConvoyPickerProps {
 }
 
 /**
- * Tap-to-pick convoy builder: paginated fleet grid, then send selection to WhatsApp.
+ * Tap-to-pick convoy builder: one scrollable list (no pages), big swipeable
+ * photos per car, then send the selection to WhatsApp.
  */
 export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPickerProps) {
   const { appConfig } = useConfig()
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
   const [date, setDate] = useState('')
-  const [page, setPage] = useState(1)
   const [query, setQuery] = useState('')
 
   const filtered = useMemo(() => {
@@ -30,13 +28,6 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
     if (!q) return vehicles
     return vehicles.filter((v) => v.name.toLowerCase().includes(q))
   }, [vehicles, query])
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
-
-  const pageVehicles = useMemo(() => {
-    const start = (page - 1) * PAGE_SIZE
-    return filtered.slice(start, start + PAGE_SIZE)
-  }, [filtered, page])
 
   useEffect(() => {
     if (!isOpen) return
@@ -53,12 +44,7 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
   }, [isOpen, onClose])
 
   useEffect(() => {
-    if (page > totalPages) setPage(totalPages)
-  }, [page, totalPages])
-
-  useEffect(() => {
     if (!isOpen) {
-      setPage(1)
       setQuery('')
     }
   }, [isOpen])
@@ -108,7 +94,7 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
           <div>
             <h2 className="text-xl md:text-2xl text-charcoal-600 dark:text-white">Pick Your Cars</h2>
             <p className="text-xs md:text-sm text-warm-600 dark:text-gray-400 mt-1">
-              Tap one or more cars — we&apos;ll check availability on WhatsApp. {vehicles.length} cars in the fleet.
+              Tap to pick, swipe a photo to see more of each car. {vehicles.length} cars in the fleet.
             </p>
           </div>
           <button
@@ -138,17 +124,14 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
           <input
             type="search"
             value={query}
-            onChange={(e) => {
-              setQuery(e.target.value)
-              setPage(1)
-            }}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder="Search by name — e.g. Rolls, Jaguar, vintage…"
             className="w-full px-3 py-2 text-sm border border-warm-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-charcoal-600 dark:text-white placeholder:text-warm-500 focus:ring-2 focus:ring-primary-500"
             aria-label="Search fleet"
           />
         </div>
 
-        <div className="flex-1 overflow-y-auto px-5 py-4">
+        <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-4">
           {filtered.length === 0 ? (
             <p className="text-center text-sm text-warm-600 dark:text-gray-400 py-10">
               {vehicles.length === 0
@@ -156,70 +139,54 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
                 : 'No cars match your search.'}
             </p>
           ) : (
-            <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {pageVehicles.map((vehicle) => {
-                  const id = String(vehicle.id)
-                  const selected = selectedIds.has(id)
-                  return (
-                    <button
-                      key={id}
-                      type="button"
-                      onClick={() => toggle(id)}
-                      aria-pressed={selected}
-                      className={`relative text-left rounded-xl overflow-hidden border-2 transition-all ${
-                        selected
-                          ? 'border-primary-600 ring-2 ring-primary-300 dark:ring-primary-700 shadow-md'
-                          : 'border-warm-200 dark:border-gray-700 hover:border-primary-300'
-                      }`}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {filtered.map((vehicle) => {
+                const id = String(vehicle.id)
+                const selected = selectedIds.has(id)
+                return (
+                  <div
+                    key={id}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => toggle(id)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        toggle(id)
+                      }
+                    }}
+                    aria-pressed={selected}
+                    className={`relative cursor-pointer select-none rounded-xl overflow-hidden border-2 transition-all ${
+                      selected
+                        ? 'border-primary-600 ring-2 ring-primary-300 dark:ring-primary-700 shadow-md'
+                        : 'border-warm-200 dark:border-gray-700 hover:border-primary-300'
+                    }`}
+                  >
+                    <CardImageCarousel
+                      images={[vehicle.images.main, ...(vehicle.images.gallery || [])]}
+                      alt={vehicle.name}
+                      aspectClass="aspect-[4/3]"
+                      sizes="(max-width: 480px) 90vw, (max-width: 640px) 45vw, 340px"
+                    />
+                    {selected && (
+                      <span className="absolute top-2 right-2 w-7 h-7 rounded-full bg-primary-600 text-white flex items-center justify-center shadow z-10">
+                        <CheckIcon className="w-4 h-4" />
+                      </span>
+                    )}
+                    <div
+                      className={`px-3 py-2.5 ${selected ? 'bg-primary-50 dark:bg-primary-900/30' : 'bg-white dark:bg-gray-800'}`}
                     >
-                      <FleetVehicleImage src={vehicle.images.main} alt={vehicle.name} variant="compact" />
-                      {selected && (
-                        <span className="absolute top-2 right-2 w-6 h-6 rounded-full bg-primary-600 text-white flex items-center justify-center shadow z-10">
-                          <CheckIcon className="w-4 h-4" />
-                        </span>
-                      )}
-                      <div
-                        className={`px-3 py-2 ${selected ? 'bg-primary-50 dark:bg-primary-900/30' : 'bg-white dark:bg-gray-800'}`}
-                      >
-                        <p className="text-sm font-medium text-charcoal-600 dark:text-white leading-tight line-clamp-2">
-                          {vehicle.name}
-                        </p>
-                        {vehicle.maxPassengers ? (
-                          <p className="text-[11px] text-warm-600 dark:text-gray-400">{vehicle.maxPassengers} passengers</p>
-                        ) : null}
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-
-              {totalPages > 1 ? (
-                <div className="mt-4 flex items-center justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setPage((p) => Math.max(1, p - 1))}
-                    disabled={page <= 1}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 text-xs rounded-full border border-warm-300 dark:border-gray-600 disabled:opacity-40"
-                  >
-                    <ChevronLeftIcon className="w-4 h-4" />
-                    Prev
-                  </button>
-                  <span className="text-xs text-warm-600 dark:text-gray-400">
-                    {page} / {totalPages}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                    disabled={page >= totalPages}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 text-xs rounded-full border border-warm-300 dark:border-gray-600 disabled:opacity-40"
-                  >
-                    Next
-                    <ChevronRightIcon className="w-4 h-4" />
-                  </button>
-                </div>
-              ) : null}
-            </>
+                      <p className="text-sm sm:text-base font-medium text-charcoal-600 dark:text-white leading-tight line-clamp-2">
+                        {vehicle.name}
+                      </p>
+                      {vehicle.maxPassengers ? (
+                        <p className="text-[11px] sm:text-xs text-warm-600 dark:text-gray-400">{vehicle.maxPassengers} passengers</p>
+                      ) : null}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           )}
         </div>
 

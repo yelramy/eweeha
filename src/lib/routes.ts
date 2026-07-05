@@ -26,19 +26,19 @@ export const routes: Record<string, Route> = {
     slug: 'wedding-cars-beirut',
     category: 'areas',
     title: 'Wedding Cars in Beirut',
-    description: 'Chauffeured wedding cars in Beirut: decorated bridal cars and full wedding convoys for ceremonies in Achrafieh, downtown, and every neighborhood of the capital.',
+    description: 'Chauffeured wedding cars in Beirut: bridal cars and full wedding convoys for ceremonies in Achrafieh, downtown, and every neighborhood of the capital.',
     from: 'Bridal prep — home, salon, or hotel',
     to: 'Ceremonies & venues across Beirut',
     distance: 'All Beirut neighborhoods',
-    duration: 'Ceremony, celebration, or full day',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 250, max: 1200 },
-    referenceVehicle: 'Decorated bridal sedan with chauffeur',
+    referenceVehicle: 'Bridal sedan with chauffeur',
     highlights: [
       'Convoy routes planned around Beirut traffic — you arrive on time, relaxed',
       'Every ceremony spot in the capital — from St. George Cathedral to downtown ballrooms and rooftop venues',
       'Pickups from the Phoenicia, Four Seasons, and all Beirut hotels',
-      'Ribbon and fresh-flower decoration matched to your bouquet',
+      'Flower & ribbon decoration add-on, matched to your bouquet',
       'Photo stop planning along the corniche and old Beirut streets'
     ],
     faqs: [
@@ -64,10 +64,10 @@ export const routes: Record<string, Route> = {
     from: 'Jounieh, Kaslik, Adma & surroundings',
     to: 'Harissa & bay-view venues',
     distance: 'Jounieh bay to the Harissa summit',
-    duration: 'Ceremony, celebration, or full day',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 250, max: 1200 },
-    referenceVehicle: 'Decorated bridal sedan with chauffeur',
+    referenceVehicle: 'Bridal sedan with chauffeur',
     highlights: [
       'Experienced with the winding Harissa road — smooth ride up to Our Lady of Lebanon',
       'Ceremonies from Harissa and the Basilica of Our Lady of Lebanon down to the venues on the bay',
@@ -98,7 +98,7 @@ export const routes: Record<string, Route> = {
     from: 'Byblos, Amchit, Batroun & the coast',
     to: 'Seaside ceremonies & beach venues',
     distance: 'The Jbeil–Batroun coastline',
-    duration: 'Ceremony, celebration, or full day',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 280, max: 1300 },
     referenceVehicle: 'Convertible or classic car with chauffeur',
@@ -120,7 +120,7 @@ export const routes: Record<string, Route> = {
       },
       {
         question: 'Do you cover weddings in Amchit and the villages above Byblos?',
-        answer: 'Yes, the whole district — coastal towns and mountain villages alike. Distance within the area does not change the package price.'
+        answer: 'Yes, the whole district — coastal towns and mountain villages alike. Distance within the area does not change the price.'
       }
     ]
   },
@@ -132,10 +132,10 @@ export const routes: Record<string, Route> = {
     from: 'Beirut or the Metn villages',
     to: 'Broummana, Beit Mery, Baabdat & Beit Misk',
     distance: 'The high Metn, 20-40 min from Beirut',
-    duration: 'Ceremony, celebration, or full day',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 250, max: 1200 },
-    referenceVehicle: 'Decorated bridal sedan with chauffeur',
+    referenceVehicle: 'Bridal sedan with chauffeur',
     highlights: [
       'Summer wedding classic: pine forests, cool air, and skyline views',
       'Ceremonies across Broummana, Beit Mery, Baabdat, and the Mar Chaaya area',
@@ -145,8 +145,8 @@ export const routes: Record<string, Route> = {
     ],
     faqs: [
       {
-        question: 'Our ceremony is in Beirut but the venue is in Broummana — is that one package?',
-        answer: 'Yes, that is the most common Lebanese wedding day. The celebration package covers prep, ceremony, the drive up, and your venue entrance, all with one car and one chauffeur.'
+        question: 'Our ceremony is in Beirut but the venue is in Broummana — is that one booking?',
+        answer: 'Yes, that is the most common Lebanese wedding day. One booking covers prep, ceremony, the drive up, and your venue entrance — one car, one chauffeur.'
       },
       {
         question: 'Are the mountain roads a problem for classic cars?',
@@ -166,16 +166,16 @@ export const routes: Record<string, Route> = {
     from: 'Beirut or the Aley district towns',
     to: 'Aley, Bhamdoun, Sawfar & mountain venues',
     distance: 'The Aley heights, 30-45 min from Beirut',
-    duration: 'Ceremony, celebration, or full day',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 250, max: 1200 },
-    referenceVehicle: 'Decorated bridal sedan with chauffeur',
+    referenceVehicle: 'Bridal sedan with chauffeur',
     highlights: [
       'The classic summer wedding towns of the old Damascus road — Aley, Bhamdoun, Sawfar',
       'Garden and terrace venues with the Beirut skyline glittering below',
       'Ceremonies across the district\'s churches and celebration halls',
       'Convoy timing planned around the busy summer mountain road',
-      'Evening returns to Beirut included on celebration and full-day packages'
+      'Evening returns to Beirut available with the stay-till-the-end add-on'
     ],
     faqs: [
       {
@@ -184,7 +184,7 @@ export const routes: Record<string, Route> = {
       },
       {
         question: 'Can prep happen in Beirut with the wedding up in Bhamdoun?',
-        answer: 'The most common plan for these weddings. One package covers the Beirut prep pickup, the drive up, the ceremony, photos, and the venue entrance — one car, one chauffeur, all day.'
+        answer: 'The most common plan for these weddings. One booking covers the Beirut prep pickup, the drive up, the ceremony, photos, and the venue entrance — one car, one chauffeur.'
       },
       {
         question: 'Do you handle the big diaspora summer weddings?',
@@ -200,7 +200,7 @@ export const routes: Record<string, Route> = {
     from: 'Beirut, Jounieh, or mountain hotels',
     to: 'Faqra Club, Kfardebian chapels & mountain venues',
     distance: 'The Kfardebian heights, ~1h from Beirut',
-    duration: 'Celebration or full day recommended',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 300, max: 1400 },
     referenceVehicle: 'Luxury SUV or bridal sedan with chauffeur',
@@ -234,7 +234,7 @@ export const routes: Record<string, Route> = {
     from: 'Beirut or the Chouf villages',
     to: 'Deir el Qamar, Beiteddine & Chouf venues',
     distance: 'The historic Chouf, ~1h from Beirut',
-    duration: 'Celebration or full day recommended',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 300, max: 1400 },
     referenceVehicle: 'Classic car or bridal sedan with chauffeur',
@@ -243,7 +243,7 @@ export const routes: Record<string, Route> = {
       'Photo sessions among Ottoman-era palaces and cobbled alleys',
       'Venue arrivals near Beiteddine and at Mir Amin Palace',
       'Classic cars fit the historic setting beautifully',
-      'Full-day packages for the long Beirut–Chouf–Beirut day'
+      'The long Beirut–Chouf–Beirut day handled in one booking'
     ],
     faqs: [
       {
@@ -252,7 +252,7 @@ export const routes: Record<string, Route> = {
       },
       {
         question: 'Is the Chouf too far for a Beirut-based convoy?',
-        answer: 'Not at all — it is a classic full-day wedding. We recommend the 10-hour or 24-hour package so prep, ceremony, photos, and the venue entrance all fit without clock-watching.'
+        answer: 'Not at all — it is a classic Lebanese wedding day. One booking covers it: prep, ceremony, photos, and the venue entrance all fit without clock-watching.'
       },
       {
         question: 'Do you know the venues around Beiteddine?',
@@ -268,7 +268,7 @@ export const routes: Record<string, Route> = {
     from: 'Beirut, Zahle, or Bekaa towns',
     to: 'Zahle ceremonies & Bekaa vineyard venues',
     distance: 'The Bekaa Valley, ~1h15 from Beirut',
-    duration: 'Full day recommended',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 300, max: 1500 },
     referenceVehicle: 'Bridal sedan or luxury SUV with chauffeur',
@@ -278,12 +278,12 @@ export const routes: Record<string, Route> = {
       'Golden vineyard photo sessions at sunset',
       'Wedding convoys for big Zahle family weddings',
       'The whole valley covered — Baalbek celebrations, West Bekaa villages, and everything between',
-      'Late-night returns to Beirut handled — your chauffeur stays with you'
+      'Late-night returns to Beirut available with the stay-till-the-end add-on'
     ],
     faqs: [
       {
         question: 'Do you wait during the whole vineyard reception?',
-        answer: 'On full-day bookings, yes. The car and chauffeur stay at the venue, decorated and ready for photos or an early exit for the couple, until the party ends.'
+        answer: 'With the stay-till-the-end add-on, yes: the car and chauffeur stay at the venue, ready for photos or an early exit, until the party ends. Otherwise the cars drop you off at the venue and leave.'
       },
       {
         question: 'Can we visit Saydet Zahle for a blessing between ceremony and venue?',
@@ -303,30 +303,30 @@ export const routes: Record<string, Route> = {
     from: 'Beirut, Saida, or southern towns',
     to: 'Maghdouche, Jezzine, Tyre & southern venues',
     distance: 'Saida & the South — 45-120 min from Beirut',
-    duration: 'Celebration or full day recommended',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 300, max: 1500 },
-    referenceVehicle: 'Decorated bridal sedan with chauffeur',
+    referenceVehicle: 'Bridal sedan with chauffeur',
     highlights: [
       'Ceremonies at Our Lady of Mantara (Maghdouche) overlooking the coast',
       'Jezzine mountain weddings in the waterfall town',
       'Coastal photo stops around Saida\'s sea castle',
       'Tyre (Sour) seaside weddings and the Nabatieh district — the far South covered',
       'Wedding convoys for the South\'s big family celebrations',
-      'One package covering the Beirut–South round trip'
+      'One booking covering the Beirut–South round trip'
     ],
     faqs: [
       {
         question: 'Do you really cover the South at the same standard?',
-        answer: 'Yes. Same cars, same suited chauffeurs, same decoration. Our fleets drive the coastal highway daily, and southern weddings are among our favorites — big, warm, and unforgettable.'
+        answer: 'Yes. Same cars, same suited chauffeurs, same standard. Our fleets drive the coastal highway daily, and southern weddings are among our favorites — big, warm, and unforgettable.'
       },
       {
         question: 'Can we combine Maghdouche ceremony and a Jezzine reception?',
-        answer: 'Beautiful combination. It is a mountain climb between the two, so we recommend the full-day package and we handle the timing between ceremony, photos, and the venue entrance.'
+        answer: 'Beautiful combination. It is a mountain climb between the two, so we plan the timing carefully between ceremony, photos, and the venue entrance — all in one booking.'
       },
       {
         question: 'Are night returns from the South included?',
-        answer: 'On celebration and full-day packages, yes — your chauffeur waits and drives you home safely, however late the dabke goes.'
+        answer: 'With the stay-till-the-end add-on, yes — your chauffeur waits and drives you home safely, however late the dabke goes.'
       }
     ]
   },
@@ -338,7 +338,7 @@ export const routes: Record<string, Route> = {
     from: 'Beirut, Tripoli, or northern towns',
     to: 'Balamand, Ehden, Zgharta, Koura, Tripoli & Akkar',
     distance: 'The North, 1-2h from Beirut',
-    duration: 'Full day recommended',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 300, max: 1500 },
     referenceVehicle: 'Bridal sedan or luxury SUV with chauffeur',
@@ -353,7 +353,7 @@ export const routes: Record<string, Route> = {
     faqs: [
       {
         question: 'Our wedding is in Ehden but guests stay in Beirut — how does that work?',
-        answer: 'Very common for summer weddings. The bridal car works on a full-day package in Ehden, while our shuttles move guests north and back overnight. One coordinator handles both.'
+        answer: 'Very common for summer weddings. The bridal car covers the wedding day in Ehden, while our shuttles move guests north and back overnight. One coordinator handles both.'
       },
       {
         question: 'Can the convoy form in the village tradition, house to ceremony?',
@@ -391,7 +391,7 @@ export const routes: Record<string, Route> = {
       },
       {
         question: 'What if we only want the car for photos, not the whole day?',
-        answer: 'That is exactly what this experience is for: a 2-6 hour booking around your photo session, standalone or added to a bridal car package.'
+        answer: 'That is exactly what this experience is for: a short booking around your photo session, standalone or added to your wedding-day cars.'
       },
       {
         question: 'Which classic cars do you have?',
@@ -407,7 +407,7 @@ export const routes: Record<string, Route> = {
     from: 'Your prep location',
     to: 'Ceremony, photos & venue — top down',
     distance: 'Anywhere the sun is out',
-    duration: 'Ceremony, celebration, or full day',
+    duration: 'One wedding day — the whole route',
     image: '/images/areas/ornament.svg',
     priceRange: { min: 280, max: 1200 },
     referenceVehicle: 'Convertible with chauffeur',

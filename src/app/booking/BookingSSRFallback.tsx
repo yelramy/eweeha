@@ -18,19 +18,16 @@ export default function BookingSSRFallback() {
           <div className="space-y-6">
             <div>
               <h2 className="text-xl font-bold text-charcoal-500 dark:text-white mb-4">
-                Online Booking Form
+                Booking Request Form
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Book your wedding car rental in 7 easy steps:
+                Request your wedding cars in 4 quick steps:
               </p>
               <ol className="list-decimal list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                <li>Select your rental dates (start and end date)</li>
-                <li>Enter number of passengers and luggage</li>
-                <li>Choose from our fleet of wedding cars</li>
-                <li>Select service duration (10 or 24 hours per day)</li>
-                <li>Customize with optional extras</li>
-                <li>Provide your contact details</li>
-                <li>Choose payment method and confirm</li>
+                <li>Pick your wedding date — one day, the whole route</li>
+                <li>Pick your cars — bridal car, convoy cars, a classic for photos</li>
+                <li>Choose add-ons — early arrival, stay till the end, flower decoration, luxury van</li>
+                <li>Leave your WhatsApp number — we reply with availability and the price</li>
               </ol>
             </div>
 
@@ -42,26 +39,11 @@ export default function BookingSSRFallback() {
                 Choose from our wedding fleet:
               </p>
               <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                <li>• Decorated bridal sedans for the couple</li>
+                <li>• Bridal sedans for the couple</li>
                 <li>• Classic &amp; convertible cars for the photos and the grand exit</li>
                 <li>• Luxury sedans &amp; SUVs for family and convoy cars</li>
                 <li>• Guest shuttle vans and minibuses for your guests</li>
-                <li>• All cars include a suited chauffeur and fuel</li>
-              </ul>
-            </div>
-
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
-              <h3 className="text-lg font-bold text-charcoal-500 dark:text-white mb-3">
-                Payment Methods
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-3">
-                We accept multiple payment options:
-              </p>
-              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-                <li>• International Credit/Debit Cards (Visa, Mastercard)</li>
-                <li>• OMT Money Transfer</li>
-                <li>• Whish Money</li>
-                <li>• Bank Transfer</li>
+                <li>• All cars include a suited chauffeur and fuel — no stickers or ads on any car</li>
               </ul>
             </div>
 

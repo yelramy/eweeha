@@ -125,8 +125,13 @@ const hardcodedFaqs: FAQ[] = [
   },
   { 
     category: 'Booking',
-    question: 'What packages do you offer?', 
-    answer: 'Three wedding packages: Ceremony (6 hours — prep, ceremony, photos), Celebration (10 hours — through the venue grand entrance), and Full Day (24 hours — from the morning zaffe to the after-party exit). Photoshoot-only bookings of 2-6 hours are also available for classic cars.' 
+    question: 'How does the wedding day work?', 
+    answer: 'It\'s one day, one booking — no hourly packages. Our cars usually arrive between 1 and 3pm, drive the wedding route (prep, ceremony, photos, venue), drop you off at the venue, and leave. Need more? Add-ons cover it: early arrival (convoy by 11am), one or more cars staying till the end of the party, flower decoration, or an extra black luxury van.' 
+  },
+  { 
+    category: 'Booking',
+    question: 'What time do the cars arrive?', 
+    answer: 'Standard arrival is between 1 and 3pm, timed with your ceremony. If you need the convoy earlier — for a morning zaffe or an early church — request the early-arrival add-on and we\'ll have the cars there by 11am.' 
   },
 
   // Payment Questions
@@ -155,12 +160,17 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Cars & Decoration',
     question: 'What\'s included with every wedding car?', 
-    answer: 'A professional chauffeur in a suit, fuel, waiting time throughout your package, ribbon decoration, air conditioning, and a route scouted before the day. Fresh flower décor is arranged on request with your florist.' 
+    answer: 'A professional chauffeur in a suit, fuel, air conditioning, and a route scouted before the day. The cars arrive between 1 and 3pm, drive the full wedding route, and drop you off at the venue. Decoration, early arrival, and staying till the end are optional add-ons.' 
   },
   { 
     category: 'Cars & Decoration',
     question: 'Is the car decoration included?', 
-    answer: 'Ribbon decoration is included in every booking. Fresh flower arrangements are coordinated with your wedding florist so the car matches your bouquet and theme — we handle the fitting on the morning of the wedding.' 
+    answer: 'The basic package comes without decoration — that keeps it simple and affordable. Flower decoration is an add-on: flowers and ribbons matched to your theme, fitted on the morning of the wedding. We can also coordinate directly with your florist.' 
+  },
+  { 
+    category: 'Cars & Decoration',
+    question: 'Do the cars have company stickers or ads on them?', 
+    answer: 'No — and that\'s a promise. None of our cars carry stickers, logos, or advertising. Your photos and videos show a clean car, nothing else.' 
   },
   { 
     category: 'Cars & Decoration',
@@ -186,8 +196,8 @@ const hardcodedFaqs: FAQ[] = [
   },
   { 
     category: 'Policies',
-    question: 'Can we extend on the day if the party runs late?', 
-    answer: 'Usually yes — tell your chauffeur or message the coordinator before your package ends. Extensions are billed at the same hourly rate as your booking, subject to availability.' 
+    question: 'Can a car stay until the end of the party?', 
+    answer: 'Yes — that\'s the stay-till-the-end add-on. Normally the cars drop you off at the venue and leave; with this add-on, one or more cars (usually the bridal car) wait and drive you home after the last dance. Book it in advance, or ask on the day and we\'ll do our best, subject to availability.' 
   },
   { 
     category: 'Policies',
@@ -202,7 +212,7 @@ const hardcodedFaqs: FAQ[] = [
   { 
     category: 'Policies',
     question: 'Do you handle engagement parties and baptisms too?', 
-    answer: 'Yes — the same decorated cars and chauffeurs are available for engagements, baptisms, and anniversary celebrations. Message us with the occasion and we\'ll recommend the right setup.' 
+    answer: 'Yes — the same cars and chauffeurs are available for engagements, baptisms, and anniversary celebrations. Message us with the occasion and we\'ll recommend the right setup.' 
   },
 ]
 

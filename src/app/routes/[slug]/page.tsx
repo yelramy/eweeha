@@ -162,7 +162,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
                 <div className="font-semibold text-charcoal-600 dark:text-white">{route.distance}</div>
               </div>
               <div>
-                <div className="text-warm-500 dark:text-gray-400">Packages</div>
+                <div className="text-warm-500 dark:text-gray-400">The Day</div>
                 <div className="font-semibold text-charcoal-600 dark:text-white">{route.duration}</div>
               </div>
               <div>
@@ -206,7 +206,7 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
                       )}
                       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                         Indicative range, from a single bridal car to a full multi-car convoy — final quote
-                        depends on the cars, hours, and route
+                        depends on the cars, add-ons, and route
                       </p>
                     </>
                   ) : (
@@ -222,7 +222,8 @@ export default async function RoutePage({ params }: { params: Promise<{ slug: st
                   <ul className="text-sm text-gray-700 dark:text-gray-300 space-y-1">
                     <li>• Suited chauffeur included</li>
                     <li>• Fuel included</li>
-                    <li>• Ribbon &amp; flower décor on request</li>
+                    <li>• No stickers or ads on the cars</li>
+                    <li>• Flower décor available as an add-on</li>
                   </ul>
                 </div>
               </div>

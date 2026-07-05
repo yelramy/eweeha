@@ -30,7 +30,7 @@ const CONTENT_DEFAULT_TEMPLATE: Record<string, ContentSection> = {
     name: 'Hero Section Subtitle',
     type: 'rich_text',
     content:
-      'Chauffeured bridal cars, classic convertibles, and full wedding convoys — decorated with ribbons and fresh flowers, on time wherever you celebrate, from Beirut to the mountains.',
+      'Chauffeured bridal cars, classic convertibles, and full wedding convoys — clean, unbranded cars, on time wherever you celebrate, from Beirut to the mountains.',
     lastUpdated: new Date().toISOString(),
     status: 'published'
   },
@@ -48,7 +48,7 @@ const CONTENT_DEFAULT_TEMPLATE: Record<string, ContentSection> = {
       },
       {
         title: 'Bridal Car & Chauffeur',
-        description: 'An elegant decorated car with a suited chauffeur for the bride and groom, from prep to venue',
+        description: 'An elegant car with a suited chauffeur for the bride and groom, from prep to venue',
         icon: 'family',
         image:
           'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=300&h=200&fit=crop&crop=center'

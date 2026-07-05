@@ -312,15 +312,6 @@ export async function sendAIQuoteEmail(data: AIQuoteEmailData) {
   }
 }
 
-export interface QuickQuoteRequestData {
-  vehicle: string
-  startDate: string
-  endDate: string
-  pickupCity: string
-  contact: string
-  notes?: string
-}
-
 export async function sendReviewRequest(toEmail: string, data: ReviewRequestData) {
   const resend = getResendClient()
 
@@ -349,47 +340,6 @@ export async function sendReviewRequest(toEmail: string, data: ReviewRequestData
     return result
   } catch (error) {
     console.error('❌ Failed to send review request:', error)
-    throw error
-  }
-}
-
-export async function sendQuickQuoteRequest(data: QuickQuoteRequestData) {
-  const resend = getResendClient()
-  
-  if (!resend) {
-    console.log('📧 [DEV MODE] Would send quick quote request for:', data.vehicle)
-    return
-  }
-
-  try {
-    const subject = `Quick Quote Request: ${data.vehicle}`
-    const html = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2 style="color: #742F38;">Quick Quote Request</h2>
-        <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-          <p><strong>Vehicle:</strong> ${data.vehicle}</p>
-          <p><strong>Start Date:</strong> ${data.startDate}</p>
-          <p><strong>End Date:</strong> ${data.endDate}</p>
-          <p><strong>Pickup Location:</strong> ${data.pickupCity}</p>
-          <p><strong>Contact:</strong> ${data.contact}</p>
-          ${data.notes ? `<p><strong>Notes:</strong> ${data.notes}</p>` : ''}
-        </div>
-        <p style="color: #666; font-size: 14px;">Please contact this customer as soon as possible to provide a quote.</p>
-      </div>
-    `
-    
-    const result = await resend.emails.send({
-      from: `Eweeha Quick Quote <${EMAIL_FROM}>`,
-      to: EMAIL_ADMIN,
-      subject,
-      html,
-      replyTo: EMAIL_REPLY_TO,
-    })
-
-    console.log('✅ Quick quote request sent to admin | ID:', result.data?.id)
-    return result
-  } catch (error) {
-    console.error('❌ Failed to send quick quote request:', error)
     throw error
   }
 }

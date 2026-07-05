@@ -5,8 +5,8 @@ import { ServiceSchema, FAQSchema } from '@/components/StructuredDataEnhanced'
 import { FAQAccordion } from '@/components/Accordion'
 
 export const metadata: Metadata = generateSeoMetadata({
-  title: 'Bridal Car with Chauffeur in Lebanon - Decorated Wedding Car',
-  description: 'Rent a decorated bridal car with a suited chauffeur in Lebanon. Ribbon and fresh flower décor, dress-friendly seating, and calm, punctual service from the bride\'s prep to the venue entrance. All regions covered.',
+  title: 'Bridal Car with Chauffeur in Lebanon - Wedding Car for the Bride',
+  description: 'Rent a bridal car with a suited chauffeur in Lebanon. Dress-friendly seating, calm punctual service from the bride\'s prep to the venue entrance, and flower décor available as an add-on. All regions covered.',
   path: '/services/bridal-car',
 })
 
@@ -14,7 +14,7 @@ export default function BridalCarPage() {
   const faqs = [
     {
       question: "Is the decoration included in the price?",
-      answer: "Ribbon decoration is included. Fresh flower arrangements are arranged on request and priced by your chosen florist's design — or we coordinate directly with your wedding florist so the car matches the bouquet exactly."
+      answer: "The basic package comes without decoration. Flower decoration is an add-on — flowers and ribbons matched to your theme, fitted on the morning of the wedding — or we coordinate directly with your wedding florist so the car matches the bouquet exactly."
     },
     {
       question: "Will the car fit the wedding dress?",
@@ -22,7 +22,7 @@ export default function BridalCarPage() {
     },
     {
       question: "How long do we have the car for?",
-      answer: "Packages run 6 hours (prep, ceremony, photos), 10 hours (through the venue entrance), or 24 hours (the whole day until the after-party exit). The chauffeur stays with you the entire time — the car never leaves your wedding."
+      answer: "It's one booking for the wedding day: the car arrives between 1 and 3pm, covers prep, ceremony, photos, and the venue entrance, then drops you off and leaves. Want it earlier or waiting until the last dance? The early-arrival and stay-till-the-end add-ons cover that."
     },
     {
       question: "Can the chauffeur pick up the groom separately first?",
@@ -44,7 +44,7 @@ export default function BridalCarPage() {
       <ServiceSchema
         service={{
           name: "Bridal Car with Chauffeur",
-          description: "Decorated bridal car rental with professional suited chauffeur in Lebanon, from bridal prep to venue entrance",
+          description: "Bridal car rental with professional suited chauffeur in Lebanon, from bridal prep to venue entrance",
           provider: "Eweeha",
           areaServed: "Lebanon",
           priceRange: "$250-$900"
@@ -71,7 +71,7 @@ export default function BridalCarPage() {
                 Bridal Car &amp; Chauffeur
               </h1>
               <p className="text-xl md:text-2xl text-white mb-8">
-                One elegant, decorated car and one calm professional — dedicated to the couple all day
+                One elegant car and one calm professional — dedicated to the couple all day
               </p>
               <Link
                 href="/booking"
@@ -92,18 +92,18 @@ export default function BridalCarPage() {
             <div className="max-w-none">
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed mb-4">
                 Between the salon, the photographer, the ceremony, and three hundred guests, the bridal car is the only quiet
-                place a couple gets all day. We treat it that way: a spotless, decorated car with climate control set before
+                place a couple gets all day. We treat it that way: a spotless car with climate control set before
                 you step in, water waiting, and a chauffeur who knows when to talk and when to just drive.
               </p>
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed mb-4">
-                The car is dressed the morning of the wedding — ribbons in your colors, fresh flowers coordinated with your
-                florist if you wish — and photographed-checked before pickup. Your chauffeur arrives early at the prep
+                Want the car dressed for the day? Add the flower-decoration add-on — flowers and ribbons in your colors,
+                fitted the morning of the wedding and coordinated with your florist. Your chauffeur arrives at the prep
                 location, plans the dress into the seating, and keeps a steady, gentle pace so hair, veil, and nerves all
                 arrive intact.
               </p>
               <p className="text-black dark:text-gray-300 text-lg leading-relaxed">
                 From the ceremony exit under the rice to the golden-hour photo stop to the venue&apos;s grand entrance, the same
-                car and the same person stay dedicated to you until the end of your package — in Beirut, on the coast, or up
+                car and the same person stay dedicated to you for the whole route — in Beirut, on the coast, or up
                 the mountain. Add convoy cars anytime through our <Link href="/services/wedding-convoy" className="underline hover:text-primary-600">full convoy service</Link>.
               </p>
             </div>
@@ -119,10 +119,10 @@ export default function BridalCarPage() {
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
                 <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
-                  Ribbon &amp; Flower Décor
+                  Flower Décor Add-on
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  Classic ribbon V on the hood included; fresh flower arrangements coordinated with your florist so the car matches the bouquet.
+                  Flowers &amp; ribbons matched to your theme, fitted the morning of the wedding — coordinated with your florist so the car matches the bouquet.
                 </p>
               </div>
 
@@ -146,10 +146,10 @@ export default function BridalCarPage() {
 
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-warm-200 dark:border-gray-700">
                 <h3 className="font-semibold text-lg text-black dark:text-white mb-2">
-                  Dedicated All Day
+                  The Whole Route
                 </h3>
                 <p className="text-warm-600 dark:text-gray-400 leading-relaxed">
-                  The car never leaves your wedding — it stages at the ceremony for the exit photos and waits at the venue for as long as your package runs.
+                  Prep, ceremony, photo stop, venue entrance — one car, one chauffeur. Want it waiting till the last dance? Add the stay-till-the-end add-on.
                 </p>
               </div>
 

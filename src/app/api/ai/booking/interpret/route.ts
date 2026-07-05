@@ -5,133 +5,37 @@ import { rateLimiters, checkRateLimit } from '@/lib/ratelimit'
 import { sanitizeText } from '@/utils/sanitize'
 import { sendAIQuoteEmail } from '@/lib/email'
 
-export interface QuoteDayPricing {
-  date: string
-  serviceType: 'airport' | '6h' | '10h' | 'full-day'
-  label: string
-  vehiclePricing: Array<{
-    vehicleId: string
-    vehicleName: string
-    quantity: number
-    ratePerUnit: number
-    subtotal: number
-  }>
-  dayTotal: number
-}
-
+/**
+ * Wedding-day plan (no prices — pricing is confirmed on WhatsApp until the
+ * range-based pricing system exists).
+ */
 export interface QuoteResponse {
   interpretation: BookingInterpretation
-  pricing: {
-    days: QuoteDayPricing[]
-    extrasBreakdown: Array<{
-      id: string
-      name: string
-      pricePerUnit: number
-      perDay: boolean
-      total: number
-    }>
-    subtotal: number
-    onlineDiscount: number
-    onlineTotal: number
-    totalWithoutDiscount: number
-  }
   vehicles: Array<{
     id: string
     name: string
     image: string
     maxPassengers?: number
-    maxLuggage?: number
     quantity: number
     reason: string
   }>
 }
 
-const priceKeyMap: Record<string, 'price6h' | 'price10h' | 'price24h'> = {
-  'airport': 'price6h',
-  '6h': 'price6h',
-  '10h': 'price10h',
-  'full-day': 'price24h',
-}
-
-function getVehicleRate(vehicle: { price6h?: number; price10h?: number; price24h?: number } | undefined, serviceType: string): number {
-  if (!vehicle) return 0
-  if (serviceType === 'airport') {
-    return Math.round((vehicle.price6h || 0) / 2 * 100) / 100
-  }
-  const key = priceKeyMap[serviceType] || 'price10h'
-  if (key === 'price6h') return vehicle.price6h || 0
-  if (key === 'price24h') return vehicle.price24h || 0
-  return vehicle.price10h || 0
-}
-
-function calculateQuotePricing(
+function buildVehicleDetails(
   interpretation: BookingInterpretation,
-  availableVehicles: Array<{ id: string; name: string; price6h?: number; price10h?: number; price24h?: number; images?: { main: string; gallery: string[] }; maxPassengers?: number; maxLuggage?: number; availableExtras?: Array<{ id: string; name: string; price: number; perDay: boolean }> }>
-): { pricing: QuoteResponse['pricing']; vehicles: QuoteResponse['vehicles'] } {
-  const daysPricing: QuoteDayPricing[] = interpretation.days.map(day => {
-    const vehiclePricing = interpretation.vehicleRecommendations.map(rec => {
-      const vehicle = availableVehicles.find(v => v.id === rec.vehicleId)
-      const rate = getVehicleRate(vehicle, day.serviceType)
-      const qty = rec.quantity || 1
-      return {
-        vehicleId: rec.vehicleId,
-        vehicleName: rec.vehicleName,
-        quantity: qty,
-        ratePerUnit: rate,
-        subtotal: rate * qty,
-      }
-    })
-    return {
-      date: day.date,
-      serviceType: day.serviceType,
-      label: day.label,
-      vehiclePricing,
-      dayTotal: vehiclePricing.reduce((sum, vp) => sum + vp.subtotal, 0),
-    }
-  })
-
-  const totalDays = interpretation.days.length || 1
-  const extrasBreakdown = interpretation.extras
-    .map(extraId => {
-      for (const v of availableVehicles) {
-        const extra = v.availableExtras?.find(e => e.id === extraId)
-        if (extra) {
-          return {
-            id: extra.id,
-            name: extra.name,
-            pricePerUnit: extra.price,
-            perDay: extra.perDay,
-            total: extra.perDay ? extra.price * totalDays : extra.price,
-          }
-        }
-      }
-      return null
-    })
-    .filter((e): e is NonNullable<typeof e> => e !== null)
-
-  const daysSubtotal = daysPricing.reduce((sum, d) => sum + d.dayTotal, 0)
-  const extrasSubtotal = extrasBreakdown.reduce((sum, e) => sum + e.total, 0)
-  const subtotal = Math.round((daysSubtotal + extrasSubtotal) * 100) / 100
-  const onlineDiscount = Math.round(subtotal * 0.10 * 100) / 100
-  const onlineTotal = Math.round((subtotal - onlineDiscount) * 100) / 100
-
-  const vehicleDetails = interpretation.vehicleRecommendations.map(rec => {
+  availableVehicles: Array<{ id: string; name: string; images?: { main: string; gallery: string[] }; maxPassengers?: number }>
+): QuoteResponse['vehicles'] {
+  return interpretation.vehicleRecommendations.map(rec => {
     const vehicle = availableVehicles.find(v => v.id === rec.vehicleId)
     return {
       id: rec.vehicleId,
       name: rec.vehicleName,
       image: vehicle?.images?.main || '',
       maxPassengers: vehicle?.maxPassengers,
-      maxLuggage: vehicle?.maxLuggage,
       quantity: rec.quantity || 1,
       reason: rec.reason,
     }
   })
-
-  return {
-    pricing: { days: daysPricing, extrasBreakdown, subtotal, onlineDiscount, onlineTotal, totalWithoutDiscount: subtotal },
-    vehicles: vehicleDetails,
-  }
 }
 
 export async function POST(request: NextRequest) {
@@ -178,11 +82,6 @@ export async function POST(request: NextRequest) {
       id: v.id,
       name: v.name,
       maxPassengers: v.maxPassengers,
-      maxLuggage: v.maxLuggage,
-      price6h: v.price6h,
-      price10h: v.price10h,
-      price24h: v.price24h,
-      availableExtras: v.availableExtras,
     }))
 
     console.log(`🤖 AI booking interpret: "${message.substring(0, 100)}" | ${catalog.length} vehicles in catalog`)
@@ -190,8 +89,10 @@ export async function POST(request: NextRequest) {
     const interpretation = await interpretBookingRequest(message, catalog)
     console.log('✅ AI interpretation:', JSON.stringify(interpretation).substring(0, 300))
 
-    const { pricing, vehicles: vehicleDetails } = calculateQuotePricing(interpretation, availableVehicles)
-    const quoteResponse: QuoteResponse = { interpretation, pricing, vehicles: vehicleDetails }
+    const quoteResponse: QuoteResponse = {
+      interpretation,
+      vehicles: buildVehicleDetails(interpretation, availableVehicles),
+    }
 
     return NextResponse.json({ success: true, data: quoteResponse })
   } catch (error) {
@@ -206,7 +107,7 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json()
     const interpretation = body.interpretation as BookingInterpretation
 
-    if (!interpretation || !Array.isArray(interpretation.days)) {
+    if (!interpretation || !Array.isArray(interpretation.vehicleRecommendations)) {
       return NextResponse.json(
         { success: false, error: 'Invalid interpretation data.' },
         { status: 400 }
@@ -216,14 +117,16 @@ export async function PATCH(request: NextRequest) {
     const allVehicles = await cached.vehicles.getAll()
     const availableVehicles = allVehicles.filter(v => v.available)
 
-    const { pricing, vehicles: vehicleDetails } = calculateQuotePricing(interpretation, availableVehicles)
-    const quoteResponse: QuoteResponse = { interpretation, pricing, vehicles: vehicleDetails }
+    const quoteResponse: QuoteResponse = {
+      interpretation,
+      vehicles: buildVehicleDetails(interpretation, availableVehicles),
+    }
 
     return NextResponse.json({ success: true, data: quoteResponse })
   } catch (error) {
-    console.error('Quote reprice error:', error)
+    console.error('Plan refresh error:', error)
     return NextResponse.json(
-      { success: false, error: 'Failed to recalculate pricing.' },
+      { success: false, error: 'Failed to update the plan.' },
       { status: 500 }
     )
   }
@@ -253,16 +156,16 @@ export async function PUT(request: NextRequest) {
 
       await sendAIQuoteEmail({
         phone,
-        days: quote.interpretation.days,
+        weddingDate: quote.interpretation.weddingDate,
         vehicles: quote.vehicles.map(v => ({
           name: v.name,
           quantity: v.quantity,
           reason: v.reason,
         })),
+        addOns: quote.interpretation.addOns,
         passengers: quote.interpretation.passengers,
         startingLocation: quote.interpretation.startingLocation,
-        subtotal: quote.pricing.subtotal,
-        onlineTotal: quote.pricing.onlineTotal,
+        venue: quote.interpretation.venue,
         notes: quote.interpretation.notes,
       })
 

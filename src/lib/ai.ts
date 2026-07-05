@@ -376,8 +376,12 @@ Evaluate:
 }
 
 /**
- * Interpret a free-text booking request into structured booking data.
- * Accepts input in any language (Arabic, French, English, etc.) and always returns English.
+ * Interpret a free-text wedding request into structured booking data.
+ * Accepts input in any language (Arabic, Arabizi, French, English…) and always returns English.
+ *
+ * Wedding model: ONE wedding day (not multi-day, not hour packages).
+ * Standard service: cars arrive between 1-3pm, drive the route, drop off at the venue, leave.
+ * Add-ons: early-arrival, stay-till-end, flower-decoration, luxury-van.
  */
 export async function interpretBookingRequest(
   userMessage: string,
@@ -385,39 +389,28 @@ export async function interpretBookingRequest(
     id: string
     name: string
     maxPassengers?: number
-    maxLuggage?: number
-    price6h?: number
-    price10h?: number
-    price24h?: number
-    availableExtras?: Array<{ id: string; name: string; price: number; perDay: boolean }>
   }>
 ): Promise<BookingInterpretation> {
   const today = new Date().toISOString().split('T')[0]
 
-  // Build compact catalog — only include IDs, names, capacity, and pricing
-  const catalogText = vehicleCatalog.map(v => {
-    const p = [v.price6h && `6h:$${v.price6h}`, v.price10h && `10h:$${v.price10h}`, v.price24h && `24h:$${v.price24h}`].filter(Boolean).join(' ')
-    return `${v.id}|${v.name}|${v.maxPassengers || 0}pax|${p}`
-  }).join('\n')
+  const catalogText = vehicleCatalog.map(v => `${v.id}|${v.name}|${v.maxPassengers || 4}pax`).join('\n')
 
-  // Collect unique extras across all vehicles
-  const extrasSet = new Map<string, string>()
-  for (const v of vehicleCatalog) {
-    for (const e of v.availableExtras || []) {
-      if (!extrasSet.has(e.id)) extrasSet.set(e.id, e.name)
-    }
-  }
-  const extrasText = extrasSet.size > 0 ? '\nExtras: ' + [...extrasSet.entries()].map(([id, name]) => `${id}=${name}`).join(', ') : ''
+  const systemPrompt = `Eweeha wedding car assistant (Lebanon). Chauffeur + fuel always included. Today: ${today}
+Cars (id|name|capacity):
+${catalogText}
 
-  const systemPrompt = `Eweeha booking assistant. Driver+fuel included. Today: ${today}
-Vehicles (id|name|capacity|rates):
-${catalogText}${extrasText}
-Services: "airport"=one-way airport pickup/dropoff (half the 6h price), "6h"=half day up to 6 hours, "10h"=full day up to 10 hours, "full-day"=24 hours overnight/extended
+Service model: ONE wedding day. Standard: cars arrive 1-3pm, drive the wedding route, drop off at the venue, leave.
+Add-on ids: "early-arrival" (convoy by 11am), "stay-till-end" (car stays till the party ends), "flower-decoration" (flowers & ribbons; basic package has no decoration), "luxury-van" (black luxury van for family/bridal party).
 
-Input may be ANY language. Output ONLY JSON in English:
-{"days":[{"date":"YYYY-MM-DD","serviceType":"airport|6h|10h|full-day","label":"description"}],"vehicleRecommendations":[{"vehicleId":"id","vehicleName":"name","reason":"why","quantity":1}],"passengers":null,"startingLocation":null,"extras":[],"notes":"summary","clarifications":["questions"]}
+Input may be ANY language (Lebanese Arabic, Arabizi, French…). Output ONLY JSON in English:
+{"weddingDate":"YYYY-MM-DD or null","vehicleRecommendations":[{"vehicleId":"id","vehicleName":"name","reason":"short why","quantity":1}],"addOns":[],"passengers":null,"startingLocation":null,"venue":null,"notes":"one-line summary","clarifications":[]}
 
-Rules: recommend vehicles by passenger count, use multiple if needed, guess vague dates from today, default serviceType "10h". Use "airport" for airport pickups/dropoffs, "6h" for half day, "10h" for full day, "full-day" for 24h. List missing info in clarifications.`
+Rules:
+- ONE date only. Vague dates ("next summer") → best guess from today; no date at all → null.
+- Recommend cars from the catalog only: a bridal car first, plus convoy cars if family/friends are mentioned. Match car style requests (classic, convertible, Rolls…).
+- Detect add-ons only when the user asks for them (decoration, staying late, early start, a van).
+- startingLocation = where the day starts (bride's prep); venue = the party location.
+- clarifications: at most ONE short question, and only if the wedding date is completely missing. Do not ask about anything else.`
 
   const response = await generateAICompletion(userMessage, systemPrompt, { jsonMode: true })
   const raw = response.content || ''
@@ -437,13 +430,14 @@ Rules: recommend vehicles by passenger count, use multiple if needed, guess vagu
     }
     const parsed = JSON.parse(jsonMatch[0])
     return {
-      days: Array.isArray(parsed.days) ? parsed.days : [],
+      weddingDate: typeof parsed.weddingDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(parsed.weddingDate) ? parsed.weddingDate : null,
       vehicleRecommendations: Array.isArray(parsed.vehicleRecommendations) ? parsed.vehicleRecommendations : [],
+      addOns: Array.isArray(parsed.addOns) ? parsed.addOns : [],
       passengers: typeof parsed.passengers === 'number' ? parsed.passengers : null,
       startingLocation: parsed.startingLocation || null,
-      extras: Array.isArray(parsed.extras) ? parsed.extras : [],
+      venue: parsed.venue || null,
       notes: parsed.notes || '',
-      clarifications: Array.isArray(parsed.clarifications) ? parsed.clarifications : [],
+      clarifications: Array.isArray(parsed.clarifications) ? parsed.clarifications.slice(0, 1) : [],
     }
   } catch (error) {
     console.error('Failed to parse booking interpretation. Raw AI response:', raw)
@@ -452,11 +446,14 @@ Rules: recommend vehicles by passenger count, use multiple if needed, guess vagu
 }
 
 export interface BookingInterpretation {
-  days: Array<{ date: string; serviceType: 'airport' | '6h' | '10h' | 'full-day'; label: string }>
+  /** The single wedding day (YYYY-MM-DD) — weddings are one day, not date ranges. */
+  weddingDate: string | null
   vehicleRecommendations: Array<{ vehicleId: string; vehicleName: string; reason: string; quantity: number }>
+  /** Ids from WEDDING_ADD_ONS (early-arrival, stay-till-end, flower-decoration, luxury-van). */
+  addOns: string[]
   passengers: number | null
   startingLocation: string | null
-  extras: string[]
+  venue: string | null
   notes: string
   clarifications: string[]
 }

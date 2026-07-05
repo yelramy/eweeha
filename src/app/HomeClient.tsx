@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { PhoneIcon, ChatBubbleLeftRightIcon, Bars3Icon } from '@heroicons/react/24/outline'
@@ -52,6 +52,13 @@ function RibbonDivider({ className = '' }: { className?: string }) {
 export default function HomeClient({ allVehicles, config, reviews = [], ratingStats }: HomeClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isConvoyPickerOpen, setIsConvoyPickerOpen] = useState(false)
+
+  // Owner request: visitors land on the cars — jump straight to the fleet
+  // unless a specific anchor (#booking, #services…) was requested.
+  useEffect(() => {
+    if (window.location.hash) return
+    document.getElementById('fleet')?.scrollIntoView({ behavior: 'auto', block: 'start' })
+  }, [])
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
     e.preventDefault()
@@ -176,13 +183,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                 </span>
               </h1>
 
-              <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-5" />
-
-              <p className="text-base md:text-lg text-charcoal-600 dark:text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8 font-light">
-                Decorated bridal cars, classic convertibles, and full wedding convoys —
-                ribbons, fresh flowers, and suited chauffeurs, on time wherever you
-                celebrate, from Beirut to the mountains.
-              </p>
+              <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-8" />
 
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
                 <button
@@ -205,7 +206,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
               <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs md:text-sm font-medium text-charcoal-500 dark:text-gray-200">
                 <span>Suited chauffeurs</span>
                 <span aria-hidden="true" className="text-clay-300">✿</span>
-                <span>Ribbon &amp; flower décor</span>
+                <span>No ads or stickers on our cars</span>
                 <span aria-hidden="true" className="text-clay-300">✿</span>
                 <span>On time, every time</span>
               </div>
@@ -214,7 +215,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
         </section>
 
         {/* Fleet Section */}
-        <section id="fleet" className="py-10 md:py-16 bg-white dark:bg-gray-800">
+        <section id="fleet" className="scroll-mt-16 py-10 md:py-16 bg-white dark:bg-gray-800">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="text-center mb-6">
               <p className="script-accent text-2xl text-primary-600 dark:text-primary-300 mb-1">the cars</p>
@@ -269,11 +270,11 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                     </div>
                     <div className="flex items-start gap-2">
                       <span className="text-primary-600 dark:text-primary-300 font-bold">✓</span>
-                      <span>Fuel and waiting time included in the price</span>
+                      <span>Fuel included in the price</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <span className="text-primary-600 dark:text-primary-300 font-bold">✓</span>
-                      <span>Ribbon &amp; fresh flower decoration on request</span>
+                      <span>No company stickers or ads on the cars — clean cars in your photos</span>
                     </div>
                     <div className="flex items-start gap-2">
                       <span className="text-primary-600 dark:text-primary-300 font-bold">✓</span>
@@ -283,19 +284,23 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Wedding Packages:</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Popular Add-ons:</h3>
                   <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
                     <div>
-                      <div className="font-semibold text-primary-600 dark:text-primary-300">Ceremony Package — 6 hours</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Bride&apos;s prep → ceremony → photo session</div>
+                      <div className="font-semibold text-primary-600 dark:text-primary-300">Early arrival</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Cars usually arrive between 1 and 3pm — ask for your convoy by 11am</div>
                     </div>
                     <div>
-                      <div className="font-semibold text-primary-600 dark:text-primary-300">Celebration Package — 10 hours</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">Prep → ceremony → photoshoot → grand venue entrance</div>
+                      <div className="font-semibold text-primary-600 dark:text-primary-300">Stay till the end</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Cars normally drop off at the venue and leave — keep one or more till the end of the party</div>
                     </div>
                     <div>
-                      <div className="font-semibold text-primary-600 dark:text-primary-300">Full Day — 24 hours</div>
-                      <div className="text-xs text-gray-600 dark:text-gray-400">From the morning zaffe to the after-party exit</div>
+                      <div className="font-semibold text-primary-600 dark:text-primary-300">Flower decoration</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">The basic package comes without decoration — add flowers &amp; ribbons to match your theme</div>
+                    </div>
+                    <div>
+                      <div className="font-semibold text-primary-600 dark:text-primary-300">Black luxury van</div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">Add a black luxury van to the convoy for family or the bridal party</div>
                     </div>
                   </div>
                 </div>
@@ -319,7 +324,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                 Plan Your Convoy
               </h2>
               <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Tell us your date, ceremony, and venue in your own words — we&apos;ll build your personalized quote instantly.
+                Tell us your date, ceremony, and venue in your own words — we&apos;ll match the cars and reply with the price.
               </p>
             </div>
 
@@ -364,7 +369,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   </svg>
                 }
                 title="Bridal Car & Chauffeur"
-                excerpt="An elegant decorated car with a suited chauffeur dedicated to the bride and groom — calm, punctual, and camera-ready all day."
+                excerpt="An elegant car with a suited chauffeur dedicated to the bride and groom — calm, punctual, and camera-ready all day."
                 link="/services/bridal-car"
               />
               <ServiceCard
@@ -431,16 +436,16 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
             <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  title: "Zero-Stress Timing",
+                  title: "Always On Time",
                   description: "We scout the route, plan for traffic and the zaffe, and get you to your ceremony on time — every time",
                 },
                 {
                   title: "The Right Car",
-                  description: "Bridal sedans, classics, convertibles, and family cars — decorated, spotless, and photo-ready",
+                  description: "Bridal sedans, classics, convertibles, and family cars — spotless and photo-ready",
                 },
                 {
-                  title: "White-Glove Service",
-                  description: "Suited chauffeurs who know weddings: doors held, dress protected, aunties handled with a smile",
+                  title: "Suited Chauffeurs",
+                  description: "Chauffeurs who know weddings: doors held, dress protected, aunties handled with a smile",
                 }
               ].map((feature, index) => (
                 <div key={index} className="border-l-2 border-clay-400 dark:border-primary-500 pl-4 py-2">
@@ -483,7 +488,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                 <ol className="space-y-3 text-sm text-charcoal-500 dark:text-gray-300 leading-relaxed list-decimal list-inside">
                   <li>The opening cry of the radde — the chant that officially starts a Lebanese wedding.</li>
                   <li>The call that rings down the street when the bridal car pulls up, ribbons flying and horns singing.</li>
-                  <li><span className="italic">(this company)</span> The moment we deliver — decorated, on time, every weekend.</li>
+                  <li><span className="italic">(that&apos;s us)</span> The moment we deliver — on time, every weekend.</li>
                 </ol>
               </div>
 

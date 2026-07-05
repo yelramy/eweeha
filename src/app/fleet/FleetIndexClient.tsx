@@ -44,7 +44,7 @@ export default function FleetIndexClient({ vehicles }: { vehicles: Vehicle[] }) 
               <p className="script-accent text-2xl text-primary-600 dark:text-primary-300 mb-1">the cars</p>
               <h1 className="text-2xl md:text-4xl text-charcoal-500 dark:text-white mb-2">Full Wedding Fleet</h1>
               <p className="text-sm md:text-base text-warm-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Every car below includes a suited chauffeur, wedding-day timing, and ribbon &amp; flower décor on request.
+                Every car below includes a suited chauffeur and wedding-day timing — no stickers or ads on any car.
               </p>
             </div>
             <FleetGrid vehicles={sortFleetForDisplay(vehicles)} />
