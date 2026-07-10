@@ -4,7 +4,6 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Button from '@/components/Button'
 import CardImageCarousel from '@/components/CardImageCarousel'
-import GroomVehicleImage from '@/components/GroomVehicleImage'
 import { Vehicle } from '@/types/vehicle'
 import { getZonePrices } from '@/utils/vehiclePricing'
 
@@ -78,16 +77,12 @@ export default function FleetGrid({
               className={`${cardClass} rounded-lg overflow-hidden hover-lift flex flex-col h-full`}
             >
               <div className="flex-shrink-0">
-                {isDark ? (
-                  <GroomVehicleImage vehicle={vehicle} />
-                ) : (
-                  <CardImageCarousel
-                    images={[vehicle.images.main, ...(vehicle.images.gallery || [])]}
-                    alt={`${vehicle.name} — wedding car with chauffeur in Lebanon`}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    quality={75}
-                  />
-                )}
+                <CardImageCarousel
+                  images={[vehicle.images.main, ...(vehicle.images.gallery || [])]}
+                  alt={`${vehicle.name} — wedding car with chauffeur in Lebanon`}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  quality={75}
+                />
               </div>
               <div className="p-4 sm:p-5 flex flex-col flex-1">
                 <div className="flex items-start justify-between mb-3 gap-2">
