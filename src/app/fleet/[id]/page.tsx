@@ -144,6 +144,22 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
       bestRating: 5,
       worstRating: 1,
     }
+    productSchema.review = reviews
+      .filter((r) => r.visible)
+      .slice(0, 5)
+      .map((r) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.customerName },
+        datePublished: r.createdAt.split('T')[0],
+        name: r.title,
+        reviewBody: r.comment,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: r.rating,
+          bestRating: 5,
+          worstRating: 1,
+        },
+      }))
   }
 
   return (
