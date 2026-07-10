@@ -23,7 +23,7 @@ export default function FleetManagement() {
     specifications: { seating: '', luggage: '', transmission: '' },
     available: true, quantity: 1, showOnHomepage: false, displayOrder: 0,
     model: '', year: new Date().getFullYear(),
-    price6h: 0, price10h: 0, price24h: 0, extraHourRate: 0,
+    priceBeirut: 0, priceBatrounSaida: 0, priceFurther: 0,
     maxPassengers: 1, maxLuggage: 0, seatingLayout: '',
     ceilingType: '' as '' | 'standard' | 'high',
     variants: [] as Array<{id: string, name: string, seating: string, maxPassengers: number}>,
@@ -77,9 +77,9 @@ export default function FleetManagement() {
         main: uploadedImages[0] || editingVehicle?.images.main || '/images/fleet/standard.svg',
         gallery: uploadedImages.slice(1) || editingVehicle?.images.gallery || []
       },
-      price6h: formData.price6h || undefined,
-      price10h: formData.price10h || undefined,
-      price24h: formData.price24h || undefined,
+      priceBeirut: formData.priceBeirut || undefined,
+      priceBatrounSaida: formData.priceBatrounSaida || undefined,
+      priceFurther: formData.priceFurther || undefined,
       maxPassengers: formData.maxPassengers || undefined,
       maxLuggage: formData.maxLuggage || undefined,
       ceilingType: formData.ceilingType || undefined,
@@ -109,7 +109,7 @@ export default function FleetManagement() {
       specifications: { seating: '', luggage: '', transmission: '' },
       available: true, quantity: 1, showOnHomepage: false, displayOrder: 0,
       model: '', year: new Date().getFullYear(),
-      price6h: 0, price10h: 0, price24h: 0, extraHourRate: 0,
+      priceBeirut: 0, priceBatrounSaida: 0, priceFurther: 0,
       maxPassengers: 0, maxLuggage: 0, seatingLayout: '', ceilingType: '',
       variants: [], availableExtras: []
     })
@@ -128,10 +128,9 @@ export default function FleetManagement() {
       displayOrder: vehicle.displayOrder || 0,
       model: vehicle.model || '',
       year: vehicle.year || new Date().getFullYear(),
-      price6h: vehicle.price6h || 0,
-      price10h: vehicle.price10h || 0,
-      price24h: vehicle.price24h || 0,
-      extraHourRate: vehicle.extraHourRate || 0,
+      priceBeirut: vehicle.priceBeirut || 0,
+      priceBatrounSaida: vehicle.priceBatrounSaida || 0,
+      priceFurther: vehicle.priceFurther || 0,
       maxPassengers: vehicle.maxPassengers || 0,
       maxLuggage: vehicle.maxLuggage || 0,
       seatingLayout: vehicle.seatingLayout || '',
@@ -176,16 +175,16 @@ export default function FleetManagement() {
                   <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-2 py-2 border border-gray-300 rounded" />
                 </div>
                 <div>
-                  <label className="block text-gray-600 mb-1">6h Rate</label>
-                  <input type="number" value={formData.price6h || ''} onChange={(e) => setFormData({...formData, price6h: Number(e.target.value) || 0})} className="w-full px-2 py-2 border border-gray-300 rounded" />
+                  <label className="block text-gray-600 mb-1">Beirut District ($) *</label>
+                  <input type="number" required value={formData.priceBeirut || ''} onChange={(e) => setFormData({...formData, priceBeirut: Number(e.target.value) || 0})} className="w-full px-2 py-2 border border-gray-300 rounded" />
                 </div>
                 <div>
-                  <label className="block text-gray-600 mb-1">10h Rate *</label>
-                  <input type="number" required value={formData.price10h || ''} onChange={(e) => setFormData({...formData, price10h: Number(e.target.value) || 0})} className="w-full px-2 py-2 border border-gray-300 rounded" />
+                  <label className="block text-gray-600 mb-1">Batroun/Saida ($) *</label>
+                  <input type="number" required value={formData.priceBatrounSaida || ''} onChange={(e) => setFormData({...formData, priceBatrounSaida: Number(e.target.value) || 0})} className="w-full px-2 py-2 border border-gray-300 rounded" />
                 </div>
                 <div>
-                  <label className="block text-gray-600 mb-1">24h Rate *</label>
-                  <input type="number" required value={formData.price24h || ''} onChange={(e) => setFormData({...formData, price24h: Number(e.target.value) || 0})} className="w-full px-2 py-2 border border-gray-300 rounded" />
+                  <label className="block text-gray-600 mb-1">Further ($) *</label>
+                  <input type="number" required value={formData.priceFurther || ''} onChange={(e) => setFormData({...formData, priceFurther: Number(e.target.value) || 0})} className="w-full px-2 py-2 border border-gray-300 rounded" />
                 </div>
                 <div>
                   <label className="block text-gray-600 mb-1">Passengers *</label>
@@ -272,9 +271,9 @@ export default function FleetManagement() {
                   </div>
                   <div className="flex justify-between items-center mt-2 pt-2 border-t border-gray-200 text-sm">
                     <div className="text-gray-600">
-                      {v.price6h && <span className="mr-2">6h: ${v.price6h}</span>}
-                      {v.price10h && <span className="mr-2">10h: ${v.price10h}</span>}
-                      {v.price24h && <span>24h: ${v.price24h}</span>}
+                      {v.priceBeirut ? <span className="mr-2">Beirut: ${v.priceBeirut}</span> : null}
+                      {v.priceBatrounSaida ? <span className="mr-2">Batroun/Saida: ${v.priceBatrounSaida}</span> : null}
+                      {v.priceFurther ? <span>Further: ${v.priceFurther}</span> : null}
                     </div>
                     <div className="flex gap-3">
                       <button onClick={() => handleEdit(v)} className="text-primary-600 py-1">Edit</button>
@@ -291,9 +290,9 @@ export default function FleetManagement() {
                 <thead>
                   <tr className="bg-gray-100">
                     <th className="px-3 py-2 text-left font-medium text-gray-700 border-r border-b border-gray-300">Vehicle</th>
-                    <th className="px-3 py-2 text-right font-medium text-gray-700 border-r border-b border-gray-300">6h</th>
-                    <th className="px-3 py-2 text-right font-medium text-gray-700 border-r border-b border-gray-300">10h</th>
-                    <th className="px-3 py-2 text-right font-medium text-gray-700 border-r border-b border-gray-300">24h</th>
+                    <th className="px-3 py-2 text-right font-medium text-gray-700 border-r border-b border-gray-300">Beirut</th>
+                    <th className="px-3 py-2 text-right font-medium text-gray-700 border-r border-b border-gray-300">Batroun/Saida</th>
+                    <th className="px-3 py-2 text-right font-medium text-gray-700 border-r border-b border-gray-300">Further</th>
                     <th className="px-3 py-2 text-center font-medium text-gray-700 border-r border-b border-gray-300">Pax</th>
                     <th className="px-3 py-2 text-center font-medium text-gray-700 border-r border-b border-gray-300 hidden md:table-cell">Qty</th>
                     <th className="px-3 py-2 text-center font-medium text-gray-700 border-r border-b border-gray-300">Status</th>
@@ -312,9 +311,9 @@ export default function FleetManagement() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-3 py-2 border-r border-b border-gray-200 text-right">{v.price6h ? `$${v.price6h}` : '-'}</td>
-                      <td className="px-3 py-2 border-r border-b border-gray-200 text-right">{v.price10h ? `$${v.price10h}` : '-'}</td>
-                      <td className="px-3 py-2 border-r border-b border-gray-200 text-right">{v.price24h ? `$${v.price24h}` : '-'}</td>
+                      <td className="px-3 py-2 border-r border-b border-gray-200 text-right">{v.priceBeirut ? `$${v.priceBeirut}` : '-'}</td>
+                      <td className="px-3 py-2 border-r border-b border-gray-200 text-right">{v.priceBatrounSaida ? `$${v.priceBatrounSaida}` : '-'}</td>
+                      <td className="px-3 py-2 border-r border-b border-gray-200 text-right">{v.priceFurther ? `$${v.priceFurther}` : '-'}</td>
                       <td className="px-3 py-2 border-r border-b border-gray-200 text-center">{v.maxPassengers || v.capacity || '-'}</td>
                       <td className="px-3 py-2 border-r border-b border-gray-200 text-center hidden md:table-cell">{v.quantity}</td>
                       <td className="px-3 py-2 border-r border-b border-gray-200 text-center">

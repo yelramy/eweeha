@@ -6,6 +6,7 @@ import CardImageCarousel from '@/components/CardImageCarousel'
 import { Vehicle } from '@/types/vehicle'
 import { useConfig } from '@/hooks/useConfig'
 import { events } from '@/lib/posthog'
+import { getFromPrice, getZonePricesTooltip } from '@/utils/vehiclePricing'
 
 interface ConvoyPickerProps {
   isOpen: boolean
@@ -61,6 +62,7 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
   }
 
   const selectedVehicles = vehicles.filter((v) => selectedIds.has(String(v.id)))
+  const selectedFromTotal = selectedVehicles.reduce((sum, v) => sum + (getFromPrice(v) ?? 0), 0)
   const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
 
   const handleSend = () => {
@@ -179,9 +181,21 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
                       <p className="text-sm sm:text-base font-medium text-charcoal-600 dark:text-white leading-tight line-clamp-2">
                         {vehicle.name}
                       </p>
-                      {vehicle.maxPassengers ? (
-                        <p className="text-[11px] sm:text-xs text-warm-600 dark:text-gray-400">{vehicle.maxPassengers} passengers</p>
-                      ) : null}
+                      <div className="flex items-baseline justify-between gap-2 mt-0.5">
+                        {vehicle.maxPassengers ? (
+                          <p className="text-[11px] sm:text-xs text-warm-600 dark:text-gray-400">{vehicle.maxPassengers} passengers</p>
+                        ) : <span />}
+                        {getFromPrice(vehicle) ? (
+                          <p
+                            className="text-[11px] sm:text-xs text-charcoal-600 dark:text-gray-200 whitespace-nowrap"
+                            title={getZonePricesTooltip(vehicle)}
+                          >
+                            from <span className="font-semibold text-sm">${getFromPrice(vehicle)}</span>
+                          </p>
+                        ) : (
+                          <p className="text-[11px] sm:text-xs text-warm-500 dark:text-gray-500 whitespace-nowrap">ask price</p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )
@@ -194,11 +208,20 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
           className="px-5 py-4 border-t border-warm-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex items-center justify-between gap-3"
           style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}
         >
-          <span className="text-sm text-warm-700 dark:text-gray-300">
-            {selectedIds.size === 0
-              ? 'No cars selected yet'
-              : `${selectedIds.size} car${selectedIds.size > 1 ? 's' : ''} selected`}
-          </span>
+          <div className="text-sm text-warm-700 dark:text-gray-300">
+            {selectedIds.size === 0 ? (
+              'No cars selected yet'
+            ) : (
+              <>
+                <span className="font-medium">{selectedIds.size} car{selectedIds.size > 1 ? 's' : ''}</span>
+                {selectedFromTotal > 0 && (
+                  <span className="block text-xs text-warm-600 dark:text-gray-400">
+                    from <span className="font-semibold text-charcoal-600 dark:text-white">${selectedFromTotal}</span> · Beirut district
+                  </span>
+                )}
+              </>
+            )}
+          </div>
           <button
             type="button"
             onClick={handleSend}

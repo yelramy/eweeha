@@ -495,6 +495,27 @@ export async function migrateAddQuoteCommitmentFields() {
   }
 }
 
+export async function migrateAddZonePricing() {
+  const fields = [
+    { name: 'price_beirut', type: 'REAL' },
+    { name: 'price_batroun_saida', type: 'REAL' },
+    { name: 'price_further', type: 'REAL' },
+  ]
+  for (const field of fields) {
+    try {
+      await turso.execute(`ALTER TABLE vehicles ADD COLUMN ${field.name} ${field.type}`)
+      console.log(`✅ Added ${field.name} to vehicles table`)
+    } catch (error) {
+      const errorMessage = (error as Error).message
+      if (errorMessage.includes('duplicate column') || errorMessage.includes('already exists')) {
+        console.log(`✅ ${field.name} already exists in vehicles`)
+      } else {
+        throw error
+      }
+    }
+  }
+}
+
 export async function runAllMigrations() {
   console.log('🔄 Running database migrations...')
   await migrateAddQuantityColumn()
@@ -508,6 +529,7 @@ export async function runAllMigrations() {
   await migrateAddReviewVisibility()
   await migrateAddReviewInvitationsTable()
   await migrateAddQuoteCommitmentFields()
+  await migrateAddZonePricing()
   console.log('✅ All migrations complete')
 }
 
