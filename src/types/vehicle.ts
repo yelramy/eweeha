@@ -37,14 +37,18 @@ export interface Vehicle {
   // Homepage display settings
   showOnHomepage?: boolean // Display this vehicle on homepage fleet section
   displayOrder?: number // Order to display on homepage (lower numbers first)
+  // Wedding pricing — one price per wedding, by destination zone
+  priceBeirut?: number // Larger Beirut District
+  priceBatrounSaida?: number // Up to Batroun / Saida
+  priceFurther?: number // Further areas
   // Rental fields
   model?: string // 'h1' | 'staria' | 'hiace' | 'v-class-2020' | 'v-class-2024' | 'maybach'
   year?: number
   variants?: VehicleVariant[]
-  price6h?: number // Up to 6-hour rate
-  price10h?: number // 10-hour day rate
-  price24h?: number // 24-hour/full day rate
-  extraHourRate?: number // For flexible hourly bookings
+  price6h?: number // Legacy hourly rate
+  price10h?: number // Legacy hourly rate
+  price24h?: number // Legacy hourly rate
+  extraHourRate?: number // Legacy
   maxPassengers?: number
   maxLuggage?: number
   seatingLayout?: string // e.g., "2+2+3 configuration"

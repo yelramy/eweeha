@@ -25,10 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? `${formatUsd(pricingInfo.min)}-${formatUsd(pricingInfo.max)}`
       : formatUsd(pricingInfo.min)
     : null
+  const perUnit = pricingInfo?.context === 'zone' ? '/wedding' : '/day'
   const descriptionPricingText = pricingSnippet
     ? pricingInfo?.hasRange
-      ? `Starting between ${pricingSnippet}/day`
-      : `Starting at ${pricingSnippet}/day`
+      ? `Starting between ${pricingSnippet}${perUnit}`
+      : `Starting at ${pricingSnippet}${perUnit}`
     : 'Contact us for pricing'
 
   return generateSEOMetadata({

@@ -47,6 +47,7 @@ function normalizePositiveNumber(value: unknown): number | undefined {
 
 function rowToVehicle(row: Record<string, unknown>): Vehicle {
   const normalizedPrice =
+    normalizePositiveNumber(row.price_beirut) ??
     normalizePositiveNumber(row.price) ??
     normalizePositiveNumber(row.price_6h) ??
     normalizePositiveNumber(row.price_10h) ??
@@ -95,6 +96,9 @@ function rowToVehicle(row: Record<string, unknown>): Vehicle {
       vehicle.variants = []
     }
   }
+  if (row.price_beirut !== null && row.price_beirut !== undefined) vehicle.priceBeirut = row.price_beirut as number
+  if (row.price_batroun_saida !== null && row.price_batroun_saida !== undefined) vehicle.priceBatrounSaida = row.price_batroun_saida as number
+  if (row.price_further !== null && row.price_further !== undefined) vehicle.priceFurther = row.price_further as number
   if (row.price_6h !== null && row.price_6h !== undefined) vehicle.price6h = row.price_6h as number
   if (row.price_10h !== null && row.price_10h !== undefined) vehicle.price10h = row.price_10h as number
   if (row.price_24h !== null && row.price_24h !== undefined) vehicle.price24h = row.price_24h as number
@@ -199,8 +203,8 @@ export const vehicles = {
         main_image, gallery_images, seating, luggage, transmission,
         available, quantity, show_on_homepage, display_order, model, year, variants, 
         price_6h, price_10h, price_24h, extra_hour_rate, max_passengers, max_luggage, ceiling_type,
-        available_extras, created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        available_extras, price_beirut, price_batroun_saida, price_further, created_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [
         newVehicle.id,
         newVehicle.slug,
@@ -230,6 +234,9 @@ export const vehicles = {
         newVehicle.maxLuggage || null,
         newVehicle.ceilingType || null,
         newVehicle.availableExtras ? JSON.stringify(newVehicle.availableExtras) : null,
+        newVehicle.priceBeirut || null,
+        newVehicle.priceBatrounSaida || null,
+        newVehicle.priceFurther || null,
         newVehicle.createdAt
       ]
     })
@@ -318,6 +325,18 @@ export const vehicles = {
     if (vehicleData.variants !== undefined) {
       updates.push('variants = ?')
       args.push(JSON.stringify(vehicleData.variants))
+    }
+    if (vehicleData.priceBeirut !== undefined) {
+      updates.push('price_beirut = ?')
+      args.push(vehicleData.priceBeirut || null)
+    }
+    if (vehicleData.priceBatrounSaida !== undefined) {
+      updates.push('price_batroun_saida = ?')
+      args.push(vehicleData.priceBatrounSaida || null)
+    }
+    if (vehicleData.priceFurther !== undefined) {
+      updates.push('price_further = ?')
+      args.push(vehicleData.priceFurther || null)
     }
     if (vehicleData.price6h !== undefined) {
       updates.push('price_6h = ?')

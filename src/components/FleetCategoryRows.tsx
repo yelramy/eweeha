@@ -7,8 +7,10 @@ import Button from '@/components/Button'
 import FleetVehicleImage from '@/components/FleetVehicleImage'
 import { Vehicle } from '@/types/vehicle'
 import { groupFleetByCategory } from '@/lib/fleetCategories'
+import { getFromPrice, getZonePricesTooltip } from '@/utils/vehiclePricing'
 
 function RowCard({ vehicle }: { vehicle: Vehicle }) {
+  const fromPrice = getFromPrice(vehicle)
   return (
     <div className="snap-start flex-shrink-0 w-[70vw] max-w-[270px] sm:w-60 md:w-64 bg-cream-50 dark:bg-gray-700 border border-warm-200 dark:border-gray-600 rounded-lg overflow-hidden flex flex-col hover-lift">
       <Link href={`/fleet/${vehicle.id}`} className="block">
@@ -24,7 +26,17 @@ function RowCard({ vehicle }: { vehicle: Vehicle }) {
         <p className="text-xs text-warm-600 dark:text-gray-400 mt-0.5 mb-3">
           {vehicle.maxPassengers ? `${vehicle.maxPassengers} passengers · ` : ''}Chauffeur included
         </p>
-        <div className="mt-auto flex gap-2">
+        <div className="mt-auto">
+          {fromPrice ? (
+            <p className="mb-2" title={getZonePricesTooltip(vehicle)}>
+              <span className="text-xs text-warm-600 dark:text-gray-400">From </span>
+              <span className="text-base font-bold text-charcoal-500 dark:text-white">${fromPrice}</span>
+              <span className="text-xs text-warm-600 dark:text-gray-400"> / wedding</span>
+            </p>
+          ) : (
+            <p className="mb-2 text-xs text-warm-600 dark:text-gray-400">Ask for price</p>
+          )}
+          <div className="flex gap-2">
           <Button href={`/fleet/${vehicle.id}`} variant="outline" size="sm" className="flex-1 font-medium">
             Details
           </Button>
@@ -37,6 +49,7 @@ function RowCard({ vehicle }: { vehicle: Vehicle }) {
           >
             Book
           </Button>
+          </div>
         </div>
       </div>
     </div>

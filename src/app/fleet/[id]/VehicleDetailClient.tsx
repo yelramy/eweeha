@@ -9,6 +9,7 @@ import BackToTop from '@/components/BackToTop'
 import ReviewsSection from '@/components/ReviewsSection'
 import ReviewStars from '@/components/ReviewStars'
 import type { Review, VehicleRatingStats } from '@/lib/reviews'
+import { getZonePrices } from '@/utils/vehiclePricing'
 import Link from 'next/link'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { events } from '@/lib/posthog'
@@ -38,6 +39,7 @@ export default function VehicleDetailClient({ vehicle, config, reviews = [], rat
 
   // Combine main image with gallery images
   const allImages = [vehicle.images.main, ...vehicle.images.gallery]
+  const zonePrices = getZonePrices(vehicle)
   
   // Pagination logic for thumbnails
   const totalThumbnailPages = Math.ceil(allImages.length / THUMBNAILS_PER_PAGE)
@@ -204,27 +206,18 @@ export default function VehicleDetailClient({ vehicle, config, reviews = [], rat
 
             {/* Pricing */}
             <div className="mb-6 bg-slate-50 rounded-xl p-5">
-              {(vehicle.price6h || vehicle.price10h || vehicle.price24h) ? (
-                <div className="flex flex-wrap gap-4 md:gap-6">
-                  {vehicle.price6h && (
-                    <div>
-                      <span className="text-2xl md:text-3xl font-bold text-slate-800">${vehicle.price6h}</span>
-                      <span className="block text-sm text-gray-500 mt-0.5">6 hours</span>
-                    </div>
-                  )}
-                  {vehicle.price10h && (
-                    <div>
-                      <span className="text-2xl md:text-3xl font-bold text-slate-800">${vehicle.price10h}</span>
-                      <span className="block text-sm text-gray-500 mt-0.5">10 hours</span>
-                    </div>
-                  )}
-                  {vehicle.price24h && (
-                    <div>
-                      <span className="text-2xl md:text-3xl font-bold text-slate-800">${vehicle.price24h}</span>
-                      <span className="block text-sm text-gray-500 mt-0.5">Full day</span>
-                    </div>
-                  )}
-                </div>
+              {zonePrices.length > 0 ? (
+                <>
+                  <div className="flex flex-wrap gap-4 md:gap-6">
+                    {zonePrices.map((zone) => (
+                      <div key={zone.id}>
+                        <span className="text-2xl md:text-3xl font-bold text-slate-800">${zone.price}</span>
+                        <span className="block text-sm text-gray-500 mt-0.5">{zone.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-3">Per wedding, depending on your venue location — chauffeur &amp; fuel included</p>
+                </>
               ) : (
                 <span className="text-2xl md:text-3xl font-bold text-slate-800">Contact for pricing</span>
               )}

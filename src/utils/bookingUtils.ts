@@ -529,8 +529,8 @@ export function recommendVehiclesByCapacity(
       const priorityDiff = priority[a.recommendation] - priority[b.recommendation]
       if (priorityDiff !== 0) return priorityDiff
       
-      const priceA = a.price10h || a.price || 0
-      const priceB = b.price10h || b.price || 0
+      const priceA = a.priceBeirut || a.price10h || a.price || 0
+      const priceB = b.priceBeirut || b.price10h || b.price || 0
       return priceA - priceB
     })
 }
