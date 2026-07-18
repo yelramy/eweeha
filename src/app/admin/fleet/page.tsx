@@ -6,6 +6,7 @@ import AdminLayout from '@/components/AdminLayout'
 import { Vehicle } from '@/types/vehicle'
 import { useNotification } from '@/contexts/NotificationContext'
 import { adminOperations } from '@/utils/adminApi'
+import { pickFromGooglePhotos } from '@/lib/googlePhotosPicker'
 
 export default function FleetManagement() {
   const notification = useNotification()
@@ -16,6 +17,7 @@ export default function FleetManagement() {
   const [uploadingImages, setUploadingImages] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
+  const [googleStatus, setGoogleStatus] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
   
   const [formData, setFormData] = useState({
@@ -62,6 +64,43 @@ export default function FleetManagement() {
       setUploadedImages(prev => [...prev, ...newImages])
     } catch (error) {
       console.error('Upload error:', error)
+    } finally {
+      setUploadingImages(false)
+    }
+  }
+
+  const handleGooglePhotos = async () => {
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID
+    if (!clientId) {
+      notification.error('Google Photos is not configured')
+      return
+    }
+    setUploadingImages(true)
+    try {
+      const { token, items } = await pickFromGooglePhotos(clientId, setGoogleStatus)
+      if (items.length === 0) {
+        setGoogleStatus('')
+        return
+      }
+      const newImages: string[] = []
+      for (let i = 0; i < items.length; i++) {
+        setGoogleStatus(`Importing ${i + 1} of ${items.length}...`)
+        const response = await fetch('/api/images/import-google', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ baseUrl: items[i].baseUrl, token, filename: items[i].filename, folder: 'eweeha/fleet' })
+        })
+        const result = await response.json()
+        if (result.success) newImages.push(result.data.secure_url)
+      }
+      setUploadedImages(prev => [...prev, ...newImages])
+      setGoogleStatus('')
+      if (newImages.length < items.length) {
+        notification.error(`${items.length - newImages.length} photo(s) failed to import`)
+      }
+    } catch (error) {
+      setGoogleStatus('')
+      notification.error(error instanceof Error ? error.message : 'Google Photos import failed')
     } finally {
       setUploadingImages(false)
     }
@@ -225,6 +264,10 @@ export default function FleetManagement() {
                 <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploadingImages} className="px-3 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50">
                   {uploadingImages ? 'Uploading...' : 'Upload Images'}
                 </button>
+                <button type="button" onClick={handleGooglePhotos} disabled={uploadingImages} className="ml-2 px-3 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50">
+                  Google Photos
+                </button>
+                {googleStatus && <span className="ml-2 text-sm text-gray-500">{googleStatus}</span>}
                 <input type="file" ref={fileInputRef} multiple accept="image/*" onChange={(e) => handleImageUpload(e.target.files)} className="hidden" />
                 {uploadedImages.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-2">
