@@ -177,7 +177,7 @@ function applySecurityHeaders(response: NextResponse, isProd: boolean, isDev: bo
     headers.delete('Cross-Origin-Embedder-Policy')
   }
 
-  headers.set('Cross-Origin-Opener-Policy', 'same-origin')
+  headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
   headers.set('Cross-Origin-Resource-Policy', 'same-origin')
   headers.set('Content-Security-Policy', buildContentSecurityPolicy(isDev))
 }
