@@ -81,6 +81,7 @@ function buildContentSecurityPolicy(isDev: boolean): string {
     'https://connect.facebook.net',
     'https://www.facebook.com',
     'https://us-assets.i.posthog.com',
+    'https://accounts.google.com/gsi/client',
   ].join(' ')
 
   const connectSources = [
@@ -93,6 +94,8 @@ function buildContentSecurityPolicy(isDev: boolean): string {
     'https://res.cloudinary.com',
     'https://us.i.posthog.com',
     'https://us-assets.i.posthog.com',
+    'https://accounts.google.com/gsi/',
+    'https://photospicker.googleapis.com',
   ].join(' ')
 
   const imageSources = [
@@ -111,11 +114,11 @@ function buildContentSecurityPolicy(isDev: boolean): string {
   return [
     "default-src 'self'",
     `script-src ${scriptSources}`,
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style",
     `img-src ${imageSources}`,
     "font-src 'self' https://fonts.gstatic.com data:",
     `connect-src ${connectSources}`,
-    "frame-src 'self' https://www.facebook.com https://www.google.com https://maps.google.com",
+    "frame-src 'self' https://www.facebook.com https://www.google.com https://maps.google.com https://accounts.google.com/gsi/",
     "frame-ancestors 'self'",
     "object-src 'none'",
     "base-uri 'self'",
