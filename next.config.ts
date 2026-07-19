@@ -14,8 +14,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['@heroicons/react', 'react-hot-toast'],
   },
 
-  // Image optimization
+  // Image optimization via Cloudinary instead of Vercel (avoids Vercel optimization limits)
   images: {
+    loader: 'custom',
+    loaderFile: './src/lib/cloudinaryLoader.ts',
     remotePatterns: [
       {
         protocol: 'https',
