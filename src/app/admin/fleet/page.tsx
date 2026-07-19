@@ -52,6 +52,7 @@ export default function FleetManagement() {
     if (!files) return
     setUploadingImages(true)
     const newImages: string[] = []
+    const failed: string[] = []
     try {
       for (const file of Array.from(files)) {
         const formData = new FormData()
@@ -59,11 +60,19 @@ export default function FleetManagement() {
         formData.append('folder', 'eweeha/fleet')
         const response = await fetch('/api/images/upload', { method: 'POST', body: formData })
         const result = await response.json()
-        if (result.success) newImages.push(result.data.secure_url)
+        if (result.success) {
+          newImages.push(result.data.secure_url)
+        } else {
+          failed.push(result.error || 'upload failed')
+        }
       }
       setUploadedImages(prev => [...prev, ...newImages])
+      if (failed.length > 0) {
+        notification.error(`${failed.length} photo(s) failed to upload: ${failed[0]}`)
+      }
     } catch (error) {
       console.error('Upload error:', error)
+      notification.error('Photo upload failed — network error')
     } finally {
       setUploadingImages(false)
     }
@@ -114,7 +123,7 @@ export default function FleetManagement() {
       features: formData.features.split(',').map(f => f.trim()).filter(f => f),
       images: {
         main: uploadedImages[0] || editingVehicle?.images.main || '/images/fleet/standard.svg',
-        gallery: uploadedImages.slice(1) || editingVehicle?.images.gallery || []
+        gallery: uploadedImages.length > 0 ? uploadedImages.slice(1) : editingVehicle?.images.gallery ?? []
       },
       priceBeirut: formData.priceBeirut || undefined,
       priceBatrounSaida: formData.priceBatrounSaida || undefined,
@@ -133,10 +142,15 @@ export default function FleetManagement() {
         await fetchVehicles()
         resetForm()
       } else {
-        notification.error(result.error || 'Failed to save')
+        const fieldErrors = result.details?.fieldErrors as Record<string, string[]> | undefined
+        const detail = fieldErrors
+          ? Object.entries(fieldErrors).map(([field, msgs]) => `${field}: ${msgs.join(', ')}`).join(' | ')
+          : ''
+        notification.error(detail ? `${result.error || 'Failed to save'} — ${detail}` : (result.error || 'Failed to save'))
       }
     } catch (error) {
       console.error('Error:', error)
+      notification.error('Failed to save — network error, please try again')
     } finally {
       setSubmitting(false)
     }
