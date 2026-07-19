@@ -34,7 +34,7 @@ export const VehicleCreateSchema = z.object({
   description: z.string().max(2000).optional().default(''),
   images: z.object({
     main: z.string().min(1).max(500), // Allow both URLs and relative paths
-    gallery: z.array(z.string().max(500)).max(10).default([])
+    gallery: z.array(z.string().max(500)).max(30).default([])
   }),
   specifications: z.object({
     seating: z.string().max(50).optional().default(''),
@@ -48,7 +48,7 @@ export const VehicleCreateSchema = z.object({
   displayOrder: z.number().int().min(0).max(9999).default(0),
   // Rental pricing fields
   model: z.string().max(100).optional(),
-  year: z.number().int().min(1990).max(2030).optional(),
+  year: z.number().int().min(1900).max(2030).optional(),
   priceBeirut: z.number().finite().nonnegative().max(999999).optional(),
   priceBatrounSaida: z.number().finite().nonnegative().max(999999).optional(),
   priceFurther: z.number().finite().nonnegative().max(999999).optional(),
