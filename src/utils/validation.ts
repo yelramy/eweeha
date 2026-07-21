@@ -49,6 +49,7 @@ export const VehicleCreateSchema = z.object({
   // Rental pricing fields
   model: z.string().max(100).optional(),
   year: z.number().int().min(1900).max(2030).optional(),
+  fleetCategory: z.string().max(50).optional(), // '' clears back to auto-assignment
   priceBeirut: z.number().finite().nonnegative().max(999999).optional(),
   priceBatrounSaida: z.number().finite().nonnegative().max(999999).optional(),
   priceFurther: z.number().finite().nonnegative().max(999999).optional(),

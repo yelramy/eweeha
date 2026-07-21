@@ -516,6 +516,48 @@ export async function migrateAddZonePricing() {
   }
 }
 
+export async function migrateAddFleetCategories() {
+  try {
+    await turso.execute(`
+      CREATE TABLE IF NOT EXISTS fleet_categories (
+        id TEXT PRIMARY KEY,
+        title TEXT NOT NULL,
+        blurb TEXT NOT NULL DEFAULT '',
+        display_order INTEGER NOT NULL DEFAULT 0
+      )
+    `)
+    const defaults = [
+      ['rolls-bentley', 'Rolls-Royce & Bentley', 'The flagship bridal cars', 0],
+      ['classic-vintage', 'Classic & Vintage', 'Timeless cars for ceremony exits & photos', 1],
+      ['sports-convertible', 'Sports & Convertibles', 'Open-top drama for photoshoots', 2],
+      ['luxury-sedan', 'Luxury Bridal Sedans', 'Modern comfort for bride, groom & family', 3],
+      ['suv-limo', 'SUVs & Stretch Limousines', 'Bold entrances & the whole bridal party', 4],
+    ]
+    for (const [id, title, blurb, order] of defaults) {
+      await turso.execute({
+        sql: 'INSERT OR IGNORE INTO fleet_categories (id, title, blurb, display_order) VALUES (?, ?, ?, ?)',
+        args: [id, title, blurb, order],
+      })
+    }
+    console.log('✅ fleet_categories table ready')
+  } catch (error) {
+    console.error('❌ Migration error (fleet_categories):', error)
+    throw error
+  }
+  try {
+    await turso.execute(`ALTER TABLE vehicles ADD COLUMN fleet_category TEXT`)
+    console.log('✅ Added fleet_category column to vehicles')
+  } catch (error) {
+    const msg = (error as Error).message
+    if (msg.includes('duplicate column') || msg.includes('already exists')) {
+      console.log('✅ fleet_category column already exists')
+    } else {
+      console.error('❌ Migration error:', error)
+      throw error
+    }
+  }
+}
+
 export async function runAllMigrations() {
   console.log('🔄 Running database migrations...')
   await migrateAddQuantityColumn()
@@ -530,6 +572,7 @@ export async function runAllMigrations() {
   await migrateAddReviewInvitationsTable()
   await migrateAddQuoteCommitmentFields()
   await migrateAddZonePricing()
+  await migrateAddFleetCategories()
   console.log('✅ All migrations complete')
 }
 
