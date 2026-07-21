@@ -8,10 +8,13 @@
  */
 
 async function main() {
-  if (!process.env.TURSO_DATABASE_URL || !process.env.TURSO_AUTH_TOKEN) {
+  const url = process.env.TURSO_URL_OVERRIDE || process.env.TURSO_DATABASE_URL
+  const token = process.env.TURSO_TOKEN_OVERRIDE || process.env.TURSO_AUTH_TOKEN
+  if (!url || !token) {
     console.error('❌ Missing TURSO_DATABASE_URL or TURSO_AUTH_TOKEN.')
     process.exit(1)
   }
+  console.log('🎯 Target DB:', url.replace(/^libsql:\/\//, '').split('.')[0])
 
   try {
     const turso = (await import('../src/lib/turso')).default
