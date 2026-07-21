@@ -84,7 +84,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
         if (p < 1) raf = requestAnimationFrame(step)
       }
       raf = requestAnimationFrame(step)
-    }, 1500)
+    }, 500)
 
     return () => {
       clearTimeout(delay)
