@@ -6,7 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Button from '@/components/Button'
 import FleetVehicleImage from '@/components/FleetVehicleImage'
 import { Vehicle } from '@/types/vehicle'
-import { groupFleetByCategory } from '@/lib/fleetCategories'
+import { groupFleetByCategory, FleetCategory, FLEET_CATEGORIES } from '@/lib/fleetCategories'
 import { getFromPrice, getZonePricesTooltip } from '@/utils/vehiclePricing'
 
 function RowCard({ vehicle }: { vehicle: Vehicle }) {
@@ -143,7 +143,14 @@ function CategoryRow({
  * (scroll-snap on touch, arrow buttons on desktop).
  */
 export default function FleetCategoryRows({ vehicles }: { vehicles: Vehicle[] }) {
-  const groups = groupFleetByCategory(vehicles)
+  const [categories, setCategories] = useState<FleetCategory[]>(FLEET_CATEGORIES)
+  useEffect(() => {
+    fetch('/api/fleet-categories')
+      .then((r) => r.json())
+      .then((d) => { if (d.success && d.data?.length) setCategories(d.data) })
+      .catch(() => {})
+  }, [])
+  const groups = groupFleetByCategory(vehicles, categories)
 
   if (groups.length === 0) {
     return (

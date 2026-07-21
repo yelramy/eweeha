@@ -79,6 +79,9 @@ function rowToVehicle(row: Record<string, unknown>): Vehicle {
   }
 
   // Add homepage display fields
+  if (row.fleet_category) {
+    vehicle.fleetCategory = row.fleet_category as string
+  }
   if (row.show_on_homepage !== null && row.show_on_homepage !== undefined) {
     vehicle.showOnHomepage = Boolean(row.show_on_homepage)
   }
@@ -203,8 +206,8 @@ export const vehicles = {
         main_image, gallery_images, seating, luggage, transmission,
         available, quantity, show_on_homepage, display_order, model, year, variants, 
         price_6h, price_10h, price_24h, extra_hour_rate, max_passengers, max_luggage, ceiling_type,
-        available_extras, price_beirut, price_batroun_saida, price_further, created_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        available_extras, price_beirut, price_batroun_saida, price_further, created_at, fleet_category
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [
         newVehicle.id,
         newVehicle.slug,
@@ -237,7 +240,8 @@ export const vehicles = {
         newVehicle.priceBeirut || null,
         newVehicle.priceBatrounSaida || null,
         newVehicle.priceFurther || null,
-        newVehicle.createdAt
+        newVehicle.createdAt,
+        newVehicle.fleetCategory || null
       ]
     })
     
@@ -305,6 +309,10 @@ export const vehicles = {
     if (vehicleData.quantity !== undefined) {
       updates.push('quantity = ?')
       args.push(vehicleData.quantity)
+    }
+    if (vehicleData.fleetCategory !== undefined) {
+      updates.push('fleet_category = ?')
+      args.push(vehicleData.fleetCategory || null)
     }
     if (vehicleData.showOnHomepage !== undefined) {
       updates.push('show_on_homepage = ?')

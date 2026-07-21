@@ -7,6 +7,8 @@ import { Vehicle } from '@/types/vehicle'
 import { useNotification } from '@/contexts/NotificationContext'
 import { adminOperations } from '@/utils/adminApi'
 import { pickFromGooglePhotos } from '@/lib/googlePhotosPicker'
+import FleetCategoryManager from '@/components/admin/FleetCategoryManager'
+import { FleetCategory } from '@/lib/fleetCategories'
 
 export default function FleetManagement() {
   const notification = useNotification()
@@ -17,6 +19,8 @@ export default function FleetManagement() {
   const [uploadingImages, setUploadingImages] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
+  const [fleetCategories, setFleetCategories] = useState<FleetCategory[]>([])
+  const [showCategories, setShowCategories] = useState(false)
   const [googleStatus, setGoogleStatus] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
   
@@ -24,7 +28,7 @@ export default function FleetManagement() {
     name: '', price: 0, features: '', description: '',
     specifications: { seating: '', luggage: '', transmission: '' },
     available: true, quantity: 1, showOnHomepage: false, displayOrder: 0,
-    model: '', year: new Date().getFullYear(),
+    model: '', year: new Date().getFullYear(), fleetCategory: '',
     priceBeirut: 0, priceBatrounSaida: 0, priceFurther: 0,
     maxPassengers: 1, maxLuggage: 0, seatingLayout: '',
     ceilingType: '' as '' | 'standard' | 'high',
@@ -47,6 +51,18 @@ export default function FleetManagement() {
   }, [notification])
 
   useEffect(() => { fetchVehicles() }, [fetchVehicles])
+
+  const fetchCategories = useCallback(async () => {
+    try {
+      const res = await fetch('/api/fleet-categories')
+      const result = await res.json()
+      if (result.success) setFleetCategories(result.data)
+    } catch {
+      notification.error('Failed to load categories')
+    }
+  }, [notification])
+
+  useEffect(() => { fetchCategories() }, [fetchCategories])
 
   const handleImageUpload = async (files: FileList | null) => {
     if (!files) return
@@ -161,7 +177,7 @@ export default function FleetManagement() {
       name: '', price: 0, features: '', description: '',
       specifications: { seating: '', luggage: '', transmission: '' },
       available: true, quantity: 1, showOnHomepage: false, displayOrder: 0,
-      model: '', year: new Date().getFullYear(),
+      model: '', year: new Date().getFullYear(), fleetCategory: '',
       priceBeirut: 0, priceBatrounSaida: 0, priceFurther: 0,
       maxPassengers: 0, maxLuggage: 0, seatingLayout: '', ceilingType: '',
       variants: [], availableExtras: []
@@ -181,6 +197,7 @@ export default function FleetManagement() {
       displayOrder: vehicle.displayOrder || 0,
       model: vehicle.model || '',
       year: vehicle.year || new Date().getFullYear(),
+      fleetCategory: vehicle.fleetCategory || '',
       priceBeirut: vehicle.priceBeirut || 0,
       priceBatrounSaida: vehicle.priceBatrounSaida || 0,
       priceFurther: vehicle.priceFurther || 0,
@@ -214,8 +231,24 @@ export default function FleetManagement() {
       <div>
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4">
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Fleet</h1>
-          <button onClick={() => setShowAddForm(true)} className="px-3 py-2 text-sm bg-gray-900 text-white rounded hover:bg-gray-800 w-full sm:w-auto">+ Add Vehicle</button>
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button onClick={() => setShowCategories(!showCategories)} className="px-3 py-2 text-sm border border-gray-300 rounded hover:bg-gray-100 flex-1 sm:flex-none">Categories</button>
+            <button onClick={() => setShowAddForm(true)} className="px-3 py-2 text-sm bg-gray-900 text-white rounded hover:bg-gray-800 flex-1 sm:flex-none">+ Add Vehicle</button>
+          </div>
         </div>
+
+        {showCategories && (
+          <div className="border border-gray-300 rounded p-4 mb-4 bg-white">
+            <h3 className="font-semibold mb-3">Fleet Categories</h3>
+            <p className="text-xs text-gray-500 mb-3">These are the rows shown on the homepage & fleet pages. Cars without an assigned category are placed automatically based on their name.</p>
+            <FleetCategoryManager
+              categories={fleetCategories}
+              onChanged={fetchCategories}
+              notifyError={notification.error}
+              notifySuccess={notification.success}
+            />
+          </div>
+        )}
 
         {/* Add/Edit Form */}
         {showAddForm && (
@@ -226,6 +259,13 @@ export default function FleetManagement() {
                 <div className="col-span-2 sm:col-span-1">
                   <label className="block text-gray-600 mb-1">Name *</label>
                   <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-2 py-2 border border-gray-300 rounded" />
+                </div>
+                <div>
+                  <label className="block text-gray-600 mb-1">Category</label>
+                  <select value={formData.fleetCategory} onChange={(e) => setFormData({...formData, fleetCategory: e.target.value})} className="w-full px-2 py-2 border border-gray-300 rounded">
+                    <option value="">Auto (by name)</option>
+                    {fleetCategories.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
+                  </select>
                 </div>
                 <div>
                   <label className="block text-gray-600 mb-1">Beirut District ($) *</label>

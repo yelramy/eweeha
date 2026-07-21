@@ -1,19 +1,12 @@
 import { Vehicle } from '@/types/vehicle'
 
-export type FleetCategoryId =
-  | 'rolls-bentley'
-  | 'classic-vintage'
-  | 'sports-convertible'
-  | 'luxury-sedan'
-  | 'suv-limo'
-
 export interface FleetCategory {
-  id: FleetCategoryId
+  id: string
   title: string
   blurb: string
 }
 
-/** Display order of the homepage fleet rows. */
+/** Built-in defaults — DB-managed categories (fleet_categories table) take over when provided. */
 export const FLEET_CATEGORIES: FleetCategory[] = [
   { id: 'rolls-bentley', title: 'Rolls-Royce & Bentley', blurb: 'The flagship bridal cars' },
   { id: 'classic-vintage', title: 'Classic & Vintage', blurb: 'Timeless cars for ceremony exits & photos' },
@@ -23,11 +16,11 @@ export const FLEET_CATEGORIES: FleetCategory[] = [
 ]
 
 /**
- * Categorize by name/slug keywords. Rule order matters:
- * brand rows win first (Phantom Limousine -> Rolls row), vintage beats the
- * generic limo/convertible checks (Daimler DS420 Limousine -> Classic row).
+ * Keyword fallback used when a vehicle has no explicit fleetCategory (or its
+ * category was deleted). Rule order matters: brand rows win first, vintage
+ * beats the generic limo/convertible checks.
  */
-export function getFleetCategory(vehicle: Vehicle): FleetCategoryId {
+function keywordCategory(vehicle: Vehicle): string {
   const n = `${vehicle.name} ${vehicle.slug}`.toLowerCase()
   if (/rolls|bentley/.test(n)) return 'rolls-bentley'
   if (/daimler|190\s?sl|excalibur|vintage|classic\b/.test(n)) return 'classic-vintage'
@@ -37,21 +30,36 @@ export function getFleetCategory(vehicle: Vehicle): FleetCategoryId {
   return 'luxury-sedan'
 }
 
+/** Explicit admin assignment wins when it matches a known category; otherwise keyword fallback. */
+export function getFleetCategory(vehicle: Vehicle, validIds?: Set<string>): string {
+  if (vehicle.fleetCategory && (!validIds || validIds.has(vehicle.fleetCategory))) {
+    return vehicle.fleetCategory
+  }
+  return keywordCategory(vehicle)
+}
+
 export interface FleetCategoryGroup extends FleetCategory {
   vehicles: Vehicle[]
 }
 
 /** Group + sort vehicles into ordered category rows; empty rows are dropped. */
-export function groupFleetByCategory(vehicles: Vehicle[]): FleetCategoryGroup[] {
-  const byId = new Map<FleetCategoryId, Vehicle[]>()
+export function groupFleetByCategory(
+  vehicles: Vehicle[],
+  categories: FleetCategory[] = FLEET_CATEGORIES
+): FleetCategoryGroup[] {
+  if (categories.length === 0) categories = FLEET_CATEGORIES
+  const validIds = new Set(categories.map((c) => c.id))
+  const byId = new Map<string, Vehicle[]>()
   for (const v of vehicles) {
-    const id = getFleetCategory(v)
+    let id = getFleetCategory(v, validIds)
+    // Keyword fallback can return an id the admin deleted; park those in the last category.
+    if (!validIds.has(id)) id = categories[categories.length - 1]?.id ?? id
     const list = byId.get(id) ?? []
     list.push(v)
     byId.set(id, list)
   }
   const order = (v: Vehicle) => v.displayOrder ?? 99
-  return FLEET_CATEGORIES.map((cat) => ({
+  return categories.map((cat) => ({
     ...cat,
     vehicles: (byId.get(cat.id) ?? []).sort(
       (a, b) => order(a) - order(b) || a.name.localeCompare(b.name)
@@ -60,6 +68,9 @@ export function groupFleetByCategory(vehicles: Vehicle[]): FleetCategoryGroup[] 
 }
 
 /** Flat list in homepage row order — for grids and pickers (DB order is insert order). */
-export function sortFleetForDisplay(vehicles: Vehicle[]): Vehicle[] {
-  return groupFleetByCategory(vehicles).flatMap((group) => group.vehicles)
+export function sortFleetForDisplay(
+  vehicles: Vehicle[],
+  categories: FleetCategory[] = FLEET_CATEGORIES
+): Vehicle[] {
+  return groupFleetByCategory(vehicles, categories).flatMap((group) => group.vehicles)
 }
