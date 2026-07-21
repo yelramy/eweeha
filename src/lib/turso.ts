@@ -6,11 +6,16 @@ if (typeof window !== 'undefined') {
   throw new Error('Database client should not be used on the client side')
 }
 
-if (!process.env.TURSO_DATABASE_URL) {
+// Overrides pin the app to the stable parent DB, bypassing the Turso/Vercel
+// integration's per-deployment branch databases (see docs/DATABASE.md).
+const DB_URL = process.env.TURSO_URL_OVERRIDE || process.env.TURSO_DATABASE_URL
+const DB_TOKEN = process.env.TURSO_TOKEN_OVERRIDE || process.env.TURSO_AUTH_TOKEN
+
+if (!DB_URL) {
   throw new Error('TURSO_DATABASE_URL environment variable is required')
 }
 
-if (!process.env.TURSO_AUTH_TOKEN) {
+if (!DB_TOKEN) {
   throw new Error('TURSO_AUTH_TOKEN environment variable is required')
 }
 
@@ -21,8 +26,8 @@ class TursoConnection {
 
   constructor() {
     this.client = createClient({
-      url: process.env.TURSO_DATABASE_URL!,
-      authToken: process.env.TURSO_AUTH_TOKEN!,
+      url: DB_URL!,
+      authToken: DB_TOKEN!,
     })
     // Warmup connection asynchronously
     this.warmup().catch(console.error)
