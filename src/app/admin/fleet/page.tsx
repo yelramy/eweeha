@@ -28,7 +28,7 @@ export default function FleetManagement() {
     name: '', price: 0, features: '', description: '',
     specifications: { seating: '', luggage: '', transmission: '' },
     available: true, quantity: 1, showOnHomepage: false, displayOrder: 0,
-    model: '', year: new Date().getFullYear(), fleetCategory: '',
+    model: '', year: new Date().getFullYear(), fleetCategories: [] as string[],
     priceBeirut: 0, priceBatrounSaida: 0, priceFurther: 0,
     maxPassengers: 1, maxLuggage: 0, seatingLayout: '',
     ceilingType: '' as '' | 'standard' | 'high',
@@ -177,7 +177,7 @@ export default function FleetManagement() {
       name: '', price: 0, features: '', description: '',
       specifications: { seating: '', luggage: '', transmission: '' },
       available: true, quantity: 1, showOnHomepage: false, displayOrder: 0,
-      model: '', year: new Date().getFullYear(), fleetCategory: '',
+      model: '', year: new Date().getFullYear(), fleetCategories: [] as string[],
       priceBeirut: 0, priceBatrounSaida: 0, priceFurther: 0,
       maxPassengers: 0, maxLuggage: 0, seatingLayout: '', ceilingType: '',
       variants: [], availableExtras: []
@@ -197,7 +197,7 @@ export default function FleetManagement() {
       displayOrder: vehicle.displayOrder || 0,
       model: vehicle.model || '',
       year: vehicle.year || new Date().getFullYear(),
-      fleetCategory: vehicle.fleetCategory || '',
+      fleetCategories: vehicle.fleetCategories || [],
       priceBeirut: vehicle.priceBeirut || 0,
       priceBatrounSaida: vehicle.priceBatrounSaida || 0,
       priceFurther: vehicle.priceFurther || 0,
@@ -260,12 +260,38 @@ export default function FleetManagement() {
                   <label className="block text-gray-600 mb-1">Name *</label>
                   <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-2 py-2 border border-gray-300 rounded" />
                 </div>
-                <div>
-                  <label className="block text-gray-600 mb-1">Category</label>
-                  <select value={formData.fleetCategory} onChange={(e) => setFormData({...formData, fleetCategory: e.target.value})} className="w-full px-2 py-2 border border-gray-300 rounded">
-                    <option value="">Auto (by name)</option>
-                    {fleetCategories.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
-                  </select>
+                <div className="md:col-span-2">
+                  <label className="block text-gray-600 mb-1">Categories</label>
+                  <div className="flex flex-wrap gap-2">
+                    {fleetCategories.map((c) => {
+                      const selected = formData.fleetCategories.includes(c.id)
+                      return (
+                        <button
+                          type="button"
+                          key={c.id}
+                          aria-pressed={selected}
+                          onClick={() => setFormData({
+                            ...formData,
+                            fleetCategories: selected
+                              ? formData.fleetCategories.filter((id) => id !== c.id)
+                              : [...formData.fleetCategories, c.id],
+                          })}
+                          className={`px-3 py-1.5 rounded-full border text-sm transition-colors ${
+                            selected
+                              ? 'bg-gray-900 text-white border-gray-900'
+                              : 'bg-white text-gray-700 border-gray-300 hover:border-gray-500'
+                          }`}
+                        >
+                          {selected ? '✓ ' : ''}{c.title}
+                        </button>
+                      )
+                    })}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {formData.fleetCategories.length === 0
+                      ? 'No categories selected — the car is placed automatically by its name.'
+                      : `Shown in ${formData.fleetCategories.length} ${formData.fleetCategories.length === 1 ? 'category' : 'categories'}.`}
+                  </p>
                 </div>
                 <div>
                   <label className="block text-gray-600 mb-1">Beirut District ($) *</label>

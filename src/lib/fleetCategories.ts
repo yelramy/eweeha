@@ -30,12 +30,11 @@ function keywordCategory(vehicle: Vehicle): string {
   return 'luxury-sedan'
 }
 
-/** Explicit admin assignment wins when it matches a known category; otherwise keyword fallback. */
-export function getFleetCategory(vehicle: Vehicle, validIds?: Set<string>): string {
-  if (vehicle.fleetCategory && (!validIds || validIds.has(vehicle.fleetCategory))) {
-    return vehicle.fleetCategory
-  }
-  return keywordCategory(vehicle)
+/** Explicit admin assignments win when they match known categories; otherwise keyword fallback. */
+export function getFleetCategories(vehicle: Vehicle, validIds?: Set<string>): string[] {
+  const explicit = (vehicle.fleetCategories ?? []).filter((id) => !validIds || validIds.has(id))
+  if (explicit.length > 0) return explicit
+  return [keywordCategory(vehicle)]
 }
 
 export interface FleetCategoryGroup extends FleetCategory {
@@ -51,12 +50,13 @@ export function groupFleetByCategory(
   const validIds = new Set(categories.map((c) => c.id))
   const byId = new Map<string, Vehicle[]>()
   for (const v of vehicles) {
-    let id = getFleetCategory(v, validIds)
-    // Keyword fallback can return an id the admin deleted; park those in the last category.
-    if (!validIds.has(id)) id = categories[categories.length - 1]?.id ?? id
-    const list = byId.get(id) ?? []
-    list.push(v)
-    byId.set(id, list)
+    for (let id of getFleetCategories(v, validIds)) {
+      // Keyword fallback can return an id the admin deleted; park those in the last category.
+      if (!validIds.has(id)) id = categories[categories.length - 1]?.id ?? id
+      const list = byId.get(id) ?? []
+      list.push(v)
+      byId.set(id, list)
+    }
   }
   const order = (v: Vehicle) => v.displayOrder ?? 99
   return categories.map((cat) => ({
@@ -72,5 +72,8 @@ export function sortFleetForDisplay(
   vehicles: Vehicle[],
   categories: FleetCategory[] = FLEET_CATEGORIES
 ): Vehicle[] {
-  return groupFleetByCategory(vehicles, categories).flatMap((group) => group.vehicles)
+  const seen = new Set<string>()
+  return groupFleetByCategory(vehicles, categories)
+    .flatMap((group) => group.vehicles)
+    .filter((v) => (seen.has(v.id) ? false : (seen.add(v.id), true)))
 }

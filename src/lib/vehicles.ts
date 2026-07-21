@@ -80,7 +80,7 @@ function rowToVehicle(row: Record<string, unknown>): Vehicle {
 
   // Add homepage display fields
   if (row.fleet_category) {
-    vehicle.fleetCategory = row.fleet_category as string
+    vehicle.fleetCategories = (row.fleet_category as string).split(',').filter(Boolean)
   }
   if (row.show_on_homepage !== null && row.show_on_homepage !== undefined) {
     vehicle.showOnHomepage = Boolean(row.show_on_homepage)
@@ -241,7 +241,7 @@ export const vehicles = {
         newVehicle.priceBatrounSaida || null,
         newVehicle.priceFurther || null,
         newVehicle.createdAt,
-        newVehicle.fleetCategory || null
+        newVehicle.fleetCategories?.length ? newVehicle.fleetCategories.join(',') : null
       ]
     })
     
@@ -310,9 +310,9 @@ export const vehicles = {
       updates.push('quantity = ?')
       args.push(vehicleData.quantity)
     }
-    if (vehicleData.fleetCategory !== undefined) {
+    if (vehicleData.fleetCategories !== undefined) {
       updates.push('fleet_category = ?')
-      args.push(vehicleData.fleetCategory || null)
+      args.push(vehicleData.fleetCategories.length ? vehicleData.fleetCategories.join(',') : null)
     }
     if (vehicleData.showOnHomepage !== undefined) {
       updates.push('show_on_homepage = ?')
