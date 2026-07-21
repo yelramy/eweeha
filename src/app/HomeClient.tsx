@@ -53,11 +53,44 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isConvoyPickerOpen, setIsConvoyPickerOpen] = useState(false)
 
-  // Owner request: visitors land on the cars — jump straight to the fleet
+  // Owner request: show the hero briefly, then glide down to the fleet —
   // unless a specific anchor (#booking, #services…) was requested.
+  // Any user interaction cancels the auto-scroll.
   useEffect(() => {
     if (window.location.hash) return
-    document.getElementById('fleet')?.scrollIntoView({ behavior: 'auto', block: 'start' })
+    const target = document.getElementById('fleet')
+    if (!target) return
+
+    let raf = 0
+    let cancelled = false
+    const cancel = () => {
+      cancelled = true
+      cancelAnimationFrame(raf)
+    }
+    const events: (keyof WindowEventMap)[] = ['wheel', 'touchstart', 'keydown', 'mousedown']
+    events.forEach((e) => window.addEventListener(e, cancel, { passive: true }))
+
+    const delay = setTimeout(() => {
+      if (cancelled) return
+      const startY = window.scrollY
+      const endY = target.getBoundingClientRect().top + window.scrollY
+      const duration = 1600
+      const t0 = performance.now()
+      const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2)
+      const step = (now: number) => {
+        if (cancelled) return
+        const p = Math.min(1, (now - t0) / duration)
+        window.scrollTo(0, startY + (endY - startY) * ease(p))
+        if (p < 1) raf = requestAnimationFrame(step)
+      }
+      raf = requestAnimationFrame(step)
+    }, 1500)
+
+    return () => {
+      clearTimeout(delay)
+      cancel()
+      events.forEach((e) => window.removeEventListener(e, cancel))
+    }
   }, [])
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
