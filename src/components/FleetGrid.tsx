@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import Button from '@/components/Button'
 import CardImageCarousel from '@/components/CardImageCarousel'
@@ -33,11 +33,12 @@ export default function FleetGrid({
     return vehicles.slice(start, start + PAGE_SIZE)
   }, [vehicles, page])
 
+  const topRef = useRef<HTMLDivElement>(null)
+
   const go = (next: number) => {
     setPage(Math.min(totalPages, Math.max(1, next)))
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+    // After the new page renders: instant jump (smooth scroll gets cancelled by the re-render)
+    setTimeout(() => topRef.current?.scrollIntoView({ behavior: 'auto', block: 'start' }), 0)
   }
 
   if (vehicles.length === 0) {
@@ -67,7 +68,7 @@ export default function FleetGrid({
     'flex-1 text-center px-3 py-1.5 rounded-md text-sm font-semibold bg-gold-600 hover:bg-gold-500 text-charcoal-500 transition-colors'
 
   return (
-    <div>
+    <div ref={topRef} className="scroll-mt-24">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
         {pageVehicles.map((vehicle) => {
           const zonePrices = getZonePrices(vehicle)
