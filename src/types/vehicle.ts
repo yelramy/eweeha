@@ -18,7 +18,7 @@ export interface Vehicle {
   slug: string
   name: string
   category?: 'compact' | 'standard' | 'luxury' // Legacy field, kept for database compatibility
-  fleetCategory?: string // fleet_categories id; empty/unknown falls back to keyword rules
+  fleetCategories?: string[] // fleet_categories ids; empty/unknown falls back to keyword rules
   capacity?: string // Legacy field, kept for backward compatibility
   price: number // Legacy field, kept for backward compatibility
   features: string[]

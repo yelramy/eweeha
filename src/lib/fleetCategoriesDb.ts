@@ -59,7 +59,17 @@ export async function reorderFleetCategories(idsInOrder: string[]): Promise<void
 
 export async function deleteFleetCategory(id: string): Promise<boolean> {
   const result = await turso.execute({ sql: 'DELETE FROM fleet_categories WHERE id = ?', args: [id] })
-  // Vehicles pointing at the deleted category fall back to keyword auto-assignment
-  await turso.execute({ sql: 'UPDATE vehicles SET fleet_category = NULL WHERE fleet_category = ?', args: [id] })
+  // Remove the deleted category from vehicles' CSV lists; empty falls back to keyword auto-assignment
+  const affected = await turso.execute({
+    sql: "SELECT id, fleet_category FROM vehicles WHERE ',' || fleet_category || ',' LIKE ?",
+    args: [`%,${id},%`],
+  })
+  for (const row of affected.rows) {
+    const remaining = (row.fleet_category as string).split(',').filter((c) => c && c !== id)
+    await turso.execute({
+      sql: 'UPDATE vehicles SET fleet_category = ? WHERE id = ?',
+      args: [remaining.length ? remaining.join(',') : null, row.id as string],
+    })
+  }
   return result.rowsAffected > 0
 }
