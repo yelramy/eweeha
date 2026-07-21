@@ -350,14 +350,38 @@ export default function FleetManagement() {
                 {googleStatus && <span className="ml-2 text-sm text-gray-500">{googleStatus}</span>}
                 <input type="file" ref={fileInputRef} multiple accept="image/*" onChange={(e) => handleImageUpload(e.target.files)} className="hidden" />
                 {uploadedImages.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {uploadedImages.map((url, i) => (
-                      <div key={i} className="relative">
-                        <Image src={url} alt="" width={60} height={40} className="w-16 h-10 object-cover rounded border" />
-                        <button type="button" onClick={() => setUploadedImages(uploadedImages.filter((_, idx) => idx !== i))} className="absolute -top-1 -right-1 bg-gray-900 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center">×</button>
-                      </div>
-                    ))}
-                  </div>
+                  <>
+                    <p className="text-xs text-gray-500 mt-2">The first photo is the cover shown on the homepage and fleet cards. Tap ★ to make a photo the cover, ‹ › to reorder the gallery.</p>
+                    <div className="flex flex-wrap gap-3 mt-2">
+                      {uploadedImages.map((url, i) => {
+                        const move = (from: number, to: number) => {
+                          const next = [...uploadedImages]
+                          next.splice(to, 0, ...next.splice(from, 1))
+                          setUploadedImages(next)
+                        }
+                        return (
+                          <div key={url + i} className={`relative rounded ${i === 0 ? 'ring-2 ring-amber-500' : ''}`}>
+                            <Image src={url} alt="" width={96} height={64} className="w-24 h-16 object-cover rounded border" />
+                            {i === 0 && (
+                              <span className="absolute top-0 left-0 bg-amber-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-br rounded-tl">COVER</span>
+                            )}
+                            <button type="button" title="Remove" onClick={() => setUploadedImages(uploadedImages.filter((_, idx) => idx !== i))} className="absolute -top-1.5 -right-1.5 bg-gray-900 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center">×</button>
+                            <div className="absolute bottom-0 inset-x-0 flex justify-center gap-1 bg-black/45 rounded-b py-0.5">
+                              {i > 0 && (
+                                <button type="button" title="Make cover" onClick={() => move(i, 0)} className="text-amber-300 text-xs px-1 leading-none">★</button>
+                              )}
+                              {i > 0 && (
+                                <button type="button" title="Move left" onClick={() => move(i, i - 1)} className="text-white text-xs px-1 leading-none">‹</button>
+                              )}
+                              {i < uploadedImages.length - 1 && (
+                                <button type="button" title="Move right" onClick={() => move(i, i + 1)} className="text-white text-xs px-1 leading-none">›</button>
+                              )}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </>
                 )}
               </div>
               <div className="flex gap-2 pt-2 border-t border-gray-200">
