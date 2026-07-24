@@ -831,3 +831,11 @@ Admin client helper: `src/utils/adminApi.ts` (`ApiResponse<T>`).
 **Jul 5 2026 (afternoon) — WhatsApp link preview fix:**
 - **Root cause:** `/og-image.jpg` was **1.6MB PNG** (WhatsApp/Meta limit **600KB**) and served with **`Cross-Origin-Resource-Policy: same-origin`**, which blocks Facebook/WhatsApp crawlers from fetching the preview image cross-origin.
 - **Fix:** Replaced `ImageResponse` PNG pipeline with `src/lib/generateOgImage.ts` (sharp → **~93KB JPEG**, correct `Content-Type`). OG routes + `proxy.ts` now set **`Cross-Origin-Resource-Policy: cross-origin`**. Added `og:image:type` = `image/jpeg` in metadata. Removed unused `og-image-template.tsx` / `ogImageAssets.ts`.
+
+**Jul 24 2026 — vehicle detail prices compact + right-aligned (user request):**
+
+- `/fleet/[id]` (`VehicleDetailClient.tsx`): zone prices no longer oversized (`text-2xl/3xl` + slate box). Compact right-aligned block next to the title (muted short labels, `$` amounts in a fixed-width `tabular-nums` column).
+
+**Jul 24 2026 — local `dev.db` sync helper (read-only prod):**
+
+- Added `scripts/pull-prod-to-local.mjs`: SELECT-only from parent Turso; mirrors vehicles/settings/content into `file:dev.db` (backs up first; leaves local `users` alone).

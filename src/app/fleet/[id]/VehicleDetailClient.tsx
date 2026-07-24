@@ -194,7 +194,29 @@ export default function VehicleDetailClient({ vehicle, config, reviews = [], rat
           {/* Vehicle Details */}
           <div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">{vehicle.name}</h1>
+            <div className="flex items-start justify-between gap-4 mb-3">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 min-w-0">{vehicle.name}</h1>
+              {/* Pricing — right-aligned; prices form a scan column */}
+              <div className="text-sm text-right flex-shrink-0">
+                {zonePrices.length > 0 ? (
+                  <>
+                    <div className="space-y-0.5">
+                      {zonePrices.map((zone) => (
+                        <div key={zone.id} className="flex justify-end gap-2 tabular-nums">
+                          <span className="text-gray-400">{zone.shortLabel}</span>
+                          <span className="font-semibold text-gray-900 w-14 text-right">${zone.price}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-[11px] text-gray-500 mt-1.5 max-w-[11rem] leading-snug">
+                      Per wedding — chauffeur &amp; fuel included
+                    </p>
+                  </>
+                ) : (
+                  <span className="text-gray-500">Contact for pricing</span>
+                )}
+              </div>
+            </div>
 
             {ratingStats && ratingStats.totalReviews > 0 && (
               <a href="#reviews" className="inline-flex items-center gap-2 mb-4 text-sm text-gray-700 hover:text-gray-900">
@@ -203,25 +225,6 @@ export default function VehicleDetailClient({ vehicle, config, reviews = [], rat
                 <span className="text-gray-500">({ratingStats.totalReviews} {ratingStats.totalReviews === 1 ? 'review' : 'reviews'})</span>
               </a>
             )}
-
-            {/* Pricing */}
-            <div className="mb-6 bg-slate-50 rounded-xl p-5">
-              {zonePrices.length > 0 ? (
-                <>
-                  <div className="flex flex-wrap gap-4 md:gap-6">
-                    {zonePrices.map((zone) => (
-                      <div key={zone.id}>
-                        <span className="text-2xl md:text-3xl font-bold text-slate-800">${zone.price}</span>
-                        <span className="block text-sm text-gray-500 mt-0.5">{zone.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-xs text-gray-500 mt-3">Per wedding, depending on your venue location — chauffeur &amp; fuel included</p>
-                </>
-              ) : (
-                <span className="text-2xl md:text-3xl font-bold text-slate-800">Contact for pricing</span>
-              )}
-            </div>
 
             <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">{vehicle.description}</p>
 
