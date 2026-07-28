@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { generateMetadata as generateSeoMetadata } from '@/lib/seoManager'
 import { ServiceSchema, FAQSchema } from '@/components/StructuredDataEnhanced'
 import { FAQAccordion } from '@/components/Accordion'
+import SiteHeader from '@/components/SiteHeader'
+import Footer from '@/components/Footer'
 
 export const metadata: Metadata = generateSeoMetadata({
   title: 'Classic & Convertible Wedding Cars in Lebanon - Photoshoot Rentals',
@@ -53,20 +55,13 @@ export default function PhotoshootCarsPage() {
       <FAQSchema faqs={faqs} />
 
       <div className="min-h-screen bg-white dark:bg-gray-900">
-        {/* Simple Header */}
-        <div className="bg-white dark:bg-gray-800 border-b border-warm-200 dark:border-gray-700 sticky top-0 z-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <Link href="/" className="inline-flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors">
-              ← Back to Home
-            </Link>
-          </div>
-        </div>
+        <SiteHeader />
 
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <p className="script-accent text-3xl text-primary-100 mb-4">the frame-worthy ones…</p>
+              <p className="font-arabic text-3xl text-primary-100 mb-4" lang="ar" dir="auto">صورة العمر…</p>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 Classic &amp; Convertible Cars
               </h1>
@@ -193,6 +188,8 @@ export default function PhotoshootCarsPage() {
             </div>
           </section>
         </div>
+
+        <Footer />
       </div>
     </>
   )

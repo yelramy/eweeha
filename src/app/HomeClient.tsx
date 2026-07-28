@@ -122,8 +122,8 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   Wedding Cars<span className="block">Lebanon</span>
                 </span>
               </Link>
-              <div className="hidden md:flex items-center gap-6">
-                <nav className="flex space-x-8">
+              <div className="hidden lg:flex items-center gap-6">
+                <nav className="flex space-x-6">
                   <a
                     href="#fleet"
                     onClick={(e) => handleSmoothScroll(e, '#fleet')}
@@ -166,7 +166,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                 </nav>
               </div>
               <button
-                className="md:hidden p-0.5 rounded-md text-gray-700 dark:text-gray-200 hover:bg-cream-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="lg:hidden p-0.5 rounded-md text-gray-700 dark:text-gray-200 hover:bg-cream-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-500"
                 onClick={() => setIsMobileMenuOpen(true)}
                 aria-label="Open menu"
               >

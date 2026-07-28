@@ -2,6 +2,7 @@
 
 import { useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import Button from '@/components/Button'
 import CardImageCarousel from '@/components/CardImageCarousel'
 import { Vehicle } from '@/types/vehicle'
@@ -25,6 +26,7 @@ export default function FleetGrid({
   initialPage = 1,
   tone = 'default',
 }: FleetGridProps) {
+  const router = useRouter()
   const [page, setPage] = useState(initialPage)
   const totalPages = Math.max(1, Math.ceil(vehicles.length / PAGE_SIZE))
 
@@ -56,9 +58,6 @@ export default function FleetGrid({
   const titleClass = isDark ? 'text-cream-50' : 'text-charcoal-500 dark:text-white'
   const titleHover = isDark ? 'hover:text-gold-400' : 'hover:text-primary-700 dark:hover:text-primary-300'
   const metaClass = isDark ? 'text-gray-400' : 'text-warm-600 dark:text-gray-400'
-  const chauffeurClass = isDark
-    ? 'bg-gray-800/80 text-gold-300 border border-gray-600'
-    : 'bg-primary-50 text-primary-700 border border-primary-200'
   const featureClass = isDark
     ? 'bg-gray-800 text-gray-300 border border-gray-600'
     : 'bg-cream-100 text-charcoal-500 border border-warm-200'
@@ -72,15 +71,25 @@ export default function FleetGrid({
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
         {pageVehicles.map((vehicle) => {
           const zonePrices = getZonePrices(vehicle)
+          const goDetails = () => router.push(`/fleet/${vehicle.id}`)
           return (
             <div
               key={vehicle.id}
-              className={`${cardClass} rounded-lg overflow-hidden hover-lift flex flex-col h-full`}
+              role="link"
+              tabIndex={0}
+              onClick={goDetails}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  goDetails()
+                }
+              }}
+              className={`${cardClass} rounded-lg overflow-hidden hover-lift flex flex-col h-full cursor-pointer`}
             >
               <div className="flex-shrink-0">
                 <CardImageCarousel
                   images={[vehicle.images.main, ...(vehicle.images.gallery || [])]}
-                  alt={`${vehicle.name} — wedding car with chauffeur in Lebanon`}
+                  alt={`${vehicle.name} — wedding car in Lebanon`}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   quality={75}
                 />
@@ -88,10 +97,10 @@ export default function FleetGrid({
               <div className="p-4 sm:p-5 flex flex-col flex-1">
                 <div className="flex items-start justify-between mb-3 gap-2">
                   <div className="flex-1 min-w-0">
-                    <h3 className={`text-base sm:text-lg font-semibold ${titleClass} mb-1 leading-tight`}>
-                      <Link href={`/fleet/${vehicle.id}`} className={`${titleHover} transition-colors`}>
+                    <h3 className={`text-base sm:text-lg font-semibold ${titleClass} mb-1 leading-tight`} dir="auto">
+                      <span className={`${titleHover} transition-colors`}>
                         {vehicle.name}
-                      </Link>
+                      </span>
                     </h3>
                     <p className={`text-xs sm:text-sm ${metaClass}`}>
                       {vehicle.maxPassengers ? `${vehicle.maxPassengers} passengers` : vehicle.capacity}
@@ -111,21 +120,23 @@ export default function FleetGrid({
                   )}
                 </div>
                 <div className="flex-1" />
-                <div className="space-y-1.5 sm:space-y-2 text-xs mb-3">
-                  <span className={`inline-flex px-2.5 py-1 rounded text-[11px] sm:text-xs ${chauffeurClass}`}>
-                    Chauffeur included
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {vehicle.features.slice(0, 2).map((feature, i) => (
-                      <span
-                        key={i}
-                        className={`px-2.5 py-1 rounded text-[11px] sm:text-xs ${featureClass}`}
-                      >
-                        {feature}
-                      </span>
-                    ))}
+                {vehicle.features.length > 0 ? (
+                  <div className="space-y-1.5 sm:space-y-2 text-xs mb-3">
+                    <div className="flex flex-wrap gap-1.5">
+                      {vehicle.features.slice(0, 2).map((feature, i) => (
+                        <span
+                          key={i}
+                          className={`px-2.5 py-1 rounded text-[11px] sm:text-xs ${featureClass}`}
+                          dir="auto"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="mb-3" />
+                )}
                 {showActions ? (
                   <div className="flex gap-2">
                     {isDark ? (
@@ -136,7 +147,8 @@ export default function FleetGrid({
                         <Link
                           href={`/booking?vehicle=${vehicle.id}`}
                           className={actionGold}
-                          aria-label={`Book ${vehicle.name} wedding car with chauffeur included`}
+                          aria-label={`Book ${vehicle.name} wedding car`}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           Book
                         </Link>
@@ -146,15 +158,21 @@ export default function FleetGrid({
                         <Button href={`/fleet/${vehicle.id}`} variant="outline" size="sm" className="flex-1 font-medium">
                           Details
                         </Button>
-                        <Button
-                          href={`/booking?vehicle=${vehicle.id}`}
-                          variant="warning"
-                          size="sm"
-                          className="flex-1 font-semibold"
-                          aria-label={`Book ${vehicle.name} wedding car with chauffeur included`}
+                        <div
+                          className="flex-1"
+                          onClick={(e) => e.stopPropagation()}
+                          onKeyDown={(e) => e.stopPropagation()}
                         >
-                          Book
-                        </Button>
+                          <Button
+                            href={`/booking?vehicle=${vehicle.id}`}
+                            variant="warning"
+                            size="sm"
+                            className="w-full font-semibold"
+                            aria-label={`Book ${vehicle.name} wedding car`}
+                          >
+                            Book
+                          </Button>
+                        </div>
                       </>
                     )}
                   </div>

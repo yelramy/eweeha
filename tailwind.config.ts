@@ -16,10 +16,11 @@ const config: Config = {
     // brand palette + rebrands on top.
     extend: {
       fontFamily: {
-        sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-outfit)', 'var(--font-arabic)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-inter)', 'monospace'],
         display: ['var(--font-script)', 'cursive'],
         serif: ['var(--font-cormorant)', 'serif'],
+        arabic: ['var(--font-arabic)', 'var(--font-outfit)', 'system-ui', 'sans-serif'],
       },
       colors: {
         background: 'var(--background)',

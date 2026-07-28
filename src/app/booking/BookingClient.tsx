@@ -268,6 +268,7 @@ function WeddingBookingContent() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by name — e.g. Rolls, Jaguar, vintage…"
+              dir="auto"
               className="w-full px-3 py-2.5 mb-4 text-sm border border-warm-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-charcoal-600 dark:text-white placeholder:text-warm-500 focus:ring-2 focus:ring-primary-500"
               aria-label="Search fleet"
             />
@@ -376,6 +377,7 @@ function WeddingBookingContent() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Rita & Elie"
+                  dir="auto"
                   className="w-full px-3 py-2.5 text-base border border-warm-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-charcoal-600 dark:text-white placeholder:text-warm-400 focus:ring-2 focus:ring-primary-500"
                 />
               </div>
@@ -389,6 +391,7 @@ function WeddingBookingContent() {
                   value={startingLocation}
                   onChange={(e) => setStartingLocation(e.target.value)}
                   placeholder="e.g. bride's home in Achrafieh"
+                  dir="auto"
                   className="w-full px-3 py-2.5 text-base border border-warm-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-charcoal-600 dark:text-white placeholder:text-warm-400 focus:ring-2 focus:ring-primary-500"
                 />
               </div>
@@ -403,6 +406,7 @@ function WeddingBookingContent() {
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={500}
                   placeholder="e.g. ceremony in Harissa, venue in Faqra"
+                  dir="auto"
                   className="w-full px-3 py-2.5 text-base border border-warm-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-charcoal-600 dark:text-white placeholder:text-warm-400 focus:ring-2 focus:ring-primary-500"
                 />
               </div>

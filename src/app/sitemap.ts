@@ -29,6 +29,7 @@ const staticRouteConfigs: StaticRouteConfig[] = [
   { path: '/privacy', priority: 0.4, changeFrequency: 'yearly' },
   // Routes index
   { path: '/routes', priority: 0.8, changeFrequency: 'weekly' },
+  { path: '/sitemap', priority: 0.3, changeFrequency: 'monthly' },
 ]
 
 function resolveBaseUrl(url: string) {

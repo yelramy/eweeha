@@ -33,13 +33,8 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
           }
         }
       })
-    } else {
-      console.error('[PostHog] Configuration error:', {
-        hasKey: !!posthogKey,
-        hasHost: !!posthogHost,
-        key: posthogKey || 'MISSING',
-        host: posthogHost || 'MISSING'
-      })
+    } else if (process.env.NODE_ENV === 'production') {
+      console.warn('[PostHog] key/host missing — analytics disabled')
     }
   }, [])
 

@@ -839,3 +839,12 @@ Admin client helper: `src/utils/adminApi.ts` (`ApiResponse<T>`).
 **Jul 24 2026 — local `dev.db` sync helper (read-only prod):**
 
 - Added `scripts/pull-prod-to-local.mjs`: SELECT-only from parent Turso; mirrors vehicles/settings/content into `file:dev.db` (backs up first; leaves local `users` alone).
+
+**Jul 28 2026 — fleet UX + Arabic + category colors:**
+
+- **Shuffle on refresh:** `FleetCategoryRows` reshuffles category row order and cars within each row on the client after load (`shuffleFleetGroups` in `fleetCategories.ts`). SSR keeps stable order for SEO/crawlers.
+- **Category accent colors (admin):** `fleet_categories.color` + `color_dark` columns (`migrateAddFleetCategoryColors`); admin color pickers in `FleetCategoryManager`; homepage row titles/underlines use the light/dark accents (useful for groom-style / dark rows).
+- **Clickable cards:** homepage rows + `/fleet` grid — clicking anywhere on a card opens details; Book still works via stopPropagation.
+- **Vehicle detail nav:** sticky header Book Now → **Previous / Next** within the active category + **category dropdown** underneath; bottom **Book This Vehicle** kept.
+- **Arabic writing:** Noto Sans Arabic (`--font-arabic`) in root layout; font fallbacks in `globals.css` + Tailwind; `dir="auto"` / `unicode-bidi: plaintext` on forms and fleet text; RTL chevron helpers.
+- **Removed** "Chauffeur included" badges under fleet card photos (`FleetCategoryRows`, `FleetGrid`).

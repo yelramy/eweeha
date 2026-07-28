@@ -516,6 +516,23 @@ export async function migrateAddZonePricing() {
   }
 }
 
+export async function migrateAddFleetCategoryColors() {
+  for (const col of ['color', 'color_dark'] as const) {
+    try {
+      await turso.execute(`ALTER TABLE fleet_categories ADD COLUMN ${col} TEXT`)
+      console.log(`✅ Added ${col} column to fleet_categories`)
+    } catch (error) {
+      const msg = (error as Error).message
+      if (msg.includes('duplicate column') || msg.includes('already exists')) {
+        console.log(`✅ ${col} column already exists on fleet_categories`)
+      } else {
+        console.error(`❌ Migration error (${col}):`, error)
+        throw error
+      }
+    }
+  }
+}
+
 export async function migrateAddFleetCategories() {
   try {
     await turso.execute(`
@@ -523,7 +540,9 @@ export async function migrateAddFleetCategories() {
         id TEXT PRIMARY KEY,
         title TEXT NOT NULL,
         blurb TEXT NOT NULL DEFAULT '',
-        display_order INTEGER NOT NULL DEFAULT 0
+        display_order INTEGER NOT NULL DEFAULT 0,
+        color TEXT,
+        color_dark TEXT
       )
     `)
     const defaults = [
@@ -573,6 +592,7 @@ export async function runAllMigrations() {
   await migrateAddQuoteCommitmentFields()
   await migrateAddZonePricing()
   await migrateAddFleetCategories()
+  await migrateAddFleetCategoryColors()
   console.log('✅ All migrations complete')
 }
 
