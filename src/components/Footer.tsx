@@ -31,6 +31,7 @@ export default function Footer() {
               {/* Blog link hidden until enough posts exist — /blog route still live */}
               <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
               <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
+              <li><Link href="/sitemap" className="hover:text-white">Site Map</Link></li>
               <li><Link href="/terms" className="hover:text-white">Terms of Service</Link></li>
               <li><Link href="/privacy" className="hover:text-white">Privacy Policy</Link></li>
             </ul>
@@ -65,7 +66,9 @@ export default function Footer() {
         </div>
         <div className="mt-8 border-t border-primary-800 pt-6 text-sm text-primary-100/70 flex justify-between items-center">
           <div>© {new Date().getFullYear()} Eweeha. All rights reserved.</div>
-          <Link href="/routes" className="hover:text-white">Site Map</Link>
+          <div className="flex items-center gap-4">
+            <Link href="/routes" className="hover:text-white">Routes</Link>
+          </div>
         </div>
       </div>
     </footer>

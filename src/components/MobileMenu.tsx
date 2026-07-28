@@ -26,12 +26,15 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   const handleLinkClick = (href: string) => {
     onClose()
-    // Add smooth scrolling for anchor links
+    // Add smooth scrolling for anchor links; anchors only exist on the
+    // homepage, so from other routes navigate there with the hash instead.
     if (href.startsWith('#')) {
       setTimeout(() => {
         const element = document.querySelector(href)
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        } else {
+          window.location.href = `/${href}`
         }
       }, 100)
     }

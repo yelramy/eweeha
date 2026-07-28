@@ -175,26 +175,26 @@ export default function VehicleDetailClient({
               <span className="sm:hidden">Back</span>
             </Link>
             <div className="flex flex-col items-end gap-1.5 min-w-0">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <button
                   type="button"
                   onClick={goPrev}
                   disabled={navDisabled || !prevVehicle}
-                  className="bg-slate-800 text-white px-3 md:px-4 py-2.5 rounded-lg hover:bg-slate-900 text-sm md:text-base font-semibold min-h-[44px] flex items-center gap-1 transition-colors disabled:opacity-40 disabled:cursor-default"
+                  className="border border-slate-300 text-slate-600 px-2 py-1 rounded-md hover:bg-slate-100 hover:text-slate-900 text-xs md:text-sm font-medium min-h-[32px] flex items-center gap-0.5 transition-colors disabled:opacity-40 disabled:cursor-default"
                   aria-label="Previous vehicle in category"
                 >
-                  <ChevronLeftIcon className="h-4 w-4 rtl:rotate-180" />
-                  <span>Previous</span>
+                  <ChevronLeftIcon className="h-3.5 w-3.5 rtl:rotate-180" />
+                  <span>Prev</span>
                 </button>
                 <button
                   type="button"
                   onClick={goNext}
                   disabled={navDisabled || !nextVehicle}
-                  className="bg-slate-800 text-white px-3 md:px-4 py-2.5 rounded-lg hover:bg-slate-900 text-sm md:text-base font-semibold min-h-[44px] flex items-center gap-1 transition-colors disabled:opacity-40 disabled:cursor-default"
+                  className="border border-slate-300 text-slate-600 px-2 py-1 rounded-md hover:bg-slate-100 hover:text-slate-900 text-xs md:text-sm font-medium min-h-[32px] flex items-center gap-0.5 transition-colors disabled:opacity-40 disabled:cursor-default"
                   aria-label="Next vehicle in category"
                 >
                   <span>Next</span>
-                  <ChevronRightIcon className="h-4 w-4 rtl:rotate-180" />
+                  <ChevronRightIcon className="h-3.5 w-3.5 rtl:rotate-180" />
                 </button>
               </div>
               {categoryOptions.length > 0 ? (
@@ -203,7 +203,7 @@ export default function VehicleDetailClient({
                   <select
                     value={activeCategoryId}
                     onChange={(e) => onCategoryChange(e.target.value)}
-                    className="border border-gray-300 rounded-md px-2 py-1.5 text-sm text-gray-800 bg-white max-w-[min(100%,14rem)] min-h-[40px]"
+                    className="border border-gray-300 rounded-md px-2 py-1 text-xs md:text-sm text-gray-800 bg-white max-w-[min(100%,14rem)] min-h-[32px]"
                     aria-label="Switch fleet category"
                     dir="auto"
                   >
