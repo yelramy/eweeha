@@ -100,6 +100,7 @@ export default function ContactPageClient() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    dir="auto"
                     className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-primary-500 focus:border-warm-500 dark:focus:border-primary-500 transition-colors"
                     placeholder="John Doe"
                   />
@@ -144,6 +145,7 @@ export default function ContactPageClient() {
                     rows={6}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    dir="auto"
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-warm-500 dark:focus:ring-primary-500 focus:border-warm-500 dark:focus:border-primary-500 transition-all resize-none"
                     placeholder="Tell us how we can help you..."
                   />

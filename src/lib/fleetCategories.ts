@@ -4,6 +4,10 @@ export interface FleetCategory {
   id: string
   title: string
   blurb: string
+  /** Optional accent hex for category headers / groom-style rows (light mode). */
+  color?: string | null
+  /** Optional accent hex for dark mode; falls back to `color` when unset. */
+  colorDark?: string | null
 }
 
 /** Built-in defaults — DB-managed categories (fleet_categories table) take over when provided. */
@@ -14,6 +18,24 @@ export const FLEET_CATEGORIES: FleetCategory[] = [
   { id: 'luxury-sedan', title: 'Luxury Bridal Sedans', blurb: 'Modern comfort for bride, groom & family' },
   { id: 'suv-limo', title: 'SUVs & Stretch Limousines', blurb: 'Bold entrances & the whole bridal party' },
 ]
+
+/** Fisher–Yates shuffle (in place). Safe for client-only refresh variety — SSR keeps stable order for SEO. */
+export function shuffleInPlace<T>(items: T[]): T[] {
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[items[i], items[j]] = [items[j], items[i]]
+  }
+  return items
+}
+
+/** Shuffle category row order and cars within each category (client refresh variety). */
+export function shuffleFleetGroups<T extends { vehicles: Vehicle[] }>(groups: T[]): T[] {
+  const next = groups.map((g) => ({
+    ...g,
+    vehicles: shuffleInPlace([...g.vehicles]),
+  }))
+  return shuffleInPlace(next)
+}
 
 /**
  * Keyword fallback used when a vehicle has no explicit fleetCategory (or its

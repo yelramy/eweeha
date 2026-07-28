@@ -4,6 +4,7 @@ import { cached } from '@/lib/cache'
 import VehicleDetailClient from './VehicleDetailClient'
 import { formatUsd, getVehiclePricingInfo } from '@/utils/vehiclePricing'
 import { getVehicleReviews, getVehicleRatingStats } from '@/lib/reviews'
+import { getFleetCategoriesFromDb } from '@/lib/fleetCategoriesDb'
 
 // ISR: Revalidate every 10 minutes
 export const revalidate = 600
@@ -57,9 +58,11 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
   const { id } = await params
   
   // Fetch vehicle and config in parallel - single clean caching layer
-  const [vehicle, config] = await Promise.all([
+  const [vehicle, config, allVehicles, categories] = await Promise.all([
     cached.vehicles.getById(id),
     cached.config(),
+    cached.vehicles.getAll(),
+    getFleetCategoriesFromDb(),
   ])
 
   if (!vehicle) {
@@ -173,6 +176,8 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
         config={config}
         reviews={reviews}
         ratingStats={ratingStats}
+        allVehicles={allVehicles.filter((v) => v.available !== false)}
+        categories={categories}
       />
     </>
   )

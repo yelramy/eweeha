@@ -9,9 +9,17 @@ import {
   deleteFleetCategory,
 } from '@/lib/fleetCategoriesDb'
 
+const hexColor = z
+  .string()
+  .regex(/^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/, 'Must be a hex color like #742F38')
+  .nullable()
+  .optional()
+
 const CategoryBodySchema = z.object({
   title: z.string().min(1).max(100),
   blurb: z.string().max(200).default(''),
+  color: hexColor,
+  colorDark: hexColor,
 })
 
 const ReorderSchema = z.object({
@@ -38,7 +46,12 @@ export async function POST(request: NextRequest) {
     if (!parsed.success) {
       return NextResponse.json({ success: false, error: 'Invalid payload', details: parsed.error.flatten() }, { status: 400 })
     }
-    const category = await createFleetCategory(parsed.data.title, parsed.data.blurb)
+    const category = await createFleetCategory(
+      parsed.data.title,
+      parsed.data.blurb,
+      parsed.data.color ?? null,
+      parsed.data.colorDark ?? null
+    )
     return NextResponse.json({ success: true, data: category })
   } catch (error) {
     return NextResponse.json({ success: false, error: error instanceof Error ? error.message : 'Failed to create category' }, { status: 400 })
@@ -62,7 +75,13 @@ export async function PUT(request: NextRequest) {
     if (!id || !parsed.success) {
       return NextResponse.json({ success: false, error: 'Invalid payload', details: parsed.success ? undefined : parsed.error.flatten() }, { status: 400 })
     }
-    const updated = await updateFleetCategory(id, parsed.data.title, parsed.data.blurb)
+    const updated = await updateFleetCategory(
+      id,
+      parsed.data.title,
+      parsed.data.blurb,
+      parsed.data.color ?? null,
+      parsed.data.colorDark ?? null
+    )
     if (!updated) {
       return NextResponse.json({ success: false, error: 'Category not found' }, { status: 404 })
     }

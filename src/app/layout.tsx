@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Kaushan_Script, Outfit, Cormorant_Garamond } from "next/font/google";
+import { Kaushan_Script, Outfit, Cormorant_Garamond, Noto_Sans_Arabic } from "next/font/google";
 import { Suspense } from "react";
 import "./globals.css";
 import { generateMetadata, generateStructuredData, generateWebSiteStructuredData, siteConfig } from '@/lib/seoManager';
@@ -33,6 +33,14 @@ const outfit = Outfit({
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+
+// Arabic script fallback for bilingual / Arabic input (Lebanon)
+const arabic = Noto_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
 });
@@ -152,7 +160,7 @@ export default async function RootLayout({
         <meta name="application-name" content="Eweeha" />
       </head>
       <body
-        className={`${scriptFont.variable} ${outfit.variable} ${cormorant.variable} antialiased`}
+        className={`${scriptFont.variable} ${outfit.variable} ${cormorant.variable} ${arabic.variable} antialiased`}
       >
         <PostHogProvider>
           <Suspense fallback={null}>
