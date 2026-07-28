@@ -19,6 +19,23 @@ export const FLEET_CATEGORIES: FleetCategory[] = [
   { id: 'suv-limo', title: 'SUVs & Stretch Limousines', blurb: 'Bold entrances & the whole bridal party' },
 ]
 
+/**
+ * Near-black check on a hex color: true when every channel is dark (max < 60),
+ * i.e. the swatch reads as black regardless of hue. Used to switch a category
+ * row into the sleek dark "groom-style" treatment instead of a title tint.
+ */
+export function isNearBlack(hex?: string | null): boolean {
+  if (!hex) return false
+  const m = hex.trim().match(/^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/)
+  if (!m) return false
+  let h = m[1]
+  if (h.length === 3) h = h.split('').map((c) => c + c).join('')
+  const r = parseInt(h.slice(0, 2), 16)
+  const g = parseInt(h.slice(2, 4), 16)
+  const b = parseInt(h.slice(4, 6), 16)
+  return Math.max(r, g, b) < 60
+}
+
 /** Fisher–Yates shuffle (in place). Safe for client-only refresh variety — SSR keeps stable order for SEO. */
 export function shuffleInPlace<T>(items: T[]): T[] {
   for (let i = items.length - 1; i > 0; i--) {
