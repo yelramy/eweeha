@@ -225,7 +225,7 @@ function CategoryRow({
         <div
           ref={scrollerRef}
           onScroll={updateArrows}
-          className="no-scrollbar flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory -mx-1 px-1 pb-1"
+          className="no-scrollbar flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-1"
         >
           {vehicles.map((vehicle) => (
             <RowCard key={vehicle.id} vehicle={vehicle} dark />
@@ -241,7 +241,7 @@ function CategoryRow({
       <div
         ref={scrollerRef}
         onScroll={updateArrows}
-        className="no-scrollbar flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory -mx-4 px-4 scroll-px-4 sm:-mx-6 sm:px-6 sm:scroll-px-6 pb-1"
+        className="no-scrollbar flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-1"
       >
         {vehicles.map((vehicle) => (
           <RowCard key={vehicle.id} vehicle={vehicle} />
