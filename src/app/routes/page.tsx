@@ -5,7 +5,7 @@ import Footer from '@/components/Footer'
 import { routes } from '@/lib/routes'
 
 export const metadata: Metadata = {
-  title: 'Wedding Car Areas & Experiences in Lebanon | Eweeha',
+  title: { absolute: 'Wedding Car Areas & Experiences in Lebanon | Eweeha' },
   description: 'Wedding cars everywhere in Lebanon: Beirut, Jounieh & Harissa, Byblos & Batroun, Broummana, Aley & Bhamdoun, Faraya, the Chouf, Zahle & the Bekaa, the South and the North. Plus classic car photoshoots, convertibles, and zaffe arrivals.',
   alternates: {
     canonical: 'https://eweeha.com/routes'
@@ -14,7 +14,8 @@ export const metadata: Metadata = {
     title: 'Wedding Car Areas & Experiences in Lebanon',
     description: 'Chauffeured wedding cars for every ceremony and venue across Lebanon — plus classic car photoshoots and convertible convoys.',
     url: 'https://eweeha.com/routes',
-    type: 'website'
+    type: 'website',
+    images: [{ url: 'https://eweeha.com/og-image.jpg', width: 1200, height: 630 }]
   }
 }
 

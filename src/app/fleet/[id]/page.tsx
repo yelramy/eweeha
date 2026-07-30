@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const canonicalSlug = vehicle.slug || id
 
   return {
-    title: `${vehicle.name} - Wedding Car in Lebanon | Eweeha`,
+    title: { absolute: `${vehicle.name} — Wedding Car in Lebanon | Eweeha` },
     description: `Rent ${vehicle.name} in Lebanon. ${vehicle.description} Capacity: ${vehicle.capacity}. ${descriptionPricingText} with driver.`,
     alternates: {
       canonical: `https://eweeha.com/fleet/${canonicalSlug}`,

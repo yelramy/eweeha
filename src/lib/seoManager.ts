@@ -462,7 +462,9 @@ export function generateMetadata({
   const canonicalUrl = pageUrl
 
   return {
-    ...(omitTitle || !titleSegment ? {} : { title: titleSegment }),
+    // Absolute title: root-segment pages never get the layout template, child pages
+    // would get the brand twice — this makes every page carry exactly one brand suffix.
+    ...(omitTitle || !title ? {} : { title: { absolute: pageTitle } }),
     description: pageDescription,
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,

@@ -5,7 +5,7 @@ import FleetIndexClient from './FleetIndexClient'
 export const revalidate = 300
 
 export const metadata: Metadata = {
-  title: 'Wedding Car Fleet — All Cars with Chauffeur | Eweeha',
+  title: { absolute: 'Wedding Car Fleet — All Cars with Chauffeur | Eweeha' },
   description:
     'Browse the full Eweeha wedding car fleet in Lebanon: Rolls-Royce, Mercedes-Maybach, vintage limousines, convertibles, and bridal sedans — all with chauffeur.',
   alternates: { canonical: 'https://eweeha.com/fleet' },
