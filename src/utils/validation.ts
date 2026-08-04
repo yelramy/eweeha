@@ -72,7 +72,17 @@ export const VehicleCreateSchema = z.object({
     name: z.string(),
     price: z.number(),
     perDay: z.boolean()
-  })).optional()
+  })).optional(),
+  // Detail-page content managed from admin
+  descriptionTitle: z.string().max(120).optional(),
+  detailSections: z.array(z.object({
+    id: z.string().min(1).max(50),
+    title: z.string().max(120),
+    body: z.string().max(4000)
+  })).max(10).optional(),
+  bundleTitle: z.string().max(120).optional(),
+  bundleBody: z.string().max(4000).optional(),
+  bundleVehicleIds: z.array(z.string().min(1).max(200)).max(20).optional()
 })
 
 export const VehicleUpdateSchema = VehicleCreateSchema.partial()

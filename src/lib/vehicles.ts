@@ -118,6 +118,26 @@ function rowToVehicle(row: Record<string, unknown>): Vehicle {
     }
   }
 
+  if (row.description_title) vehicle.descriptionTitle = row.description_title as string
+  if (row.detail_sections) {
+    try {
+      const parsed = JSON.parse(row.detail_sections as string)
+      vehicle.detailSections = Array.isArray(parsed) ? parsed : []
+    } catch {
+      vehicle.detailSections = []
+    }
+  }
+  if (row.bundle_title) vehicle.bundleTitle = row.bundle_title as string
+  if (row.bundle_body) vehicle.bundleBody = row.bundle_body as string
+  if (row.bundle_vehicle_ids) {
+    try {
+      const parsed = JSON.parse(row.bundle_vehicle_ids as string)
+      vehicle.bundleVehicleIds = Array.isArray(parsed) ? parsed : []
+    } catch {
+      vehicle.bundleVehicleIds = []
+    }
+  }
+
   return vehicle
 }
 
@@ -206,8 +226,9 @@ export const vehicles = {
         main_image, gallery_images, seating, luggage, transmission,
         available, quantity, show_on_homepage, display_order, model, year, variants, 
         price_6h, price_10h, price_24h, extra_hour_rate, max_passengers, max_luggage, ceiling_type,
-        available_extras, price_beirut, price_batroun_saida, price_further, created_at, fleet_category
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        available_extras, price_beirut, price_batroun_saida, price_further, created_at, fleet_category,
+        description_title, detail_sections, bundle_title, bundle_body, bundle_vehicle_ids
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [
         newVehicle.id,
         newVehicle.slug,
@@ -241,7 +262,12 @@ export const vehicles = {
         newVehicle.priceBatrounSaida || null,
         newVehicle.priceFurther || null,
         newVehicle.createdAt,
-        newVehicle.fleetCategories?.length ? newVehicle.fleetCategories.join(',') : null
+        newVehicle.fleetCategories?.length ? newVehicle.fleetCategories.join(',') : null,
+        newVehicle.descriptionTitle || null,
+        newVehicle.detailSections?.length ? JSON.stringify(newVehicle.detailSections) : null,
+        newVehicle.bundleTitle || null,
+        newVehicle.bundleBody || null,
+        newVehicle.bundleVehicleIds?.length ? JSON.stringify(newVehicle.bundleVehicleIds) : null
       ]
     })
     
@@ -381,6 +407,26 @@ export const vehicles = {
     if (vehicleData.availableExtras !== undefined) {
       updates.push('available_extras = ?')
       args.push(JSON.stringify(vehicleData.availableExtras))
+    }
+    if (vehicleData.descriptionTitle !== undefined) {
+      updates.push('description_title = ?')
+      args.push(vehicleData.descriptionTitle || null)
+    }
+    if (vehicleData.detailSections !== undefined) {
+      updates.push('detail_sections = ?')
+      args.push(vehicleData.detailSections.length ? JSON.stringify(vehicleData.detailSections) : null)
+    }
+    if (vehicleData.bundleTitle !== undefined) {
+      updates.push('bundle_title = ?')
+      args.push(vehicleData.bundleTitle || null)
+    }
+    if (vehicleData.bundleBody !== undefined) {
+      updates.push('bundle_body = ?')
+      args.push(vehicleData.bundleBody || null)
+    }
+    if (vehicleData.bundleVehicleIds !== undefined) {
+      updates.push('bundle_vehicle_ids = ?')
+      args.push(vehicleData.bundleVehicleIds.length ? JSON.stringify(vehicleData.bundleVehicleIds) : null)
     }
     
     if (updates.length === 0) return existing

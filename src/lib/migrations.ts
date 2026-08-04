@@ -577,6 +577,33 @@ export async function migrateAddFleetCategories() {
   }
 }
 
+/**
+ * Editable detail-page content per vehicle: description heading, extra content
+ * sections, and the "bundle with these cars" recommendation block.
+ */
+export async function migrateAddVehicleDetailContent() {
+  const fields = [
+    { name: 'description_title', type: 'TEXT' },
+    { name: 'detail_sections', type: 'TEXT' },
+    { name: 'bundle_title', type: 'TEXT' },
+    { name: 'bundle_body', type: 'TEXT' },
+    { name: 'bundle_vehicle_ids', type: 'TEXT' },
+  ]
+  for (const field of fields) {
+    try {
+      await turso.execute(`ALTER TABLE vehicles ADD COLUMN ${field.name} ${field.type}`)
+      console.log(`✅ Added ${field.name} to vehicles table`)
+    } catch (error) {
+      const errorMessage = (error as Error).message
+      if (errorMessage.includes('duplicate column') || errorMessage.includes('already exists')) {
+        console.log(`✅ ${field.name} already exists in vehicles`)
+      } else {
+        throw error
+      }
+    }
+  }
+}
+
 export async function runAllMigrations() {
   console.log('🔄 Running database migrations...')
   await migrateAddQuantityColumn()
@@ -593,6 +620,7 @@ export async function runAllMigrations() {
   await migrateAddZonePricing()
   await migrateAddFleetCategories()
   await migrateAddFleetCategoryColors()
+  await migrateAddVehicleDetailContent()
   console.log('✅ All migrations complete')
 }
 

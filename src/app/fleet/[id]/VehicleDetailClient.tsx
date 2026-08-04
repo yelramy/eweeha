@@ -9,17 +9,21 @@ import BackToTop from '@/components/BackToTop'
 import ReviewsSection from '@/components/ReviewsSection'
 import ReviewStars from '@/components/ReviewStars'
 import type { Review, VehicleRatingStats } from '@/lib/reviews'
-import { getZonePrices } from '@/utils/vehiclePricing'
+import { getFromPrice, getZonePrices } from '@/utils/vehiclePricing'
 import {
   FleetCategory,
   FLEET_CATEGORIES,
-  getFleetCategories,
-  groupFleetByCategory,
+  sortFleetForDisplay,
 } from '@/lib/fleetCategories'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { events } from '@/lib/posthog'
+
+// Section headings sit one step above the body text — clearly a heading,
+// without the weight of the page title.
+const SECTION_HEADING = 'text-[17px] md:text-lg font-semibold text-gray-900 tracking-tight mb-2'
+const SECTION_BODY = 'text-[15px] md:text-base text-gray-600 leading-relaxed whitespace-pre-line max-w-3xl'
 
 interface VehicleDetailClientProps {
   vehicle: Vehicle
@@ -46,10 +50,6 @@ export default function VehicleDetailClient({
   const router = useRouter()
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [thumbnailPage, setThumbnailPage] = useState(0)
-  const [categories, setCategories] = useState<FleetCategory[]>(
-    categoriesProp?.length ? categoriesProp : FLEET_CATEGORIES
-  )
-  const [fetchedOnce, setFetchedOnce] = useState(Boolean(categoriesProp?.length))
 
   const THUMBNAILS_PER_PAGE = 12
 
@@ -57,54 +57,27 @@ export default function VehicleDetailClient({
     events.vehicleViewed(vehicle.id, vehicle.name, 'detail_page')
   }, [vehicle.id, vehicle.name])
 
-  useEffect(() => {
-    if (categoriesProp?.length || fetchedOnce) return
-    let cancelled = false
-    fetch('/api/fleet-categories')
-      .then((r) => r.json())
-      .then((d) => {
-        if (cancelled) return
-        if (d.success && d.data?.length) setCategories(d.data)
-        setFetchedOnce(true)
-      })
-      .catch(() => { if (!cancelled) setFetchedOnce(true) })
-    return () => { cancelled = true }
-  }, [categoriesProp, fetchedOnce])
+  const resolvedCategories: FleetCategory[] = categoriesProp?.length ? categoriesProp : FLEET_CATEGORIES
 
-  const resolvedCategories = categoriesProp?.length ? categoriesProp : categories
-
-  const validIds = useMemo(() => new Set(resolvedCategories.map((c) => c.id)), [resolvedCategories])
-  const vehicleCategoryIds = useMemo(
-    () => getFleetCategories(vehicle, validIds),
-    [vehicle, validIds]
-  )
-
-  const preferredCategoryId = vehicleCategoryIds[0] ?? resolvedCategories[0]?.id ?? ''
-  const [activeCategoryId, setActiveCategoryId] = useState(preferredCategoryId)
-  const [categoryVehicleId, setCategoryVehicleId] = useState(vehicle.id)
-
-  // Reset category selection when navigating to another vehicle (render-time adjust).
-  if (vehicle.id !== categoryVehicleId) {
-    setCategoryVehicleId(vehicle.id)
-    setActiveCategoryId(preferredCategoryId)
-  } else if (!activeCategoryId && preferredCategoryId) {
-    setActiveCategoryId(preferredCategoryId)
-  }
-
-  const categoryGroups = useMemo(
-    () => groupFleetByCategory(allVehicles.length ? allVehicles : [vehicle], resolvedCategories),
+  // Prev/Next walk the fleet in the same order as the fleet & homepage rows,
+  // which keeps cars of the same category next to each other.
+  const siblings = useMemo(
+    () => sortFleetForDisplay(allVehicles.length ? allVehicles : [vehicle], resolvedCategories),
     [allVehicles, vehicle, resolvedCategories]
   )
 
-  const categoryOptions = useMemo(
-    () => categoryGroups.map((g) => ({ id: g.id, title: g.title, count: g.vehicles.length })),
-    [categoryGroups]
-  )
+  const bundleVehicles = useMemo(() => {
+    const ids = vehicle.bundleVehicleIds ?? []
+    if (ids.length === 0 || allVehicles.length === 0) return []
+    const byId = new Map(allVehicles.map((v) => [v.id, v]))
+    return ids
+      .map((id) => byId.get(id))
+      .filter((v): v is Vehicle => Boolean(v) && v!.id !== vehicle.id)
+  }, [vehicle.bundleVehicleIds, vehicle.id, allVehicles])
 
-  const siblings = useMemo(() => {
-    const group = categoryGroups.find((g) => g.id === activeCategoryId)
-    return group?.vehicles ?? []
-  }, [categoryGroups, activeCategoryId])
+  const detailSections = (vehicle.detailSections ?? []).filter(
+    (s) => s.title.trim() || s.body.trim()
+  )
 
   const currentIndex = siblings.findIndex((v) => v.id === vehicle.id)
   const prevVehicle =
@@ -124,16 +97,6 @@ export default function VehicleDetailClient({
   const goNext = () => {
     if (!nextVehicle || nextVehicle.id === vehicle.id) return
     router.push(`/fleet/${nextVehicle.id}`)
-  }
-
-  const onCategoryChange = (id: string) => {
-    setActiveCategoryId(id)
-    if (vehicleCategoryIds.includes(id)) return
-    const group = categoryGroups.find((g) => g.id === id)
-    const first = group?.vehicles[0]
-    if (first && first.id !== vehicle.id) {
-      router.push(`/fleet/${first.id}`)
-    }
   }
 
   const allImages = [vehicle.images.main, ...vehicle.images.gallery]
@@ -174,47 +137,27 @@ export default function VehicleDetailClient({
               <span className="hidden sm:inline">Back to Fleet</span>
               <span className="sm:hidden">Back</span>
             </Link>
-            <div className="flex flex-col items-end gap-1.5 min-w-0">
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={goPrev}
-                  disabled={navDisabled || !prevVehicle}
-                  className="border border-slate-300 text-slate-600 px-2 py-1 rounded-md hover:bg-slate-100 hover:text-slate-900 text-xs md:text-sm font-medium min-h-[32px] flex items-center gap-0.5 transition-colors disabled:opacity-40 disabled:cursor-default"
-                  aria-label="Previous vehicle in category"
-                >
-                  <ChevronLeftIcon className="h-3.5 w-3.5 rtl:rotate-180" />
-                  <span>Prev</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={goNext}
-                  disabled={navDisabled || !nextVehicle}
-                  className="border border-slate-300 text-slate-600 px-2 py-1 rounded-md hover:bg-slate-100 hover:text-slate-900 text-xs md:text-sm font-medium min-h-[32px] flex items-center gap-0.5 transition-colors disabled:opacity-40 disabled:cursor-default"
-                  aria-label="Next vehicle in category"
-                >
-                  <span>Next</span>
-                  <ChevronRightIcon className="h-3.5 w-3.5 rtl:rotate-180" />
-                </button>
-              </div>
-              {categoryOptions.length > 0 ? (
-                <label className="flex items-center gap-2 text-xs text-gray-600 max-w-full">
-                  <span className="hidden sm:inline whitespace-nowrap">Category</span>
-                  <select
-                    value={activeCategoryId}
-                    onChange={(e) => onCategoryChange(e.target.value)}
-                    className="border border-gray-300 rounded-md px-2 py-1 text-xs md:text-sm text-gray-800 bg-white max-w-[min(100%,14rem)] min-h-[32px]"
-                    aria-label="Switch fleet category"
-                    dir="auto"
-                  >
-                    {categoryOptions.map((opt) => (
-                      <option key={opt.id} value={opt.id}>
-                        {opt.title} ({opt.count})
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              ) : null}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <button
+                type="button"
+                onClick={goPrev}
+                disabled={navDisabled || !prevVehicle}
+                className="border border-slate-300 text-slate-600 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-slate-900 text-sm font-medium min-h-[40px] flex items-center gap-1 transition-colors disabled:opacity-40 disabled:cursor-default"
+                aria-label="Previous vehicle"
+              >
+                <ChevronLeftIcon className="h-4 w-4 rtl:rotate-180" />
+                <span>Prev</span>
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                disabled={navDisabled || !nextVehicle}
+                className="border border-slate-300 text-slate-600 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-slate-900 text-sm font-medium min-h-[40px] flex items-center gap-1 transition-colors disabled:opacity-40 disabled:cursor-default"
+                aria-label="Next vehicle"
+              >
+                <span>Next</span>
+                <ChevronRightIcon className="h-4 w-4 rtl:rotate-180" />
+              </button>
             </div>
           </div>
         </div>
@@ -326,22 +269,25 @@ export default function VehicleDetailClient({
 
           {/* Vehicle Details */}
           <div>
-            <div className="flex items-start justify-between gap-4 mb-3">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 min-w-0" dir="auto">{vehicle.name}</h1>
-              <div className="text-sm text-right flex-shrink-0">
+            <div className="flex items-start justify-between gap-3 mb-3">
+              <h1
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 leading-snug tracking-tight text-balance break-words min-w-0"
+                dir="auto"
+              >
+                {vehicle.name}
+              </h1>
+              <div className="text-[11px] sm:text-xs text-right flex-shrink-0">
                 {zonePrices.length > 0 ? (
                   <>
-                    <div className="space-y-0.5">
+                    <div className="space-y-0.5 text-gray-600">
                       {zonePrices.map((zone) => (
-                        <div key={zone.id} className="flex justify-end gap-2 tabular-nums">
-                          <span className="text-gray-400">{zone.shortLabel}</span>
-                          <span className="font-semibold text-gray-900 w-14 text-right">${zone.price}</span>
+                        <div key={zone.id} className="whitespace-nowrap">
+                          <span className="text-gray-400">{zone.shortLabel}:</span>{' '}
+                          <span className="font-semibold text-gray-900 tabular-nums">${zone.price}</span>
                         </div>
                       ))}
                     </div>
-                    <p className="text-[11px] text-gray-500 mt-1.5 max-w-[11rem] leading-snug">
-                      Per wedding — fuel included
-                    </p>
+                    <p className="text-[10px] sm:text-[11px] text-gray-500 mt-1">Per wedding — fuel included</p>
                   </>
                 ) : (
                   <span className="text-gray-500">Contact for pricing</span>
@@ -350,14 +296,12 @@ export default function VehicleDetailClient({
             </div>
 
             {ratingStats && ratingStats.totalReviews > 0 && (
-              <a href="#reviews" className="inline-flex items-center gap-2 mb-4 text-sm text-gray-700 hover:text-gray-900">
+              <a href="#reviews" className="inline-flex items-center gap-2 mb-6 text-sm text-gray-700 hover:text-gray-900">
                 <ReviewStars rating={ratingStats.averageRating} size="sm" />
                 <span className="font-medium">{ratingStats.averageRating.toFixed(1)}</span>
                 <span className="text-gray-500">({ratingStats.totalReviews} {ratingStats.totalReviews === 1 ? 'review' : 'reviews'})</span>
               </a>
             )}
-
-            <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed" dir="auto">{vehicle.description}</p>
 
             <div className="grid grid-cols-2 gap-5 mb-8 bg-white rounded-xl p-5 border-2 border-gray-200">
               <div>
@@ -409,6 +353,77 @@ export default function VehicleDetailClient({
             </div>
           </div>
         </div>
+
+        {/* Content sections — description, custom sections, then the bundle, in order */}
+        {(vehicle.description?.trim() || detailSections.length > 0 || bundleVehicles.length > 0) && (
+          <div className="mt-10 pt-8 border-t border-gray-200 divide-y divide-gray-200">
+            {vehicle.description?.trim() && (
+              <section className="pb-7">
+                <h2 className={SECTION_HEADING} dir="auto">
+                  {vehicle.descriptionTitle?.trim() || 'Description'}
+                </h2>
+                <p className={SECTION_BODY} dir="auto">{vehicle.description}</p>
+              </section>
+            )}
+
+            {detailSections.map((section) => (
+              <section key={section.id} className="py-7 first:pt-0">
+                {section.title.trim() && (
+                  <h2 className={SECTION_HEADING} dir="auto">{section.title}</h2>
+                )}
+                {section.body.trim() && (
+                  <p className={SECTION_BODY} dir="auto">{section.body}</p>
+                )}
+              </section>
+            ))}
+
+            {bundleVehicles.length > 0 && (
+              <section className="py-7 first:pt-0 last:pb-0">
+                <h2 className={SECTION_HEADING} dir="auto">
+                  {vehicle.bundleTitle?.trim() || `Pairs well with the ${vehicle.name}`}
+                </h2>
+                {vehicle.bundleBody?.trim() && (
+                  <p className={`${SECTION_BODY} mb-5`} dir="auto">{vehicle.bundleBody}</p>
+                )}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {bundleVehicles.map((bundled) => (
+                    <Link
+                      key={bundled.id}
+                      href={`/fleet/${bundled.id}`}
+                      className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-slate-400 hover:shadow-md transition-all"
+                    >
+                      <ImageWithFallback
+                        src={bundled.images.main}
+                        alt={bundled.name}
+                        width={320}
+                        height={220}
+                        className="w-full h-32 sm:h-40 object-cover"
+                        fallback={<div className="w-full h-32 sm:h-40 bg-slate-100" />}
+                      />
+                      <div className="p-3">
+                        <p className="text-sm font-semibold text-gray-900 leading-snug line-clamp-2" dir="auto">
+                          {bundled.name}
+                        </p>
+                        <div className="flex items-baseline justify-between gap-2 mt-1">
+                          {bundled.maxPassengers ? (
+                            <span className="text-[11px] text-gray-500 whitespace-nowrap">{bundled.maxPassengers} pax</span>
+                          ) : <span />}
+                          {getFromPrice(bundled) ? (
+                            <span className="text-xs text-gray-600 whitespace-nowrap">
+                              from <span className="font-semibold text-sm text-gray-900">${getFromPrice(bundled)}</span>
+                            </span>
+                          ) : (
+                            <span className="text-xs text-gray-400 whitespace-nowrap">ask price</span>
+                          )}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
       </div>
       {reviews.length > 0 && ratingStats && (
         <div id="reviews" className="bg-slate-50 border-t border-slate-200 scroll-mt-20">

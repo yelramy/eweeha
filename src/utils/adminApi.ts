@@ -11,6 +11,9 @@ export interface ApiResponse<T = unknown> {
 const simpleRequest = async <T = unknown,>(url: string, options?: RequestInit): Promise<ApiResponse<T>> => {
   try {
     const response = await fetch(url, {
+      // Admin reads must never come from a cache: a cached list re-populates the
+      // edit form with pre-save data, and saving again writes it back.
+      cache: 'no-store',
       ...options,
       headers: {
         'Content-Type': 'application/json',

@@ -34,6 +34,7 @@ export default function BackToTop() {
       className="fixed bottom-24 md:bottom-28 right-4 z-30 p-4 rounded-full shadow-lg hover:scale-110 focus:outline-none transition-all duration-300"
       style={{ backgroundColor: '#3D3935', color: '#ffffff', cursor: 'pointer' }}
       aria-label="Back to top"
+      data-floating-action
     >
       <ChevronUpIcon className="h-6 w-6" />
     </button>

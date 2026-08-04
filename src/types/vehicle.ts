@@ -13,6 +13,12 @@ export interface VehicleExtra {
   perDay: boolean // true if charged per day, false if one-time
 }
 
+export interface VehicleDetailSection {
+  id: string
+  title: string
+  body: string
+}
+
 export interface Vehicle {
   id: string
   slug: string
@@ -55,6 +61,12 @@ export interface Vehicle {
   seatingLayout?: string // e.g., "2+2+3 configuration"
   ceilingType?: 'standard' | 'high' // For Hiace
   availableExtras?: VehicleExtra[]
+  // Detail-page content, all editable from admin
+  descriptionTitle?: string // heading above vehicle.description
+  detailSections?: VehicleDetailSection[] // extra content blocks under the description
+  bundleTitle?: string
+  bundleBody?: string
+  bundleVehicleIds?: string[] // cars recommended alongside this one
   createdAt: string
 }
 

@@ -30,6 +30,7 @@ export default function WhatsAppButton({
       onClick={handleClick}
       className="fixed bottom-6 right-4 md:right-6 z-50 group"
       aria-label="Contact us on WhatsApp"
+      data-floating-action
     >
       <div className="relative">
         {/* Tooltip */}

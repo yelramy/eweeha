@@ -89,6 +89,11 @@ export async function initializeDatabase() {
         max_luggage INTEGER,
         ceiling_type TEXT,
         available_extras TEXT, -- JSON array of extras
+        description_title TEXT,
+        detail_sections TEXT, -- JSON array of { id, title, body }
+        bundle_title TEXT,
+        bundle_body TEXT,
+        bundle_vehicle_ids TEXT, -- JSON array of vehicle ids
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
       )
     `)

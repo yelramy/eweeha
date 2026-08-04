@@ -257,6 +257,12 @@ html[dir="rtl"] .rtl\:rotate-180 {
   display: none;
 }
 
+/* Floating contact / back-to-top buttons must not sit on top of an open modal's
+ * own CTAs (e.g. the convoy picker's WhatsApp button). */
+body.modal-open [data-floating-action] {
+  display: none;
+}
+
 /* ::selection brand tint (light) */
 ::selection {
   background-color: #F6E3E6;
