@@ -17,7 +17,7 @@ type StaticRouteConfig = {
 const staticRouteConfigs: StaticRouteConfig[] = [
   { path: '/', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/booking', priority: 0.9, changeFrequency: 'weekly' },
-  { path: '/fleet', priority: 0.85, changeFrequency: 'weekly' },
+  { path: '/wedding-car-rental-lebanon', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/fleet/category/luxury-wedding-cars-lebanon', priority: 0.85, changeFrequency: 'weekly' },
   { path: '/fleet/category/classic-vintage-wedding-cars-lebanon', priority: 0.85, changeFrequency: 'weekly' },
   { path: '/fleet/category/exotic-convertible-wedding-cars-lebanon', priority: 0.8, changeFrequency: 'weekly' },

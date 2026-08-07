@@ -123,7 +123,7 @@ export default async function FleetCategoryPage({
         <section className="py-12 md:py-16 border-b border-warm-200 dark:border-gray-700">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <nav className="text-sm text-warm-600 dark:text-gray-400 mb-5">
-              <Link href="/fleet" className="underline underline-offset-2">
+              <Link href="/wedding-car-rental-lebanon" className="underline underline-offset-2">
                 Wedding Car Fleet
               </Link>{' '}
               / {category.title}

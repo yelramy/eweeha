@@ -53,6 +53,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/fleet',
+        destination: '/wedding-car-rental-lebanon',
+        permanent: true,
+      },
+      {
         source: '/services/wedding-cortege',
         destination: '/services/wedding-convoy',
         permanent: true,
