@@ -4,18 +4,21 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
 import FleetGrid from '@/components/FleetGrid'
-import { FLEET_CATEGORIES, sortFleetForDisplay } from '@/lib/fleetCategories'
+import {
+  FLEET_CATEGORIES,
+  FleetCategory,
+  categorySlug,
+  sortFleetForDisplay,
+} from '@/lib/fleetCategories'
 import { Vehicle } from '@/types/vehicle'
 
-const categoryLinks = [
-  'luxury-wedding-cars-lebanon',
-  'classic-vintage-wedding-cars-lebanon',
-  'exotic-convertible-wedding-cars-lebanon',
-  'luxury-bridal-cars-lebanon',
-  'stretch-limousines-wedding-suvs-lebanon',
-]
-
-export default function FleetIndexClient({ vehicles }: { vehicles: Vehicle[] }) {
+export default function FleetIndexClient({
+  vehicles,
+  categories = FLEET_CATEGORIES,
+}: {
+  vehicles: Vehicle[]
+  categories?: FleetCategory[]
+}) {
   return (
     <>
       <SiteHeader />
@@ -29,20 +32,18 @@ export default function FleetIndexClient({ vehicles }: { vehicles: Vehicle[] }) 
                 Every car below includes a suited chauffeur and wedding-day timing — no stickers or ads on any car.
               </p>
             </div>
-            <div className="mb-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
-              {FLEET_CATEGORIES.map((category, index) => (
+            <nav aria-label="Fleet categories" className="mb-8 flex flex-wrap justify-center gap-2">
+              {categories.map((category) => (
                 <Link
                   key={category.id}
-                  href={`/fleet/category/${categoryLinks[index]}`}
-                  className="rounded-lg border border-warm-200 dark:border-gray-700 p-4 text-center hover:bg-cream-50 dark:hover:bg-gray-800"
+                  href={`/fleet/category/${categorySlug(category.id)}`}
+                  className="rounded-full border border-warm-300 dark:border-gray-600 px-4 py-1.5 text-sm text-charcoal-500 dark:text-gray-200 hover:bg-cream-100 dark:hover:bg-gray-800 hover:border-primary-400 dark:hover:border-primary-500 transition-colors"
                 >
-                  <span className="font-semibold text-charcoal-500 dark:text-white">
-                    {category.title}
-                  </span>
+                  {category.title}
                 </Link>
               ))}
-            </div>
-            <FleetGrid vehicles={sortFleetForDisplay(vehicles)} />
+            </nav>
+            <FleetGrid vehicles={sortFleetForDisplay(vehicles, categories)} />
             <p className="mt-12 text-center text-sm text-warm-600 dark:text-gray-400">
               Not sure which cars to pick?{' '}
               <Link href="/#fleet" className="text-primary-700 dark:text-primary-300 underline underline-offset-2">

@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { cached } from '@/lib/cache'
+import { getFleetCategoriesFromDb } from '@/lib/fleetCategoriesDb'
 import FleetIndexClient from '../fleet/FleetIndexClient'
 
 export const revalidate = 300
@@ -11,7 +12,10 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://eweeha.com/wedding-car-rental-lebanon' },
 }
 
-export default async function FleetPage() {
-  const vehicles = await cached.vehicles.getAvailable()
-  return <FleetIndexClient vehicles={vehicles} />
+export default async function FleetIndexPage() {
+  const [vehicles, categories] = await Promise.all([
+    cached.vehicles.getAvailable(),
+    getFleetCategoriesFromDb(),
+  ])
+  return <FleetIndexClient vehicles={vehicles} categories={categories} />
 }
