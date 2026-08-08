@@ -39,7 +39,7 @@ export default function SiteHeader() {
               <Link href="/#fleet" className={linkClass}>
                 The Cars
               </Link>
-              <Link href="/fleet" className={linkClass}>
+              <Link href="/wedding-car-rental-lebanon" className={linkClass}>
                 Full Fleet
               </Link>
               <Link href="/#services" className={linkClass}>

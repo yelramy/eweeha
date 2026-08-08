@@ -5,6 +5,8 @@ import { cached } from '@/lib/cache'
 import { siteConfig } from '@/lib/seoManager'
 import { routes as popularRoutes } from '@/lib/routes'
 import { getPublishedPosts, getAllCategories } from '@/lib/blog'
+import { getFleetCategoriesFromDb } from '@/lib/fleetCategoriesDb'
+import { categorySlug } from '@/lib/fleetCategories'
 
 type ChangeFrequency = MetadataRoute.Sitemap[number]['changeFrequency']
 
@@ -17,7 +19,7 @@ type StaticRouteConfig = {
 const staticRouteConfigs: StaticRouteConfig[] = [
   { path: '/', priority: 1.0, changeFrequency: 'weekly' },
   { path: '/booking', priority: 0.9, changeFrequency: 'weekly' },
-  { path: '/fleet', priority: 0.85, changeFrequency: 'weekly' },
+  { path: '/wedding-car-rental-lebanon', priority: 0.9, changeFrequency: 'weekly' },
   { path: '/about', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/services/wedding-convoy', priority: 0.85, changeFrequency: 'monthly' },
@@ -77,6 +79,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: slug.startsWith('wedding-cars') ? 0.85 : 0.8,
   }))
 
+  // Fleet category landing pages from the same DB the admin panel manages
+  const fleetCategories = await getFleetCategoriesFromDb()
+  const fleetCategoryRoutes: MetadataRoute.Sitemap = fleetCategories.map(category => ({
+    url: new URL(`/fleet/category/${categorySlug(category.id)}`, baseUrl).toString(),
+    lastModified: fallbackLastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }))
+
   // Get vehicles from database
   const vehicles = await cached.vehicles.getAll()
   const vehicleRoutes: MetadataRoute.Sitemap = vehicles
@@ -118,7 +129,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  const allRoutes = [...staticRoutes, ...routePages, ...vehicleRoutes, ...blogIndexRoute, ...blogPostRoutes, ...blogCategoryRoutes]
+  const allRoutes = [...staticRoutes, ...fleetCategoryRoutes, ...routePages, ...vehicleRoutes, ...blogIndexRoute, ...blogPostRoutes, ...blogCategoryRoutes]
   const deduped = new Map<string, MetadataRoute.Sitemap[number]>()
 
   allRoutes.forEach(route => {

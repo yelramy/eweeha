@@ -132,7 +132,7 @@ export default function VehicleDetailClient({
       <div className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4">
           <div className="flex items-center justify-between gap-3">
-            <Link href="/fleet" className="text-slate-700 hover:text-slate-900 flex items-center text-sm md:text-base font-medium min-h-[48px] px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+            <Link href="/wedding-car-rental-lebanon" className="text-slate-700 hover:text-slate-900 flex items-center text-sm md:text-base font-medium min-h-[48px] px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
               <ChevronLeftIcon className="h-5 w-5 md:h-6 md:w-6 mr-1 rtl:mr-0 rtl:ml-1 rtl:rotate-180" />
               <span className="hidden sm:inline">Back to Fleet</span>
               <span className="sm:hidden">Back</span>
@@ -165,7 +165,7 @@ export default function VehicleDetailClient({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
         <Breadcrumbs items={[
-          { label: 'Fleet', href: '/fleet' },
+          { label: 'Fleet', href: '/wedding-car-rental-lebanon' },
           { label: vehicle.name, href: `/fleet/${vehicle.id}` }
         ]} className="mb-6 hidden sm:block" />
 
