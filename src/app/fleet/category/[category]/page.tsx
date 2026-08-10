@@ -19,9 +19,10 @@ export const revalidate = 300
 
 const categoryContent: Record<
   string,
-  { title: string; description: string; intro: string }
+  { title: string; description: string; intro: string; arabicAccent: string }
 > = {
   'rolls-bentley': {
+    arabicAccent: 'ليلة العمر…',
     title: 'Luxury Wedding Cars in Lebanon — Rolls-Royce & Bentley',
     description:
       'Explore chauffeur-driven Rolls-Royce, Bentley, and flagship luxury wedding cars in Lebanon for bridal arrivals, groom entrances, and photos.',
@@ -29,6 +30,7 @@ const categoryContent: Record<
       'Choose a flagship wedding car for a formal bridal arrival, groom entrance, or wedding photos. Every booking includes a suited chauffeur and planned wedding-day timing.',
   },
   'classic-vintage': {
+    arabicAccent: 'عالزمن الجميل…',
     title: 'Classic & Vintage Wedding Cars in Lebanon',
     description:
       'Browse classic and vintage wedding cars with chauffeur in Lebanon, including timeless convertibles and restored ceremony cars.',
@@ -36,6 +38,7 @@ const categoryContent: Record<
       'Classic and vintage cars bring character to ceremony arrivals, exits, and photography. Compare the available models, colors, passenger space, and pricing zones.',
   },
   'sports-convertible': {
+    arabicAccent: 'دخلة العريس…',
     title: 'Exotic & Convertible Wedding Cars in Lebanon',
     description:
       'Browse chauffeur-driven exotic, sports, and convertible wedding cars in Lebanon for groom entrances, photoshoots, and special arrivals.',
@@ -43,6 +46,7 @@ const categoryContent: Record<
       'Sports cars and convertibles suit dramatic groom entrances, open-top photos, and couples who want a modern alternative to a traditional bridal sedan.',
   },
   'luxury-sedan': {
+    arabicAccent: 'أناقة وراحة…',
     title: 'Luxury Bridal Cars with Chauffeur in Lebanon',
     description:
       'Find modern luxury bridal sedans with professional chauffeurs in Lebanon for weddings, family transport, and elegant ceremony arrivals.',
@@ -50,6 +54,7 @@ const categoryContent: Record<
       'Luxury sedans combine a formal wedding-day appearance with comfortable seating, climate control, and a smooth chauffeur-driven journey.',
   },
   'suv-limo': {
+    arabicAccent: 'السهرة بلشت…',
     title: 'Stretch Limousines & Wedding SUVs in Lebanon',
     description:
       'Explore stretch limousines and luxury wedding SUVs with chauffeur in Lebanon for bridal parties, group entrances, and wedding convoys.',
@@ -66,6 +71,7 @@ function contentFor(category: FleetCategory) {
       intro:
         category.blurb ||
         'Every car below includes a suited chauffeur and planned wedding-day timing. Compare models, passenger space, and pricing zones.',
+      arabicAccent: 'ليوم العرس…',
     }
   )
 }
@@ -138,6 +144,7 @@ export default async function FleetCategoryPage({
               <span className="mx-2">/</span>
               <span>{category.title}</span>
             </nav>
+            <p className="font-arabic text-3xl text-primary-100 mb-4" lang="ar" dir="auto">{content.arabicAccent}</p>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">{content.title.split(' — ')[0]}</h1>
             <p className="text-lg md:text-xl text-primary-50 max-w-2xl mx-auto mb-8">{content.intro}</p>
             <Link
