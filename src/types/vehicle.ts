@@ -33,6 +33,8 @@ export interface Vehicle {
     main: string
     gallery: string[]
   }
+  /** SEO alt text per image URL */
+  imageAlts?: Record<string, string>
   specifications: {
     seating: string
     luggage: string

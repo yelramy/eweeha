@@ -36,6 +36,7 @@ export const VehicleCreateSchema = z.object({
     main: z.string().min(1).max(500), // Allow both URLs and relative paths
     gallery: z.array(z.string().max(500)).max(30).default([])
   }),
+  imageAlts: z.record(z.string().max(500), z.string().max(300)).optional(),
   specifications: z.object({
     seating: z.string().max(50).optional().default(''),
     luggage: z.string().max(50).optional().default(''),

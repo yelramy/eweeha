@@ -89,6 +89,12 @@ function rowToVehicle(row: Record<string, unknown>): Vehicle {
     vehicle.displayOrder = row.display_order as number
   }
 
+  if (row.image_alts) {
+    try {
+      vehicle.imageAlts = JSON.parse(row.image_alts as string)
+    } catch {}
+  }
+
   // Add rental fields if they exist
   if (row.model) vehicle.model = row.model as string
   if (row.year) vehicle.year = row.year as number
@@ -227,8 +233,8 @@ export const vehicles = {
         available, quantity, show_on_homepage, display_order, model, year, variants, 
         price_6h, price_10h, price_24h, extra_hour_rate, max_passengers, max_luggage, ceiling_type,
         available_extras, price_beirut, price_batroun_saida, price_further, created_at, fleet_category,
-        description_title, detail_sections, bundle_title, bundle_body, bundle_vehicle_ids
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        description_title, detail_sections, bundle_title, bundle_body, bundle_vehicle_ids, image_alts
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       args: [
         newVehicle.id,
         newVehicle.slug,
@@ -267,7 +273,8 @@ export const vehicles = {
         newVehicle.detailSections?.length ? JSON.stringify(newVehicle.detailSections) : null,
         newVehicle.bundleTitle || null,
         newVehicle.bundleBody || null,
-        newVehicle.bundleVehicleIds?.length ? JSON.stringify(newVehicle.bundleVehicleIds) : null
+        newVehicle.bundleVehicleIds?.length ? JSON.stringify(newVehicle.bundleVehicleIds) : null,
+        newVehicle.imageAlts && Object.keys(newVehicle.imageAlts).length ? JSON.stringify(newVehicle.imageAlts) : null
       ]
     })
     
@@ -315,6 +322,10 @@ export const vehicles = {
     if (vehicleData.images?.gallery !== undefined) {
       updates.push('gallery_images = ?')
       args.push(JSON.stringify(vehicleData.images.gallery))
+    }
+    if (vehicleData.imageAlts !== undefined) {
+      updates.push('image_alts = ?')
+      args.push(Object.keys(vehicleData.imageAlts).length ? JSON.stringify(vehicleData.imageAlts) : null)
     }
     if (vehicleData.specifications?.seating !== undefined) {
       updates.push('seating = ?')

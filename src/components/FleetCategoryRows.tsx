@@ -43,7 +43,7 @@ function RowCard({ vehicle, dark = false }: { vehicle: Vehicle; dark?: boolean }
     >
       <FleetVehicleImage
         src={vehicle.images.main}
-        alt={`${vehicle.name} — wedding car in Lebanon`}
+        alt={vehicle.imageAlts?.[vehicle.images.main] || `${vehicle.name} — wedding car in Lebanon`}
       />
       <div className="p-3 flex flex-col flex-1">
         <h4 className={`text-sm font-semibold leading-tight line-clamp-2 ${titleClass}`} dir="auto">

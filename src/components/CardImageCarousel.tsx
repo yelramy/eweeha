@@ -11,6 +11,8 @@ type CardImageCarouselProps = {
   /** main image first, then gallery — duplicates are removed */
   images: string[]
   alt: string
+  /** per-URL SEO alt text; falls back to `alt` */
+  alts?: Record<string, string>
   /** Tailwind aspect class for the frame */
   aspectClass?: string
   sizes?: string
@@ -27,6 +29,7 @@ type CardImageCarouselProps = {
 export default function CardImageCarousel({
   images,
   alt,
+  alts,
   aspectClass = 'aspect-[4/3]',
   sizes = '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px',
   quality = 70,
@@ -43,7 +46,7 @@ export default function CardImageCarousel({
       <div className={`relative overflow-hidden bg-cream-100 dark:bg-gray-900 ${aspectClass}`}>
         <ImageWithFallback
           src={fleetCardImageUrl(slides[0] || '')}
-          alt={alt}
+          alt={alts?.[slides[0]] || alt}
           fill
           sizes={sizes}
           quality={quality}
@@ -84,7 +87,7 @@ export default function CardImageCarousel({
           <div key={i} className="relative w-full h-full flex-shrink-0 snap-center">
             <ImageWithFallback
               src={fleetCardImageUrl(src)}
-              alt={i === 0 ? alt : `${alt} — photo ${i + 1}`}
+              alt={alts?.[src] || (i === 0 ? alt : `${alt} — photo ${i + 1}`)}
               fill
               sizes={sizes}
               quality={quality}

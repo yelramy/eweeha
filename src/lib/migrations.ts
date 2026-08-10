@@ -604,6 +604,16 @@ export async function migrateAddVehicleDetailContent() {
   }
 }
 
+export async function migrateAddImageAlts() {
+  try {
+    await turso.execute('ALTER TABLE vehicles ADD COLUMN image_alts TEXT')
+    console.log('✅ image_alts column added')
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error)
+    if (!msg.includes('duplicate column')) throw error
+  }
+}
+
 export async function runAllMigrations() {
   console.log('🔄 Running database migrations...')
   await migrateAddQuantityColumn()
@@ -621,6 +631,7 @@ export async function runAllMigrations() {
   await migrateAddFleetCategories()
   await migrateAddFleetCategoryColors()
   await migrateAddVehicleDetailContent()
+  await migrateAddImageAlts()
   console.log('✅ All migrations complete')
 }
 

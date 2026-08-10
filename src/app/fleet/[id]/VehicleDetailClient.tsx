@@ -176,7 +176,7 @@ export default function VehicleDetailClient({
               <div className="aspect-w-16 aspect-h-12 bg-gray-200 rounded-xl overflow-hidden relative">
                 <ImageWithFallback
                   src={allImages[selectedImageIndex]}
-                  alt={`${vehicle.name} - Image ${selectedImageIndex + 1}`}
+                  alt={vehicle.imageAlts?.[allImages[selectedImageIndex]] || `${vehicle.name} - Image ${selectedImageIndex + 1}`}
                   width={600}
                   height={400}
                   className="w-full h-72 md:h-96 object-cover cursor-pointer"
@@ -253,7 +253,7 @@ export default function VehicleDetailClient({
                       >
                         <ImageWithFallback
                           src={image}
-                          alt={`${vehicle.name} thumbnail ${actualIndex + 1}`}
+                          alt={vehicle.imageAlts?.[image] || `${vehicle.name} thumbnail ${actualIndex + 1}`}
                           width={100}
                           height={100}
                           className="w-full h-full object-cover"

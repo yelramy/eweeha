@@ -168,8 +168,10 @@ export function sanitizeFilename(filename: string): string {
   
   // Sanitize name
   const safeName = name
+    .replace(/\s+/g, '-') // hyphens, not underscores — Google reads them as word separators
     .replace(/[^a-zA-Z0-9-_]/g, '_')
     .replace(/_+/g, '_')
+    .replace(/-+/g, '-')
     .substring(0, 200) // Leave room for extension and timestamp
   
   // Sanitize extension

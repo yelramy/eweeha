@@ -25,6 +25,7 @@ export default function FleetManagement() {
   const [uploadingImages, setUploadingImages] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
+  const [imageAlts, setImageAlts] = useState<Record<string, string>>({})
   const [fleetCategories, setFleetCategories] = useState<FleetCategory[]>([])
   const [showCategories, setShowCategories] = useState(false)
   const [googleStatus, setGoogleStatus] = useState('')
@@ -163,6 +164,9 @@ export default function FleetManagement() {
         main: uploadedImages[0] || editingVehicle?.images.main || '/images/fleet/standard.svg',
         gallery: uploadedImages.length > 0 ? uploadedImages.slice(1) : editingVehicle?.images.gallery ?? []
       },
+      imageAlts: Object.fromEntries(
+        Object.entries(imageAlts).filter(([url, alt]) => alt.trim() && uploadedImages.includes(url))
+      ),
       priceBeirut: formData.priceBeirut || undefined,
       priceBatrounSaida: formData.priceBatrounSaida || undefined,
       priceFurther: formData.priceFurther || undefined,
@@ -206,6 +210,7 @@ export default function FleetManagement() {
       descriptionTitle: '', detailSections: [EMPTY_SECTION()], bundleTitle: '', bundleBody: '', bundleVehicleIds: []
     })
     setUploadedImages([])
+    setImageAlts({})
     setShowAddForm(false)
     setEditingVehicle(null)
   }
@@ -237,6 +242,7 @@ export default function FleetManagement() {
       bundleVehicleIds: vehicle.bundleVehicleIds || []
     })
     setUploadedImages([vehicle.images.main, ...vehicle.images.gallery])
+    setImageAlts(vehicle.imageAlts || {})
     setShowAddForm(true)
   }
 
@@ -549,8 +555,9 @@ export default function FleetManagement() {
                           setUploadedImages(next)
                         }
                         return (
-                          <div key={url + i} className={`relative rounded ${i === 0 ? 'ring-2 ring-amber-500' : ''}`}>
-                            <Image src={url} alt="" width={96} height={64} className="w-24 h-16 object-cover rounded border" />
+                          <div key={url + i} className="w-40">
+                          <div className={`relative rounded ${i === 0 ? 'ring-2 ring-amber-500' : ''}`}>
+                            <Image src={url} alt="" width={160} height={64} className="w-40 h-24 object-cover rounded border" />
                             {i === 0 && (
                               <span className="absolute top-0 left-0 bg-amber-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-br rounded-tl">COVER</span>
                             )}
@@ -566,6 +573,14 @@ export default function FleetManagement() {
                                 <button type="button" title="Move right" onClick={() => move(i, i + 1)} className="text-white text-xs px-1 leading-none">›</button>
                               )}
                             </div>
+                          </div>
+                          <textarea
+                            value={imageAlts[url] || ''}
+                            onChange={(e) => setImageAlts((prev) => ({ ...prev, [url]: e.target.value }))}
+                            placeholder="Describe for Google: car, color, place… e.g. White Rolls-Royce at Harissa church, Jounieh"
+                            rows={2}
+                            className="mt-1 w-full text-xs border border-gray-300 rounded px-1.5 py-1 resize-none"
+                          />
                           </div>
                         )
                       })}
