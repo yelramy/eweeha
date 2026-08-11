@@ -19,6 +19,26 @@ export const FLEET_CATEGORIES: FleetCategory[] = [
   { id: 'suv-limo', title: 'SUVs & Stretch Limousines', blurb: 'Bold entrances & the whole bridal party' },
 ]
 
+/** SEO landing slugs for the built-in categories; admin-added categories use their id as slug. */
+export const CATEGORY_SEO_SLUGS: Record<string, string> = {
+  'rolls-bentley': 'luxury-wedding-cars-lebanon',
+  'classic-vintage': 'classic-vintage-wedding-cars-lebanon',
+  'sports-convertible': 'exotic-convertible-wedding-cars-lebanon',
+  'luxury-sedan': 'luxury-bridal-cars-lebanon',
+  'suv-limo': 'stretch-limousines-wedding-suvs-lebanon',
+}
+
+export function categorySlug(id: string): string {
+  return CATEGORY_SEO_SLUGS[id] ?? id
+}
+
+export function resolveCategorySlug(
+  slug: string,
+  categories: FleetCategory[]
+): FleetCategory | undefined {
+  return categories.find((c) => categorySlug(c.id) === slug)
+}
+
 /**
  * Near-black check on a hex color: true when every channel is dark (max < 60),
  * i.e. the swatch reads as black regardless of hue. Used to switch a category

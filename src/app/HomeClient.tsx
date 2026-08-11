@@ -132,7 +132,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                     The Cars
                   </a>
                   <Link
-                    href="/fleet"
+                    href="/wedding-car-rental-lebanon"
                     className="text-gray-700 dark:text-gray-200 hover:text-primary-700 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-md px-2 py-1"
                   >
                     Full Fleet
@@ -263,7 +263,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               {allVehicles.length > 0 ? (
                 <Link
-                  href="/fleet"
+                  href="/wedding-car-rental-lebanon"
                   className="inline-block w-full sm:w-auto text-center border-2 border-primary-600 dark:border-primary-400 text-primary-700 dark:text-primary-200 px-8 py-3 rounded-md font-medium tracking-wider transition-all hover:bg-primary-600 hover:text-white dark:hover:bg-primary-500"
                 >
                   View the Full Fleet ({allVehicles.length} cars) →

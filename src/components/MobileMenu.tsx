@@ -13,7 +13,7 @@ interface MobileMenuProps {
 
 const navigationItems = [
   { name: 'The Cars', href: '#fleet' },
-  { name: 'Full Fleet', href: '/fleet' },
+  { name: 'Full Fleet', href: '/wedding-car-rental-lebanon' },
   { name: 'Services', href: '#services' },
   { name: 'Wedding Areas', href: '/routes' },
   { name: 'Book Now', href: '/booking' },

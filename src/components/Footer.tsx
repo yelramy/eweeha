@@ -39,7 +39,10 @@ export default function Footer() {
           <div>
             <h4 className="text-cream-50 font-semibold mb-3">Services</h4>
             <ul className="space-y-2 text-sm text-primary-100/80">
-              <li><Link href="/fleet" className="hover:text-white">Wedding Car Fleet</Link></li>
+              <li><Link href="/wedding-car-rental-lebanon" className="hover:text-white">Wedding Car Fleet</Link></li>
+              <li><Link href="/fleet/category/luxury-wedding-cars-lebanon" className="hover:text-white">Luxury Wedding Cars</Link></li>
+              <li><Link href="/fleet/category/classic-vintage-wedding-cars-lebanon" className="hover:text-white">Classic Wedding Cars</Link></li>
+              <li><Link href="/fleet/category/stretch-limousines-wedding-suvs-lebanon" className="hover:text-white">Stretch Limousines</Link></li>
               <li><Link href="/services/wedding-convoy" className="hover:text-white">Wedding Convoy</Link></li>
               <li><Link href="/services/bridal-car" className="hover:text-white">Bridal Car &amp; Chauffeur</Link></li>
               <li><Link href="/services/photoshoot-cars" className="hover:text-white">Classic &amp; Convertible Cars</Link></li>

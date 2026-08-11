@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const mainPages = [
   { href: '/', label: 'Home' },
-  { href: '/fleet', label: 'Full Fleet' },
+  { href: '/wedding-car-rental-lebanon', label: 'Full Fleet' },
   { href: '/booking', label: 'Book Now' },
   { href: '/booking/lookup', label: 'Track Booking' },
   { href: '/routes', label: 'Wedding Areas & Experiences' },
