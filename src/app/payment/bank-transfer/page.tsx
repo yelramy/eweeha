@@ -117,9 +117,9 @@ function BankTransferPaymentContent() {
               <Link href="/" className="text-2xl font-bold text-charcoal-500">
                 Eweeha
               </Link>
-              <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
+              <a href={`tel:${config?.contact?.phone || '+96171500363'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
                 <PhoneIcon className="h-5 w-5 mr-2" />
-                {config?.contact?.phone || '+961-70-971-841'}
+                {config?.contact?.phone || '+961-71-500-363'}
               </a>
             </div>
           </div>
@@ -193,9 +193,9 @@ function BankTransferPaymentContent() {
             <Link href="/" className="text-2xl font-bold text-charcoal-500">
               Eweeha
             </Link>
-            <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
+            <a href={`tel:${config?.contact?.phone || '+96171500363'}`} className="flex items-center text-charcoal-500 hover:text-charcoal-500">
               <PhoneIcon className="h-5 w-5 mr-2" />
-              {config?.contact?.phone || '+961-70-971-841'}
+              {config?.contact?.phone || '+961-71-500-363'}
             </a>
           </div>
         </div>
@@ -418,14 +418,14 @@ function BankTransferPaymentContent() {
           <h3 className="font-semibold text-charcoal-500 mb-2">Need Help with Bank Transfer?</h3>
           <div className="flex justify-center space-x-6">
             <a
-              href={`tel:${config?.contact?.phone || '+96170971841'}`}
+              href={`tel:${config?.contact?.phone || '+96171500363'}`}
               className="flex items-center text-warm-600 hover:text-charcoal-500"
             >
               <PhoneIcon className="h-4 w-4 mr-1" />
               Call Support
             </a>
             <a
-              href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+              href={`https://wa.me/${config?.contact?.whatsapp || '96171500363'}`}
               className="flex items-center text-[#128C7E] hover:text-[#075E54]"
             >
               💬 WhatsApp

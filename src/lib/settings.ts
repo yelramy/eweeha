@@ -19,7 +19,11 @@ function rowToSetting(row: Record<string, unknown>): Setting {
   return {
     id: row.id as string,
     key: row.key as string,
-    value: row.value as string,
+    // Keep previously saved contact settings aligned with the updated business number.
+    value: (row.key === 'contact_phone' || row.key === 'contact_whatsapp') &&
+      ['96170971841', '70971841'].includes(String(row.value).replace(/\D/g, ''))
+      ? (row.key === 'contact_phone' ? '+961-71-500-363' : '96171500363')
+      : row.value as string,
     type: row.type as 'string' | 'number' | 'boolean' | 'json',
     category: row.category as string,
     description: row.description as string | undefined,

@@ -64,7 +64,7 @@ export default function WhatsAppQuickQuote({
 }: WhatsAppQuickQuoteProps) {
   const { appConfig } = useConfig()
 
-  const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
+  const whatsappNumber = appConfig?.contact?.whatsapp || '96171500363'
   const message = generateWhatsAppMessage(data)
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
 

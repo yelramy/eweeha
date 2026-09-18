@@ -119,9 +119,9 @@ function StripePaymentContent() {
             <Link href="/" className="text-xl md:text-2xl font-bold text-charcoal-500 dark:text-white">
               Eweeha
             </Link>
-            <a href={`tel:${config?.contact?.phone || '+96170971841'}`} className="flex items-center text-charcoal-500 dark:text-gray-300 hover:text-charcoal-500 dark:hover:text-primary-400 text-sm md:text-base min-h-[48px] px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <a href={`tel:${config?.contact?.phone || '+96171500363'}`} className="flex items-center text-charcoal-500 dark:text-gray-300 hover:text-charcoal-500 dark:hover:text-primary-400 text-sm md:text-base min-h-[48px] px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
               <PhoneIcon className="h-5 w-5 md:h-6 md:w-6 mr-2" />
-              <span className="hidden sm:inline">{config?.contact?.phone || '+961-70-971-841'}</span>
+              <span className="hidden sm:inline">{config?.contact?.phone || '+961-71-500-363'}</span>
               <span className="sm:hidden">Call</span>
             </a>
           </div>
@@ -226,14 +226,14 @@ function StripePaymentContent() {
           <h3 className="font-bold text-charcoal-500 mb-4 text-lg md:text-xl">Need Help?</h3>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <a
-              href={`tel:${config?.contact?.phone || '+96170971841'}`}
+              href={`tel:${config?.contact?.phone || '+96171500363'}`}
               className="flex items-center justify-center text-primary-600 hover:text-primary-800 text-sm md:text-base font-semibold py-2.5 px-5 rounded-lg hover:bg-primary-50 transition-colors min-h-[44px]"
             >
               <PhoneIcon className="h-4 w-4 md:h-5 md:w-5 mr-2" />
               Call Support
             </a>
             <a
-              href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+              href={`https://wa.me/${config?.contact?.whatsapp || '96171500363'}`}
               className="flex items-center justify-center text-[#128C7E] hover:text-[#075E54] text-sm md:text-base font-semibold py-2.5 px-5 rounded-lg hover:bg-[#25D366]/10 transition-colors min-h-[44px]"
             >
               💬 WhatsApp

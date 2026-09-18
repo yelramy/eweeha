@@ -67,7 +67,7 @@ export const cached = {
   config: async (): Promise<AppConfig> => {
     const cachedFn = unstable_cache(
       async () => await settings.getConfig(),
-      ['app-config'],
+      ['app-config-contact-71500363'],
       { revalidate: 3600, tags: ['config'] }
     )
     return cachedFn()

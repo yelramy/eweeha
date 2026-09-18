@@ -50,14 +50,14 @@ function PaymentSuccessContent() {
           
           <div className="flex justify-center space-x-4">
             <a
-              href={`tel:${config?.contact?.phone || '+96170971841'}`}
+              href={`tel:${config?.contact?.phone || '+96171500363'}`}
               className="flex items-center text-primary-600 hover:text-primary-800"
             >
               <PhoneIcon className="h-4 w-4 mr-1" />
               Call us
             </a>
             <a
-              href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+              href={`https://wa.me/${config?.contact?.whatsapp || '96171500363'}`}
               className="flex items-center text-[#128C7E] hover:text-[#075E54]"
             >
               💬 WhatsApp

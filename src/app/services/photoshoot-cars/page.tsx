@@ -178,7 +178,7 @@ export default function PhotoshootCarsPage() {
                 Check Availability
               </Link>
               <a
-                href="https://wa.me/96170971841"
+                href="https://wa.me/96171500363"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block bg-[#25D366] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#1DA851] transition-colors"

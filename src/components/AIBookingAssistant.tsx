@@ -89,7 +89,7 @@ export default function AIBookingAssistant({ className = '' }: AIBookingAssistan
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const chatInputRef = useRef<HTMLInputElement>(null)
   const quoteRef = useRef<HTMLDivElement>(null)
-  const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
+  const whatsappNumber = appConfig?.contact?.whatsapp || '96171500363'
 
   // Auto-scroll chat container to bottom (without moving the page)
   useEffect(() => {

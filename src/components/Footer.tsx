@@ -61,9 +61,9 @@ export default function Footer() {
           <div>
             <h4 className="text-cream-50 font-semibold mb-3">Support</h4>
             <ul className="space-y-2 text-sm text-primary-100/80">
-              <li><a href="tel:+96170971841" className="hover:text-white">+961-70-971-841</a></li>
+              <li><a href="tel:+96171500363" className="hover:text-white">+961-71-500-363</a></li>
               <li><a href="mailto:eweehalebanon@gmail.com" className="hover:text-white">eweehalebanon@gmail.com</a></li>
-              <li><a href="https://wa.me/96170971841" target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a></li>
+              <li><a href="https://wa.me/96171500363" target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a></li>
             </ul>
           </div>
         </div>

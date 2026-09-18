@@ -139,7 +139,7 @@ export default function FAQClient({ faqs }: FAQClientProps) {
                 Contact Us
               </Link>
               <a
-                href="https://wa.me/96170971841"
+                href="https://wa.me/96171500363"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-3 bg-[#25D366] text-white rounded-lg font-semibold hover:bg-[#1DA851] transition-colors"

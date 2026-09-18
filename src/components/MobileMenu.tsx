@@ -126,13 +126,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         </Link>
                         <div className="border-t border-warm-200 dark:border-gray-700 pt-4 mt-4">
                           <a
-                            href={`tel:${config?.contact?.phone || '+96170971841'}`}
+                            href={`tel:${config?.contact?.phone || '+96171500363'}`}
                             className="flex items-center px-3 py-2 text-base font-medium text-charcoal-500 dark:text-gray-300 hover:text-charcoal-500 dark:hover:text-white transition-colors"
                           >
-                            📞 {config?.contact?.phone || '+961-70-971-841'}
+                            📞 {config?.contact?.phone || '+961-71-500-363'}
                           </a>
                           <a
-                            href={`https://wa.me/${config?.contact?.whatsapp || '96170971841'}`}
+                            href={`https://wa.me/${config?.contact?.whatsapp || '96171500363'}`}
                             className="flex items-center px-3 py-2 text-base font-medium text-[#128C7E] hover:text-[#075E54] transition-colors"
                           >
                             💬 WhatsApp

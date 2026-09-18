@@ -68,13 +68,13 @@ export default function BookingSSRFallback() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              href="tel:+96170971841"
+              href="tel:+96171500363"
               className="px-6 py-3 bg-charcoal-500 text-white rounded-lg font-semibold text-center hover:bg-charcoal-600 transition-colors"
             >
-              Call Us: +961 70 971 841
+              Call Us: +961 71 500 363
             </a>
             <a
-              href="https://wa.me/96170971841"
+              href="https://wa.me/96171500363"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white rounded-md font-light text-center transition-all border border-primary-700 tracking-wider"

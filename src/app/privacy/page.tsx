@@ -140,8 +140,8 @@ export default function PrivacyPage() {
                 </p>
                 <div className="bg-cream-50 dark:bg-gray-700 rounded-lg p-4 dark:text-gray-300">
                   <p><strong>Email:</strong> <a href="mailto:eweehalebanon@gmail.com" className="text-primary-600 dark:text-primary-400 hover:underline">eweehalebanon@gmail.com</a></p>
-                  <p><strong>Phone:</strong> <a href="tel:+96170971841" className="text-primary-600 dark:text-primary-400 hover:underline">+961-70-971-841</a></p>
-                  <p><strong>WhatsApp:</strong> <a href="https://wa.me/96170971841" className="text-primary-600 dark:text-primary-400 hover:underline">+961-70-971-841</a></p>
+                  <p><strong>Phone:</strong> <a href="tel:+96171500363" className="text-primary-600 dark:text-primary-400 hover:underline">+961-71-500-363</a></p>
+                  <p><strong>WhatsApp:</strong> <a href="https://wa.me/96171500363" className="text-primary-600 dark:text-primary-400 hover:underline">+961-71-500-363</a></p>
                   <p><strong>Address:</strong> Beirut, Lebanon</p>
                 </div>
                 <p className="mt-4 text-sm dark:text-gray-400">

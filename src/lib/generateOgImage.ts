@@ -55,7 +55,7 @@ function buildOverlaySvg({
   <text x="80" y="360" fill="#DEC690" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="600" letter-spacing="2">${safeSubtitle}</text>
   <text x="80" y="420" fill="#FFFEF9" fill-opacity="0.92" font-family="Georgia, 'Times New Roman', serif" font-size="26">${safeBadge}</text>
   <text x="80" y="${HEIGHT - 28}" fill="#DEC690" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700">eweeha.com</text>
-  <text x="${WIDTH - 80}" y="${HEIGHT - 28}" fill="#FFFEF9" fill-opacity="0.88" font-family="Georgia, 'Times New Roman', serif" font-size="24" text-anchor="end">Book online or WhatsApp · +961 70 971 841</text>
+  <text x="${WIDTH - 80}" y="${HEIGHT - 28}" fill="#FFFEF9" fill-opacity="0.88" font-family="Georgia, 'Times New Roman', serif" font-size="24" text-anchor="end">Book online or WhatsApp · +961 71 500 363</text>
 </svg>`)
 }
 

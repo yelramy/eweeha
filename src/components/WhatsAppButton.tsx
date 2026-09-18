@@ -15,7 +15,7 @@ export default function WhatsAppButton({
   const { appConfig } = useConfig()
   
   // Use provided phoneNumber, or fallback to config, or default
-  const whatsappNumber = phoneNumber || appConfig?.contact?.whatsapp || '96170971841'
+  const whatsappNumber = phoneNumber || appConfig?.contact?.whatsapp || '96171500363'
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
 
   const handleClick = () => {

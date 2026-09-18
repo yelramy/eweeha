@@ -165,7 +165,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
     }
 
     // Show toast immediately (optimistic UI)
-    const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
+    const whatsappNumber = appConfig?.contact?.whatsapp || '96171500363'
     const scheduleSummary = formatScheduleSummary()
     const message = `Hi, I just submitted a wedding car rental request:\n\nSchedule: ${scheduleSummary}\nStarting from: ${startingLocation}\nPassengers: ${passengers}\n\nCan you send me a quote?`
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
@@ -249,7 +249,7 @@ export default function RentalRequestForm({ className = '' }: RentalRequestFormP
   }
 
   const handleWhatsAppDirect = () => {
-    const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
+    const whatsappNumber = appConfig?.contact?.whatsapp || '96171500363'
     const message = dayServices.length > 0 && startingLocation
       ? `Hi, I need a wedding car rental:\n\nSchedule: ${formatScheduleSummary()}\nStarting from: ${startingLocation}\nPassengers: ${passengers}\n\nCan you send me a quote?`
       : `Hi, I need a wedding car rental. Can you help me with pricing and availability?`

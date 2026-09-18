@@ -40,7 +40,7 @@ export default function ReviewThankYouPage() {
               Back to home
             </Link>
             <a
-              href="https://wa.me/96170971841"
+              href="https://wa.me/96171500363"
               className="px-6 py-3 rounded-md font-medium border border-warm-200 dark:border-gray-600 text-charcoal-500 dark:text-white hover:bg-slate-100 dark:hover:bg-gray-700 transition-colors"
             >
               Chat with us on WhatsApp

@@ -16,7 +16,7 @@ export default function AboutPage() {
       <LocalBusinessSchema
         name="Eweeha"
         description="Wedding car rental in Lebanon with suited chauffeurs — bridal cars, classics, convertibles, and full wedding convoys"
-        telephone="+96170971841"
+        telephone="+96171500363"
         address="Beirut, Lebanon"
         rating={4.8}
         reviewCount={127}

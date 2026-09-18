@@ -21,8 +21,8 @@ export interface AppConfig {
 
 const CONFIG_DEFAULT_TEMPLATE: AppConfig = {
   contact: {
-    phone: '+961-70-971-841',
-    whatsapp: '96170971841',
+    phone: '+961-71-500-363',
+    whatsapp: '96171500363',
     email: 'eweehalebanon@gmail.com'
   },
   currency: {

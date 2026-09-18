@@ -240,15 +240,15 @@ export function customerBookingConfirmationTemplate(booking: Booking, accessToke
       </ul>
       
       <div style="text-align: center; margin: 30px 0;">
-        <a href="https://wa.me/96170971841" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Contact Us on WhatsApp</a>
+        <a href="https://wa.me/96171500363" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Contact Us on WhatsApp</a>
       </div>
     </div>
     
     <div class="footer">
       <p><strong>Eweeha</strong></p>
-      <p>Phone: <a href="tel:+96170971841">+961-70-971-841</a></p>
+      <p>Phone: <a href="tel:+96171500363">+961-71-500-363</a></p>
       <p>Email: <a href="mailto:eweehalebanon@gmail.com">eweehalebanon@gmail.com</a></p>
-      <p>WhatsApp: <a href="https://wa.me/96170971841">Chat with us</a></p>
+      <p>WhatsApp: <a href="https://wa.me/96171500363">Chat with us</a></p>
       <p style="margin-top: 20px; font-size: 12px; color: #999;">
         This is an automated confirmation email. Please keep this for your records.
       </p>
@@ -445,13 +445,13 @@ export function paymentConfirmationTemplate(booking: Booking): { subject: string
       <p>If you have any questions or need to modify your booking, contact us:</p>
       
       <div style="text-align: center; margin: 30px 0;">
-        <a href="https://wa.me/96170971841" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Contact Us on WhatsApp</a>
+        <a href="https://wa.me/96171500363" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Contact Us on WhatsApp</a>
       </div>
     </div>
     
     <div class="footer">
       <p><strong>Eweeha</strong></p>
-      <p>Phone: <a href="tel:+96170971841">+961-70-971-841</a></p>
+      <p>Phone: <a href="tel:+96171500363">+961-71-500-363</a></p>
       <p>Email: <a href="mailto:eweehalebanon@gmail.com">eweehalebanon@gmail.com</a></p>
       <p style="margin-top: 20px; font-size: 12px; color: #999;">
         Keep this email as your receipt and booking confirmation.
@@ -562,13 +562,13 @@ export function contactFormAutoReplyTemplate(data: ContactFormData): { subject: 
       <p>For urgent inquiries, you can reach us directly:</p>
       
       <div style="background-color: ${brandColors.cream}; padding: 20px; border-radius: 6px; margin: 20px 0;">
-        <p style="margin: 5px 0;"><strong>📞 Phone:</strong> <a href="tel:+96170971841">+961-70-971-841</a></p>
-        <p style="margin: 5px 0;"><strong>💬 WhatsApp:</strong> <a href="https://wa.me/96170971841">Click to chat</a></p>
+        <p style="margin: 5px 0;"><strong>📞 Phone:</strong> <a href="tel:+96171500363">+961-71-500-363</a></p>
+        <p style="margin: 5px 0;"><strong>💬 WhatsApp:</strong> <a href="https://wa.me/96171500363">Click to chat</a></p>
         <p style="margin: 5px 0;"><strong>📧 Email:</strong> <a href="mailto:eweehalebanon@gmail.com">eweehalebanon@gmail.com</a></p>
       </div>
       
       <div style="text-align: center; margin: 30px 0;">
-        <a href="https://wa.me/96170971841" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Chat on WhatsApp</a>
+        <a href="https://wa.me/96171500363" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Chat on WhatsApp</a>
       </div>
     </div>
     
@@ -843,7 +843,7 @@ export function reviewRequestTemplate(data: ReviewRequestData): { subject: strin
 
     <div class="footer">
       <p><strong>Eweeha</strong></p>
-      <p>WhatsApp: <a href="https://wa.me/96170971841">+961 70 971 841</a></p>
+      <p>WhatsApp: <a href="https://wa.me/96171500363">+961 71 500 363</a></p>
       <p>Email: <a href="mailto:eweehalebanon@gmail.com">eweehalebanon@gmail.com</a></p>
       <p style="margin-top: 20px; font-size: 12px; color: #999;">
         This invitation link is valid for 90 days and can only be used once.
@@ -941,15 +941,15 @@ export function paymentInfoReceivedTemplate(booking: Booking, paymentInfo: Payme
       <p>If you have any questions or concerns, please don't hesitate to reach out:</p>
       
       <div style="text-align: center; margin: 20px 0;">
-        <a href="https://wa.me/96170971841?text=Question%20about%20booking%20${escHtml(booking.booking_id)}" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Contact Us on WhatsApp</a>
+        <a href="https://wa.me/96171500363?text=Question%20about%20booking%20${escHtml(booking.booking_id)}" class="cta-button" style="background-color: #25D366; color: #ffffff; text-decoration: none;">Contact Us on WhatsApp</a>
       </div>
     </div>
     
     <div class="footer">
       <p><strong>Eweeha</strong></p>
-      <p>Phone: <a href="tel:+96170971841">+961-70-971-841</a></p>
+      <p>Phone: <a href="tel:+96171500363">+961-71-500-363</a></p>
       <p>Email: <a href="mailto:eweehalebanon@gmail.com">eweehalebanon@gmail.com</a></p>
-      <p>WhatsApp: <a href="https://wa.me/96170971841">Chat with us</a></p>
+      <p>WhatsApp: <a href="https://wa.me/96171500363">Chat with us</a></p>
       <p style="margin-top: 20px; font-size: 12px; color: #999;">
         You'll receive another email once your payment is verified and confirmed.
       </p>
@@ -1028,7 +1028,7 @@ export function quoteOfferTemplate(data: QuoteEmailData): {
     </div>
     <div class="footer">
       <p><strong>Eweeha</strong></p>
-      <p>Phone: <a href="tel:+96170971841">+961-70-971-841</a></p>
+      <p>Phone: <a href="tel:+96171500363">+961-71-500-363</a></p>
     </div>
   </div>
 </body>

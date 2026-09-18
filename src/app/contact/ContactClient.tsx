@@ -131,7 +131,7 @@ export default function ContactPageClient() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     className="w-full px-3 py-2 border border-warm-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white text-sm rounded focus:ring-1 focus:ring-warm-500 dark:focus:ring-primary-500 focus:border-warm-500 dark:focus:border-primary-500 transition-colors"
-                    placeholder="+961-70-971-841"
+                    placeholder="+961-71-500-363"
                   />
                 </div>
 
@@ -178,10 +178,10 @@ export default function ContactPageClient() {
                     <div>
                       <h3 className="text-lg font-semibold text-charcoal-500 dark:text-white mb-1">Phone</h3>
                       <a 
-                        href="tel:+96170971841" 
+                        href="tel:+96171500363"
                         className="text-slate-600 dark:text-gray-300 hover:text-charcoal-600 dark:hover:text-white transition-colors"
                       >
-                        +961-70-971-841
+                        +961-71-500-363
                       </a>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Available 24/7</p>
                     </div>
@@ -216,7 +216,7 @@ export default function ContactPageClient() {
                     <div>
                       <h3 className="text-lg font-semibold text-charcoal-500 dark:text-white mb-1">WhatsApp</h3>
                       <a 
-                        href="https://wa.me/96170971841" 
+                        href="https://wa.me/96171500363"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-slate-600 dark:text-gray-300 hover:text-charcoal-600 dark:hover:text-white transition-colors"
@@ -266,7 +266,7 @@ export default function ContactPageClient() {
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-4">
                 <a
-                  href="https://wa.me/96170971841"
+                  href="https://wa.me/96171500363"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center px-6 py-4 bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white border border-primary-700 rounded-lg transition-all font-semibold"
@@ -275,7 +275,7 @@ export default function ContactPageClient() {
                   WhatsApp
                 </a>
                 <a
-                  href="tel:+96170971841"
+                  href="tel:+96171500363"
                   className="flex items-center justify-center px-6 py-4 bg-clay-400 text-white rounded-lg hover:bg-clay-500 transition-colors font-semibold"
                 >
                   <PhoneIcon className="h-5 w-5 mr-2" />

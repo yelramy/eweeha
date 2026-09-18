@@ -80,7 +80,7 @@ export default function ConvoyPicker({ isOpen, onClose, vehicles }: ConvoyPicker
     (sum, e) => sum + (getFromPrice(e.vehicle) ?? 0) * e.count,
     0
   )
-  const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
+  const whatsappNumber = appConfig?.contact?.whatsapp || '96171500363'
 
   const handleSend = () => {
     if (selectedVehicles.length === 0) return

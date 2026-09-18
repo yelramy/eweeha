@@ -128,13 +128,13 @@ export default function Settings() {
                 <tr className="bg-white">
                   <td className="px-3 py-2 border-r border-b border-gray-200 font-medium">Phone</td>
                   <td className="px-3 py-2 border-b border-gray-200">
-                    <input type="tel" value={settings.contactPhone} onChange={(e) => setSettings({...settings, contactPhone: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="+961-70-971-841" />
+                    <input type="tel" value={settings.contactPhone} onChange={(e) => setSettings({...settings, contactPhone: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="+961-71-500-363" />
                   </td>
                 </tr>
                 <tr className="bg-gray-50">
                   <td className="px-3 py-2 border-r border-b border-gray-200 font-medium">WhatsApp</td>
                   <td className="px-3 py-2 border-b border-gray-200">
-                    <input type="tel" value={settings.contactWhatsapp} onChange={(e) => setSettings({...settings, contactWhatsapp: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="96170971841" />
+                    <input type="tel" value={settings.contactWhatsapp} onChange={(e) => setSettings({...settings, contactWhatsapp: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded text-base" placeholder="96171500363" />
                   </td>
                 </tr>
                 <tr className="bg-white">

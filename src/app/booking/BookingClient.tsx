@@ -41,7 +41,7 @@ function WeddingBookingContent() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
-  const whatsappNumber = appConfig?.contact?.whatsapp || '96170971841'
+  const whatsappNumber = appConfig?.contact?.whatsapp || '96171500363'
   const today = new Date().toISOString().split('T')[0]
 
   useEffect(() => {
