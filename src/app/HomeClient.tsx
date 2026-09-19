@@ -206,11 +206,11 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
 
               <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-8" />
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
                 <button
                   type="button"
                   onClick={() => setIsConvoyPickerOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3 text-center text-white text-sm font-medium tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
+                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-white text-xs sm:text-sm font-medium tracking-wide sm:tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
                 >
                   Pick My Cars
                 </button>
@@ -218,7 +218,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   href={`https://wa.me/${config.contact.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-3 text-center text-primary-700 dark:text-primary-200 text-sm font-medium tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
+                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-primary-700 dark:text-primary-200 text-xs sm:text-sm font-medium tracking-wide sm:tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
                 >
                   WhatsApp Us
                 </Link>
