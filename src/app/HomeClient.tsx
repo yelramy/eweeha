@@ -10,7 +10,6 @@ import AIBookingAssistant from '@/components/AIBookingAssistant'
 import Button from '@/components/Button'
 import MobileMenu from '@/components/MobileMenu'
 import ConvoyPicker from '@/components/ConvoyPicker'
-import LebanonFlag from '@/components/LebanonFlag'
 import Footer from '@/components/Footer'
 import ServiceCard, { ServiceCardsGrid } from '@/components/ServiceCard'
 import { sortFleetForDisplay } from '@/lib/fleetCategories'
@@ -196,33 +195,22 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
             <div className="hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream-50/15 dark:to-gray-950/30" />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-32 z-10">
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 z-10">
             <div className="max-w-2xl text-center lg:text-left animate-fade-in-up">
-              <p className="text-[11px] md:text-xs tracking-[0.35em] uppercase text-primary-700 dark:text-primary-300 mb-5">
-                Chauffeured wedding cars ·{' '}
-                <span className="whitespace-nowrap">
-                  All of Lebanon
-                  <LebanonFlag className="inline-block w-[19px] h-[13px] md:w-[21px] md:h-[14px] rounded-[2px] ml-2 align-[-2px] shadow-sm" />
-                </span>
-              </p>
-
               <h1 className="mb-4">
                 <span className="sr-only">Eweeha — wedding cars in Lebanon: </span>
                 <span className="script-accent block text-primary-600 dark:text-primary-300 text-6xl sm:text-7xl md:text-8xl leading-none">
                   Eweeha!
                 </span>
-                <span className="font-serif italic font-semibold block text-gold-700 dark:text-gold-300 text-3xl sm:text-4xl md:text-5xl tracking-wide mt-3">
-                  Smalla 3layke
-                </span>
               </h1>
 
               <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-8" />
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
                 <button
                   type="button"
                   onClick={() => setIsConvoyPickerOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3 text-center text-white text-sm font-medium tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
+                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-white text-xs sm:text-sm font-medium tracking-wide sm:tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
                 >
                   Pick My Cars
                 </button>
@@ -230,19 +218,12 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   href={`https://wa.me/${config.contact.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-3 text-center text-primary-700 dark:text-primary-200 text-sm font-medium tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
+                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-primary-700 dark:text-primary-200 text-xs sm:text-sm font-medium tracking-wide sm:tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
                 >
                   WhatsApp Us
                 </Link>
               </div>
 
-              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs md:text-sm font-medium text-charcoal-500 dark:text-gray-200">
-                <span>Suited chauffeurs</span>
-                <span aria-hidden="true" className="text-clay-300">✿</span>
-                <span>No ads or stickers on our cars</span>
-                <span aria-hidden="true" className="text-clay-300">✿</span>
-                <span>On time, every time</span>
-              </div>
             </div>
           </div>
         </section>

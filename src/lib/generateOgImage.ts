@@ -32,9 +32,9 @@ function buildOverlaySvg({
   <defs>
     <linearGradient id="side" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#4A1F25" stop-opacity="0.94"/>
-      <stop offset="42%" stop-color="#4A1F25" stop-opacity="0.82"/>
-      <stop offset="72%" stop-color="#4A1F25" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#4A1F25" stop-opacity="0.12"/>
+      <stop offset="38%" stop-color="#4A1F25" stop-opacity="0.88"/>
+      <stop offset="62%" stop-color="#4A1F25" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#4A1F25" stop-opacity="0.24"/>
     </linearGradient>
     <linearGradient id="bottom" x1="0%" y1="100%" x2="0%" y2="0%">
       <stop offset="0%" stop-color="#1A0C0E" stop-opacity="0.55"/>
@@ -49,11 +49,13 @@ function buildOverlaySvg({
   <rect width="${WIDTH}" height="6" fill="url(#goldBar)"/>
   <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#side)"/>
   <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#bottom)"/>
+  <rect x="752" y="64" width="384" height="430" rx="24" fill="#FFFEF9" fill-opacity="0.96"/>
+  <rect x="752" y="64" width="384" height="430" rx="24" fill="none" stroke="#DEC690" stroke-width="3" stroke-opacity="0.9"/>
   <rect y="${HEIGHT - 72}" width="${WIDTH}" height="72" fill="#1A0C0E" fill-opacity="0.72"/>
   <line x1="0" y1="${HEIGHT - 72}" x2="${WIDTH}" y2="${HEIGHT - 72}" stroke="#DEC690" stroke-opacity="0.35"/>
-  <text x="80" y="300" fill="#FFFEF9" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700">${safeTitle}</text>
-  <text x="80" y="360" fill="#DEC690" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="600" letter-spacing="2">${safeSubtitle}</text>
-  <text x="80" y="420" fill="#FFFEF9" fill-opacity="0.92" font-family="Georgia, 'Times New Roman', serif" font-size="26">${safeBadge}</text>
+  <text x="64" y="270" fill="#FFFEF9" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700">${safeTitle}</text>
+  <text x="64" y="332" fill="#DEC690" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="600" letter-spacing="2">${safeSubtitle}</text>
+  <text x="64" y="390" fill="#FFFEF9" fill-opacity="0.92" font-family="Georgia, 'Times New Roman', serif" font-size="23">${safeBadge}</text>
   <text x="80" y="${HEIGHT - 28}" fill="#DEC690" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700">eweeha.com</text>
   <text x="${WIDTH - 80}" y="${HEIGHT - 28}" fill="#FFFEF9" fill-opacity="0.88" font-family="Georgia, 'Times New Roman', serif" font-size="24" text-anchor="end">Book online or WhatsApp · +961 71 500 363</text>
 </svg>`)
@@ -77,7 +79,7 @@ async function encodeUnderLimit(
 export async function generateOgImageBuffer({
   title = 'Eweeha!',
   subtitle = 'WEDDING CARS IN LEBANON',
-  badge = 'Chauffeur included · Bridal cars · Full convoys · All Lebanon',
+  badge = 'Chauffeur included · Bridal cars · Wedding convoys',
 }: {
   title?: string
   subtitle?: string
@@ -113,11 +115,11 @@ export async function generateOgImageBuffer({
 
   if (logoExists) {
     const logo = await sharp(logoPath)
-      .resize(132, 132, { fit: 'cover' })
+      .resize(360, 406, { fit: 'contain', background: '#FFFEF9' })
       .png()
       .toBuffer()
 
-    composites.unshift({ input: logo, top: 148, left: 80 })
+    composites.push({ input: logo, top: 76, left: 764 })
   }
 
   const pipeline = base.composite(composites)
