@@ -9,11 +9,8 @@ import FleetCategoryRows from '@/components/FleetCategoryRows'
 import AIBookingAssistant from '@/components/AIBookingAssistant'
 import Button from '@/components/Button'
 import MobileMenu from '@/components/MobileMenu'
-import ConvoyPicker from '@/components/ConvoyPicker'
-import LebanonFlag from '@/components/LebanonFlag'
 import Footer from '@/components/Footer'
 import ServiceCard, { ServiceCardsGrid } from '@/components/ServiceCard'
-import { sortFleetForDisplay } from '@/lib/fleetCategories'
 import { Vehicle } from '@/types/vehicle'
 import { AppConfig } from '@/constants/configDefaults'
 import ReviewsSection from '@/components/ReviewsSection'
@@ -34,24 +31,8 @@ interface HomeClientProps {
   ratingStats?: { averageRating: number; totalReviews: number }
 }
 
-/** Ribbon divider — a wedding-car ribbon with a center bow */
-function RibbonDivider({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 200 28" className={className} fill="none" aria-hidden="true">
-      <path d="M 6 16 C 50 8 74 20 92 15" stroke="#8E3B46" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 108 15 C 126 20 150 8 194 16" stroke="#8E3B46" strokeWidth="1.5" strokeLinecap="round" />
-      {/* bow */}
-      <path d="M 100 14 C 92 6 82 8 84 14 C 85.5 19 95 18 100 14 Z" fill="#EBC3C9" stroke="#8E3B46" strokeWidth="1.3" />
-      <path d="M 100 14 C 108 6 118 8 116 14 C 114.5 19 105 18 100 14 Z" fill="#EBC3C9" stroke="#8E3B46" strokeWidth="1.3" />
-      <circle cx="100" cy="14" r="2.6" fill="#8E3B46" />
-      <path d="M 97 17 C 94 21 93 23 91 25 M 103 17 C 106 21 107 23 109 25" stroke="#8E3B46" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
-  )
-}
-
 export default function HomeClient({ allVehicles, config, reviews = [], ratingStats }: HomeClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isConvoyPickerOpen, setIsConvoyPickerOpen] = useState(false)
 
   // Owner request: show the hero briefly, then glide down to the fleet —
   // unless a specific anchor (#booking, #services…) was requested.
@@ -177,74 +158,19 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
           <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
         </header>
 
-        {/* Hero Section — soft photo backdrop + invitation copy */}
-        <section className="relative overflow-hidden bg-cream-50 dark:bg-gray-900">
-          {/* Background photo, kept airy with cream washes so it never overwhelms the text */}
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-            <Image
-              src="/images/hero-bg.jpg"
-              alt=""
-              fill
-              priority
-              quality={75}
-              sizes="100vw"
-              className="object-cover object-[72%_center] dark:opacity-85 sm:dark:opacity-60"
-            />
-            {/* Mobile: top-heavy wash — strong behind the title, fading so the car stays rich below; Desktop: left gradient so the car side stays vivid */}
-            <div className="absolute inset-0 sm:hidden bg-gradient-to-b from-cream-50/85 via-cream-50/45 to-cream-50/15 dark:from-gray-950/85 dark:via-gray-950/45 dark:to-gray-950/15" />
-            <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-cream-50/95 via-cream-50/50 to-transparent dark:from-gray-950/95 dark:via-gray-950/55 dark:to-gray-950/10" />
-            <div className="hidden sm:block absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream-50/15 dark:to-gray-950/30" />
-          </div>
-
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-32 z-10">
-            <div className="max-w-2xl text-center lg:text-left animate-fade-in-up">
-              <p className="text-[11px] md:text-xs tracking-[0.35em] uppercase text-primary-700 dark:text-primary-300 mb-5">
-                Chauffeured wedding cars ·{' '}
-                <span className="whitespace-nowrap">
-                  All of Lebanon
-                  <LebanonFlag className="inline-block w-[19px] h-[13px] md:w-[21px] md:h-[14px] rounded-[2px] ml-2 align-[-2px] shadow-sm" />
-                </span>
-              </p>
-
-              <h1 className="mb-4">
-                <span className="sr-only">Eweeha — wedding cars in Lebanon: </span>
-                <span className="script-accent block text-primary-600 dark:text-primary-300 text-6xl sm:text-7xl md:text-8xl leading-none">
-                  Eweeha!
-                </span>
-                <span className="font-serif italic font-semibold block text-gold-700 dark:text-gold-300 text-3xl sm:text-4xl md:text-5xl tracking-wide mt-3">
-                  Smalla 3layke
-                </span>
-              </h1>
-
-              <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-8" />
-
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
-                <button
-                  type="button"
-                  onClick={() => setIsConvoyPickerOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3 text-center text-white text-sm font-medium tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
-                >
-                  Pick My Cars
-                </button>
-                <Link
-                  href={`https://wa.me/${config.contact.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-3 text-center text-primary-700 dark:text-primary-200 text-sm font-medium tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
-                >
-                  WhatsApp Us
-                </Link>
-              </div>
-
-              <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-x-6 gap-y-2 text-xs md:text-sm font-medium text-charcoal-500 dark:text-gray-200">
-                <span>Suited chauffeurs</span>
-                <span aria-hidden="true" className="text-clay-300">✿</span>
-                <span>No ads or stickers on our cars</span>
-                <span aria-hidden="true" className="text-clay-300">✿</span>
-                <span>On time, every time</span>
-              </div>
-            </div>
-          </div>
+        {/* Full supplied artwork, displayed without cropping or overlays. */}
+        <section aria-label="Eweeha wedding car rental in Lebanon">
+          <h1 className="sr-only">Eweeha — Wedding Car Rental in Lebanon</h1>
+          <Image
+            src="/images/eweeha-hero.jpg"
+            alt="Eweeha — Wedding Car Rental | Lebanon. eweeha.com, +96171500363, WhatsApp only."
+            width={1536}
+            height={864}
+            priority
+            unoptimized
+            sizes="100vw"
+            className="block h-auto w-full"
+          />
         </section>
 
         {/* Fleet Section */}
@@ -615,11 +541,6 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
         <Footer />
       </main>
 
-      <ConvoyPicker
-        isOpen={isConvoyPickerOpen}
-        onClose={() => setIsConvoyPickerOpen(false)}
-        vehicles={sortFleetForDisplay(allVehicles)}
-      />
     </>
   )
 }
