@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import MobileMenu from '@/components/MobileMenu'
 
@@ -22,13 +21,9 @@ export default function SiteHeader() {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-2 sm:py-3">
           <Link href="/" className="flex items-center gap-2.5">
-            <Image
-              src="/logo.png"
-              alt="Eweeha — Wedding Cars Lebanon"
-              width={144}
-              height={144}
-              className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
-              priority
+            <span
+              aria-hidden="true"
+              className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 bg-primary-600 dark:bg-primary-300 [mask-image:url('/logo-primary.png')] [-webkit-mask-image:url('/logo-primary.png')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
             />
             <span className="text-[10px] sm:text-[11px] tracking-[0.28em] text-primary-600 dark:text-primary-300 uppercase leading-snug">
               Wedding Cars<span className="block">Lebanon</span>
