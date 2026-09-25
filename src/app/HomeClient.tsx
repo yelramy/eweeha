@@ -33,21 +33,6 @@ interface HomeClientProps {
   ratingStats?: { averageRating: number; totalReviews: number }
 }
 
-/** Ribbon divider — a wedding-car ribbon with a center bow */
-function RibbonDivider({ className = '' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 200 28" className={className} fill="none" aria-hidden="true">
-      <path d="M 6 16 C 50 8 74 20 92 15" stroke="#8E3B46" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M 108 15 C 126 20 150 8 194 16" stroke="#8E3B46" strokeWidth="1.5" strokeLinecap="round" />
-      {/* bow */}
-      <path d="M 100 14 C 92 6 82 8 84 14 C 85.5 19 95 18 100 14 Z" fill="#EBC3C9" stroke="#8E3B46" strokeWidth="1.3" />
-      <path d="M 100 14 C 108 6 118 8 116 14 C 114.5 19 105 18 100 14 Z" fill="#EBC3C9" stroke="#8E3B46" strokeWidth="1.3" />
-      <circle cx="100" cy="14" r="2.6" fill="#8E3B46" />
-      <path d="M 97 17 C 94 21 93 23 91 25 M 103 17 C 106 21 107 23 109 25" stroke="#8E3B46" strokeWidth="1.2" strokeLinecap="round" />
-    </svg>
-  )
-}
-
 export default function HomeClient({ allVehicles, config, reviews = [], ratingStats }: HomeClientProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isConvoyPickerOpen, setIsConvoyPickerOpen] = useState(false)
@@ -204,9 +189,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                 </span>
               </h1>
 
-              <RibbonDivider className="w-48 mx-auto lg:mx-0 mb-8" />
-
-              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2 mt-8">
                 <button
                   type="button"
                   onClick={() => setIsConvoyPickerOpen(true)}
