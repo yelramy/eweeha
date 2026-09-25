@@ -183,10 +183,11 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 z-10">
             <div className="max-w-2xl text-center lg:text-left animate-fade-in-up">
               <h1 className="mb-4">
-                <span className="sr-only">Eweeha — wedding cars in Lebanon: </span>
-                <span className="script-accent block text-primary-600 dark:text-primary-300 text-6xl sm:text-7xl md:text-8xl leading-none">
-                  Eweeha!
-                </span>
+                <span className="sr-only">eweeha — wedding cars in Lebanon</span>
+                <span
+                  aria-hidden="true"
+                  className="mx-auto lg:mx-0 block w-full max-w-xl aspect-[496/123] bg-primary-600 dark:bg-primary-300 [mask-image:url('/images/eweeha-wordmark.png?v=2')] [-webkit-mask-image:url('/images/eweeha-wordmark.png?v=2')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
+                />
               </h1>
 
               <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2 mt-8">
