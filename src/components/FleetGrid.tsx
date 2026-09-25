@@ -18,6 +18,8 @@ type FleetGridProps = {
   initialPage?: number
   /** Dark cards + gold/gray actions — for groom page on charcoal background. */
   tone?: 'default' | 'dark'
+  /** Load the first card's photo immediately — set when the grid is the first thing on the page. */
+  prioritizeFirstImage?: boolean
 }
 
 export default function FleetGrid({
@@ -25,6 +27,7 @@ export default function FleetGrid({
   showActions = true,
   initialPage = 1,
   tone = 'default',
+  prioritizeFirstImage = false,
 }: FleetGridProps) {
   const router = useRouter()
   const [page, setPage] = useState(initialPage)
@@ -69,7 +72,7 @@ export default function FleetGrid({
   return (
     <div ref={topRef} className="scroll-mt-24">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
-        {pageVehicles.map((vehicle) => {
+        {pageVehicles.map((vehicle, index) => {
           const zonePrices = getZonePrices(vehicle)
           const goDetails = () => router.push(`/fleet/${vehicle.id}`)
           return (
@@ -93,6 +96,7 @@ export default function FleetGrid({
                   alts={vehicle.imageAlts}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   quality={75}
+                  priority={prioritizeFirstImage && page === 1 && index === 0}
                 />
               </div>
               <div className="p-4 sm:p-5 flex flex-col flex-1">

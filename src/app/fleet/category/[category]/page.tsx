@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import FleetGrid from '@/components/FleetGrid'
 import { cached } from '@/lib/cache'
 import { getFleetCategoriesFromDb } from '@/lib/fleetCategoriesDb'
+import { siteConfig } from '@/lib/seoManager'
 import {
   FleetCategory,
   CATEGORY_SEO_SLUGS,
@@ -80,20 +81,47 @@ export function generateStaticParams() {
   return Object.values(CATEGORY_SEO_SLUGS).map((slug) => ({ category: slug }))
 }
 
+async function loadCategory(slug: string) {
+  const categories = await getFleetCategoriesFromDb()
+  const category = resolveCategorySlug(slug, categories)
+  if (!category) return null
+  const validIds = new Set(categories.map((c) => c.id))
+  const vehicles = sortFleetForDisplay(await cached.vehicles.getAvailable(), categories).filter(
+    (vehicle) => getFleetCategories(vehicle, validIds).includes(category.id)
+  )
+  return { category, vehicles }
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ category: string }>
 }): Promise<Metadata> {
   const { category: slug } = await params
-  const category = resolveCategorySlug(slug, await getFleetCategoriesFromDb())
-  if (!category) return { title: 'Wedding Car Category | Eweeha' }
-  const content = contentFor(category)
+  const loaded = await loadCategory(slug)
+  if (!loaded) return { title: 'Wedding Car Category | Eweeha' }
+  const content = contentFor(loaded.category)
+  const title = `${content.title} | Eweeha`
+  const url = `https://eweeha.com/fleet/category/${slug}`
 
   return {
-    title: { absolute: `${content.title} | Eweeha` },
+    title: { absolute: title },
     description: content.description,
-    alternates: { canonical: `https://eweeha.com/fleet/category/${slug}` },
+    alternates: { canonical: url },
+    ...(loaded.vehicles.length === 0 ? { robots: { index: false, follow: true } } : {}),
+    openGraph: {
+      title,
+      description: content.description,
+      url,
+      type: 'website',
+      images: [siteConfig.ogImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: content.description,
+      images: [siteConfig.ogImage],
+    },
   }
 }
 
@@ -103,15 +131,10 @@ export default async function FleetCategoryPage({
   params: Promise<{ category: string }>
 }) {
   const { category: slug } = await params
-  const categories = await getFleetCategoriesFromDb()
-  const category = resolveCategorySlug(slug, categories)
-  if (!category) notFound()
+  const loaded = await loadCategory(slug)
+  if (!loaded) notFound()
+  const { category, vehicles } = loaded
   const content = contentFor(category)
-
-  const validIds = new Set(categories.map((c) => c.id))
-  const vehicles = sortFleetForDisplay(await cached.vehicles.getAvailable(), categories).filter(
-    (vehicle) => getFleetCategories(vehicle, validIds).includes(category.id)
-  )
 
   const itemListSchema = {
     '@context': 'https://schema.org',

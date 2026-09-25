@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { siteConfig } from '@/lib/seoManager'
 import vehicles from '@/lib/vehicles'
+import { isSvgImage, isVehicleIndexable } from '@/lib/vehicleSeo'
 
 /**
  * Image Sitemap Generator
@@ -22,13 +23,13 @@ export async function GET() {
     }> = []
 
     // Add vehicle images
-    for (const vehicle of allVehicles) {
+    for (const vehicle of allVehicles.filter(isVehicleIndexable)) {
       const vehicleUrl = `${baseUrl}/fleet/${vehicle.slug}`
 
       const vehicleImages: Array<{ loc: string; title?: string; caption?: string }> = []
 
       // Main image
-      if (vehicle.images?.main) {
+      if (vehicle.images?.main && !isSvgImage(vehicle.images.main)) {
         vehicleImages.push({
           loc: vehicle.images.main.startsWith('http') 
             ? vehicle.images.main 
@@ -40,7 +41,7 @@ export async function GET() {
 
       // Gallery images
       if (vehicle.images?.gallery && vehicle.images.gallery.length > 0) {
-        vehicle.images.gallery.forEach((image: string) => {
+        vehicle.images.gallery.filter((image: string) => !isSvgImage(image)).forEach((image: string) => {
           vehicleImages.push({
             loc: image.startsWith('http') ? image : `${baseUrl}${image}`,
             title: vehicle.name,

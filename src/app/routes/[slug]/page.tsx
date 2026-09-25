@@ -4,6 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 import Footer from '@/components/Footer'
 import Button from '@/components/Button'
 import { routes } from '@/lib/routes'
+import { shareImageUrl } from '@/lib/seoManager'
 
 type RouteSlug = keyof typeof routes
 
@@ -23,15 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
-  // Ensure absolute URL for og:image with fallback
-  const ogImageUrl = route.image 
-    ? (route.image.startsWith('http') 
-        ? route.image 
-        : `https://eweeha.com${route.image}`)
-    : 'https://eweeha.com/og-image.jpg'
+  const ogImageUrl = shareImageUrl(route.image)
 
   return {
-    title: `${route.title} | Eweeha`,
+    title: { absolute: `${route.title} | Eweeha` },
     description: route.description,
     alternates: {
       canonical: `https://eweeha.com/routes/${slug}`

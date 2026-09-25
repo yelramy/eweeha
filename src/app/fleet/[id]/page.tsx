@@ -2,9 +2,11 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cached } from '@/lib/cache'
 import VehicleDetailClient from './VehicleDetailClient'
-import { formatUsd, getVehiclePricingInfo } from '@/utils/vehiclePricing'
+import { getVehiclePricingInfo } from '@/utils/vehiclePricing'
 import { getVehicleReviews, getVehicleRatingStats } from '@/lib/reviews'
 import { getFleetCategoriesFromDb } from '@/lib/fleetCategoriesDb'
+import { shareImageUrl } from '@/lib/seoManager'
+import { isVehicleIndexable, vehicleMetaDescription, vehiclePageTitle } from '@/lib/vehicleSeo'
 
 // ISR: Revalidate every 10 minutes
 export const revalidate = 600
@@ -24,32 +26,31 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     return { title: 'Vehicle Not Found | Eweeha' }
   }
 
-  const pricingInfo = vehicle ? getVehiclePricingInfo(vehicle) : null
-  const pricingSnippet = pricingInfo
-    ? pricingInfo.hasRange
-      ? `${formatUsd(pricingInfo.min)}-${formatUsd(pricingInfo.max)}`
-      : formatUsd(pricingInfo.min)
-    : null
-  const descriptionPricingText = pricingSnippet
-    ? pricingInfo?.hasRange
-      ? `Starting between ${pricingSnippet}/day`
-      : `Starting at ${pricingSnippet}/day`
-    : 'Contact us for pricing'
-
   // Always use slug for canonical URL (SEO best practice)
   const canonicalSlug = vehicle.slug || id
+  const url = `https://eweeha.com/fleet/${canonicalSlug}`
+  const title = vehiclePageTitle(vehicle)
+  const description = vehicleMetaDescription(vehicle)
+  const image = shareImageUrl(vehicle.images.main)
 
   return {
-    title: { absolute: `${vehicle.name} — Wedding Car in Lebanon | Eweeha` },
-    description: `Rent ${vehicle.name} in Lebanon. ${vehicle.description} Capacity: ${vehicle.capacity}. ${descriptionPricingText} with driver.`,
+    title: { absolute: title },
+    description,
     alternates: {
-      canonical: `https://eweeha.com/fleet/${canonicalSlug}`,
+      canonical: url,
     },
+    ...(isVehicleIndexable(vehicle) ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       title: `${vehicle.name} - Wedding Car Rental in Lebanon`,
-      description: vehicle.description,
-      images: [vehicle.images.main],
-      url: `https://eweeha.com/fleet/${canonicalSlug}`,
+      description,
+      images: [image],
+      url,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
     },
   }
 }
@@ -87,10 +88,6 @@ export default async function VehicleDetailPage({ params }: { params: Promise<{ 
     description: vehicle.description,
     image: vehicle.images.main,
     sku: vehicle.id,
-    brand: {
-      '@type': 'Brand',
-      name: 'Eweeha'
-    },
     category: 'Vehicle Rental',
     offers: pricingInfo ? (
       pricingInfo.hasRange ? {

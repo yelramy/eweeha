@@ -1,12 +1,11 @@
 import { MetadataRoute } from 'next'
-import { promises as fs } from 'fs'
-import path from 'path'
 import { cached } from '@/lib/cache'
 import { siteConfig } from '@/lib/seoManager'
 import { routes as popularRoutes } from '@/lib/routes'
 import { getPublishedPosts, getAllCategories } from '@/lib/blog'
 import { getFleetCategoriesFromDb } from '@/lib/fleetCategoriesDb'
-import { categorySlug } from '@/lib/fleetCategories'
+import { categorySlug, getFleetCategories } from '@/lib/fleetCategories'
+import { isVehicleIndexable } from '@/lib/vehicleSeo'
 
 type ChangeFrequency = MetadataRoute.Sitemap[number]['changeFrequency']
 
@@ -42,58 +41,46 @@ function resolveBaseUrl(url: string) {
   }
 }
 
-async function getRouteLastModified(route: string): Promise<Date | undefined> {
-  const segments = route === '/' ? [] : route.split('/').filter(Boolean)
-  const filePath = path.join(process.cwd(), 'src', 'app', ...segments, 'page.tsx')
-
-  try {
-    const stats = await fs.stat(filePath)
-    return stats.mtime
-  } catch {
-    return undefined
-  }
-}
-
+// Only real dates for lastModified: a value that changes on every deploy teaches Google to ignore it.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = resolveBaseUrl(siteConfig.url || 'http://localhost:3000')
-  const fallbackLastModified = new Date()
 
-  const staticRoutes: MetadataRoute.Sitemap = await Promise.all(
-    staticRouteConfigs.map(async ({ path: routePath, priority, changeFrequency }) => {
-      const lastModified = await getRouteLastModified(routePath)
-
-      return {
-        url: new URL(routePath, baseUrl).toString(),
-        lastModified: lastModified ?? fallbackLastModified,
-        changeFrequency,
-        priority,
-      }
-    })
-  )
+  const staticRoutes: MetadataRoute.Sitemap = staticRouteConfigs.map(({ path: routePath, priority, changeFrequency }) => ({
+    url: new URL(routePath, baseUrl).toString(),
+    changeFrequency,
+    priority,
+  }))
 
   // Build route pages dynamically from config
   const routePages: MetadataRoute.Sitemap = Object.keys(popularRoutes).map(slug => ({
     url: new URL(`/routes/${slug}`, baseUrl).toString(),
-    lastModified: fallbackLastModified,
     changeFrequency: 'weekly' as const,
     priority: slug.startsWith('wedding-cars') ? 0.85 : 0.8,
   }))
 
-  // Fleet category landing pages from the same DB the admin panel manages
-  const fleetCategories = await getFleetCategoriesFromDb()
-  const fleetCategoryRoutes: MetadataRoute.Sitemap = fleetCategories.map(category => ({
-    url: new URL(`/fleet/category/${categorySlug(category.id)}`, baseUrl).toString(),
-    lastModified: fallbackLastModified,
-    changeFrequency: 'weekly' as const,
-    priority: 0.85,
-  }))
+  const [fleetCategories, vehicles, availableVehicles] = await Promise.all([
+    getFleetCategoriesFromDb(),
+    cached.vehicles.getAll(),
+    cached.vehicles.getAvailable(),
+  ])
 
-  // Get vehicles from database
-  const vehicles = await cached.vehicles.getAll()
+  // Fleet category landing pages from the same DB the admin panel manages; empty ones are noindexed
+  const validCategoryIds = new Set(fleetCategories.map(category => category.id))
+  const fleetCategoryRoutes: MetadataRoute.Sitemap = fleetCategories
+    .filter(category =>
+      availableVehicles.some(vehicle => getFleetCategories(vehicle, validCategoryIds).includes(category.id))
+    )
+    .map(category => ({
+      url: new URL(`/fleet/category/${categorySlug(category.id)}`, baseUrl).toString(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    }))
+
   const vehicleRoutes: MetadataRoute.Sitemap = vehicles
+    .filter(isVehicleIndexable)
     .map(vehicle => ({
       url: new URL(`/fleet/${vehicle.slug}`, baseUrl).toString(),
-      lastModified: vehicle.createdAt ? new Date(vehicle.createdAt) : fallbackLastModified,
+      lastModified: vehicle.createdAt ? new Date(vehicle.createdAt) : undefined,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     }))
@@ -109,7 +96,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogIndexRoute: MetadataRoute.Sitemap = blogPosts.length > 0
     ? [{
         url: new URL('/blog', baseUrl).toString(),
-        lastModified: fallbackLastModified,
         changeFrequency: 'daily' as const,
         priority: 0.8,
       }]
@@ -117,14 +103,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogPostRoutes: MetadataRoute.Sitemap = blogPosts.map(post => ({
     url: new URL(`/blog/${post.slug}`, baseUrl).toString(),
-    lastModified: post.updatedAt ? new Date(post.updatedAt) : fallbackLastModified,
+    lastModified: post.updatedAt ? new Date(post.updatedAt) : undefined,
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }))
 
   const blogCategoryRoutes: MetadataRoute.Sitemap = blogCategories.map(category => ({
     url: new URL(`/blog/category/${category.slug}`, baseUrl).toString(),
-    lastModified: fallbackLastModified,
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }))

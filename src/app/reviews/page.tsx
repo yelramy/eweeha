@@ -2,14 +2,24 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getRecentReviews, getOverallRating } from '@/lib/reviews'
+import { siteConfig } from '@/lib/seoManager'
 import ReviewsSection from '@/components/ReviewsSection'
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
-  title: 'Customer Reviews | Eweeha',
-  description: 'Read what real customers say about their wedding car rental experience with Eweeha in Lebanon.',
-  alternates: { canonical: 'https://eweeha.com/reviews' },
+export async function generateMetadata(): Promise<Metadata> {
+  const stats = await getOverallRating()
+  const title = 'Customer Reviews | Eweeha'
+  const description = 'Read what real customers say about their wedding car rental experience with Eweeha in Lebanon.'
+  const url = 'https://eweeha.com/reviews'
+
+  return {
+    title: { absolute: title },
+    description,
+    alternates: { canonical: url },
+    ...(stats.totalReviews === 0 ? { robots: { index: false, follow: true } } : {}),
+    openGraph: { title, description, url, type: 'website', images: [siteConfig.ogImage] },
+  }
 }
 
 export default async function ReviewsPage() {
