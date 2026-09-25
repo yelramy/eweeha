@@ -94,13 +94,9 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
           <div className="px-3 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-2 sm:py-3">
               <Link href="/" className="flex items-center gap-2.5">
-                <Image
-                  src="/logo.png"
-                  alt="Eweeha — Wedding Cars Lebanon"
-                  width={144}
-                  height={144}
-                  className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
-                  priority
+                <span
+                  aria-hidden="true"
+                  className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 bg-primary-600 dark:bg-primary-300 [mask-image:url('/logo-primary.png')] [-webkit-mask-image:url('/logo-primary.png')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
                 />
                 <span className="text-[10px] sm:text-[11px] tracking-[0.28em] text-primary-600 dark:text-primary-300 uppercase leading-snug">
                   Wedding Cars<span className="block">Lebanon</span>
@@ -188,7 +184,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   aria-hidden="true"
                   className="mx-auto lg:mx-0 block w-full max-w-xl aspect-[496/123] bg-primary-600 dark:bg-primary-300 [mask-image:url('/images/eweeha-wordmark.png?v=2')] [-webkit-mask-image:url('/images/eweeha-wordmark.png?v=2')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
                 />
-                <span className="mt-4 block text-sm sm:text-base tracking-[0.22em] text-primary-800 dark:text-primary-100">
+                <span className="mt-5 block text-base sm:text-xl md:text-2xl font-semibold tracking-[0.16em] text-primary-800 dark:text-white">
                   wedding car rental in lebanon
                 </span>
               </h1>
