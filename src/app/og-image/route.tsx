@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const subtitle = searchParams.get('subtitle') || 'WEDDING CARS IN LEBANON'
     const badge =
       searchParams.get('badge') ||
-      'Chauffeur included · Bridal cars · Full convoys · All Lebanon'
+      'Chauffeur included · Bridal cars · Wedding convoys'
 
     const { buffer, contentType } = await generateOgImageBuffer({
       title,
