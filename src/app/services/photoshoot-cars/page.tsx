@@ -7,7 +7,7 @@ import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = generateSeoMetadata({
-  title: 'Classic & Convertible Wedding Cars in Lebanon - Photoshoot Rentals',
+  title: 'Classic & Convertible Wedding Photo Cars in Lebanon',
   description: 'Rent classic and convertible cars for your Lebanese wedding and photoshoot. Vintage classics with chauffeur for ceremony exits, old souk sessions, and coastal golden-hour photos in Byblos, Batroun, Beirut & beyond.',
   path: '/services/photoshoot-cars',
 })

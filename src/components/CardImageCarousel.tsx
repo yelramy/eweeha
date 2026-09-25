@@ -17,6 +17,8 @@ type CardImageCarouselProps = {
   aspectClass?: string
   sizes?: string
   quality?: number
+  /** Load the first photo immediately instead of lazily */
+  priority?: boolean
 }
 
 /**
@@ -33,6 +35,7 @@ export default function CardImageCarousel({
   aspectClass = 'aspect-[4/3]',
   sizes = '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px',
   quality = 70,
+  priority = false,
 }: CardImageCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [index, setIndex] = useState(0)
@@ -50,6 +53,7 @@ export default function CardImageCarousel({
           fill
           sizes={sizes}
           quality={quality}
+          priority={priority}
           objectFit="contain"
           className="p-1.5"
           fallback={fallback}
@@ -91,6 +95,7 @@ export default function CardImageCarousel({
               fill
               sizes={sizes}
               quality={quality}
+              priority={priority && i === 0}
               objectFit="contain"
               className="p-1.5"
               fallback={fallback}

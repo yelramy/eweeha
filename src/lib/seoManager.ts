@@ -7,6 +7,7 @@ import turso from './turso'
 import { Metadata } from 'next'
 import { getConfig } from '@/utils/config'
 import { createDefaultConfig } from '@/constants/configDefaults'
+import { isSvgImage } from '@/lib/vehicleSeo'
 
 // Base site configuration with sensible fallbacks
 const DEFAULT_PRODUCTION_BASE_URL = 'https://eweeha.com'
@@ -36,6 +37,12 @@ export const siteConfig = {
     'zaffe wedding cars',
     'wedding guest shuttle lebanon'
   ]
+}
+
+/** WhatsApp, Facebook and X can't render SVG link previews, so those fall back to the default JPG. */
+export function shareImageUrl(image?: string | null): string {
+  if (!image || isSvgImage(image)) return siteConfig.ogImage
+  return image.startsWith('http') ? image : `${siteConfig.url}${image}`
 }
 
 /** Avoid "Title | Eweeha | Eweeha" when callers already include a brand suffix. */

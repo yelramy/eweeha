@@ -4,13 +4,19 @@ import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
 import { cached } from '@/lib/cache'
 import { routes } from '@/lib/routes'
+import { siteConfig } from '@/lib/seoManager'
 
 export const revalidate = 600
 
+const title = 'Site Map — Wedding Cars Lebanon | Eweeha'
+const description = 'Every page on Eweeha: fleet, services, wedding areas, booking, and company pages.'
+const url = 'https://eweeha.com/sitemap'
+
 export const metadata: Metadata = {
-  title: 'Site Map | Eweeha — Wedding Cars Lebanon',
-  description: 'Every page on Eweeha: fleet, services, wedding areas, booking, and company pages.',
-  alternates: { canonical: 'https://eweeha.com/sitemap' },
+  title: { absolute: title },
+  description,
+  alternates: { canonical: url },
+  openGraph: { title, description, url, type: 'website', images: [siteConfig.ogImage] },
 }
 
 const mainPages = [

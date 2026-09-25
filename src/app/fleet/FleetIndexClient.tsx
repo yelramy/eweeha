@@ -43,7 +43,7 @@ export default function FleetIndexClient({
                 </Link>
               ))}
             </nav>
-            <FleetGrid vehicles={sortFleetForDisplay(vehicles, categories)} />
+            <FleetGrid vehicles={sortFleetForDisplay(vehicles, categories)} prioritizeFirstImage />
             <p className="mt-12 text-center text-sm text-warm-600 dark:text-gray-400">
               Not sure which cars to pick?{' '}
               <Link href="/#fleet" className="text-primary-700 dark:text-primary-300 underline underline-offset-2">

@@ -7,7 +7,7 @@ import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = generateSeoMetadata({
-  title: 'Bridal Car with Chauffeur in Lebanon - Wedding Car for the Bride',
+  title: 'Bridal Car with Chauffeur in Lebanon',
   description: 'Rent a bridal car with a suited chauffeur in Lebanon. Dress-friendly seating, calm punctual service from the bride\'s prep to the venue entrance, and flower décor available as an add-on. All regions covered.',
   path: '/services/bridal-car',
 })

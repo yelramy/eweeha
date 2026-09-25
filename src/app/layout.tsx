@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import "./globals.css";
 import { generateMetadata, generateStructuredData, generateWebSiteStructuredData, siteConfig } from '@/lib/seoManager';
 import { getOverallRating } from '@/lib/reviews';
+import { cached } from '@/lib/cache';
+import { formatUsd, getVehiclePricingInfo } from '@/utils/vehiclePricing';
 import AuthProvider from '@/components/AuthProvider';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -98,9 +100,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [organizationData, ratingStats] = await Promise.all([
+  const [organizationData, ratingStats, availableVehicles] = await Promise.all([
     generateStructuredData({}),
     getOverallRating(),
+    cached.vehicles.getAvailable(),
   ]);
 
   // Single source of truth for the business entity: one @graph with the
@@ -115,6 +118,15 @@ export default async function RootLayout({
       bestRating: 5,
       worstRating: 1,
     }
+  }
+  const prices = availableVehicles
+    .flatMap((vehicle) => {
+      const pricing = getVehiclePricingInfo(vehicle)
+      return pricing ? [pricing.min, pricing.max] : []
+    })
+    .filter((price) => price > 0)
+  if (prices.length > 0) {
+    orgNode.priceRange = `${formatUsd(Math.min(...prices))}-${formatUsd(Math.max(...prices))}`
   }
 
   const rootSchemaGraph = {

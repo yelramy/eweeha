@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { generateMetadata as generateSeoMetadata } from '@/lib/seoManager'
-import { LocalBusinessSchema } from '@/components/StructuredDataEnhanced'
 
 export const metadata: Metadata = generateSeoMetadata({
   title: 'About Us - Wedding Car Rental in Lebanon',
@@ -12,17 +11,6 @@ export const metadata: Metadata = generateSeoMetadata({
 export default function AboutPage() {
   return (
     <>
-      {/* Structured Data for Local Business */}
-      <LocalBusinessSchema
-        name="Eweeha"
-        description="Wedding car rental in Lebanon with suited chauffeurs — bridal cars, classics, convertibles, and full wedding convoys"
-        telephone="+96171500363"
-        address="Beirut, Lebanon"
-        rating={4.8}
-        reviewCount={127}
-        priceRange="$250-$1500"
-      />
-
       <div className="min-h-screen bg-white dark:bg-gray-900">
         {/* Simple Header */}
         <div className="bg-white dark:bg-gray-800 border-b border-warm-200 dark:border-gray-700 sticky top-0 z-50">

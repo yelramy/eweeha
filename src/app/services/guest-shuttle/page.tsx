@@ -7,7 +7,7 @@ import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = generateSeoMetadata({
-  title: 'Wedding Guest Shuttle in Lebanon - Vans & Minibuses for Guests',
+  title: 'Wedding Guest Shuttle Vans in Lebanon',
   description: 'Wedding guest shuttle service in Lebanon: air-conditioned vans and minibuses moving guests between hotels, ceremony, and venue. Mountain venue transfers, late-night returns, and multi-pickup plans — one coordinator with your convoy.',
   path: '/services/guest-shuttle',
 })
