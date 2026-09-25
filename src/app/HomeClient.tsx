@@ -186,7 +186,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                 <span className="sr-only">eweeha — wedding cars in Lebanon</span>
                 <span
                   aria-hidden="true"
-                  className="mx-auto lg:mx-0 block w-full max-w-xl aspect-[508/125] bg-primary-600 dark:bg-primary-300 [mask-image:url('/images/eweeha-wordmark.png')] [-webkit-mask-image:url('/images/eweeha-wordmark.png')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
+                  className="mx-auto lg:mx-0 block w-full max-w-xl aspect-[496/123] bg-primary-600 dark:bg-primary-300 [mask-image:url('/images/eweeha-wordmark.png?v=2')] [-webkit-mask-image:url('/images/eweeha-wordmark.png?v=2')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
                 />
               </h1>
 
