@@ -5,6 +5,9 @@ export function trackEvent(eventName: string, properties?: Record<string, unknow
   if (typeof window !== 'undefined' && posthog) {
     posthog.capture(eventName, properties)
   }
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', eventName, properties)
+  }
 }
 
 // Booking funnel events
