@@ -25,6 +25,7 @@ export const siteConfig = {
     'Wedding car rental in Lebanon with chauffeur — bridal cars, classic & convertible cars, and full wedding convoys. Serving every ceremony across Beirut, Jounieh, Byblos & all Lebanon. Book online or WhatsApp.',
   url: envBaseUrl,
   ogImage: `${envBaseUrl}/og-image.jpg?v=full-logo-2026`,
+  googleAnalyticsId: 'G-YFRBQ2LX1H',
   keywords: [
     'wedding car rental lebanon',
     'wedding cars beirut',

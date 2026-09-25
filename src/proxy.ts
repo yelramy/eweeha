@@ -84,9 +84,11 @@ function buildContentSecurityPolicy(isDev: boolean): string {
     'https://accounts.google.com/gsi/client',
   ].join(' ')
 
+  // GA4 sends hits to regional hosts (e.g. region1.google-analytics.com), hence the wildcards.
   const connectSources = [
     "'self'",
-    'https://www.google-analytics.com',
+    'https://*.google-analytics.com',
+    'https://*.analytics.google.com',
     'https://www.googletagmanager.com',
     'https://vitals.vercel-insights.com',
     'https://connect.facebook.net',
@@ -102,7 +104,7 @@ function buildContentSecurityPolicy(isDev: boolean): string {
     "'self'",
     'data:',
     'blob:',
-    'https://www.google-analytics.com',
+    'https://*.google-analytics.com',
     'https://www.googletagmanager.com',
     'https://www.facebook.com',
     'https://connect.facebook.net',
