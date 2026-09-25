@@ -102,7 +102,7 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
                   priority
                 />
-                <span className="text-[10px] sm:text-[11px] tracking-[0.28em] text-charcoal-500 dark:text-gray-300 uppercase leading-snug">
+                <span className="text-[10px] sm:text-[11px] tracking-[0.28em] text-primary-600 dark:text-primary-300 uppercase leading-snug">
                   Wedding Cars<span className="block">Lebanon</span>
                 </span>
               </Link>
@@ -183,14 +183,17 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24 z-10">
             <div className="max-w-2xl text-center lg:text-left animate-fade-in-up">
               <h1 className="mb-4">
-                <span className="sr-only">eweeha — wedding cars in Lebanon</span>
+                <span className="sr-only">eweeha — </span>
                 <span
                   aria-hidden="true"
                   className="mx-auto lg:mx-0 block w-full max-w-xl aspect-[496/123] bg-primary-600 dark:bg-primary-300 [mask-image:url('/images/eweeha-wordmark.png?v=2')] [-webkit-mask-image:url('/images/eweeha-wordmark.png?v=2')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
                 />
+                <span className="mt-4 block text-sm sm:text-base tracking-[0.22em] text-primary-800 dark:text-primary-100">
+                  wedding car rental in lebanon
+                </span>
               </h1>
 
-              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2 mt-8">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2 mt-6">
                 <button
                   type="button"
                   onClick={() => setIsConvoyPickerOpen(true)}
@@ -218,8 +221,8 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
             <div className="text-center mb-6">
               <p className="script-accent text-2xl text-primary-600 dark:text-primary-300 mb-1">the cars</p>
               <h2 className="text-2xl md:text-3xl text-charcoal-500 dark:text-white mb-2">The Wedding Fleet</h2>
-              <p className="text-xs md:text-sm text-warm-600 dark:text-gray-400">
-                Bridal cars, classics, convertibles &amp; family cars — chauffeur included
+              <p className="mx-auto max-w-2xl text-sm md:text-base leading-relaxed text-charcoal-500 dark:text-gray-200">
+                The largest selection of wedding cars for rent in Lebanon. Featuring transparent prices and detailed multi-angle pictures of our complete luxury fleet
               </p>
             </div>
 

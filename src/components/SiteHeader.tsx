@@ -30,7 +30,7 @@ export default function SiteHeader() {
               className="w-11 h-11 sm:w-12 sm:h-12 object-contain"
               priority
             />
-            <span className="text-[10px] sm:text-[11px] tracking-[0.28em] text-charcoal-500 dark:text-gray-300 uppercase leading-snug">
+            <span className="text-[10px] sm:text-[11px] tracking-[0.28em] text-primary-600 dark:text-primary-300 uppercase leading-snug">
               Wedding Cars<span className="block">Lebanon</span>
             </span>
           </Link>
