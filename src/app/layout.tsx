@@ -61,24 +61,24 @@ export const metadata: Metadata = {
     {
       rel: 'icon',
       type: 'image/x-icon',
-      url: '/favicon.ico',
+      url: '/favicon.ico?v=2',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      url: '/favicon-32x32.png',
+      url: '/favicon-32x32.png?v=2',
     },
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '192x192',
-      url: '/icon-192.png',
+      url: '/icon-192.png?v=2',
     },
     {
       rel: 'apple-touch-icon',
       sizes: '180x180',
-      url: '/apple-touch-icon.png',
+      url: '/apple-touch-icon.png?v=2',
     },
   ],
 };
