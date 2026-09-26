@@ -55,6 +55,9 @@ export const events = {
       price_per_day: price,
       hours_per_day: hoursPerDay
     }),
+
+  convoyPickerOpened: (source: string) =>
+    trackEvent('convoy_picker_opened', { source }),
   
   // Contact events
   whatsappClicked: (source: string, bookingId?: string) => 
