@@ -17,6 +17,7 @@ import { Vehicle } from '@/types/vehicle'
 import { AppConfig } from '@/constants/configDefaults'
 import ReviewsSection from '@/components/ReviewsSection'
 import type { Review } from '@/lib/reviews'
+import { events as analytics } from '@/lib/posthog'
 
 interface ServiceItem {
   title: string
@@ -184,7 +185,8 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   aria-hidden="true"
                   className="mx-auto lg:mx-0 block w-full max-w-xl aspect-[496/123] bg-primary-600 dark:bg-primary-300 [mask-image:url('/images/eweeha-wordmark.png?v=2')] [-webkit-mask-image:url('/images/eweeha-wordmark.png?v=2')] [mask-size:contain] [-webkit-mask-size:contain] [mask-repeat:no-repeat] [-webkit-mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-position:center]"
                 />
-                <span className="mt-5 block text-base sm:text-xl md:text-2xl font-semibold tracking-[0.16em] text-primary-800 dark:text-white">
+                {/* The halo keeps this line readable where it crosses the car and the sea wall */}
+                <span className="mt-5 block text-[19px] sm:text-xl md:text-2xl font-bold tracking-[0.12em] sm:tracking-[0.16em] text-primary-800 dark:text-white [text-shadow:0_0_3px_rgba(255,254,249,0.95),0_0_10px_rgba(255,254,249,0.9),0_0_22px_rgba(255,254,249,0.75)] dark:[text-shadow:0_0_3px_rgba(3,7,18,0.9),0_0_10px_rgba(3,7,18,0.8),0_0_22px_rgba(3,7,18,0.6)]">
                   wedding car rental in lebanon
                 </span>
               </h1>
@@ -192,8 +194,11 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
               <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start items-center animate-fade-in-up stagger-2 mt-6">
                 <button
                   type="button"
-                  onClick={() => setIsConvoyPickerOpen(true)}
-                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-white text-xs sm:text-sm font-medium tracking-wide sm:tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
+                  onClick={() => {
+                    analytics.convoyPickerOpened('hero')
+                    setIsConvoyPickerOpen(true)
+                  }}
+                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-white text-sm font-medium tracking-wide sm:tracking-wider bg-gradient-to-br from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 rounded-full shadow-sm hover:shadow transition-all"
                 >
                   Pick My Cars
                 </button>
@@ -201,7 +206,8 @@ export default function HomeClient({ allVehicles, config, reviews = [], ratingSt
                   href={`https://wa.me/${config.contact.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-primary-700 dark:text-primary-200 text-xs sm:text-sm font-medium tracking-wide sm:tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
+                  onClick={() => analytics.whatsappClicked('hero')}
+                  className="inline-flex min-h-11 items-center justify-center px-4 py-2 sm:px-8 sm:py-3 text-center text-primary-700 dark:text-primary-200 text-sm font-medium tracking-wide sm:tracking-wider border border-primary-300 dark:border-primary-400 rounded-full hover:bg-primary-50/90 dark:hover:bg-gray-800 bg-cream-50/85 dark:bg-gray-950/60 backdrop-blur-[3px] transition-all"
                 >
                   WhatsApp Us
                 </Link>
